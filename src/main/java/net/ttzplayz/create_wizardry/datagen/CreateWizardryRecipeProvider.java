@@ -18,11 +18,8 @@
 
 package net.ttzplayz.create_wizardry.datagen;
 
-import com.simibubi.create.AllItems;
-import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.compat.jei.ConversionRecipe;
 import com.simibubi.create.content.equipment.sandPaper.SandPaperPolishingRecipe;
-import com.simibubi.create.content.fluids.potion.PotionFluid;
 import com.simibubi.create.content.fluids.transfer.EmptyingRecipe;
 import com.simibubi.create.content.fluids.transfer.FillingRecipe;
 import com.simibubi.create.content.kinetics.crusher.CrushingRecipe;
@@ -35,14 +32,9 @@ import com.simibubi.create.content.kinetics.mixer.CompactingRecipe;
 import com.simibubi.create.content.kinetics.mixer.MixingRecipe;
 import com.simibubi.create.content.kinetics.press.PressingRecipe;
 import com.simibubi.create.content.kinetics.saw.CuttingRecipe;
-import com.simibubi.create.content.processing.recipe.HeatCondition;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
-import com.simibubi.create.content.processing.sequenced.SequencedAssemblyRecipe;
 import com.simibubi.create.content.processing.sequenced.SequencedAssemblyRecipeBuilder;
-import com.simibubi.create.foundation.data.recipe.CreateRecipeProvider;
 import com.simibubi.create.foundation.data.recipe.MechanicalCraftingRecipeBuilder;
-import com.simibubi.create.foundation.data.recipe.Mods;
-import io.redspace.ironsspellbooks.registries.FluidRegistry;
 import io.redspace.ironsspellbooks.registries.ItemRegistry;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -50,13 +42,9 @@ import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.alchemy.Potions;
-import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.common.Tags;
-import net.neoforged.neoforge.common.conditions.ICondition;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -67,7 +55,6 @@ import static io.redspace.ironsspellbooks.registries.FluidRegistry.*;
 import static io.redspace.ironsspellbooks.registries.ItemRegistry.*;
 import static net.minecraft.tags.ItemTags.WOOL;
 import static net.minecraft.world.item.Items.*;
-import static net.minecraft.world.item.alchemy.Potions.MUNDANE;
 import static net.neoforged.neoforge.common.Tags.Items.INGOTS;
 import static net.ttzplayz.create_wizardry.fluids.FluidRegistry.*;
 
