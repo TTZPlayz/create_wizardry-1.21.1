@@ -1,0 +1,62 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "create_enchantment_industry"
+    }
+  ],
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "irons_spellbooks:arcane_essence"
+    },
+    {
+      "item": "irons_spellbooks:arcane_essence"
+    },
+    {
+      "item": "irons_spellbooks:arcane_essence"
+    },
+    {
+      "item": "irons_spellbooks:arcane_essence"
+    },
+    {
+      "item": "irons_spellbooks:arcane_essence"
+    },
+    {
+      "item": "irons_spellbooks:arcane_essence"
+    },
+    {
+      "item": "irons_spellbooks:arcane_essence"
+    },
+    {
+      "item": "irons_spellbooks:arcane_essence"
+    },
+    {
+      "item": "irons_spellbooks:blood_vial"
+    },
+    {
+      "item": "irons_spellbooks:blood_vial"
+    },
+    {
+      "type": "fluid_tag",
+      "amount": 12,
+      "fluid_tag": "create_enchantment_industry:experience"
+    },
+    {
+      "type": "fluid_tag",
+      "amount": 1000,
+      "id": "irons_spellbooks:rare_ink"
+    }
+  ],
+  "results": [
+    {
+      "amount": 750,
+      "id": "irons_spellbooks:epic_ink"
+    },
+    {
+      "item": "minecraft:glass_bottle",
+      "count": 2
+    }
+  ],
+  "heatRequirement": "heated"
+}
