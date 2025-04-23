@@ -440,9 +440,6 @@ public class CreateWizardryRecipeProvider extends RecipeProvider {
     public static ProcessingRecipeBuilder<MixingRecipe> mixing(ResourceLocation id) {
         return new ProcessingRecipeBuilder<>(MixingRecipe::new, id);
     }
-    public static ProcessingRecipeBuilder<MixingRecipe> manaMixing(ResourceLocation id) {
-        return new ProcessingRecipeBuilder<>(MixingRecipe::new, id);
-    }
 
     public static ProcessingRecipeBuilder<CompactingRecipe> compacting(ResourceLocation id) {
         return new ProcessingRecipeBuilder<>(CompactingRecipe::new, id);

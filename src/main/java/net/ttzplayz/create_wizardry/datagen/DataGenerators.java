@@ -17,10 +17,10 @@ public class DataGenerators {
     @SubscribeEvent
     public static void generate(final GatherDataEvent event) {
         var generator = event.getGenerator();
-        var existingFileHelper = event.getExistingFileHelper();
+        event.getExistingFileHelper();
         var lookupProvider = event.getLookupProvider();
         var output = generator.getPackOutput();
-        var client = event.includeClient();
+        event.includeClient();
         var server = event.includeServer();
 
         generator.addProvider(server, new CreateWizardryRecipeProvider(output, lookupProvider));
