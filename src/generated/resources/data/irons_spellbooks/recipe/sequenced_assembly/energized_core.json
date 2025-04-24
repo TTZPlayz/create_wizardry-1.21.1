@@ -1,0 +1,53 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "minecraft:copper_block"
+  },
+  "loops": 1,
+  "results": [
+    {
+      "id": "irons_spellbooks:energized_core"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "minecraft:copper_block"
+        },
+        {
+          "type": "fluid_stack",
+          "amount": 1000,
+          "fluid": "create_wizardry:lightning"
+        }
+      ],
+      "results": [
+        {
+          "id": "minecraft:copper_block"
+        }
+      ]
+    },
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "minecraft:copper_block"
+        },
+        {
+          "type": "fluid_stack",
+          "amount": 1000,
+          "fluid": "create_wizardry:lightning"
+        }
+      ],
+      "results": [
+        {
+          "id": "minecraft:copper_block"
+        }
+      ]
+    }
+  ],
+  "transitional_item": {
+    "id": "minecraft:copper_block"
+  }
+}

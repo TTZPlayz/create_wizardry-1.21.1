@@ -70,6 +70,7 @@ public class CreateWizardryRecipeProvider extends RecipeProvider {
         buildEmptyingRecipes(output);
         buildMixingRecipes(output);
         buildSequencedRecipes(output);
+        buildCompactingRecipes(output);
     }
     private void buildMixingRecipes(RecipeOutput output) {
 
@@ -351,6 +352,13 @@ public class CreateWizardryRecipeProvider extends RecipeProvider {
                 .require(TIMELESS_SLURRY.get())
                 .output(TIMELESS_SLURRY_FLUID.get(), 250)
                 .output(GLASS_BOTTLE)
+                .build(output);
+    }
+
+    private void buildCompactingRecipes(RecipeOutput output) {
+        compacting(BLOOD.getId())
+                .require(Tags.Items.FOODS_RAW_MEAT)
+                .output(BLOOD.get(), 250)
                 .build(output);
     }
 

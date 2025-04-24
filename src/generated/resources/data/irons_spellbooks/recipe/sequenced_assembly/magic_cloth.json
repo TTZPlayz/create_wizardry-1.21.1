@@ -1,0 +1,53 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "tag": "minecraft:wool"
+  },
+  "loops": 1,
+  "results": [
+    {
+      "id": "irons_spellbooks:magic_cloth"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "minecraft:white_wool"
+        },
+        {
+          "type": "fluid_stack",
+          "amount": 1000,
+          "fluid": "create_wizardry:mana"
+        }
+      ],
+      "results": [
+        {
+          "id": "minecraft:white_wool"
+        }
+      ]
+    },
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "minecraft:white_wool"
+        },
+        {
+          "type": "fluid_stack",
+          "amount": 1000,
+          "fluid": "create_wizardry:mana"
+        }
+      ],
+      "results": [
+        {
+          "id": "minecraft:white_wool"
+        }
+      ]
+    }
+  ],
+  "transitional_item": {
+    "id": "minecraft:white_wool"
+  }
+}
