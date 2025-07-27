@@ -28,6 +28,8 @@ import static net.ttzplayz.create_wizardry.fluids.FluidRegistry.LIGHTNING;
 @EventBusSubscriber(modid = CreateWizardry.MOD_ID, bus = EventBusSubscriber.Bus.GAME)
 public class CreateWizardryEvents {
 
+    // got this stuff from MCreator, amazing hack
+
     @SubscribeEvent
     public static void onEntitySpawned(EntityJoinLevelEvent event) {
         execute(event, event.getLevel(), event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ(), event.getEntity());
