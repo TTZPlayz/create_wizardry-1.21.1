@@ -7,11 +7,11 @@
   ],
   "results": [
     {
-      "amount": 250,
-      "id": "irons_spellbooks:invisibility_elixir"
+      "id": "minecraft:glass_bottle"
     },
     {
-      "id": "minecraft:glass_bottle"
+      "amount": 250,
+      "id": "irons_spellbooks:invisibility_elixir"
     }
   ]
 }
