@@ -18,7 +18,7 @@
         },
         {
           "type": "fluid_stack",
-          "amount": 1000,
+          "amount": 500,
           "fluid": "create_wizardry:mana"
         }
       ],

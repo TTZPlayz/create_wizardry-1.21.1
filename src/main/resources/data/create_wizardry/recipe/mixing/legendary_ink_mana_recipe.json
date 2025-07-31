@@ -37,33 +37,33 @@
       "item": "irons_spellbooks:lightning_bottle"
     },
     {
+      "item": "create:experience_nugget"
+    },
+    {
+      "item": "create:experience_nugget"
+    },
+    {
+      "item": "create:experience_nugget"
+    },
+    {
+      "item": "create:experience_nugget"
+    },
+    {
+      "item": "create:experience_nugget"
+    },
+    {
+      "item": "create:experience_nugget"
+    },
+    {
+      "item": "create:experience_nugget"
+    },
+    {
+      "item": "create:experience_nugget"
+    },
+    {
       "type": "fluid_stack",
       "amount": 1000,
       "fluid": "create_wizardry:epic_ink"
-    },
-    {
-      "item": "create:experience_nugget"
-    },
-    {
-      "item": "create:experience_nugget"
-    },
-    {
-      "item": "create:experience_nugget"
-    },
-    {
-      "item": "create:experience_nugget"
-    },
-    {
-      "item": "create:experience_nugget"
-    },
-    {
-      "item": "create:experience_nugget"
-    },
-    {
-      "item": "create:experience_nugget"
-    },
-    {
-      "item": "create:experience_nugget"
     }
   ],
   "results": [

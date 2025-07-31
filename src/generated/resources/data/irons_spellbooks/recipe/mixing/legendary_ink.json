@@ -53,7 +53,7 @@
     {
       "type": "fluid_stack",
       "amount": 500,
-      "fluid": "irons_spellbooks:blood"
+      "fluid": "create_wizardry:lightning"
     },
     {
       "type": "fluid_stack",

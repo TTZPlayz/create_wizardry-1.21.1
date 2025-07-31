@@ -54,8 +54,10 @@ import static com.simibubi.create.content.processing.recipe.HeatCondition.HEATED
 import static com.simibubi.create.content.processing.recipe.HeatCondition.SUPERHEATED;
 import static io.redspace.ironsspellbooks.registries.FluidRegistry.*;
 import static io.redspace.ironsspellbooks.registries.ItemRegistry.*;
+import static net.minecraft.tags.FluidTags.LAVA;
 import static net.minecraft.tags.ItemTags.WOOL;
 import static net.minecraft.world.item.Items.*;
+import static net.neoforged.neoforge.common.Tags.Items.DUSTS;
 import static net.neoforged.neoforge.common.Tags.Items.INGOTS;
 import static net.ttzplayz.create_wizardry.fluids.FluidRegistry.*;
 
@@ -105,9 +107,9 @@ public class CreateWizardryRecipeProvider extends RecipeProvider {
                 .require(ARCANE_ESSENCE.get())
                 .require(ARCANE_ESSENCE.get())
                 .require(ARCANE_ESSENCE.get())
+                .require(EXP_NUGGET)
+                .require(EXP_NUGGET)
                 .require(UNCOMMON_INK.get(), 1000)
-                .require(EXP_NUGGET)
-                .require(EXP_NUGGET)
                 .output(RARE_INK.get(), 750)
                 .build(output);
 
@@ -121,17 +123,17 @@ public class CreateWizardryRecipeProvider extends RecipeProvider {
                 .require(ARCANE_ESSENCE.get())
                 .require(ARCANE_ESSENCE.get())
                 .require(ARCANE_ESSENCE.get())
+                .require(EXP_NUGGET)
+                .require(EXP_NUGGET)
+                .require(EXP_NUGGET)
+                .require(EXP_NUGGET)
                 .require(RARE_INK.get(), 1000)
-                .require(EXP_NUGGET)
-                .require(EXP_NUGGET)
-                .require(EXP_NUGGET)
-                .require(EXP_NUGGET)
                 .output(EPIC_INK.get(), 750)
                 .requiresHeat(HEATED)
                 .build(output);
 
         mixing(LEGENDARY_INK.getId())
-                .require(BLOOD.get(), 500)
+                .require(LIGHTNING.get(), 500)
                 .require(ARCANE_ESSENCE.get())
                 .require(ARCANE_ESSENCE.get())
                 .require(ARCANE_ESSENCE.get())
@@ -144,11 +146,11 @@ public class CreateWizardryRecipeProvider extends RecipeProvider {
                 .require(ARCANE_ESSENCE.get())
                 .require(ARCANE_ESSENCE.get())
                 .require(ARCANE_ESSENCE.get())
+                .require(EXP_NUGGET)
+                .require(EXP_NUGGET)
+                .require(EXP_NUGGET)
+                .require(EXP_NUGGET)
                 .require(EPIC_INK.get(), 1000)
-                .require(EXP_NUGGET)
-                .require(EXP_NUGGET)
-                .require(EXP_NUGGET)
-                .require(EXP_NUGGET)
                 .output(LEGENDARY_INK.get(), 750)
                 .requiresHeat(SUPERHEATED)
                 .build(output);
@@ -175,7 +177,7 @@ public class CreateWizardryRecipeProvider extends RecipeProvider {
                 .output(CINDER_ESSENCE.get(), 8)
                 .requiresHeat(SUPERHEATED)
                 .build(output);
-        // FLUIDS
+        // OTHER FLUIDS
         mixing(MANA.getId())
                 .require(FluidTags.WATER, 1000)
                 .require(ARCANE_ESSENCE.get())
@@ -183,6 +185,20 @@ public class CreateWizardryRecipeProvider extends RecipeProvider {
                 .require(ARCANE_ESSENCE.get())
                 .require(ARCANE_ESSENCE.get())
                 .output(MANA.get(), 1000)
+                .requiresHeat(HEATED)
+                .build(output);
+        mixing(ICE_VENOM_FLUID.getId())
+                .require(FluidTags.WATER, 1000)
+                .require(ICY_FANG.get())
+                .output(ICE_VENOM_FLUID.get(), 750)
+                .requiresHeat(HEATED)
+                .build(output);
+        mixing(TIMELESS_SLURRY_FLUID.getId())
+                .require(FluidTags.WATER, 1000)
+                .require(ECHO_SHARD)
+                .require(DUSTS)
+                .output(TIMELESS_SLURRY_FLUID.get(), 750)
+                .requiresHeat(SUPERHEATED)
                 .build(output);
             // add timeless slurry
 
@@ -267,12 +283,63 @@ public class CreateWizardryRecipeProvider extends RecipeProvider {
                 .require(TIMELESS_SLURRY_FLUID.get(), 250)
                 .output(ItemRegistry.TIMELESS_SLURRY.get())
                 .build(output);
+        filling(ICE_VENOM_VIAL.getId())
+                .require(Items.GLASS_BOTTLE)
+                .require(ICE_VENOM_FLUID.get(), 250)
+                .output(ICE_VENOM_VIAL.get())
+                .build(output);
 
+        //RUNES
+        filling(MANA_RUNE.getId())
+                .require(BLANK_RUNE.get())
+                .require(MANA.get(), 1000)
+                .output(MANA_RUNE.get())
+                .build(output);
+        filling(LIGHTNING_RUNE.getId())
+                .require(BLANK_RUNE.get())
+                .require(LIGHTNING.get(), 1000)
+                .output(LIGHTNING_RUNE.get())
+                .build(output);
+        filling(BLOOD_RUNE.getId())
+                .require(BLANK_RUNE.get())
+                .require(BLOOD.get(), 1000)
+                .output(BLOOD_RUNE.get())
+                .build(output);
         // MISC
         filling(ARCANE_ESSENCE.getId())
                 .require(Tags.Items.DUSTS)
                 .require(MANA.get(), 250)
                 .output(ARCANE_ESSENCE.get())
+                .build(output);
+        filling(ARCANE_INGOT.getId())
+                .require(INGOTS)
+                .require(MANA.get(), 1000)
+                .output(ARCANE_INGOT.get())
+                .build(output);
+        filling(MAGIC_CLOTH.getId())
+                .require(WOOL)
+                .require(MANA.get(), 1000)
+                .output(MAGIC_CLOTH.get())
+                .build(output);
+        filling(ENERGIZED_CORE.getId())
+                .require(WOOL)
+                .require(LIGHTNING.get(), 1000)
+                .output(ENERGIZED_CORE.get())
+                .build(output);
+        filling(ICY_FANG.getId())
+                .require(FROZEN_BONE_SHARD.get())
+                .require(ICE_VENOM_FLUID.get(), 500)
+                .output(ICY_FANG.get())
+                .build(output);
+        filling(BLOODY_VELLUM.getId())
+                .require(HOGSKIN.get())
+                .require(BLOOD.get(), 1000)
+                .output(BLOODY_VELLUM.get())
+                .build(output);
+        filling(FROZEN_BONE_SHARD.getId())
+                .require(BONE)
+                .require(ICE_VENOM_FLUID.get(), 250)
+                .output(FROZEN_BONE_SHARD.get())
                 .build(output);
     }
     private void buildEmptyingRecipes(RecipeOutput output) {
@@ -354,6 +421,11 @@ public class CreateWizardryRecipeProvider extends RecipeProvider {
                 .output(TIMELESS_SLURRY_FLUID.get(), 250)
                 .output(GLASS_BOTTLE)
                 .build(output);
+        emptying(ICE_VENOM_FLUID.getId())
+                .require(ICE_VENOM_VIAL.get())
+                .output(ICE_VENOM_FLUID.get(), 250)
+                .output(GLASS_BOTTLE)
+                .build(output);
     }
 
     private void buildCompactingRecipes(RecipeOutput output) {
@@ -364,64 +436,80 @@ public class CreateWizardryRecipeProvider extends RecipeProvider {
     }
 
     public void buildSequencedRecipes(RecipeOutput output) {
-        // RUNES
-        sequencedAssembly(MANA_RUNE.getId())
-                .require(BLANK_RUNE.get())
-                .transitionTo(BLANK_RUNE.get())
-                .addOutput(MANA_RUNE.get(), 1)
-                .loops(1)
-                .addStep(FillingRecipe::new, builder -> builder.require(MANA.get(), 1000))
-                .addStep(FillingRecipe::new, builder -> builder.require(MANA.get(), 1000))
-                .build(output);
-        sequencedAssembly(BLOOD_RUNE.getId())
-                .require(BLANK_RUNE.get())
-                .transitionTo(BLANK_RUNE.get())
-                .addOutput(BLOOD_RUNE.get(), 1)
-                .loops(1)
-                .addStep(FillingRecipe::new, builder -> builder.require(BLOOD.get(), 1000))
-                .addStep(FillingRecipe::new, builder -> builder.require(BLOOD.get(), 1000))
-                .build(output);
-        sequencedAssembly(LIGHTNING_RUNE.getId())
-                .require(BLANK_RUNE.get())
-                .transitionTo(BLANK_RUNE.get())
-                .addOutput(LIGHTNING_RUNE.get(), 1)
-                .loops(1)
-                .addStep(FillingRecipe::new, builder -> builder.require(LIGHTNING.get(), 1000))
-                .addStep(FillingRecipe::new, builder -> builder.require(LIGHTNING.get(), 1000))
-                .build(output);
-
-        // MISC ITEMS
-        sequencedAssembly(ARCANE_INGOT.getId())
-                .require(INGOTS)
-                .transitionTo(COPPER_INGOT)
-                .addOutput(ARCANE_INGOT.get(), 1)
-                .loops(1)
-                .addStep(FillingRecipe::new, builder -> builder.require(MANA.get(), 1000))
-                .addStep(FillingRecipe::new, builder -> builder.require(MANA.get(), 1000))
-                .build(output);
-        sequencedAssembly(MAGIC_CLOTH.getId())
-                .require(WOOL)
-                .transitionTo(WHITE_WOOL)
-                .addOutput(MAGIC_CLOTH.get(), 1)
-                .loops(1)
-                .addStep(FillingRecipe::new, builder -> builder.require(MANA.get(), 1000))
-                .addStep(FillingRecipe::new, builder -> builder.require(MANA.get(), 1000))
-                .build(output);
-        sequencedAssembly(ENERGIZED_CORE.getId())
-                .require(COPPER_BLOCK)
-                .transitionTo(COPPER_BLOCK)
-                .addOutput(ENERGIZED_CORE.get(), 1)
-                .loops(1)
-                .addStep(FillingRecipe::new, builder -> builder.require(LIGHTNING.get(), 1000))
-                .addStep(FillingRecipe::new, builder -> builder.require(LIGHTNING.get(), 1000))
-                .build(output);
+//        // RUNES (OLD)
+//        sequencedAssembly(MANA_RUNE.getId())
+//                .require(BLANK_RUNE.get())
+//                .transitionTo(BLANK_RUNE.get())
+//                .addOutput(MANA_RUNE.get(), 1)
+//                .loops(1)
+//                .addStep(FillingRecipe::new, builder -> builder.require(MANA.get(), 1000))
+//                .addStep(FillingRecipe::new, builder -> builder.require(MANA.get(), 1000))
+//                .build(output);
+//        sequencedAssembly(BLOOD_RUNE.getId())
+//                .require(BLANK_RUNE.get())
+//                .transitionTo(BLANK_RUNE.get())
+//                .addOutput(BLOOD_RUNE.get(), 1)
+//                .loops(1)
+//                .addStep(FillingRecipe::new, builder -> builder.require(BLOOD.get(), 1000))
+//                .addStep(FillingRecipe::new, builder -> builder.require(BLOOD.get(), 1000))
+//                .build(output);
+//        sequencedAssembly(LIGHTNING_RUNE.getId())
+//                .require(BLANK_RUNE.get())
+//                .transitionTo(BLANK_RUNE.get())
+//                .addOutput(LIGHTNING_RUNE.get(), 1)
+//                .loops(1)
+//                .addStep(FillingRecipe::new, builder -> builder.require(LIGHTNING.get(), 1000))
+//                .addStep(FillingRecipe::new, builder -> builder.require(LIGHTNING.get(), 1000))
+//                .build(output);
+//
+//        // MISC ITEMS
+//        sequencedAssembly(ARCANE_INGOT.getId())
+//                .require(INGOTS)
+//                .transitionTo(COPPER_INGOT)
+//                .addOutput(ARCANE_INGOT.get(), 1)
+//                .loops(1)
+//                .addStep(FillingRecipe::new, builder -> builder.require(MANA.get(), 1000))
+//                .addStep(FillingRecipe::new, builder -> builder.require(MANA.get(), 1000))
+//                .build(output);
+//        sequencedAssembly(MAGIC_CLOTH.getId())
+//                .require(WOOL)
+//                .transitionTo(WHITE_WOOL)
+//                .addOutput(MAGIC_CLOTH.get(), 1)
+//                .loops(1)
+//                .addStep(FillingRecipe::new, builder -> builder.require(MANA.get(), 1000))
+//                .addStep(FillingRecipe::new, builder -> builder.require(MANA.get(), 1000))
+//                .build(output);
+//        sequencedAssembly(ENERGIZED_CORE.getId())
+//                .require(COPPER_BLOCK)
+//                .transitionTo(COPPER_BLOCK)
+//                .addOutput(ENERGIZED_CORE.get(), 1)
+//                .loops(1)
+//                .addStep(FillingRecipe::new, builder -> builder.require(LIGHTNING.get(), 1000))
+//                .addStep(FillingRecipe::new, builder -> builder.require(LIGHTNING.get(), 1000))
+//                .build(output);
         sequencedAssembly(WAYWARD_COMPASS.getId())
                 .require(COMPASS)
                 .transitionTo(COMPASS)
                 .addOutput(WAYWARD_COMPASS.get(), 1)
                 .loops(1)
-                .addStep(FillingRecipe::new, builder -> builder.require(MANA.get(), 1000))
+                .addStep(FillingRecipe::new, builder -> builder.require(MANA.get(), 500))
                 .addStep(DeployerApplicationRecipe::new, builder -> builder.require(SOUL_LANTERN))
+                .build(output);
+        sequencedAssembly(CINDEROUS_SOULCALLER.getId())
+                .require(BELL)
+                .transitionTo(BELL)
+                .addOutput(CINDEROUS_SOULCALLER.get(), 1)
+                .loops(1)
+                .addStep(FillingRecipe::new, builder -> builder.require(LAVA, 1000))
+                .addStep(DeployerApplicationRecipe::new, builder -> builder.require(NETHERITE_INGOT))
+                .build(output);
+        sequencedAssembly(ICE_SPIDER_EGG_BLOCK_ITEM.getId())
+                .require(TURTLE_EGG)
+                .transitionTo(TURTLE_EGG)
+                .addOutput(ICE_SPIDER_EGG_BLOCK_ITEM.get(), 1)
+                .loops(1)
+                .addStep(FillingRecipe::new, builder -> builder.require(ICE_VENOM_FLUID.get(), 1000))
+                .addStep(DeployerApplicationRecipe::new, builder -> builder.require(SPIDER_EYE))
                 .build(output);
     }
 
