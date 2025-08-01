@@ -1,4 +1,4 @@
-// 1.21.1	2025-07-31T20:25:15.0517	Recipes
+// 1.21.1	2025-08-01T12:44:26.952172	Recipes
 2a2f6d368f7f0c389b2f4309f075ac6f09428115 data/create_wizardry/recipe/mixing/mana.json
 7a06364ea1db48e45c7d571e965bea7269fab9c5 data/irons_spellbooks/recipe/cinderous_soul_rune.json
 414263df6de2090738a06a2030b30b995ecf119f data/irons_spellbooks/recipe/compacting/blood.json
@@ -52,12 +52,12 @@ ccc3b53ef4077965a7bf37496a196e223ed19050 data/irons_spellbooks/recipe/filling/wa
 1b39c4f99dca279115c238b8fae7730751c36411 data/irons_spellbooks/recipe/mixing/arcane_essence.json
 94e9008bca606490c4bdb9cc971d19297b235cfa data/irons_spellbooks/recipe/mixing/cinder_essence.json
 3135c4bd2f1071fbe52faa39d7dad583c59f4037 data/irons_spellbooks/recipe/mixing/common_ink.json
-53982a1c316cee3f9ee9c8124251fe967134100f data/irons_spellbooks/recipe/mixing/epic_ink.json
+95e704a1c982bc6b3cb085dac23edc26ce461c41 data/irons_spellbooks/recipe/mixing/epic_ink.json
 e08881ef3a787621443437ef5eb064ddc2d3389e data/irons_spellbooks/recipe/mixing/ice_venom.json
-dfde3dad54d4e592f3016d0d76a3c32b8848c90b data/irons_spellbooks/recipe/mixing/legendary_ink.json
-3e6f92b920e4e49a6c7c3513f969a8081aaa4e2f data/irons_spellbooks/recipe/mixing/rare_ink.json
+0341c27b43ce0f9516ea50327fde382e03d354d3 data/irons_spellbooks/recipe/mixing/legendary_ink.json
+97769131c4af0250046d1d6113a5bfa3800597eb data/irons_spellbooks/recipe/mixing/rare_ink.json
 0e266152f5264c9677e1756c867728459a9a7977 data/irons_spellbooks/recipe/mixing/timeless_slurry.json
-11bc9fb5c4d8a47872b5ff5b977f53b039a0f7e8 data/irons_spellbooks/recipe/mixing/uncommon_ink.json
+972791477ccf9ea1909c4fb840049e3d290cef73 data/irons_spellbooks/recipe/mixing/uncommon_ink.json
 3e4b3d2b0d59d0e8ef87a36b1ad0c09acbdf96e6 data/irons_spellbooks/recipe/sequenced_assembly/blank_rune.json
 9d148ace291282ea92d92d4f357313a6b6144f3e data/irons_spellbooks/recipe/sequenced_assembly/cinderous_soulcaller.json
 b4b43a16e2f8a838a95c06fd7ea89c9ea995a140 data/irons_spellbooks/recipe/sequenced_assembly/ice_spider_egg.json
