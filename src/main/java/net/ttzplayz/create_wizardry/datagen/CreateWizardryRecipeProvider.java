@@ -18,6 +18,7 @@
 
 package net.ttzplayz.create_wizardry.datagen;
 
+import com.simibubi.create.api.data.recipe.MechanicalCraftingRecipeBuilder;
 import com.simibubi.create.compat.jei.ConversionRecipe;
 import com.simibubi.create.content.equipment.sandPaper.SandPaperPolishingRecipe;
 import com.simibubi.create.content.fluids.transfer.EmptyingRecipe;
@@ -74,6 +75,7 @@ public class CreateWizardryRecipeProvider extends RecipeProvider {
         buildMixingRecipes(output);
         buildSequencedRecipes(output);
         buildCompactingRecipes(output);
+        buildMechanicalRecipes(output);
     }
     private void buildMixingRecipes(RecipeOutput output) {
 
@@ -305,6 +307,34 @@ public class CreateWizardryRecipeProvider extends RecipeProvider {
                 .require(BLOOD.get(), 1000)
                 .output(BLOOD_RUNE.get())
                 .build(output);
+        filling(ICE_RUNE.getId())
+                .require(BLANK_RUNE.get())
+                .require(ICE_VENOM_FLUID.get(), 250)
+                .output(ICE_RUNE.get())
+                .build(output);
+        //ARMOR
+        filling(WANDERING_MAGICIAN_BOOTS.getId())
+                .require(LEATHER_BOOTS)
+                .require(MANA.get(), 250)
+                .output(WANDERING_MAGICIAN_BOOTS.get())
+                .build(output);
+        filling(WANDERING_MAGICIAN_CHESTPLATE.getId())
+                .require(LEATHER_CHESTPLATE)
+                .require(MANA.get(), 250)
+                .output(WANDERING_MAGICIAN_CHESTPLATE.get())
+                .build(output);
+        filling(WANDERING_MAGICIAN_HELMET.getId())
+                .require(LEATHER_HELMET)
+                .require(MANA.get(), 250)
+                .output(WANDERING_MAGICIAN_HELMET.get())
+                .build(output);
+        filling(WANDERING_MAGICIAN_LEGGINGS.getId())
+                .require(LEATHER_LEGGINGS)
+                .require(MANA.get(), 250)
+                .output(WANDERING_MAGICIAN_LEGGINGS.get())
+                .build(output);
+
+
         // MISC
         filling(ARCANE_ESSENCE.getId())
                 .require(Tags.Items.DUSTS)
@@ -333,7 +363,7 @@ public class CreateWizardryRecipeProvider extends RecipeProvider {
                 .build(output);
         filling(BLOODY_VELLUM.getId())
                 .require(HOGSKIN.get())
-                .require(BLOOD.get(), 1000)
+                .require(BLOOD.get(), 500)
                 .output(BLOODY_VELLUM.get())
                 .build(output);
         filling(FROZEN_BONE_SHARD.getId())
@@ -435,64 +465,13 @@ public class CreateWizardryRecipeProvider extends RecipeProvider {
                 .build(output);
     }
 
-    public void buildSequencedRecipes(RecipeOutput output) {
-//        // RUNES (OLD)
-//        sequencedAssembly(MANA_RUNE.getId())
-//                .require(BLANK_RUNE.get())
-//                .transitionTo(BLANK_RUNE.get())
-//                .addOutput(MANA_RUNE.get(), 1)
-//                .loops(1)
-//                .addStep(FillingRecipe::new, builder -> builder.require(MANA.get(), 1000))
-//                .addStep(FillingRecipe::new, builder -> builder.require(MANA.get(), 1000))
-//                .build(output);
-//        sequencedAssembly(BLOOD_RUNE.getId())
-//                .require(BLANK_RUNE.get())
-//                .transitionTo(BLANK_RUNE.get())
-//                .addOutput(BLOOD_RUNE.get(), 1)
-//                .loops(1)
-//                .addStep(FillingRecipe::new, builder -> builder.require(BLOOD.get(), 1000))
-//                .addStep(FillingRecipe::new, builder -> builder.require(BLOOD.get(), 1000))
-//                .build(output);
-//        sequencedAssembly(LIGHTNING_RUNE.getId())
-//                .require(BLANK_RUNE.get())
-//                .transitionTo(BLANK_RUNE.get())
-//                .addOutput(LIGHTNING_RUNE.get(), 1)
-//                .loops(1)
-//                .addStep(FillingRecipe::new, builder -> builder.require(LIGHTNING.get(), 1000))
-//                .addStep(FillingRecipe::new, builder -> builder.require(LIGHTNING.get(), 1000))
-//                .build(output);
-//
-//        // MISC ITEMS
-//        sequencedAssembly(ARCANE_INGOT.getId())
-//                .require(INGOTS)
-//                .transitionTo(COPPER_INGOT)
-//                .addOutput(ARCANE_INGOT.get(), 1)
-//                .loops(1)
-//                .addStep(FillingRecipe::new, builder -> builder.require(MANA.get(), 1000))
-//                .addStep(FillingRecipe::new, builder -> builder.require(MANA.get(), 1000))
-//                .build(output);
-//        sequencedAssembly(MAGIC_CLOTH.getId())
-//                .require(WOOL)
-//                .transitionTo(WHITE_WOOL)
-//                .addOutput(MAGIC_CLOTH.get(), 1)
-//                .loops(1)
-//                .addStep(FillingRecipe::new, builder -> builder.require(MANA.get(), 1000))
-//                .addStep(FillingRecipe::new, builder -> builder.require(MANA.get(), 1000))
-//                .build(output);
-//        sequencedAssembly(ENERGIZED_CORE.getId())
-//                .require(COPPER_BLOCK)
-//                .transitionTo(COPPER_BLOCK)
-//                .addOutput(ENERGIZED_CORE.get(), 1)
-//                .loops(1)
-//                .addStep(FillingRecipe::new, builder -> builder.require(LIGHTNING.get(), 1000))
-//                .addStep(FillingRecipe::new, builder -> builder.require(LIGHTNING.get(), 1000))
-//                .build(output);
+    private void buildSequencedRecipes(RecipeOutput output) {
         sequencedAssembly(WAYWARD_COMPASS.getId())
                 .require(COMPASS)
                 .transitionTo(COMPASS)
                 .addOutput(WAYWARD_COMPASS.get(), 1)
                 .loops(1)
-                .addStep(FillingRecipe::new, builder -> builder.require(MANA.get(), 500))
+                .addStep(FillingRecipe::new, builder -> builder.require(MANA.get(), 1000))
                 .addStep(DeployerApplicationRecipe::new, builder -> builder.require(SOUL_LANTERN))
                 .build(output);
         sequencedAssembly(CINDEROUS_SOULCALLER.getId())
@@ -501,7 +480,7 @@ public class CreateWizardryRecipeProvider extends RecipeProvider {
                 .addOutput(CINDEROUS_SOULCALLER.get(), 1)
                 .loops(1)
                 .addStep(FillingRecipe::new, builder -> builder.require(LAVA, 1000))
-                .addStep(DeployerApplicationRecipe::new, builder -> builder.require(NETHERITE_INGOT))
+                .addStep(DeployerApplicationRecipe::new, builder -> builder.require(NETHERITE_SCRAP))
                 .build(output);
         sequencedAssembly(ICE_SPIDER_EGG_BLOCK_ITEM.getId())
                 .require(TURTLE_EGG)
@@ -510,6 +489,25 @@ public class CreateWizardryRecipeProvider extends RecipeProvider {
                 .loops(1)
                 .addStep(FillingRecipe::new, builder -> builder.require(ICE_VENOM_FLUID.get(), 1000))
                 .addStep(DeployerApplicationRecipe::new, builder -> builder.require(SPIDER_EYE))
+                .build(output);
+        sequencedAssembly(BLANK_RUNE.getId())
+                .require(TUFF)
+                .transitionTo(TUFF)
+                .addOutput(BLANK_RUNE.get(), 1)
+                .loops(5)
+                .addStep(FillingRecipe::new, builder -> builder.require(MANA.get(), 1000))
+                .addStep(PressingRecipe::new, builder -> (builder))
+                .build(output);
+    }
+
+    private void buildMechanicalRecipes (RecipeOutput output) {
+        mechanicalCrafting(CINDEROUS_KEYSTONE_BLOCK_ITEM.get(), 1)
+                .key('n', NETHERITE_INGOT)
+                .key('r', FIRE_RUNE.get())
+                .key('s', NETHER_STAR)
+                .patternLine("nrn")
+                .patternLine("rsr")
+                .patternLine("nrn")
                 .build(output);
     }
 
@@ -576,5 +574,9 @@ public class CreateWizardryRecipeProvider extends RecipeProvider {
 
     public static SequencedAssemblyRecipeBuilder sequencedAssembly(ResourceLocation id) {
         return new SequencedAssemblyRecipeBuilder(id);
+    }
+
+    public static MechanicalCraftingRecipeBuilder mechanicalCrafting(ItemLike item, int count) {
+        return new MechanicalCraftingRecipeBuilder(item, count);
     }
 }

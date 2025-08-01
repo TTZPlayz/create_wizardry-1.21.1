@@ -1,12 +1,12 @@
 {
   "type": "create:sequenced_assembly",
   "ingredient": {
-    "item": "minecraft:compass"
+    "item": "minecraft:turtle_egg"
   },
   "loops": 1,
   "results": [
     {
-      "id": "irons_spellbooks:wayward_compass"
+      "id": "irons_spellbooks:ice_spider_egg"
     }
   ],
   "sequence": [
@@ -14,17 +14,17 @@
       "type": "create:filling",
       "ingredients": [
         {
-          "item": "minecraft:compass"
+          "item": "minecraft:turtle_egg"
         },
         {
           "type": "fluid_stack",
           "amount": 1000,
-          "fluid": "create_wizardry:mana"
+          "fluid": "irons_spellbooks:ice_venom"
         }
       ],
       "results": [
         {
-          "id": "minecraft:compass"
+          "id": "minecraft:turtle_egg"
         }
       ]
     },
@@ -32,20 +32,20 @@
       "type": "create:deploying",
       "ingredients": [
         {
-          "item": "minecraft:compass"
+          "item": "minecraft:turtle_egg"
         },
         {
-          "item": "minecraft:soul_lantern"
+          "item": "minecraft:spider_eye"
         }
       ],
       "results": [
         {
-          "id": "minecraft:compass"
+          "id": "minecraft:turtle_egg"
         }
       ]
     }
   ],
   "transitional_item": {
-    "id": "minecraft:compass"
+    "id": "minecraft:turtle_egg"
   }
 }

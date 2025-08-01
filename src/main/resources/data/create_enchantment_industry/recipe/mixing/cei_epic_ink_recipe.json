@@ -6,6 +6,7 @@
     }
   ],
   "type": "create:mixing",
+  "heat_requirement": "heated",
   "ingredients": [
     {
       "item": "irons_spellbooks:arcane_essence"
@@ -52,11 +53,6 @@
     {
       "amount": 750,
       "id": "irons_spellbooks:epic_ink"
-    },
-    {
-      "item": "minecraft:glass_bottle",
-      "count": 2
     }
-  ],
-  "heatRequirement": "heated"
+  ]
 }

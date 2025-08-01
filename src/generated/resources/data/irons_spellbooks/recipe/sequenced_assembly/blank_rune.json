@@ -1,12 +1,12 @@
 {
   "type": "create:sequenced_assembly",
   "ingredient": {
-    "item": "minecraft:compass"
+    "item": "minecraft:tuff"
   },
-  "loops": 1,
+  "loops": 5,
   "results": [
     {
-      "id": "irons_spellbooks:wayward_compass"
+      "id": "irons_spellbooks:blank_rune"
     }
   ],
   "sequence": [
@@ -14,7 +14,7 @@
       "type": "create:filling",
       "ingredients": [
         {
-          "item": "minecraft:compass"
+          "item": "minecraft:tuff"
         },
         {
           "type": "fluid_stack",
@@ -24,28 +24,25 @@
       ],
       "results": [
         {
-          "id": "minecraft:compass"
+          "id": "minecraft:tuff"
         }
       ]
     },
     {
-      "type": "create:deploying",
+      "type": "create:pressing",
       "ingredients": [
         {
-          "item": "minecraft:compass"
-        },
-        {
-          "item": "minecraft:soul_lantern"
+          "item": "minecraft:tuff"
         }
       ],
       "results": [
         {
-          "id": "minecraft:compass"
+          "id": "minecraft:tuff"
         }
       ]
     }
   ],
   "transitional_item": {
-    "id": "minecraft:compass"
+    "id": "minecraft:tuff"
   }
 }

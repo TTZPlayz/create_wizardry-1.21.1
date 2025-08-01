@@ -6,6 +6,7 @@
     }
   ],
   "type": "create:mixing",
+  "heat_requirement": "superheated",
   "ingredients": [
     {
       "item": "irons_spellbooks:arcane_essence"
@@ -64,11 +65,6 @@
     {
       "amount": 750,
       "id": "irons_spellbooks:legendary_ink"
-    },
-    {
-      "item": "minecraft:glass_bottle",
-      "count": 2
     }
-  ],
-  "heatRequirement": "superheated"
+  ]
 }
