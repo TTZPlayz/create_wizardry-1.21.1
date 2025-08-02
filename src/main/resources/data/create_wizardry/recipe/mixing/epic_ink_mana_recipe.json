@@ -6,15 +6,6 @@
       "item": "irons_spellbooks:arcane_essence"
     },
     {
-      "item": "irons_spellbooks:arcane_essence"
-    },
-    {
-      "item": "irons_spellbooks:arcane_essence"
-    },
-    {
-      "item": "irons_spellbooks:arcane_essence"
-    },
-    {
       "type": "fluid_stack",
       "amount": 1000,
       "fluid": "create_wizardry:mana"
@@ -24,12 +15,6 @@
     },
     {
       "item": "irons_spellbooks:blood_vial"
-    },
-    {
-      "item": "create:experience_nugget"
-    },
-    {
-      "item": "create:experience_nugget"
     },
     {
       "item": "create:experience_nugget"

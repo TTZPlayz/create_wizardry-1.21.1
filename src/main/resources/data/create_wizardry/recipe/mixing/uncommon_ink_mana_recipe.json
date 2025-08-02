@@ -3,7 +3,7 @@
   "ingredients": [
     {
       "type": "fluid_stack",
-      "amount": 1000,
+      "amount": 750,
       "fluid": "create_wizardry:mana"
     },
     {

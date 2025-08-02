@@ -27,24 +27,6 @@
       "item": "irons_spellbooks:arcane_essence"
     },
     {
-      "item": "irons_spellbooks:arcane_essence"
-    },
-    {
-      "item": "irons_spellbooks:arcane_essence"
-    },
-    {
-      "item": "irons_spellbooks:arcane_essence"
-    },
-    {
-      "item": "irons_spellbooks:arcane_essence"
-    },
-    {
-      "item": "irons_spellbooks:arcane_essence"
-    },
-    {
-      "item": "irons_spellbooks:arcane_essence"
-    },
-    {
       "item": "irons_spellbooks:lightning_bottle"
     },
     {
@@ -52,7 +34,7 @@
     },
     {
       "type": "fluid_tag",
-      "amount": 24,
+      "amount": 9,
       "fluid_tag": "create_enchantment_industry:experience"
     },
     {

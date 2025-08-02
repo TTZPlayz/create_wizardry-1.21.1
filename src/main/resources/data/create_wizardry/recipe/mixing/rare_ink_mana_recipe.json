@@ -7,12 +7,6 @@
       "fluid": "create_wizardry:mana"
     },
     {
-      "item": "irons_spellbooks:arcane_essence"
-    },
-    {
-      "item": "irons_spellbooks:arcane_essence"
-    },
-    {
       "item": "minecraft:lapis_lazuli"
     },
     {
@@ -22,9 +16,6 @@
       "type": "fluid_stack",
       "amount": 1000,
       "fluid": "irons_spellbooks:uncommon_ink"
-    },
-    {
-      "item": "create:experience_nugget"
     },
     {
       "item": "create:experience_nugget"

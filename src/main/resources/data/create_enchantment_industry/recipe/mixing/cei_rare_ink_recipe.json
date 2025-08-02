@@ -20,12 +20,6 @@
       "item": "irons_spellbooks:arcane_essence"
     },
     {
-      "item": "irons_spellbooks:arcane_essence"
-    },
-    {
-      "item": "irons_spellbooks:arcane_essence"
-    },
-    {
       "item": "minecraft:lapis_lazuli"
     },
     {
@@ -33,7 +27,7 @@
     },
     {
       "type": "fluid_tag",
-      "amount": 6,
+      "amount": 3,
       "fluid_tag": "create_enchantment_industry:experience"
     },
     {

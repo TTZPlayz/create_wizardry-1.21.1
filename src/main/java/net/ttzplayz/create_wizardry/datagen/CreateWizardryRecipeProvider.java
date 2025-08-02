@@ -274,11 +274,13 @@ public class CreateWizardryRecipeProvider extends RecipeProvider {
                 .require(BLOOD.get(), 250)
                 .output(ItemRegistry.BLOOD_VIAL.get())
                 .build(output);
-        filling(LIGHTNING_BOTTLE.getId())
+
+        filling(ItemRegistry.LIGHTNING_BOTTLE.getId())
                 .require(Items.GLASS_BOTTLE)
                 .require(LIGHTNING.get(), 250)
-                .output(LIGHTNING_BOTTLE.get())
+                .output(ItemRegistry.LIGHTNING_BOTTLE.get())
                 .build(output);
+
         filling(ItemRegistry.TIMELESS_SLURRY.getId())
                 .require(Items.GLASS_BOTTLE)
                 .require(TIMELESS_SLURRY_FLUID.get(), 250)
