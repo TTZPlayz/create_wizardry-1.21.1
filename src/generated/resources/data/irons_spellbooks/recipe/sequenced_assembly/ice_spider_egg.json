@@ -1,0 +1,51 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "minecraft:turtle_egg"
+  },
+  "loops": 1,
+  "results": [
+    {
+      "id": "irons_spellbooks:ice_spider_egg"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "minecraft:turtle_egg"
+        },
+        {
+          "type": "fluid_stack",
+          "amount": 1000,
+          "fluid": "irons_spellbooks:ice_venom"
+        }
+      ],
+      "results": [
+        {
+          "id": "minecraft:turtle_egg"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "minecraft:turtle_egg"
+        },
+        {
+          "item": "minecraft:spider_eye"
+        }
+      ],
+      "results": [
+        {
+          "id": "minecraft:turtle_egg"
+        }
+      ]
+    }
+  ],
+  "transitional_item": {
+    "id": "minecraft:turtle_egg"
+  }
+}
