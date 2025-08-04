@@ -50,6 +50,7 @@ import net.neoforged.neoforge.common.Tags;
 import java.util.concurrent.CompletableFuture;
 
 import static com.simibubi.create.AllItems.EXP_NUGGET;
+import static com.simibubi.create.AllItems.STURDY_SHEET;
 import static com.simibubi.create.content.processing.recipe.HeatCondition.HEATED;
 import static com.simibubi.create.content.processing.recipe.HeatCondition.SUPERHEATED;
 import static io.redspace.ironsspellbooks.registries.FluidRegistry.*;
@@ -75,7 +76,18 @@ public class CreateWizardryRecipeProvider extends RecipeProvider {
         buildSequencedRecipes(output);
         buildCompactingRecipes(output);
         buildMechanicalRecipes(output);
+        buildCrushingRecipes(output);
     }
+
+    private void buildCrushingRecipes(RecipeOutput output) {
+        crushing(LOST_KNOWLEDGE_FRAGMENT.getId())
+                .require(ELDRITCH_PAGE.get())
+                .output(LOST_KNOWLEDGE_FRAGMENT.get(), 3)
+                .output(0.5F, LOST_KNOWLEDGE_FRAGMENT.getId(), 1)
+                .output(0.25F, LOST_KNOWLEDGE_FRAGMENT.getId(), 1)
+                .build(output);
+    }
+
     private void buildMixingRecipes(RecipeOutput output) {
 
         // INKS (6.0.6 restrictions - cannot be more than nine items)
@@ -462,6 +474,8 @@ public class CreateWizardryRecipeProvider extends RecipeProvider {
     private void buildCompactingRecipes(RecipeOutput output) {
         compacting(BLOOD.getId())
                 .require(Tags.Items.FOODS_RAW_MEAT)
+                .require(Tags.Items.FOODS_RAW_MEAT)
+                .require(Tags.Items.FOODS_RAW_MEAT)
                 .output(BLOOD.get(), 250)
                 .build(output);
     }
@@ -486,7 +500,10 @@ public class CreateWizardryRecipeProvider extends RecipeProvider {
         sequencedAssembly(ICE_SPIDER_EGG_BLOCK_ITEM.getId())
                 .require(TURTLE_EGG)
                 .transitionTo(TURTLE_EGG)
-                .addOutput(ICE_SPIDER_EGG_BLOCK_ITEM.get(), 1)
+                .addOutput(ICE_SPIDER_EGG_BLOCK_ITEM.get(), 15)
+                .addOutput(EGG, 90)
+                .addOutput(TURTLE_EGG, 30)
+                .addOutput(SPIDER_EYE, 15)
                 .loops(1)
                 .addStep(FillingRecipe::new, builder -> builder.require(ICE_VENOM_FLUID.get(), 1000))
                 .addStep(DeployerApplicationRecipe::new, builder -> builder.require(SPIDER_EYE))
@@ -494,9 +511,83 @@ public class CreateWizardryRecipeProvider extends RecipeProvider {
         sequencedAssembly(BLANK_RUNE.getId())
                 .require(TUFF)
                 .transitionTo(TUFF)
-                .addOutput(BLANK_RUNE.get(), 1)
+                .addOutput(BLANK_RUNE.get(), 30)
+                .addOutput(TUFF, 55)
+                .addOutput(COBBLESTONE, 45)
+                .addOutput(COBBLESTONE_SLAB, 10)
+                .addOutput(COBBLED_DEEPSLATE_SLAB, 5)
+                .addOutput(ARCANE_ESSENCE.get(), 5)
                 .loops(5)
                 .addStep(FillingRecipe::new, builder -> builder.require(MANA.get(), 1000))
+                .addStep(PressingRecipe::new, builder -> (builder))
+                .build(output);
+        sequencedAssembly(WEAPON_PARTS.getId())
+                .require(IRON_SWORD)
+                .transitionTo(IRON_SWORD)
+                .addOutput(WEAPON_PARTS.get(), 1)
+                .loops(2)
+                .addStep(DeployerApplicationRecipe::new, builder -> builder.require(ARCANE_INGOT.get()))
+                .addStep(DeployerApplicationRecipe::new, builder -> builder.require(MITHRIL_INGOT.get()))
+                .addStep(PressingRecipe::new, builder -> (builder))
+                .build(output);
+        sequencedAssembly(RUINED_BOOK.getId())
+                .require(ENCHANTED_BOOK)
+                .transitionTo(ENCHANTED_BOOK)
+                .addOutput(RUINED_BOOK.get(), 45)
+                .addOutput(LEATHER, 60)
+                .addOutput(PAPER, 30)
+                .addOutput(SCULK_VEIN, 5)
+                .addOutput(EXP_NUGGET, 5)
+                .addOutput(ECHO_SHARD, 3)
+                .addOutput(SCULK_SHRIEKER, 2)
+                .loops(3)
+                .addStep(FillingRecipe::new, builder -> builder.require(TIMELESS_SLURRY_FLUID.get(), 500))
+                .addStep(DeployerApplicationRecipe::new, builder -> builder.require(SCULK_CATALYST))
+                .addStep(PressingRecipe::new, builder -> (builder))
+                .build(output);
+        sequencedAssembly(ICE_CRYSTAL.getId())
+                .require(AMETHYST_SHARD)
+                .transitionTo(AMETHYST_SHARD)
+                .addOutput(ICE_CRYSTAL.get(), 1)
+                .loops(3)
+                .addStep(FillingRecipe::new, builder -> builder.require(ICE_VENOM_FLUID.get(), 1000))
+                .addStep(DeployerApplicationRecipe::new, builder -> builder.require(BLUE_ICE))
+                .addStep(PressingRecipe::new, builder -> (builder))
+                .build(output);
+        sequencedAssembly(ELDRITCH_PAGE.getId())
+                .require(PAPER)
+                .transitionTo(PAPER)
+                .addOutput(ELDRITCH_PAGE.get(), 75)
+                .addOutput(LOST_KNOWLEDGE_FRAGMENT.get(), 50)
+                .addOutput(ECHO_SHARD, 10)
+                .addOutput(SCULK_SHRIEKER, 10)
+                .addOutput(POTATO, 5)
+                .loops(4)
+                .addStep(FillingRecipe::new, builder -> builder.require(TIMELESS_SLURRY_FLUID.get(), 125))
+                .addStep(DeployerApplicationRecipe::new, builder -> builder.require(LOST_KNOWLEDGE_FRAGMENT.get()))
+                .build(output);
+        sequencedAssembly(DRAGONSKIN.getId())
+                .require(PHANTOM_MEMBRANE)
+                .transitionTo(PHANTOM_MEMBRANE)
+                .addOutput(DRAGONSKIN.get(), 15)
+                .addOutput(OBSIDIAN, 75)
+                .addOutput(PHANTOM_MEMBRANE, 35)
+                .addOutput(CRYING_OBSIDIAN, 10)
+                .addOutput(ENDER_EYE, 10)
+                .addOutput(STURDY_SHEET, 5)
+                .loops(5)
+                .addStep(DeployerApplicationRecipe::new, builder -> builder.require(END_CRYSTAL))
+                .addStep(DeployerApplicationRecipe::new, builder -> builder.require(OBSIDIAN))
+                .addStep(FillingRecipe::new, builder -> builder.require(TIMELESS_SLURRY_FLUID.get(), 1000))
+                .addStep(PressingRecipe::new, builder -> (builder))
+                .build(output);
+        sequencedAssembly(FROSTED_HELVE.getId())
+                .require(FROZEN_BONE_SHARD.get())
+                .transitionTo(FROZEN_BONE_SHARD.get())
+                .addOutput(FROSTED_HELVE.get(), 1)
+                .loops(2)
+                .addStep(DeployerApplicationRecipe::new, builder -> builder.require(ARCANE_INGOT.get()))
+                .addStep(DeployerApplicationRecipe::new, builder -> builder.require(FROZEN_BONE_SHARD.get()))
                 .addStep(PressingRecipe::new, builder -> (builder))
                 .build(output);
     }
