@@ -6,7 +6,28 @@
   "loops": 5,
   "results": [
     {
+      "chance": 30.0,
       "id": "irons_spellbooks:blank_rune"
+    },
+    {
+      "chance": 55.0,
+      "id": "minecraft:tuff"
+    },
+    {
+      "chance": 45.0,
+      "id": "minecraft:cobblestone"
+    },
+    {
+      "chance": 10.0,
+      "id": "minecraft:cobblestone_slab"
+    },
+    {
+      "chance": 5.0,
+      "id": "minecraft:cobbled_deepslate_slab"
+    },
+    {
+      "chance": 5.0,
+      "id": "irons_spellbooks:arcane_essence"
     }
   ],
   "sequence": [

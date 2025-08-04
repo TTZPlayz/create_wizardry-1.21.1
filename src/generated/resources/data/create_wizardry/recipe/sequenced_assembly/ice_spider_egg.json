@@ -6,7 +6,20 @@
   "loops": 1,
   "results": [
     {
+      "chance": 15.0,
       "id": "irons_spellbooks:ice_spider_egg"
+    },
+    {
+      "chance": 90.0,
+      "id": "minecraft:egg"
+    },
+    {
+      "chance": 30.0,
+      "id": "minecraft:turtle_egg"
+    },
+    {
+      "chance": 15.0,
+      "id": "minecraft:spider_eye"
     }
   ],
   "sequence": [
