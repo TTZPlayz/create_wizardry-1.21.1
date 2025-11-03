@@ -1,0 +1,16 @@
+{
+  "type": "create:deploying",
+  "ingredients": [
+    {
+      "item": "irons_spellbooks:wizard_leggings"
+    },
+    {
+      "item": "irons_spellbooks:lightning_rune"
+    }
+  ],
+  "results": [
+    {
+      "id": "irons_spellbooks:electromancer_leggings"
+    }
+  ]
+}

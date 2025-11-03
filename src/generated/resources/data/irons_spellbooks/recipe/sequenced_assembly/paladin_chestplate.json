@@ -1,0 +1,141 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "irons_spellbooks:priest_chestplate"
+  },
+  "results": [
+    {
+      "components": {
+        "irons_spellbooks:spell_container": {
+          "data": [],
+          "maxSpells": 1,
+          "mustEquip": true,
+          "spellWheel": true
+        }
+      },
+      "id": "irons_spellbooks:paladin_chestplate"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "irons_spellbooks:priest_chestplate"
+        },
+        {
+          "item": "minecraft:gold_ingot"
+        }
+      ],
+      "results": [
+        {
+          "components": {
+            "irons_spellbooks:spell_container": {
+              "data": [],
+              "maxSpells": 1,
+              "mustEquip": true,
+              "spellWheel": true
+            }
+          },
+          "id": "irons_spellbooks:priest_chestplate"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "irons_spellbooks:priest_chestplate"
+        },
+        {
+          "item": "irons_spellbooks:mithril_weave"
+        }
+      ],
+      "results": [
+        {
+          "components": {
+            "irons_spellbooks:spell_container": {
+              "data": [],
+              "maxSpells": 1,
+              "mustEquip": true,
+              "spellWheel": true
+            }
+          },
+          "id": "irons_spellbooks:priest_chestplate"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "irons_spellbooks:priest_chestplate"
+        },
+        {
+          "item": "minecraft:gold_ingot"
+        }
+      ],
+      "results": [
+        {
+          "components": {
+            "irons_spellbooks:spell_container": {
+              "data": [],
+              "maxSpells": 1,
+              "mustEquip": true,
+              "spellWheel": true
+            }
+          },
+          "id": "irons_spellbooks:priest_chestplate"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "irons_spellbooks:priest_chestplate"
+        },
+        {
+          "item": "irons_spellbooks:divine_soulshard"
+        }
+      ],
+      "results": [
+        {
+          "components": {
+            "irons_spellbooks:spell_container": {
+              "data": [],
+              "maxSpells": 1,
+              "mustEquip": true,
+              "spellWheel": true
+            }
+          },
+          "id": "irons_spellbooks:priest_chestplate"
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "irons_spellbooks:priest_chestplate"
+        }
+      ],
+      "results": [
+        {
+          "components": {
+            "irons_spellbooks:spell_container": {
+              "data": [],
+              "maxSpells": 1,
+              "mustEquip": true,
+              "spellWheel": true
+            }
+          },
+          "id": "irons_spellbooks:priest_chestplate"
+        }
+      ]
+    }
+  ],
+  "transitional_item": {
+    "id": "irons_spellbooks:priest_chestplate"
+  }
+}

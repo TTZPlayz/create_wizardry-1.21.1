@@ -1,0 +1,50 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "minecraft:stick"
+  },
+  "results": [
+    {
+      "id": "irons_spellbooks:graybeard_staff"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "minecraft:stick"
+        },
+        {
+          "item": "minecraft:iron_nugget"
+        }
+      ],
+      "results": [
+        {
+          "id": "minecraft:stick"
+        }
+      ]
+    },
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "minecraft:stick"
+        },
+        {
+          "type": "neoforge:single",
+          "amount": 250,
+          "fluid": "create_wizardry:mana"
+        }
+      ],
+      "results": [
+        {
+          "id": "minecraft:stick"
+        }
+      ]
+    }
+  ],
+  "transitional_item": {
+    "id": "minecraft:stick"
+  }
+}

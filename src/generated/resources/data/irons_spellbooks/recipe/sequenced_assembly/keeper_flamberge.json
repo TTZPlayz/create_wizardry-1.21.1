@@ -1,0 +1,39 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "minecraft:netherite_sword"
+  },
+  "loops": 5,
+  "results": [
+    {
+      "chance": 15.0,
+      "id": "irons_spellbooks:keeper_flamberge"
+    },
+    {
+      "chance": 15.0,
+      "id": "minecraft:netherite_ingot"
+    },
+    {
+      "chance": 120.0,
+      "id": "minecraft:netherite_sword"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "minecraft:netherite_sword"
+        }
+      ],
+      "results": [
+        {
+          "id": "minecraft:netherite_sword"
+        }
+      ]
+    }
+  ],
+  "transitional_item": {
+    "id": "minecraft:netherite_sword"
+  }
+}

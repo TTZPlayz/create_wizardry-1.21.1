@@ -1,0 +1,88 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "minecraft:enchanted_book"
+  },
+  "loops": 3,
+  "results": [
+    {
+      "components": {
+        "irons_spellbooks:spell_container": {
+          "data": [],
+          "maxSpells": 10,
+          "mustEquip": true,
+          "spellWheel": true
+        }
+      },
+      "id": "irons_spellbooks:villager_spell_book"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "minecraft:enchanted_book"
+        },
+        {
+          "item": "irons_spellbooks:divine_pearl"
+        }
+      ],
+      "results": [
+        {
+          "id": "minecraft:enchanted_book"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "minecraft:enchanted_book"
+        },
+        {
+          "item": "minecraft:emerald_block"
+        }
+      ],
+      "results": [
+        {
+          "id": "minecraft:enchanted_book"
+        }
+      ]
+    },
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "minecraft:enchanted_book"
+        },
+        {
+          "type": "neoforge:single",
+          "amount": 1000,
+          "fluid": "create_wizardry:mana"
+        }
+      ],
+      "results": [
+        {
+          "id": "minecraft:enchanted_book"
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "minecraft:enchanted_book"
+        }
+      ],
+      "results": [
+        {
+          "id": "minecraft:enchanted_book"
+        }
+      ]
+    }
+  ],
+  "transitional_item": {
+    "id": "minecraft:enchanted_book"
+  }
+}

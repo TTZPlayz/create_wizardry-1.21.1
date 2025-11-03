@@ -1,0 +1,27 @@
+{
+  "type": "create:crushing",
+  "ingredients": [
+    {
+      "item": "irons_spellbooks:deepslate_mithril_ore"
+    }
+  ],
+  "results": [
+    {
+      "count": 2,
+      "id": "create_wizardry:crushed_mithril"
+    },
+    {
+      "chance": 0.25,
+      "id": "create_wizardry:crushed_mithril"
+    },
+    {
+      "chance": 0.75,
+      "count": 3,
+      "id": "create:experience_nugget"
+    },
+    {
+      "chance": 0.125,
+      "id": "minecraft:cobbled_deepslate"
+    }
+  ]
+}

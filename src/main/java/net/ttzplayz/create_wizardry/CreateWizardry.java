@@ -3,7 +3,10 @@ package net.ttzplayz.create_wizardry;
 import io.redspace.ironsspellbooks.fluids.SimpleClientFluidType;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
-import net.ttzplayz.create_wizardry.fluids.FluidRegistry;
+import net.ttzplayz.create_wizardry.block.CWBlocks;
+import net.ttzplayz.create_wizardry.block.entity.ModBlockEntities;
+import net.ttzplayz.create_wizardry.fluids.CWFluidRegistry;
+import net.ttzplayz.create_wizardry.item.CWItems;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -21,6 +24,12 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 
+import static io.redspace.ironsspellbooks.registries.CreativeTabRegistry.MATERIALS_TAB;
+import static io.redspace.ironsspellbooks.registries.ItemRegistry.MITHRIL_SCRAP;
+import static io.redspace.ironsspellbooks.registries.ItemRegistry.RAW_MITHRIL;
+import static net.minecraft.world.item.CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS;
+import static net.ttzplayz.create_wizardry.item.CWItems.*;
+
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(CreateWizardry.MOD_ID)
 public class CreateWizardry {
@@ -37,14 +46,13 @@ public class CreateWizardry {
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
 
-
-
-        // Register ourselves for server and other game events we are interested in.
-        // Note that this is necessary if and only if we want *this* class (ExampleMod) to respond directly to events.
-        // Do not add this line if there are no @SubscribeEvent-annotated functions in this class, like onServerStarting() below.
         NeoForge.EVENT_BUS.register(this);
 
-        FluidRegistry.register(modEventBus);
+        CWFluidRegistry.register(modEventBus);
+
+        CWBlocks.register(modEventBus);
+        ModBlockEntities.register(modEventBus);
+        CWItems.register(modEventBus);
 
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
@@ -61,9 +69,12 @@ public class CreateWizardry {
     // Add the example block item to the building blocks tab
     private void addCreative(BuildCreativeModeTabContentsEvent event)
     {
-//        if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS)
-//            event.accept();
-
+        if (event.getTabKey() == MATERIALS_TAB.getKey()) {
+            event.insertAfter(RAW_MITHRIL.get().getDefaultInstance(), CRUSHED_MITHRIL.get().getDefaultInstance(), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(MITHRIL_SCRAP.get().getDefaultInstance(), MITHRIL_NUGGET.get().getDefaultInstance(), PARENT_AND_SEARCH_TABS);
+            event.accept(MANA_BUCKET.get());
+            event.accept(LIGHTNING_BUCKET.get());
+        }
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
@@ -86,8 +97,8 @@ public class CreateWizardry {
 
         @SubscribeEvent
         public static void registerClientExtensions(RegisterClientExtensionsEvent event) {
-            event.registerFluidType(new SimpleClientFluidType(CreateWizardry.id("block/mana")), FluidRegistry.MANA_TYPE);
-            event.registerFluidType(new SimpleClientFluidType(CreateWizardry.id("block/lightning")), FluidRegistry.LIGHTNING_TYPE);
+            event.registerFluidType(new SimpleClientFluidType(CreateWizardry.id("block/mana")), CWFluidRegistry.MANA_TYPE);
+            event.registerFluidType(new SimpleClientFluidType(CreateWizardry.id("block/lightning")), CWFluidRegistry.LIGHTNING_TYPE);
         }
 
     }

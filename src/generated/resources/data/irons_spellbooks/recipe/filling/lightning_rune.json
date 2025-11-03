@@ -1,0 +1,18 @@
+{
+  "type": "create:filling",
+  "ingredients": [
+    {
+      "item": "irons_spellbooks:blank_rune"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 1000,
+      "fluid": "create_wizardry:lightning"
+    }
+  ],
+  "results": [
+    {
+      "id": "irons_spellbooks:lightning_rune"
+    }
+  ]
+}

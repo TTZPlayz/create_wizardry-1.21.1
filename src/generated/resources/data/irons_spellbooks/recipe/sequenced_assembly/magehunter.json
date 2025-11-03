@@ -1,0 +1,63 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "minecraft:iron_sword"
+  },
+  "results": [
+    {
+      "id": "irons_spellbooks:magehunter"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "minecraft:netherite_sword"
+        },
+        {
+          "item": "minecraft:diamond"
+        }
+      ],
+      "results": [
+        {
+          "id": "minecraft:netherite_sword"
+        }
+      ]
+    },
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "minecraft:netherite_sword"
+        },
+        {
+          "type": "neoforge:single",
+          "amount": 1000,
+          "fluid": "create_wizardry:mana"
+        }
+      ],
+      "results": [
+        {
+          "id": "minecraft:netherite_sword"
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "minecraft:netherite_sword"
+        }
+      ],
+      "results": [
+        {
+          "id": "minecraft:netherite_sword"
+        }
+      ]
+    }
+  ],
+  "transitional_item": {
+    "id": "minecraft:netherite_sword"
+  }
+}

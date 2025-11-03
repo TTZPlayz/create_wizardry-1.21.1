@@ -1,0 +1,24 @@
+{
+  "type": "create:deploying",
+  "ingredients": [
+    {
+      "item": "irons_spellbooks:wizard_chestplate"
+    },
+    {
+      "item": "irons_spellbooks:ender_rune"
+    }
+  ],
+  "results": [
+    {
+      "components": {
+        "irons_spellbooks:spell_container": {
+          "data": [],
+          "maxSpells": 1,
+          "mustEquip": true,
+          "spellWheel": true
+        }
+      },
+      "id": "irons_spellbooks:shadowwalker_chestplate"
+    }
+  ]
+}

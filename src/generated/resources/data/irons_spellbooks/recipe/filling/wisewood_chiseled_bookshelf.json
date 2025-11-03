@@ -1,0 +1,18 @@
+{
+  "type": "create:filling",
+  "ingredients": [
+    {
+      "item": "minecraft:chiseled_bookshelf"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 10,
+      "fluid": "create_wizardry:mana"
+    }
+  ],
+  "results": [
+    {
+      "id": "irons_spellbooks:wisewood_chiseled_bookshelf"
+    }
+  ]
+}

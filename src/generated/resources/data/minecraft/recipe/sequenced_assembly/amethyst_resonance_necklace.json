@@ -1,0 +1,61 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "minecraft:leather"
+  },
+  "results": [
+    {
+      "id": "irons_spellbooks:amethyst_resonance_charm"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "minecraft:leather"
+        },
+        {
+          "item": "minecraft:amethyst_shard"
+        }
+      ],
+      "results": [
+        {
+          "id": "minecraft:leather"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "minecraft:leather"
+        },
+        {
+          "item": "minecraft:leather"
+        }
+      ],
+      "results": [
+        {
+          "id": "minecraft:leather"
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "minecraft:leather"
+        }
+      ],
+      "results": [
+        {
+          "id": "minecraft:leather"
+        }
+      ]
+    }
+  ],
+  "transitional_item": {
+    "id": "minecraft:leather"
+  }
+}

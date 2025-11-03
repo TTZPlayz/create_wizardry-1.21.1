@@ -1,0 +1,78 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "irons_spellbooks:decrepit_scythe"
+  },
+  "results": [
+    {
+      "components": {
+        "irons_spellbooks:spell_container": {
+          "data": [
+            {
+              "id": "irons_spellbooks:raise_hell",
+              "index": 0,
+              "level": 3,
+              "locked": true
+            }
+          ],
+          "maxSpells": 1,
+          "mustEquip": false,
+          "spellWheel": true
+        }
+      },
+      "id": "irons_spellbooks:hellrazor"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "irons_spellbooks:decrepit_scythe"
+        },
+        {
+          "type": "neoforge:single",
+          "amount": 250,
+          "fluid": "irons_spellbooks:timeless_slurry"
+        }
+      ],
+      "results": [
+        {
+          "id": "irons_spellbooks:decrepit_scythe"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "irons_spellbooks:decrepit_scythe"
+        },
+        {
+          "item": "irons_spellbooks:pyrium_ingot"
+        }
+      ],
+      "results": [
+        {
+          "id": "irons_spellbooks:decrepit_scythe"
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "irons_spellbooks:decrepit_scythe"
+        }
+      ],
+      "results": [
+        {
+          "id": "irons_spellbooks:decrepit_scythe"
+        }
+      ]
+    }
+  ],
+  "transitional_item": {
+    "id": "irons_spellbooks:decrepit_scythe"
+  }
+}

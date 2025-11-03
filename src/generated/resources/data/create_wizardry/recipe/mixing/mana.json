@@ -15,9 +15,9 @@
       "item": "irons_spellbooks:arcane_essence"
     },
     {
-      "type": "fluid_tag",
+      "type": "neoforge:tag",
       "amount": 1000,
-      "fluid_tag": "minecraft:water"
+      "tag": "minecraft:water"
     }
   ],
   "results": [

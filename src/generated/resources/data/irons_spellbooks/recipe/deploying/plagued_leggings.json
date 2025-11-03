@@ -1,0 +1,16 @@
+{
+  "type": "create:deploying",
+  "ingredients": [
+    {
+      "item": "irons_spellbooks:wizard_leggings"
+    },
+    {
+      "item": "irons_spellbooks:nature_rune"
+    }
+  ],
+  "results": [
+    {
+      "id": "irons_spellbooks:plagued_leggings"
+    }
+  ]
+}

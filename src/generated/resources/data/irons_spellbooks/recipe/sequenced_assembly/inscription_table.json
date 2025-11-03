@@ -1,0 +1,48 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "tag": "c:fences"
+  },
+  "results": [
+    {
+      "id": "irons_spellbooks:inscription_table"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "minecraft:oak_fence"
+        },
+        {
+          "tag": "minecraft:wooden_slabs"
+        }
+      ],
+      "results": [
+        {
+          "id": "minecraft:oak_fence"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "minecraft:oak_fence"
+        },
+        {
+          "item": "minecraft:book"
+        }
+      ],
+      "results": [
+        {
+          "id": "minecraft:oak_fence"
+        }
+      ]
+    }
+  ],
+  "transitional_item": {
+    "id": "minecraft:oak_fence"
+  }
+}

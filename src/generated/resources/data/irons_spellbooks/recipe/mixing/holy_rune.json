@@ -1,0 +1,25 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "irons_spellbooks:blank_rune"
+    },
+    {
+      "item": "irons_spellbooks:divine_pearl"
+    },
+    {
+      "item": "irons_spellbooks:divine_pearl"
+    },
+    {
+      "item": "irons_spellbooks:divine_pearl"
+    },
+    {
+      "item": "irons_spellbooks:divine_pearl"
+    }
+  ],
+  "results": [
+    {
+      "id": "irons_spellbooks:holy_rune"
+    }
+  ]
+}

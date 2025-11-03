@@ -1,0 +1,16 @@
+{
+  "type": "create:deploying",
+  "ingredients": [
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "minecraft:book"
+    }
+  ],
+  "results": [
+    {
+      "id": "irons_spellbooks:book_stack"
+    }
+  ]
+}

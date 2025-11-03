@@ -1,0 +1,63 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "irons_spellbooks:keeper_flamberge"
+  },
+  "results": [
+    {
+      "id": "irons_spellbooks:legionnaire_flamberge"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "irons_spellbooks:keeper_flamberge"
+        },
+        {
+          "type": "neoforge:single",
+          "amount": 250,
+          "fluid": "irons_spellbooks:timeless_slurry"
+        }
+      ],
+      "results": [
+        {
+          "id": "irons_spellbooks:keeper_flamberge"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "irons_spellbooks:keeper_flamberge"
+        },
+        {
+          "item": "irons_spellbooks:pyrium_ingot"
+        }
+      ],
+      "results": [
+        {
+          "id": "irons_spellbooks:keeper_flamberge"
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "irons_spellbooks:keeper_flamberge"
+        }
+      ],
+      "results": [
+        {
+          "id": "irons_spellbooks:keeper_flamberge"
+        }
+      ]
+    }
+  ],
+  "transitional_item": {
+    "id": "irons_spellbooks:keeper_flamberge"
+  }
+}

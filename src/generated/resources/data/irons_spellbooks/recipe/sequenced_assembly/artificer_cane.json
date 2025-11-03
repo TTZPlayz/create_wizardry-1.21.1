@@ -1,0 +1,61 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "minecraft:crimson_planks"
+  },
+  "results": [
+    {
+      "id": "irons_spellbooks:artificer_cane"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "minecraft:stick"
+        }
+      ],
+      "results": [
+        {
+          "id": "minecraft:stick"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "minecraft:stick"
+        },
+        {
+          "item": "minecraft:gold_ingot"
+        }
+      ],
+      "results": [
+        {
+          "id": "minecraft:stick"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "minecraft:stick"
+        },
+        {
+          "item": "minecraft:amethyst_shard"
+        }
+      ],
+      "results": [
+        {
+          "id": "minecraft:stick"
+        }
+      ]
+    }
+  ],
+  "transitional_item": {
+    "id": "minecraft:stick"
+  }
+}

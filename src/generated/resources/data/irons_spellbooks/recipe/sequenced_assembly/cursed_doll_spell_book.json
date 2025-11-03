@@ -1,0 +1,91 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "irons_spellbooks:ruined_book"
+  },
+  "results": [
+    {
+      "components": {
+        "irons_spellbooks:affinity_data": {
+          "bonuses": {
+            "irons_spellbooks:blood_slash": 1,
+            "irons_spellbooks:blood_step": 1
+          }
+        },
+        "irons_spellbooks:spell_container": {
+          "data": [],
+          "maxSpells": 10,
+          "mustEquip": true,
+          "spellWheel": true
+        }
+      },
+      "id": "irons_spellbooks:cursed_doll_spell_book"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "irons_spellbooks:ruined_book"
+        },
+        {
+          "item": "irons_spellbooks:bloody_vellum"
+        }
+      ],
+      "results": [
+        {
+          "id": "irons_spellbooks:ruined_book"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "irons_spellbooks:ruined_book"
+        },
+        {
+          "item": "irons_spellbooks:arcane_ingot"
+        }
+      ],
+      "results": [
+        {
+          "id": "irons_spellbooks:ruined_book"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "irons_spellbooks:ruined_book"
+        },
+        {
+          "item": "irons_spellbooks:bloody_vellum"
+        }
+      ],
+      "results": [
+        {
+          "id": "irons_spellbooks:ruined_book"
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "irons_spellbooks:ruined_book"
+        }
+      ],
+      "results": [
+        {
+          "id": "irons_spellbooks:ruined_book"
+        }
+      ]
+    }
+  ],
+  "transitional_item": {
+    "id": "irons_spellbooks:ruined_book"
+  }
+}

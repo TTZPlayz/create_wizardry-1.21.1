@@ -1,0 +1,16 @@
+{
+  "type": "create:deploying",
+  "ingredients": [
+    {
+      "item": "irons_spellbooks:wizard_boots"
+    },
+    {
+      "item": "irons_spellbooks:ice_rune"
+    }
+  ],
+  "results": [
+    {
+      "id": "irons_spellbooks:cryomancer_boots"
+    }
+  ]
+}

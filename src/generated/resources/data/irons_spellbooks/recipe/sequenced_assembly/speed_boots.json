@@ -1,0 +1,61 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "irons_spellbooks:archevoker_boots"
+  },
+  "results": [
+    {
+      "id": "irons_spellbooks:speed_boots"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "irons_spellbooks:archevoker_boots"
+        },
+        {
+          "item": "irons_spellbooks:divine_soulshard"
+        }
+      ],
+      "results": [
+        {
+          "id": "irons_spellbooks:archevoker_boots"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "irons_spellbooks:archevoker_boots"
+        },
+        {
+          "item": "minecraft:feather"
+        }
+      ],
+      "results": [
+        {
+          "id": "irons_spellbooks:archevoker_boots"
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "irons_spellbooks:archevoker_boots"
+        }
+      ],
+      "results": [
+        {
+          "id": "irons_spellbooks:archevoker_boots"
+        }
+      ]
+    }
+  ],
+  "transitional_item": {
+    "id": "irons_spellbooks:archevoker_boots"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "irons_spellbooks:blank_rune"
+    },
+    {
+      "item": "irons_spellbooks:frozen_bone"
+    },
+    {
+      "item": "irons_spellbooks:frozen_bone"
+    },
+    {
+      "item": "irons_spellbooks:frozen_bone"
+    },
+    {
+      "item": "irons_spellbooks:frozen_bone"
+    }
+  ],
+  "results": [
+    {
+      "id": "irons_spellbooks:ice_rune"
+    }
+  ]
+}

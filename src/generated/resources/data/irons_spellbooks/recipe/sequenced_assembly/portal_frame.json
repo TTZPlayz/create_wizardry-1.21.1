@@ -1,0 +1,66 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "minecraft:iron_bars"
+  },
+  "results": [
+    {
+      "id": "irons_spellbooks:portal_frame"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "minecraft:iron_bars"
+        },
+        {
+          "item": "irons_spellbooks:mithril_scrap"
+        }
+      ],
+      "results": [
+        {
+          "id": "minecraft:iron_bars"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "minecraft:iron_bars"
+        },
+        {
+          "item": "minecraft:ender_pearl"
+        }
+      ],
+      "results": [
+        {
+          "id": "minecraft:iron_bars"
+        }
+      ]
+    },
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "minecraft:iron_bars"
+        },
+        {
+          "type": "neoforge:single",
+          "amount": 250,
+          "fluid": "create_wizardry:mana"
+        }
+      ],
+      "results": [
+        {
+          "id": "minecraft:iron_bars"
+        }
+      ]
+    }
+  ],
+  "transitional_item": {
+    "id": "minecraft:iron_bars"
+  }
+}

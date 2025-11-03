@@ -1,0 +1,93 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "irons_spellbooks:arcane_ingot"
+  },
+  "results": [
+    {
+      "id": "irons_spellbooks:upgrade_orb"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "irons_spellbooks:arcane_ingot"
+        },
+        {
+          "item": "irons_spellbooks:cinder_essence"
+        }
+      ],
+      "results": [
+        {
+          "id": "irons_spellbooks:arcane_ingot"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "irons_spellbooks:arcane_ingot"
+        },
+        {
+          "item": "irons_spellbooks:mithril_ingot"
+        }
+      ],
+      "results": [
+        {
+          "id": "irons_spellbooks:arcane_ingot"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "irons_spellbooks:arcane_ingot"
+        },
+        {
+          "item": "irons_spellbooks:cinder_essence"
+        }
+      ],
+      "results": [
+        {
+          "id": "irons_spellbooks:arcane_ingot"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "irons_spellbooks:arcane_ingot"
+        },
+        {
+          "item": "irons_spellbooks:arcane_ingot"
+        }
+      ],
+      "results": [
+        {
+          "id": "irons_spellbooks:arcane_ingot"
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "irons_spellbooks:arcane_ingot"
+        }
+      ],
+      "results": [
+        {
+          "id": "irons_spellbooks:arcane_ingot"
+        }
+      ]
+    }
+  ],
+  "transitional_item": {
+    "id": "irons_spellbooks:arcane_ingot"
+  }
+}

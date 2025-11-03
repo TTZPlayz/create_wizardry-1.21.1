@@ -1,0 +1,16 @@
+{
+  "type": "create:deploying",
+  "ingredients": [
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "minecraft:chain"
+    }
+  ],
+  "results": [
+    {
+      "id": "irons_spellbooks:chained_book"
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "minecraft:cauldron"
+  },
+  "results": [
+    {
+      "id": "irons_spellbooks:alchemist_cauldron"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "minecraft:cauldron"
+        },
+        {
+          "item": "minecraft:iron_ingot"
+        }
+      ],
+      "results": [
+        {
+          "id": "minecraft:cauldron"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "minecraft:cauldron"
+        },
+        {
+          "item": "irons_spellbooks:cinder_essence"
+        }
+      ],
+      "results": [
+        {
+          "id": "minecraft:cauldron"
+        }
+      ]
+    },
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "minecraft:cauldron"
+        },
+        {
+          "type": "neoforge:single",
+          "amount": 250,
+          "fluid": "create_wizardry:mana"
+        }
+      ],
+      "results": [
+        {
+          "id": "minecraft:cauldron"
+        }
+      ]
+    }
+  ],
+  "transitional_item": {
+    "id": "minecraft:cauldron"
+  }
+}

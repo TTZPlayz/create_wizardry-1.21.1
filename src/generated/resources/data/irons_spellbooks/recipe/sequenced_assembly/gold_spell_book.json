@@ -1,0 +1,101 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "create:golden_sheet"
+  },
+  "results": [
+    {
+      "components": {
+        "irons_spellbooks:spell_container": {
+          "data": [],
+          "maxSpells": 8,
+          "mustEquip": true,
+          "spellWheel": true
+        }
+      },
+      "id": "irons_spellbooks:gold_spell_book"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "create:golden_sheet"
+        },
+        {
+          "item": "irons_spellbooks:arcane_essence"
+        }
+      ],
+      "results": [
+        {
+          "id": "create:golden_sheet"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "create:golden_sheet"
+        },
+        {
+          "item": "irons_spellbooks:hogskin"
+        }
+      ],
+      "results": [
+        {
+          "id": "create:golden_sheet"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "create:golden_sheet"
+        },
+        {
+          "item": "irons_spellbooks:arcane_essence"
+        }
+      ],
+      "results": [
+        {
+          "id": "create:golden_sheet"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "create:golden_sheet"
+        },
+        {
+          "item": "create:golden_sheet"
+        }
+      ],
+      "results": [
+        {
+          "id": "create:golden_sheet"
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "create:golden_sheet"
+        }
+      ],
+      "results": [
+        {
+          "id": "create:golden_sheet"
+        }
+      ]
+    }
+  ],
+  "transitional_item": {
+    "id": "create:golden_sheet"
+  }
+}

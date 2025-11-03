@@ -1,0 +1,18 @@
+{
+  "type": "create:filling",
+  "ingredients": [
+    {
+      "item": "create:cinder_flour"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 250,
+      "fluid": "create_wizardry:mana"
+    }
+  ],
+  "results": [
+    {
+      "id": "irons_spellbooks:arcane_essence"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "type": "create:compacting",
+  "ingredients": [
+    {
+      "tag": "c:slime_balls"
+    },
+    {
+      "type": "neoforge:tag",
+      "amount": 3,
+      "tag": "c:experience"
+    }
+  ],
+  "results": [
+    {
+      "id": "create:experience_nugget"
+    }
+  ]
+}
