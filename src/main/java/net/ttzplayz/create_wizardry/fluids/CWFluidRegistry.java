@@ -1,9 +1,11 @@
 package net.ttzplayz.create_wizardry.fluids;
 
+import io.redspace.ironsspellbooks.fluids.NoopFluid;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Fluid;
@@ -26,23 +28,35 @@ public class CWFluidRegistry {
 
     public static final DeferredHolder<FluidType, FluidType> MANA_TYPE =
             FLUID_TYPES.register("mana_type", () ->
-                    new FluidType(FluidType.Properties.create()));
+                    new FluidType(FluidType.Properties.create()
+                            .rarity(Rarity.RARE)
+                            .viscosity(200)
+                            .canConvertToSource(false)
+                            .lightLevel(15)));
+
     public static final DeferredHolder<FluidType, FluidType> LIGHTNING_TYPE =
             FLUID_TYPES.register("lightning_type", () ->
-                    new FluidType(FluidType.Properties.create()));
+                    new FluidType(FluidType.Properties.create()
+                            .rarity(Rarity.RARE)
+                            .viscosity(200)
+                            .canConvertToSource(false)
+                            .lightLevel(15)));
     // MANA
     public static final DeferredHolder<Fluid, FlowingFluid> MANA =
             FLUIDS.register("mana", () -> new BaseFlowingFluid.Source(CWFluidRegistry.MANA_PROPERTIES));
     public static final DeferredHolder<Fluid, FlowingFluid> MANA_FLOWING =
-            FLUIDS.register("mana_flowing", () -> new BaseFlowingFluid.Flowing(CWFluidRegistry.LIGHTNING_PROPERTIES));
+            FLUIDS.register("mana_flowing", () -> new BaseFlowingFluid.Flowing(CWFluidRegistry.MANA_PROPERTIES));
 
     private static final BaseFlowingFluid.Properties MANA_PROPERTIES =
             new BaseFlowingFluid.Properties(
                     MANA_TYPE,
                     MANA,
-                    MANA_FLOWING
-            ).bucket(() -> Items.BUCKET)
-                    .block(CWBlocks.MANA_BLOCK);
+                    MANA_FLOWING)
+                    .explosionResistance(100f)
+                    .bucket(() -> Items.BUCKET)
+//                    .block(CWBlocks.MANA_BLOCK)
+                    .levelDecreasePerBlock(1)
+                    .tickRate(20);
     // Optional: register a FluidBlock later
 
     // LIGHTNING
@@ -55,9 +69,12 @@ public class CWFluidRegistry {
             new BaseFlowingFluid.Properties(
                     LIGHTNING_TYPE,
                     LIGHTNING,
-                    LIGHTNING_FLOWING
-            ).bucket(() -> Items.BUCKET)
-                    .block(CWBlocks.LIGHTNING_BLOCK);
+                    LIGHTNING_FLOWING)
+                    .explosionResistance(100f)
+                    .bucket(() -> Items.BUCKET)
+//                    .block(CWBlocks.LIGHTNING_BLOCK)
+                    .levelDecreasePerBlock(1)
+                    .tickRate(20);
 
     public static void register(IEventBus eventBus) {
         FLUIDS.register(eventBus);

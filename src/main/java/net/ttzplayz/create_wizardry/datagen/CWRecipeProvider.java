@@ -36,6 +36,7 @@ import com.simibubi.create.content.kinetics.press.PressingRecipe;
 import com.simibubi.create.content.kinetics.saw.CuttingRecipe;
 import com.simibubi.create.content.processing.recipe.StandardProcessingRecipe;
 import com.simibubi.create.content.processing.sequenced.SequencedAssemblyRecipeBuilder;
+import io.redspace.ironsspellbooks.item.curios.CurioBaseItem;
 import io.redspace.ironsspellbooks.registries.ItemRegistry;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -58,9 +59,11 @@ import java.util.concurrent.CompletableFuture;
 import static com.simibubi.create.AllBlocks.COGWHEEL;
 import static com.simibubi.create.AllFluids.*;
 import static com.simibubi.create.AllItems.*;
+import static com.simibubi.create.AllTags.AllItemTags.AMETHYST;
 import static com.simibubi.create.AllTags.AllItemTags.FLOURS;
 import static com.simibubi.create.content.processing.recipe.HeatCondition.HEATED;
 import static com.simibubi.create.content.processing.recipe.HeatCondition.SUPERHEATED;
+import static com.simibubi.create.foundation.data.recipe.CommonMetal.SILVER;
 import static io.redspace.ironsspellbooks.registries.FluidRegistry.*;
 import static io.redspace.ironsspellbooks.registries.ItemRegistry.*;
 import static io.redspace.ironsspellbooks.registries.ItemRegistry.FIRE_UPGRADE_ORB;
@@ -1406,7 +1409,40 @@ public class CWRecipeProvider extends RecipeProvider {
     }
 
     private void buildCharmRecipes(RecipeOutput output) {
-        sequencedAssembly(ResourceLocation.parse("amethyst_resonance_necklace"))
+        sequencedAssembly(ResourceLocation.parse(String.valueOf(MANA_RING.get())))
+                .require(ARCANE_INGOT.get())
+                .transitionTo(ARCANE_INGOT.get())
+                .addOutput(MANA_RING.get(), 1)
+                .loops(1)
+                .addStep(DeployerApplicationRecipe::new, b -> b.require(GEMS_DIAMOND))
+                .addStep(PressingRecipe::new, b -> b)
+                .build(output);
+        sequencedAssembly(ResourceLocation.parse(String.valueOf(SILVER_RING.get())))
+                .require(SILVER.ingots)
+                .transitionTo(IRON_INGOT)
+                .addOutput(SILVER_RING.get(), 1)
+                .loops(1)
+                .addStep(DeployerApplicationRecipe::new, b -> b.require(MITHRIL_NUGGET.get()))
+                .addStep(PressingRecipe::new, b -> b)
+                .build(output);
+        sequencedAssembly(ResourceLocation.parse(String.valueOf(COOLDOWN_RING.get())))
+                .require(INGOTS_COPPER)
+                .transitionTo(COPPER_INGOT)
+                .addOutput(COOLDOWN_RING.get(), 1)
+                .loops(1)
+                .addStep(DeployerApplicationRecipe::new, b -> b.require(MITHRIL_NUGGET.get()))
+                .addStep(PressingRecipe::new, b -> b)
+                .build(output);
+        sequencedAssembly(ResourceLocation.parse(String.valueOf(EMERALD_STONEPLATE_RING.get())))
+                .require(GOLD_INGOT)
+                .transitionTo(GOLD_INGOT)
+                .addOutput(EMERALD_STONEPLATE_RING.get(), 1)
+                .loops(1)
+                .addStep(DeployerApplicationRecipe::new, b -> b.require(EXP_NUGGET))
+                .addStep(PressingRecipe::new, b -> b)
+                .build(output);
+
+        sequencedAssembly(ResourceLocation.parse(String.valueOf(AMETHYST_RESONANCE_NECKLACE.get())))
                 .require(LEATHER)
                 .transitionTo(LEATHER)
                 .addOutput(AMETHYST_RESONANCE_NECKLACE.get(), 1)
@@ -1415,12 +1451,31 @@ public class CWRecipeProvider extends RecipeProvider {
                 .addStep(DeployerApplicationRecipe::new, builder -> builder.require(LEATHER))
                 .addStep(PressingRecipe::new, builder -> (builder))
                 .build(output);
-        sequencedAssembly(ResourceLocation.parse("emerald_stoneplate_ring"))
-                .require(GOLD_INGOT)
-                .transitionTo(GOLD_INGOT)
-                .addOutput(EMERALD_STONEPLATE_RING.get(), 1)
+        sequencedAssembly(ResourceLocation.parse(String.valueOf(HEAVY_CHAIN.get())))
+                .require(CHAIN)
+                .transitionTo(CHAIN)
+                .addOutput(HEAVY_CHAIN.get(), 1)
                 .loops(1)
-                .addStep(DeployerApplicationRecipe::new, b -> b.require(EXP_NUGGET)) // you referenced EXP_NUGGET earlier
+                .addStep(DeployerApplicationRecipe::new, b -> b.require(MITHRIL_NUGGET.get()))
+                .addStep(DeployerApplicationRecipe::new, b -> b.require(CHAIN))
+                .addStep(PressingRecipe::new, b -> b)
+                .build(output);
+        sequencedAssembly(ResourceLocation.parse(String.valueOf(CONJURERS_TALISMAN.get())))
+                .require(SKELETON_SKULL)
+                .transitionTo(SKELETON_SKULL)
+                .addOutput(CONJURERS_TALISMAN.get(), 1)
+                .loops(1)
+                .addStep(DeployerApplicationRecipe::new, b -> b.require(MITHRIL_NUGGET.get()))
+                .addStep(DeployerApplicationRecipe::new, b -> b.require(STRING))
+                .addStep(PressingRecipe::new, b -> b)
+                .build(output);
+        sequencedAssembly(ResourceLocation.parse(String.valueOf(GREATER_CONJURERS_TALISMAN.get())))
+                .require(CONJURERS_TALISMAN.get())
+                .transitionTo(CONJURERS_TALISMAN.get())
+                .addOutput(GREATER_CONJURERS_TALISMAN.get(), 1)
+                .loops(1)
+                .addStep(DeployerApplicationRecipe::new, b -> b.require(MANA_RUNE.get()))
+                .addStep(DeployerApplicationRecipe::new, b -> b.require(BLOODY_VELLUM.get()))
                 .addStep(PressingRecipe::new, b -> b)
                 .build(output);
     }

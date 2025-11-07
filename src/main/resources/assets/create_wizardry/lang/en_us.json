@@ -1,6 +1,6 @@
 {
-  "fluid_type.create_wizardry.lightning": "Liquid Lightning",
-  "fluid_type.create_wizardry.mana": "Mana",
+  "fluid_type.create_wizardry.lightning_type": "Liquid Lightning",
+  "fluid_type.create_wizardry.mana_type": "Mana",
   "item.create_wizardry.crushed_mithril": "Crushed Raw Mithril",
   "item.create_wizardry.mithril_nugget": "Mithril Nugget",
   "item.create_wizardry.mana_bucket": "Bucket of Mana",

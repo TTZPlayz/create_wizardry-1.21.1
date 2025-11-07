@@ -28,14 +28,16 @@ public class CWBlocks {
 //                            .lightLevel(state -> 12) // Glowing like a blaze
 //                            .noOcclusion()
 //            ));
-    public static final DeferredHolder<Block, LiquidBlock> MANA_BLOCK =
-            BLOCKS.register("mana_block",
-                    () -> new LiquidBlock(CWFluidRegistry.MANA.get(),
-                            BlockBehaviour.Properties.of()));
-    public static final DeferredHolder<Block, LiquidBlock> LIGHTNING_BLOCK =
-            BLOCKS.register("liquid_lightning_block",
-                    () -> new LiquidBlock(CWFluidRegistry.LIGHTNING.get(),
-                            BlockBehaviour.Properties.of()));
+//    public static final DeferredHolder<Block, LiquidBlock> MANA_BLOCK =
+//            BLOCKS.register("mana_block",
+//                    () -> new LiquidBlock(CWFluidRegistry.MANA.get(),
+//                            BlockBehaviour.Properties.of().strength(100f).hasPostProcess((bs, br, bp) -> true).emissiveRendering((bs, br, bp) -> true).lightLevel(s -> 15).noCollission().noLootTable()
+//                                    .liquid()));
+//    public static final DeferredHolder<Block, LiquidBlock> LIGHTNING_BLOCK =
+//            BLOCKS.register("liquid_lightning_block",
+//                    () -> new LiquidBlock(CWFluidRegistry.LIGHTNING.get(),
+//                            BlockBehaviour.Properties.of().strength(100f).hasPostProcess((bs, br, bp) -> true).emissiveRendering((bs, br, bp) -> true).lightLevel(s -> 15).noCollission().noLootTable()
+//                                    .liquid()));
 
 
     private static <T extends Block> DeferredBlock<T> registerBlock(String name, Supplier<T> block) {
