@@ -53,6 +53,7 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.SmeltingRecipe;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.common.Tags;
+import net.ttzplayz.create_wizardry.item.CWItems;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -1183,6 +1184,11 @@ public class CWRecipeProvider extends RecipeProvider {
                 .require(Items.GLASS_BOTTLE)
                 .require(LIGHTNING.get(), 250)
                 .output(ItemRegistry.LIGHTNING_BOTTLE.get())
+                .build(output);
+        filling(CWItems.BLOOD_BUCKET.getId())
+                .require(BUCKET)
+                .require(BLOOD.get(), 1000)
+                .output(CWItems.BLOOD_BUCKET.get())
                 .build(output);
 
         filling(ItemRegistry.TIMELESS_SLURRY.getId())
