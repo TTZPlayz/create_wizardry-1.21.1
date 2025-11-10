@@ -1,25 +1,47 @@
+# Create: Wizardry
 
-Installation information
-=======
+_This mod adds enhanced compatibility between **Create** and **Iron's Spells & Spellbooks**. Happy spellcasting!_
 
-This template repository can be directly cloned to get you started with a new
-mod. Simply create a new repository cloned from this one, by following the
-instructions provided by [GitHub](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template).
+---
 
-Once you have your clone, simply open the repository in the IDE of your choice. The usual recommendation for an IDE is either IntelliJ IDEA or Eclipse.
+## Features
+- Seamless integration between Create machinery and spell mechanics
+- Crafting/processing recipes that bridge both mods
+- QoL tweaks aimed at automation-focused mages
 
-If at any point you are missing libraries in your IDE, or you've run into problems you can
-run `gradlew --refresh-dependencies` to refresh the local cache. `gradlew clean` to reset everything 
-{this does not affect your code} and then start the process again.
+---
 
-Mapping Names:
-============
-By default, the MDK is configured to use the official mapping names from Mojang for methods and fields 
-in the Minecraft codebase. These names are covered by a specific license. All modders should be aware of this
-license. For the latest license text, refer to the mapping file itself, or the reference copy here:
-https://github.com/NeoForged/NeoForm/blob/main/Mojang.md
+> **Download Here:** [CurseForge](https://www.curseforge.com/minecraft/mc-mods/create-wizardry),
+> [Modrinth](https://modrinth.com/mod/create-wizardry)
 
-Additional Resources: 
-==========
-Community Documentation: https://docs.neoforged.net/  
-NeoForged Discord: https://discord.neoforged.net/
+---
+
+## Compatibility
+Update this table as you release versions.
+
+| Minecraft | Loader   | Support                           |
+|-----------|----------|-----------------------------------|
+| 1.21.1    | NeoForge | **Supported**                     |
+| 1.20.1    | Forge    | **Shelved** (until ISS 1.20.1 V2) |
+| 1.19.2    | Forge    | **No Longer Supported**           |
+## Community
+- [**Discord**](https://discord.gg/zt2G42gn3X)
+- [**Issues**](https://github.com/TTZPlayz/create_wizardry-1.21.1/issues)
+
+---
+
+##  Credits
+- **Create** team and **Iron's Spells & Spellbooks** team for their fantastic mods.
+- **TTZPlayz** (author), **Snakeypro**, and the **Pheonix Studios Discord** for bug testing 😁.
+
+---
+
+## License
+MIT, full text in `LICENSE`.
+
+---
+
+<!-- Example usage:
+![Arcane Mixer powered by Create](docs/images/arcane_mixer.png)
+![Spell Casting Line](docs/images/spell_line.gif)
+-->
