@@ -1,12 +1,11 @@
 {
   "type": "create:sequenced_assembly",
   "ingredient": {
-    "item": "irons_spellbooks:arcane_ingot"
+    "item": "minecraft:chain"
   },
-  "loops": 2,
   "results": [
     {
-      "id": "irons_spellbooks:weapon_parts"
+      "id": "irons_spellbooks:teleportation_amulet"
     }
   ],
   "sequence": [
@@ -14,15 +13,15 @@
       "type": "create:deploying",
       "ingredients": [
         {
-          "item": "irons_spellbooks:mithril_ingot"
+          "item": "minecraft:chain"
         },
         {
-          "item": "irons_spellbooks:mithril_ingot"
+          "item": "create_wizardry:mithril_nugget"
         }
       ],
       "results": [
         {
-          "id": "irons_spellbooks:mithril_ingot"
+          "id": "minecraft:chain"
         }
       ]
     },
@@ -30,15 +29,15 @@
       "type": "create:deploying",
       "ingredients": [
         {
-          "item": "irons_spellbooks:mithril_ingot"
+          "item": "minecraft:chain"
         },
         {
-          "item": "irons_spellbooks:arcane_ingot"
+          "item": "minecraft:ender_pearl"
         }
       ],
       "results": [
         {
-          "id": "irons_spellbooks:mithril_ingot"
+          "id": "minecraft:chain"
         }
       ]
     },
@@ -46,17 +45,17 @@
       "type": "create:pressing",
       "ingredients": [
         {
-          "item": "irons_spellbooks:mithril_ingot"
+          "item": "minecraft:chain"
         }
       ],
       "results": [
         {
-          "id": "irons_spellbooks:mithril_ingot"
+          "id": "minecraft:chain"
         }
       ]
     }
   ],
   "transitional_item": {
-    "id": "irons_spellbooks:mithril_ingot"
+    "id": "minecraft:chain"
   }
 }

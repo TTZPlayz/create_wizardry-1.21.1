@@ -3,7 +3,7 @@
   "ingredient": {
     "item": "minecraft:tuff"
   },
-  "loops": 5,
+  "loops": 3,
   "results": [
     {
       "chance": 30.0,
@@ -35,7 +35,7 @@
       "type": "create:filling",
       "ingredients": [
         {
-          "item": "minecraft:tuff"
+          "item": "minecraft:tuff_slab"
         },
         {
           "type": "neoforge:single",
@@ -45,7 +45,7 @@
       ],
       "results": [
         {
-          "id": "minecraft:tuff"
+          "id": "minecraft:tuff_slab"
         }
       ]
     },
@@ -53,17 +53,17 @@
       "type": "create:pressing",
       "ingredients": [
         {
-          "item": "minecraft:tuff"
+          "item": "minecraft:tuff_slab"
         }
       ],
       "results": [
         {
-          "id": "minecraft:tuff"
+          "id": "minecraft:tuff_slab"
         }
       ]
     }
   ],
   "transitional_item": {
-    "id": "minecraft:tuff"
+    "id": "minecraft:tuff_slab"
   }
 }

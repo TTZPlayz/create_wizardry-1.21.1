@@ -1,6 +1,7 @@
-// 1.21.1	2025-11-01T18:02:31.508849	Tags for minecraft:item mod id vanilla
+// 1.21.1	2025-11-09T21:28:35.010108	Tags for minecraft:item mod id vanilla
 ba521d15bc195233e0f17bdb1c3f6c5c38a46b31 data/c/tags/item/buckets.json
 ba014a82e640108847fdf4ecec5314de83b184ce data/c/tags/item/nuggets.json
+6981d9ea61f9d242c7c9eb3a509a390188507de4 data/create/tags/item/chain_rideable.json
 ebd489f4ad76f3caf658a4510f2b0f21314df2b0 data/create/tags/item/crushed_raw_materials.json
 ba521d15bc195233e0f17bdb1c3f6c5c38a46b31 data/create/tags/item/upright_on_belt.json
 e9d6a657a916e384793844471bb0c0166989ab52 data/create_wizardry/tags/item/create_wizardry_buckets.json

@@ -1,28 +1,29 @@
 {
   "type": "create:sequenced_assembly",
   "ingredient": {
-    "item": "irons_spellbooks:arcane_ingot"
+    "item": "minecraft:netherite_ingot"
   },
-  "loops": 2,
   "results": [
     {
-      "id": "irons_spellbooks:weapon_parts"
+      "id": "irons_spellbooks:betrayer_signet"
     }
   ],
   "sequence": [
     {
-      "type": "create:deploying",
+      "type": "create:filling",
       "ingredients": [
         {
-          "item": "irons_spellbooks:mithril_ingot"
+          "item": "minecraft:gold_ingot"
         },
         {
-          "item": "irons_spellbooks:mithril_ingot"
+          "type": "neoforge:single",
+          "amount": 1000,
+          "fluid": "irons_spellbooks:timeless_slurry"
         }
       ],
       "results": [
         {
-          "id": "irons_spellbooks:mithril_ingot"
+          "id": "minecraft:gold_ingot"
         }
       ]
     },
@@ -30,15 +31,15 @@
       "type": "create:deploying",
       "ingredients": [
         {
-          "item": "irons_spellbooks:mithril_ingot"
+          "item": "minecraft:gold_ingot"
         },
         {
-          "item": "irons_spellbooks:arcane_ingot"
+          "item": "irons_spellbooks:divine_soulshard"
         }
       ],
       "results": [
         {
-          "id": "irons_spellbooks:mithril_ingot"
+          "id": "minecraft:gold_ingot"
         }
       ]
     },
@@ -46,17 +47,17 @@
       "type": "create:pressing",
       "ingredients": [
         {
-          "item": "irons_spellbooks:mithril_ingot"
+          "item": "minecraft:gold_ingot"
         }
       ],
       "results": [
         {
-          "id": "irons_spellbooks:mithril_ingot"
+          "id": "minecraft:gold_ingot"
         }
       ]
     }
   ],
   "transitional_item": {
-    "id": "irons_spellbooks:mithril_ingot"
+    "id": "minecraft:gold_ingot"
   }
 }

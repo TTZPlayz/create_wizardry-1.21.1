@@ -36,6 +36,7 @@ import com.simibubi.create.content.kinetics.press.PressingRecipe;
 import com.simibubi.create.content.kinetics.saw.CuttingRecipe;
 import com.simibubi.create.content.processing.recipe.StandardProcessingRecipe;
 import com.simibubi.create.content.processing.sequenced.SequencedAssemblyRecipeBuilder;
+import io.redspace.ironsspellbooks.fluids.NoopFluid;
 import io.redspace.ironsspellbooks.item.curios.CurioBaseItem;
 import io.redspace.ironsspellbooks.registries.ItemRegistry;
 import net.minecraft.core.HolderLookup;
@@ -502,24 +503,24 @@ public class CWRecipeProvider extends RecipeProvider {
 // MISC ITEMS
         sequencedAssembly(BLANK_RUNE.getId())
                 .require(TUFF)
-                .transitionTo(TUFF)
+                .transitionTo(TUFF_SLAB)
                 .addOutput(BLANK_RUNE.get(), 30)
                 .addOutput(TUFF, 55)
                 .addOutput(COBBLESTONE, 45)
                 .addOutput(COBBLESTONE_SLAB, 10)
                 .addOutput(COBBLED_DEEPSLATE_SLAB, 5)
                 .addOutput(ARCANE_ESSENCE.get(), 5)
-                .loops(5)
+                .loops(3)
                 .addStep(FillingRecipe::new, builder -> builder.require(MANA.get(), 1000))
                 .addStep(PressingRecipe::new, builder -> (builder))
                 .build(output);
         sequencedAssembly(WEAPON_PARTS.getId())
-                .require(IRON_SWORD)
-                .transitionTo(IRON_SWORD)
+                .require(ARCANE_INGOT.get())
+                .transitionTo(MITHRIL_INGOT.get())
                 .addOutput(WEAPON_PARTS.get(), 1)
                 .loops(2)
-                .addStep(DeployerApplicationRecipe::new, builder -> builder.require(ARCANE_INGOT.get()))
                 .addStep(DeployerApplicationRecipe::new, builder -> builder.require(MITHRIL_INGOT.get()))
+                .addStep(DeployerApplicationRecipe::new, builder -> builder.require(ARCANE_INGOT.get()))
                 .addStep(PressingRecipe::new, builder -> (builder))
                 .build(output);
         sequencedAssembly(ICE_CRYSTAL.getId())
@@ -664,7 +665,7 @@ public class CWRecipeProvider extends RecipeProvider {
                 .output(FROZEN_BONE_SHARD.get())
                 .build(output);
         haunting(HOGSKIN.getId())
-                .require(PORKCHOP)
+                .require(LEATHER)
                 .output(HOGSKIN.get())
                 .build(output);
 
@@ -1105,7 +1106,6 @@ public class CWRecipeProvider extends RecipeProvider {
                 .output(TIMELESS_SLURRY_FLUID.get(), 750)
                 .requiresHeat(SUPERHEATED)
                 .build(output);
-            // add timeless slurry
 
     }
 
@@ -1433,12 +1433,93 @@ public class CWRecipeProvider extends RecipeProvider {
                 .addStep(DeployerApplicationRecipe::new, b -> b.require(MITHRIL_NUGGET.get()))
                 .addStep(PressingRecipe::new, b -> b)
                 .build(output);
+        sequencedAssembly(ResourceLocation.parse(String.valueOf(CAST_TIME_RING.get())))
+                .require(INGOTS_COPPER)
+                .transitionTo(COPPER_INGOT)
+                .addOutput(CAST_TIME_RING.get(), 1)
+                .loops(1)
+                .addStep(DeployerApplicationRecipe::new, b -> b.require(MITHRIL_NUGGET.get()))
+                .addStep(DeployerApplicationRecipe::new, b -> b.require(AMETHYST_CLUSTER))
+                .addStep(PressingRecipe::new, b -> b)
+                .build(output);
         sequencedAssembly(ResourceLocation.parse(String.valueOf(EMERALD_STONEPLATE_RING.get())))
                 .require(GOLD_INGOT)
                 .transitionTo(GOLD_INGOT)
                 .addOutput(EMERALD_STONEPLATE_RING.get(), 1)
                 .loops(1)
+                .addStep(DeployerApplicationRecipe::new, b -> b.require(MITHRIL_NUGGET.get()))
                 .addStep(DeployerApplicationRecipe::new, b -> b.require(EXP_NUGGET))
+                .addStep(PressingRecipe::new, b -> b)
+                .build(output);
+        sequencedAssembly(ResourceLocation.parse(String.valueOf(FIREWARD_RING.get())))
+                .require(ARCANE_INGOT.get())
+                .transitionTo(ARCANE_INGOT.get())
+                .addOutput(FIREWARD_RING.get(), 1)
+                .loops(1)
+                .addStep(DeployerApplicationRecipe::new, b -> b.require(MITHRIL_NUGGET.get()))
+                .addStep(DeployerApplicationRecipe::new, b -> b.require(CINDER_ESSENCE.get()))
+                .addStep(PressingRecipe::new, b -> b)
+                .build(output);
+        sequencedAssembly(ResourceLocation.parse(String.valueOf(FROSTWARD_RING.get())))
+                .require(ARCANE_INGOT.get())
+                .transitionTo(ARCANE_INGOT.get())
+                .addOutput(FROSTWARD_RING.get(), 1)
+                .loops(1)
+                .addStep(DeployerApplicationRecipe::new, b -> b.require(MITHRIL_NUGGET.get()))
+                .addStep(DeployerApplicationRecipe::new, b -> b.require(ICE_CRYSTAL.get()))
+                .addStep(PressingRecipe::new, b -> b)
+                .build(output);
+        sequencedAssembly(ResourceLocation.parse(String.valueOf(POISONWARD_RING.get())))
+                .require(ARCANE_INGOT.get())
+                .transitionTo(ARCANE_INGOT.get())
+                .addOutput(POISONWARD_RING.get(), 1)
+                .loops(1)
+                .addStep(DeployerApplicationRecipe::new, b -> b.require(MITHRIL_NUGGET.get()))
+                .addStep(DeployerApplicationRecipe::new, b -> b.require(NATURE_RUNE.get()))
+                .addStep(PressingRecipe::new, b -> b)
+                .build(output);
+        sequencedAssembly(ResourceLocation.parse(String.valueOf(AFFINITY_RING.get())))
+                .require(ARCANE_INGOT.get())
+                .transitionTo(ARCANE_INGOT.get())
+                .addOutput(AFFINITY_RING.get(), 1)
+                .loops(1)
+                .addStep(DeployerApplicationRecipe::new, b -> b.require(MITHRIL_NUGGET.get()))
+                .addStep(DeployerApplicationRecipe::new, b -> b.require(BUCKET))
+                .addStep(PressingRecipe::new, b -> b)
+                .build(output);
+        sequencedAssembly(ResourceLocation.parse(String.valueOf(EXPULSION_RING.get())))
+                .require(ARCANE_INGOT.get())
+                .transitionTo(ARCANE_INGOT.get())
+                .addOutput(EXPULSION_RING.get(), 1)
+                .loops(1)
+                .addStep(DeployerApplicationRecipe::new, b -> b.require(MITHRIL_NUGGET.get()))
+                .addStep(DeployerApplicationRecipe::new, b -> b.require(WIND_CHARGE))
+                .addStep(PressingRecipe::new, b -> b)
+                .build(output);
+        sequencedAssembly(ResourceLocation.parse(String.valueOf(VISIBILITY_RING.get())))
+                .require(GOLD_INGOT)
+                .transitionTo(GOLD_INGOT)
+                .addOutput(VISIBILITY_RING.get(), 1)
+                .loops(1)
+                .addStep(DeployerApplicationRecipe::new, b -> b.require(MITHRIL_NUGGET.get()))
+                .addStep(DeployerApplicationRecipe::new, b -> b.require(SPYGLASS))
+                .addStep(PressingRecipe::new, b -> b)
+                .build(output);
+        sequencedAssembly(ResourceLocation.parse(String.valueOf(SIGNET_OF_THE_BETRAYER.get())))
+                .require(NETHERITE_INGOT)
+                .transitionTo(GOLD_INGOT)
+                .addOutput(SIGNET_OF_THE_BETRAYER.get(), 1)
+                .loops(1)
+                .addStep(FillingRecipe::new, b -> b.require(TIMELESS_SLURRY_FLUID.get(), 1000))
+                .addStep(DeployerApplicationRecipe::new, b -> b.require(DIVINE_SOULSHARD.get()))
+                .addStep(PressingRecipe::new, b -> b)
+                .build(output);
+        sequencedAssembly(ResourceLocation.parse(String.valueOf(INVISIBILITY_RING.get())))
+                .require(VISIBILITY_RING.get())
+                .transitionTo(VISIBILITY_RING.get())
+                .addOutput(INVISIBILITY_RING.get(), 1)
+                .loops(1)
+                .addStep(FillingRecipe::new, b -> b.require(TIMELESS_SLURRY_FLUID.get(), 1000))
                 .addStep(PressingRecipe::new, b -> b)
                 .build(output);
 
@@ -1476,6 +1557,24 @@ public class CWRecipeProvider extends RecipeProvider {
                 .loops(1)
                 .addStep(DeployerApplicationRecipe::new, b -> b.require(MANA_RUNE.get()))
                 .addStep(DeployerApplicationRecipe::new, b -> b.require(BLOODY_VELLUM.get()))
+                .addStep(PressingRecipe::new, b -> b)
+                .build(output);
+        sequencedAssembly(ResourceLocation.parse(String.valueOf(CONCENTRATION_AMULET.get())))
+                .require(CHAIN)
+                .transitionTo(CHAIN)
+                .addOutput(CONCENTRATION_AMULET.get(), 1)
+                .loops(1)
+                .addStep(DeployerApplicationRecipe::new, b -> b.require(MITHRIL_SCRAP.get()))
+                .addStep(DeployerApplicationRecipe::new, b -> b.require(CHAIN))
+                .addStep(PressingRecipe::new, b -> b)
+                .build(output);
+        sequencedAssembly(ResourceLocation.parse(String.valueOf(TELEPORTATION_AMULET.get())))
+                .require(CHAIN)
+                .transitionTo(CHAIN)
+                .addOutput(TELEPORTATION_AMULET.get(), 1)
+                .loops(1)
+                .addStep(DeployerApplicationRecipe::new, b -> b.require(MITHRIL_NUGGET.get()))
+                .addStep(DeployerApplicationRecipe::new, b -> b.require(ENDER_PEARL))
                 .addStep(PressingRecipe::new, b -> b)
                 .build(output);
     }

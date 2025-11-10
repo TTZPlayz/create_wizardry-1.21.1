@@ -2,7 +2,7 @@
   "type": "create:haunting",
   "ingredients": [
     {
-      "item": "minecraft:porkchop"
+      "item": "minecraft:leather"
     }
   ],
   "results": [

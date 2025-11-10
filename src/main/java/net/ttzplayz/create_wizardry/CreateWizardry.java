@@ -74,6 +74,7 @@ public class CreateWizardry {
             event.insertAfter(MITHRIL_SCRAP.get().getDefaultInstance(), MITHRIL_NUGGET.get().getDefaultInstance(), PARENT_AND_SEARCH_TABS);
             event.accept(MANA_BUCKET.get());
             event.accept(LIGHTNING_BUCKET.get());
+            event.accept(BLOOD_BUCKET.get());
         }
     }
 

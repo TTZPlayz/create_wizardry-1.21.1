@@ -1,0 +1,45 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "tag": "c:ingots/silver"
+  },
+  "results": [
+    {
+      "id": "irons_spellbooks:silver_ring"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "minecraft:iron_ingot"
+        },
+        {
+          "item": "create_wizardry:mithril_nugget"
+        }
+      ],
+      "results": [
+        {
+          "id": "minecraft:iron_ingot"
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "minecraft:iron_ingot"
+        }
+      ],
+      "results": [
+        {
+          "id": "minecraft:iron_ingot"
+        }
+      ]
+    }
+  ],
+  "transitional_item": {
+    "id": "minecraft:iron_ingot"
+  }
+}

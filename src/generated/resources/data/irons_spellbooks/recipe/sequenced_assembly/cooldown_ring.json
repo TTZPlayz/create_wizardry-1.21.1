@@ -1,0 +1,45 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "tag": "c:ingots/copper"
+  },
+  "results": [
+    {
+      "id": "irons_spellbooks:cooldown_ring"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "minecraft:copper_ingot"
+        },
+        {
+          "item": "create_wizardry:mithril_nugget"
+        }
+      ],
+      "results": [
+        {
+          "id": "minecraft:copper_ingot"
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "minecraft:copper_ingot"
+        }
+      ],
+      "results": [
+        {
+          "id": "minecraft:copper_ingot"
+        }
+      ]
+    }
+  ],
+  "transitional_item": {
+    "id": "minecraft:copper_ingot"
+  }
+}

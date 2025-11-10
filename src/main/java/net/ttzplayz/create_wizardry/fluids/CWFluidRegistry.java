@@ -7,11 +7,16 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.BlockAndTintGetter;
+import net.minecraft.world.level.block.AirBlock;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.pathfinder.PathType;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
+import net.neoforged.neoforge.common.SoundAction;
 import net.neoforged.neoforge.fluids.BaseFlowingFluid;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.FluidType;
@@ -20,6 +25,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import net.ttzplayz.create_wizardry.CreateWizardry;
 import net.ttzplayz.create_wizardry.block.CWBlocks;
+import net.ttzplayz.create_wizardry.item.CWItems;
 
 public class CWFluidRegistry {
 
@@ -39,6 +45,8 @@ public class CWFluidRegistry {
                     new FluidType(FluidType.Properties.create()
                             .rarity(Rarity.RARE)
                             .viscosity(200)
+                            .temperature(3000)
+                            .pathType(PathType.BLOCKED)
                             .canConvertToSource(false)
                             .lightLevel(15)));
     // MANA
@@ -53,8 +61,7 @@ public class CWFluidRegistry {
                     MANA,
                     MANA_FLOWING)
                     .explosionResistance(100f)
-                    .bucket(() -> Items.BUCKET)
-//                    .block(CWBlocks.MANA_BLOCK)
+                    .bucket(CWItems.MANA_BUCKET)
                     .levelDecreasePerBlock(1)
                     .tickRate(20);
     // Optional: register a FluidBlock later
@@ -71,8 +78,7 @@ public class CWFluidRegistry {
                     LIGHTNING,
                     LIGHTNING_FLOWING)
                     .explosionResistance(100f)
-                    .bucket(() -> Items.BUCKET)
-//                    .block(CWBlocks.LIGHTNING_BLOCK)
+                    .bucket(CWItems.LIGHTNING_BUCKET)
                     .levelDecreasePerBlock(1)
                     .tickRate(20);
 
