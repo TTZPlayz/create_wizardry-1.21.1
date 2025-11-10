@@ -17,7 +17,7 @@ _This mod adds enhanced compatibility between **Create** and **Iron's Spells & S
 ---
 
 ## Compatibility
-Update this table as you release versions.
+Current Versions:
 
 | Minecraft | Loader   | Support                           |
 |-----------|----------|-----------------------------------|
