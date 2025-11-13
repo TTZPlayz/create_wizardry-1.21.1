@@ -1000,6 +1000,11 @@ public class CWRecipeProvider extends RecipeProvider {
                 .output(0.75F, EXP_NUGGET.get(), 3)
                 .output(0.125F, COBBLED_DEEPSLATE, 1)
                 .build(output);
+        crushing(RAW_MITHRIL.getId())
+                .require(RAW_MITHRIL.get())
+                .output(CRUSHED_MITHRIL.get(), 1)
+                .output(0.75F, EXP_NUGGET.get(), 1)
+                .build(output);
     }
 
     private void buildMixingRecipes(RecipeOutput output) {

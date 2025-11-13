@@ -1,4 +1,4 @@
-// 1.21.1	2025-11-10T08:59:46.033268	Recipes
+// 1.21.1	2025-11-13T08:44:28.010419	Recipes
 f759f6476f330ad8eec776e3c207f2a7a37e56c5 data/create_wizardry/recipe/filling/blood_bucket.json
 178212521cc7b4802181c016afb443e6f8e881b2 data/create_wizardry/recipe/mixing/mana.json
 2ae253f8693d3a47ded7ba6230f2d1c7acc08505 data/create_wizardry/recipe/splashing/crushed_mithril.json
@@ -9,6 +9,7 @@ b707adbe5fef43bfa6d36f1b6728dedb132cddfd data/irons_spellbooks/advancement/recip
 2b657fc5720814c58f573871db2a781a52a43c47 data/irons_spellbooks/recipe/crushing/ancient_knowledge_fragment.json
 ab82fb0d726f34a30c9e1c453d6dc9a08358c188 data/irons_spellbooks/recipe/crushing/deepslate_mithril_ore.json
 03adf8f863ed8099db3eb28f14cb01f426220f2b data/irons_spellbooks/recipe/crushing/mithril_ore.json
+ac2cf5c84388d0872cda0281ee01cb41bffab6fb data/irons_spellbooks/recipe/crushing/raw_mithril.json
 3301304a71526226d4fd8439f4d0b42d5385445d data/irons_spellbooks/recipe/deploying/archevoker_boots.json
 bbfd9f86aa1310ed77d5217d7651475a59113b8e data/irons_spellbooks/recipe/deploying/archevoker_chestplate.json
 8dd2da369014ad05bbe171ab6fc91237c36aef3b data/irons_spellbooks/recipe/deploying/archevoker_helmet.json
