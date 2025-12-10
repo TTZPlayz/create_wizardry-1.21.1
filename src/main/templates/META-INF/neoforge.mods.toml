@@ -23,7 +23,7 @@ license="${mod_license}"
 modId="create_wizardry" #mandatory
 
 # The version number of the mod
-version="1.21.1-0.3.4" #mandatory
+version="1.21.1-0.3.5" #mandatory
 
 # A display name for the mod
 displayName="Create: Wizardry" #mandatory

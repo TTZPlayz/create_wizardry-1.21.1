@@ -1,6 +1,7 @@
 package net.ttzplayz.create_wizardry.datagen;
 
 import net.minecraft.data.PackOutput;
+import net.minecraft.data.tags.FluidTagsProvider;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -32,7 +33,6 @@ public class CWDataGenerators {
         BlockTagsProvider blockTagsProvider = new CWBlockTagProvider(packOutput, lookupProvider, existingFileHelper);
         generator.addProvider(event.includeServer(), blockTagsProvider);
         generator.addProvider(event.includeServer(), new CWItemTagProvider(packOutput, lookupProvider, blockTagsProvider.contentsGetter(), existingFileHelper));
-
 
     }
 }

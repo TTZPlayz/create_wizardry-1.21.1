@@ -1,4 +1,4 @@
-// 1.21.1	2025-11-13T08:44:28.010419	Recipes
+// 1.21.1	2025-12-09T15:00:12.699556	Recipes
 f759f6476f330ad8eec776e3c207f2a7a37e56c5 data/create_wizardry/recipe/filling/blood_bucket.json
 178212521cc7b4802181c016afb443e6f8e881b2 data/create_wizardry/recipe/mixing/mana.json
 2ae253f8693d3a47ded7ba6230f2d1c7acc08505 data/create_wizardry/recipe/splashing/crushed_mithril.json
@@ -117,7 +117,7 @@ cb0ddaccc955c80f053bfd75d39c3b3a40736ef5 data/irons_spellbooks/recipe/mixing/blo
 94e9008bca606490c4bdb9cc971d19297b235cfa data/irons_spellbooks/recipe/mixing/cinder_essence.json
 c5a5da9420a412c92bba51731c8551b56760c9f9 data/irons_spellbooks/recipe/mixing/cinder_essence_mana_recipe.json
 b5086f568088513e9043652de8e2d8ff4b27c2a7 data/irons_spellbooks/recipe/mixing/common_ink.json
-b5086f568088513e9043652de8e2d8ff4b27c2a7 data/irons_spellbooks/recipe/mixing/common_ink_mana_recipe.json
+bda25176264e086d4a571ba4ef87ae1d110b83a2 data/irons_spellbooks/recipe/mixing/common_ink_mana_recipe.json
 7300b192066763695b5398f4e0b8bd6c73dad614 data/irons_spellbooks/recipe/mixing/cooldown_rune.json
 ac419d5149e1caeeb397728f7bb23d5473996ada data/irons_spellbooks/recipe/mixing/cooldown_upgrade_orb.json
 4062c6ce44a834248b43e0505aab97f5fdf344a9 data/irons_spellbooks/recipe/mixing/ender_rune.json

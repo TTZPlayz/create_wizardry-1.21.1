@@ -1620,7 +1620,7 @@ public class CWRecipeProvider extends RecipeProvider {
                 .require(COPPER_INGOT)
                 .require(COPPER_INGOT)
                 .require(INK_SAC)
-                .require(ARCANE_ESSENCE.get())
+                .require(MANA.get(), 250)
                 .output(COMMON_INK.get(), 500)
                 .build(output);
         mixing(ResourceLocation.parse(UNCOMMON_INK.getRegisteredName() + "_mana_recipe"))
