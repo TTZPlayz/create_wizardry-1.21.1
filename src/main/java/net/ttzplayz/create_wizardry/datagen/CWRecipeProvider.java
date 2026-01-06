@@ -127,8 +127,8 @@ public class CWRecipeProvider extends RecipeProvider {
                 .define('C', COPPER_SHEET)
                 .define('L', LIGHTNING_ROD)
                 .define('H', HOPPER)
-                .define('H', IRON_SHEET)
-//                .unlockedBy("has_copper_sheet", has(COPPER_SHEET))
+                .define('I', IRON_SHEET)
+                .unlockedBy("has_copper_sheet", has(COPPER_SHEET))
                 .save(output);
 
     }

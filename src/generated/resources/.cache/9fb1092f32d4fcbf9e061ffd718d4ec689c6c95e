@@ -1,4 +1,6 @@
-// 1.21.1	2025-12-09T15:00:12.699556	Recipes
+// 1.21.1	2026-01-06T08:55:48.350758	Recipes
+3d0e41f6a61a5a00624404a8ac3ff2f8b67a890e data/create_wizardry/advancement/recipes/misc/channeler.json
+27bc846a7a5acdca899f1dcd1e82f664e474fb4c data/create_wizardry/recipe/channeler.json
 f759f6476f330ad8eec776e3c207f2a7a37e56c5 data/create_wizardry/recipe/filling/blood_bucket.json
 178212521cc7b4802181c016afb443e6f8e881b2 data/create_wizardry/recipe/mixing/mana.json
 2ae253f8693d3a47ded7ba6230f2d1c7acc08505 data/create_wizardry/recipe/splashing/crushed_mithril.json

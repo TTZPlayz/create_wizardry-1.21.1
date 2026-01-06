@@ -22,7 +22,7 @@ public class CWBlocks {
             DeferredRegister.createBlocks(CreateWizardry.MOD_ID);
 
 // Channeler block registration
-public static final DeferredBlock<LightningRodBlock> CHANNELER =
+public static final DeferredBlock<ChannelerBlock> CHANNELER =
         registerBlock("channeler", () -> new ChannelerBlock(
                 Block.Properties.of()
                         .mapColor(MapColor.COLOR_ORANGE)
