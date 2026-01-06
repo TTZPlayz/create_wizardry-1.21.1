@@ -77,6 +77,7 @@ import static net.minecraft.world.item.Items.DIRT;
 import static net.neoforged.neoforge.common.Tags.Fluids.EXPERIENCE;
 import static net.neoforged.neoforge.common.Tags.Items.*;
 import static net.neoforged.neoforge.common.Tags.Items.FENCES;
+import static net.ttzplayz.create_wizardry.block.CWBlocks.CHANNELER;
 import static net.ttzplayz.create_wizardry.fluids.CWFluidRegistry.*;
 import static net.ttzplayz.create_wizardry.item.CWItems.CRUSHED_MITHRIL;
 import static net.ttzplayz.create_wizardry.item.CWItems.MITHRIL_NUGGET;
@@ -118,6 +119,16 @@ public class CWRecipeProvider extends RecipeProvider {
                 .pattern("MMM")
                 .define('M', MITHRIL_NUGGET.get())
                 .unlockedBy("has_mithril_nugget", has(MITHRIL_NUGGET.get()))
+                .save(output);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, CHANNELER.get(), 1)
+                .pattern(" L ")
+                .pattern("IHI")
+                .pattern("CCC")
+                .define('C', COPPER_SHEET)
+                .define('L', LIGHTNING_ROD)
+                .define('H', HOPPER)
+                .define('H', IRON_SHEET)
+//                .unlockedBy("has_copper_sheet", has(COPPER_SHEET))
                 .save(output);
 
     }

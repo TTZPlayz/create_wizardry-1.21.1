@@ -32,6 +32,7 @@ public class CWDataGenerators {
         generator.addProvider(event.includeClient(), new CWItemModelProvider(packOutput, existingFileHelper));
         BlockTagsProvider blockTagsProvider = new CWBlockTagProvider(packOutput, lookupProvider, existingFileHelper);
         generator.addProvider(event.includeServer(), blockTagsProvider);
+        generator.addProvider(event.includeClient(), new CWBlockstateProvider(packOutput, existingFileHelper));
         generator.addProvider(event.includeServer(), new CWItemTagProvider(packOutput, lookupProvider, blockTagsProvider.contentsGetter(), existingFileHelper));
 
     }

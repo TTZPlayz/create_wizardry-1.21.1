@@ -4,7 +4,7 @@ import io.redspace.ironsspellbooks.fluids.SimpleClientFluidType;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 import net.ttzplayz.create_wizardry.block.CWBlocks;
-import net.ttzplayz.create_wizardry.block.entity.ModBlockEntities;
+import net.ttzplayz.create_wizardry.block.entity.CWBlockEntities;
 import net.ttzplayz.create_wizardry.fluids.CWFluidRegistry;
 import net.ttzplayz.create_wizardry.item.CWItems;
 import org.slf4j.Logger;
@@ -51,7 +51,7 @@ public class CreateWizardry {
         CWFluidRegistry.register(modEventBus);
 
         CWBlocks.register(modEventBus);
-        ModBlockEntities.register(modEventBus);
+        CWBlockEntities.register(modEventBus);
         CWItems.register(modEventBus);
 
         // Register the item to a creative tab
