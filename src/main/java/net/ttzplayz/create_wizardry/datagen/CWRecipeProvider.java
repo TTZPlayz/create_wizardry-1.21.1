@@ -1100,6 +1100,50 @@ public class CWRecipeProvider extends RecipeProvider {
                 .output(CINDER_ESSENCE.get(), 8)
                 .requiresHeat(SUPERHEATED)
                 .build(output);
+        // POTIONS/ELIXIRS (FINALLY)
+        mixing(OAKSKIN_ELIXIR_FLUID.getId())
+                .require(PotionFluidHandler.potionIngredient(Potions.STRONG_HEALING, 1000))
+                .require(OAK_LOGS)
+                .output(OAKSKIN_ELIXIR_FLUID.get(), 1000)
+                .requiresHeat(HEATED)
+                .build(output);
+        mixing(GREATER_OAKSKIN_ELIXIR_FLUID.getId())
+                .require(OAKSKIN_ELIXIR_FLUID.get(), 1000)
+                .require(AMETHYST_SHARD)
+                .output(GREATER_OAKSKIN_ELIXIR_FLUID.get(), 1000)
+                .requiresHeat(HEATED)
+                .build(output);
+        mixing(INVISIBILITY_ELIXIR_FLUID.getId())
+                .require(PotionFluidHandler.potionIngredient(Potions.LONG_INVISIBILITY, 1000))
+                .require(SHRIVING_STONE.get())
+                .output(INVISIBILITY_ELIXIR_FLUID.get(), 1000)
+                .requiresHeat(HEATED)
+                .build(output);
+        mixing(GREATER_INVISIBILITY_ELIXIR_FLUID.getId())
+                .require(INVISIBILITY_ELIXIR_FLUID.get(), 1000)
+                .require(AMETHYST_SHARD)
+                .output(GREATER_INVISIBILITY_ELIXIR_FLUID.get(), 1000)
+                .requiresHeat(HEATED)
+                .build(output);
+        mixing(EVASION_ELIXIR_FLUID.getId())
+                .require(PotionFluidHandler.potionIngredient(PotionRegistry.INSTANT_MANA_THREE, 1000))
+                .require(ENDER_PEARL)
+                .output(EVASION_ELIXIR_FLUID.get(), 1000)
+                .requiresHeat(HEATED)
+                .build(output);
+        mixing(GREATER_EVASION_ELIXIR_FLUID.getId())
+                .require(EVASION_ELIXIR_FLUID.get(), 1000)
+                .require(DRAGON_BREATH)
+                // could be dragon's breath or phantom membrane, deciding
+                .output(GREATER_EVASION_ELIXIR_FLUID.get(), 1000)
+                .requiresHeat(HEATED)
+                .build(output);
+        mixing(GREATER_HEALING_ELIXIR_FLUID.getId())
+                .require(PotionFluidHandler.potionIngredient(Potions.STRONG_HEALING, 1000))
+                .require(AMETHYST_SHARD)
+                .output(GREATER_HEALING_ELIXIR_FLUID.get(), 1000)
+                .requiresHeat(HEATED)
+                .build(output);
         // OTHER FLUIDS
         mixing(MANA.getId())
                 .require(FluidTags.WATER, 1000)
