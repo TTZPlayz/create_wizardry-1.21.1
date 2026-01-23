@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "create:copper_sheet"
+    },
+    "H": {
+      "item": "minecraft:hopper"
+    },
+    "I": {
+      "item": "create:iron_sheet"
+    },
+    "L": {
+      "item": "minecraft:lightning_rod"
+    }
+  },
+  "pattern": [
+    " L ",
+    "IHI",
+    "CCC"
+  ],
+  "result": {
+    "count": 1,
+    "id": "create_wizardry:channeler"
+  }
+}
