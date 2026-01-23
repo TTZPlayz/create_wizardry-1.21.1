@@ -36,9 +36,8 @@ import com.simibubi.create.content.kinetics.press.PressingRecipe;
 import com.simibubi.create.content.kinetics.saw.CuttingRecipe;
 import com.simibubi.create.content.processing.recipe.StandardProcessingRecipe;
 import com.simibubi.create.content.processing.sequenced.SequencedAssemblyRecipeBuilder;
-import io.redspace.ironsspellbooks.fluids.NoopFluid;
-import io.redspace.ironsspellbooks.item.curios.CurioBaseItem;
 import io.redspace.ironsspellbooks.registries.ItemRegistry;
+import io.redspace.ironsspellbooks.registries.PotionRegistry;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeCategory;
@@ -48,12 +47,15 @@ import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.PotionContents;
+import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.crafting.BlastingRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.SmeltingRecipe;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.common.Tags;
 import net.ttzplayz.create_wizardry.item.CWItems;
+import com.simibubi.create.content.fluids.potion.PotionFluidHandler;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -61,7 +63,6 @@ import java.util.concurrent.CompletableFuture;
 import static com.simibubi.create.AllBlocks.COGWHEEL;
 import static com.simibubi.create.AllFluids.*;
 import static com.simibubi.create.AllItems.*;
-import static com.simibubi.create.AllTags.AllItemTags.AMETHYST;
 import static com.simibubi.create.AllTags.AllItemTags.FLOURS;
 import static com.simibubi.create.content.processing.recipe.HeatCondition.HEATED;
 import static com.simibubi.create.content.processing.recipe.HeatCondition.SUPERHEATED;
@@ -1161,10 +1162,9 @@ public class CWRecipeProvider extends RecipeProvider {
                 .requiresHeat(HEATED)
                 .build(output);
         mixing(TIMELESS_SLURRY_FLUID.getId())
-                .require(FluidTags.WATER, 1000)
+                .require(PotionFluidHandler.potionIngredient(Potions.MUNDANE,  1000))
                 .require(ECHO_SHARD)
-                .require(DUSTS)
-                .output(TIMELESS_SLURRY_FLUID.get(), 750)
+                .output(TIMELESS_SLURRY_FLUID.get(), 1000)
                 .requiresHeat(SUPERHEATED)
                 .build(output);
 
@@ -1172,63 +1172,63 @@ public class CWRecipeProvider extends RecipeProvider {
 
     private void buildFillingRecipes(RecipeOutput output) {
         // INK
-        filling(ItemRegistry.INK_COMMON.getId())
+        filling(INK_COMMON.getId())
                 .require(Items.GLASS_BOTTLE)
                 .require(COMMON_INK.get(), 250)
                 .output(ItemRegistry.INK_COMMON.get())
                 .build(output);
-        filling(ItemRegistry.INK_UNCOMMON.getId())
+        filling(INK_UNCOMMON.getId())
                 .require(Items.GLASS_BOTTLE)
                 .require(UNCOMMON_INK.get(), 250)
                 .output(ItemRegistry.INK_UNCOMMON.get())
                 .build(output);
-        filling(ItemRegistry.INK_RARE.getId())
+        filling(INK_RARE.getId())
                 .require(Items.GLASS_BOTTLE)
                 .require(RARE_INK.get(), 250)
                 .output(ItemRegistry.INK_RARE.get())
                 .build(output);
-        filling(ItemRegistry.INK_EPIC.getId())
+        filling(INK_EPIC.getId())
                 .require(Items.GLASS_BOTTLE)
                 .require(EPIC_INK.get(), 250)
                 .output(ItemRegistry.INK_EPIC.get())
                 .build(output);
-        filling(ItemRegistry.INK_LEGENDARY.getId())
+        filling(INK_LEGENDARY.getId())
                 .require(Items.GLASS_BOTTLE)
                 .require(LEGENDARY_INK.get(), 250)
                 .output(ItemRegistry.INK_LEGENDARY.get())
                 .build(output);
         // POTIONS
-        filling(ItemRegistry.OAKSKIN_ELIXIR.getId())
+        filling(OAKSKIN_ELIXIR.getId())
                 .require(Items.GLASS_BOTTLE)
                 .require(OAKSKIN_ELIXIR_FLUID.get(), 250)
                 .output(ItemRegistry.OAKSKIN_ELIXIR.get())
                 .build(output);
-        filling(ItemRegistry.GREATER_OAKSKIN_ELIXIR.getId())
+        filling(GREATER_OAKSKIN_ELIXIR.getId())
                 .require(Items.GLASS_BOTTLE)
                 .require(GREATER_OAKSKIN_ELIXIR_FLUID.get(), 250)
                 .output(ItemRegistry.GREATER_OAKSKIN_ELIXIR.get())
                 .build(output);
-        filling(ItemRegistry.INVISIBILITY_ELIXIR.getId())
+        filling(INVISIBILITY_ELIXIR.getId())
                 .require(Items.GLASS_BOTTLE)
                 .require(INVISIBILITY_ELIXIR_FLUID.get(), 250)
                 .output(ItemRegistry.INVISIBILITY_ELIXIR.get())
                 .build(output);
-        filling(ItemRegistry.GREATER_INVISIBILITY_ELIXIR.getId())
+        filling(GREATER_INVISIBILITY_ELIXIR.getId())
                 .require(Items.GLASS_BOTTLE)
                 .require(GREATER_INVISIBILITY_ELIXIR_FLUID.get(), 250)
                 .output(ItemRegistry.GREATER_INVISIBILITY_ELIXIR.get())
                 .build(output);
-        filling(ItemRegistry.EVASION_ELIXIR.getId())
+        filling(EVASION_ELIXIR.getId())
                 .require(Items.GLASS_BOTTLE)
                 .require(EVASION_ELIXIR_FLUID.get(), 250)
                 .output(ItemRegistry.EVASION_ELIXIR.get())
                 .build(output);
-        filling(ItemRegistry.GREATER_EVASION_ELIXIR.getId())
+        filling(GREATER_EVASION_ELIXIR.getId())
                 .require(Items.GLASS_BOTTLE)
                 .require(GREATER_EVASION_ELIXIR_FLUID.get(), 250)
                 .output(ItemRegistry.GREATER_EVASION_ELIXIR.get())
                 .build(output);
-        filling(ItemRegistry.GREATER_HEALING_POTION.getId())
+        filling(GREATER_HEALING_POTION.getId())
                 .require(Items.GLASS_BOTTLE)
                 .require(GREATER_HEALING_ELIXIR_FLUID.get(), 250)
                 .output(ItemRegistry.GREATER_HEALING_POTION.get())

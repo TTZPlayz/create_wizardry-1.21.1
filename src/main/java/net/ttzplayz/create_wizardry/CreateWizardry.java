@@ -49,7 +49,6 @@ public class CreateWizardry {
         NeoForge.EVENT_BUS.register(this);
 
         CWFluidRegistry.register(modEventBus);
-
         CWBlocks.register(modEventBus);
         CWBlockEntities.register(modEventBus);
         CWItems.register(modEventBus);
@@ -86,7 +85,7 @@ public class CreateWizardry {
     }
 
     // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
-    @EventBusSubscriber(modid = MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+    @EventBusSubscriber(modid = MOD_ID, value = Dist.CLIENT)
     public static class ClientModEvents
     {
         @SubscribeEvent
@@ -98,7 +97,7 @@ public class CreateWizardry {
 
         @SubscribeEvent
         public static void registerClientExtensions(RegisterClientExtensionsEvent event) {
-            event.registerFluidType(new SimpleClientFluidType(CreateWizardry.id("block/mana")), CWFluidRegistry.MANA_TYPE);
+            event.registerFluidType(new SimpleClientFluidType(CreateWizardry.id("block/mana")), CWFluidRegistry.MAGIC_TYPE);
             event.registerFluidType(new SimpleClientFluidType(CreateWizardry.id("block/lightning")), CWFluidRegistry.LIGHTNING_TYPE);
         }
 

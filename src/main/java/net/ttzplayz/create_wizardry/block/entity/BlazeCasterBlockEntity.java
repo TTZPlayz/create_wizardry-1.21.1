@@ -24,7 +24,7 @@
 //import java.security.Provider;
 //import java.util.List;
 //
-//public class BlazeCasterBlockEntity extends SmartBlockEntity {
+//public class BlazeCasterBlockEntity extends SmartBlockEntity implements IHaveGoggleInformation {
 //
 //    // Inventory for spell scrolls/spell books
 //    private ItemStackHandler inventory = new ItemStackHandler(1) {
@@ -174,7 +174,7 @@
 //        }
 //    }
 //
-//    public boolean onUse(Player player, InteractionHand hand) {
+//    public boolean useOn(Player player, InteractionHand hand) {
 //        if (level == null || level.isClientSide)
 //            return false;
 //
