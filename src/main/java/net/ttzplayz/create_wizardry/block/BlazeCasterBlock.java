@@ -2,6 +2,9 @@ package net.ttzplayz.create_wizardry.block;
 
 //import net.ttzplayz.create_wizardry.block.entity.BlazeCasterBlockEntity;
 
+// **Blaze Caster**:
+// Will accept up to 500 mana (equivalent to maxed-out player)
+// Casts using scroll in hand
 
 //public class BlazeCasterBlock extends Block implements IBE<BlazeCasterBlockEntity> {
 //
@@ -40,6 +43,6 @@ package net.ttzplayz.create_wizardry.block;
 //
 //    @Override
 //    public BlockEntityType<? extends BlazeCasterBlockEntity> getBlockEntityType() {
-//        return ModBlockEntities.BLAZE_CASTER_BE.get(); // You'll need to register this
+//        return ModBlockEntities.BLAZE_CASTER_BE.get();
 //    }
 //}

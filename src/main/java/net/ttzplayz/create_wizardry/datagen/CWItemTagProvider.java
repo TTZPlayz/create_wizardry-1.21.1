@@ -1,7 +1,6 @@
 package net.ttzplayz.create_wizardry.datagen;
 
 import com.simibubi.create.AllTags;
-import io.redspace.ironsspellbooks.util.ModTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
@@ -16,7 +15,7 @@ import static io.redspace.ironsspellbooks.registries.ItemRegistry.*;
 import static net.neoforged.neoforge.common.Tags.Items.BUCKETS;
 import static net.neoforged.neoforge.common.Tags.Items.NUGGETS;
 import static net.ttzplayz.create_wizardry.item.CWItems.*;
-import static net.ttzplayz.create_wizardry.util.CWTags.Items.CW_BUCKETS;
+import static net.ttzplayz.create_wizardry.spell.CWTags.Items.CW_BUCKETS;
 
 public class CWItemTagProvider extends ItemTagsProvider {
     public CWItemTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, CompletableFuture<TagLookup<Block>> blockTags, ExistingFileHelper existingFileHelper) {

@@ -2,7 +2,7 @@
   "type": "create:filling",
   "ingredients": [
     {
-      "item": "minecraft:bucket"
+      "tag": "c:buckets"
     },
     {
       "type": "neoforge:single",

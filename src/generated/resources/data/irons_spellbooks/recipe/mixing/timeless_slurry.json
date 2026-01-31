@@ -6,17 +6,20 @@
       "item": "minecraft:echo_shard"
     },
     {
-      "tag": "c:dusts"
-    },
-    {
-      "type": "neoforge:tag",
+      "type": "neoforge:components",
       "amount": 1000,
-      "tag": "minecraft:water"
+      "components": {
+        "create:potion_fluid_bottle_type": "regular",
+        "minecraft:potion_contents": {
+          "potion": "minecraft:mundane"
+        }
+      },
+      "fluids": "create:potion"
     }
   ],
   "results": [
     {
-      "amount": 750,
+      "amount": 1000,
       "id": "irons_spellbooks:timeless_slurry"
     }
   ]

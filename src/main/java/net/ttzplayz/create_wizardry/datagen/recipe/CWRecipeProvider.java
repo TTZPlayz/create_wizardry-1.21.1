@@ -16,45 +16,28 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package net.ttzplayz.create_wizardry.datagen;
+package net.ttzplayz.create_wizardry.datagen.recipe;
 
-import com.simibubi.create.api.data.recipe.MechanicalCraftingRecipeBuilder;
-import com.simibubi.create.compat.jei.ConversionRecipe;
-import com.simibubi.create.content.equipment.sandPaper.SandPaperPolishingRecipe;
-import com.simibubi.create.content.fluids.transfer.EmptyingRecipe;
 import com.simibubi.create.content.fluids.transfer.FillingRecipe;
-import com.simibubi.create.content.kinetics.crusher.CrushingRecipe;
 import com.simibubi.create.content.kinetics.deployer.DeployerApplicationRecipe;
-import com.simibubi.create.content.kinetics.deployer.ItemApplicationRecipe;
-import com.simibubi.create.content.kinetics.deployer.ManualApplicationRecipe;
-import com.simibubi.create.content.kinetics.fan.processing.HauntingRecipe;
-import com.simibubi.create.content.kinetics.fan.processing.SplashingRecipe;
-import com.simibubi.create.content.kinetics.millstone.MillingRecipe;
-import com.simibubi.create.content.kinetics.mixer.CompactingRecipe;
-import com.simibubi.create.content.kinetics.mixer.MixingRecipe;
 import com.simibubi.create.content.kinetics.press.PressingRecipe;
-import com.simibubi.create.content.kinetics.saw.CuttingRecipe;
-import com.simibubi.create.content.processing.recipe.StandardProcessingRecipe;
-import com.simibubi.create.content.processing.sequenced.SequencedAssemblyRecipeBuilder;
-import io.redspace.ironsspellbooks.registries.ItemRegistry;
+import io.redspace.ironsspellbooks.IronsSpellbooks;
 import io.redspace.ironsspellbooks.registries.PotionRegistry;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.data.recipes.RecipeProvider;
-import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.alchemy.PotionContents;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.Potions;
-import net.minecraft.world.item.crafting.BlastingRecipe;
-import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.SmeltingRecipe;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.material.FlowingFluid;
 import net.neoforged.neoforge.common.Tags;
-import net.ttzplayz.create_wizardry.item.CWItems;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 import com.simibubi.create.content.fluids.potion.PotionFluidHandler;
 
 import java.util.List;
@@ -80,8 +63,8 @@ import static net.neoforged.neoforge.common.Tags.Items.*;
 import static net.neoforged.neoforge.common.Tags.Items.FENCES;
 import static net.ttzplayz.create_wizardry.block.CWBlocks.CHANNELER;
 import static net.ttzplayz.create_wizardry.fluids.CWFluidRegistry.*;
-import static net.ttzplayz.create_wizardry.item.CWItems.CRUSHED_MITHRIL;
-import static net.ttzplayz.create_wizardry.item.CWItems.MITHRIL_NUGGET;
+import static net.ttzplayz.create_wizardry.item.CWItems.*;
+import static net.ttzplayz.create_wizardry.datagen.recipe.CreateRecipeHelpers.*;
 
 public class CWRecipeProvider extends RecipeProvider {
 
@@ -89,10 +72,13 @@ public class CWRecipeProvider extends RecipeProvider {
         super(output, registries);
     }
 
+    private static ResourceLocation itemId(ItemLike item) {
+        return net.minecraft.core.registries.BuiltInRegistries.ITEM.getKey(item.asItem());
+    }
+
     @Override
     protected void buildRecipes(RecipeOutput output) {
         buildFillingRecipes(output);
-        buildEmptyingRecipes(output);
         buildMixingRecipes(output);
         buildCompactingRecipes(output);
         buildCrushingRecipes(output);
@@ -107,13 +93,14 @@ public class CWRecipeProvider extends RecipeProvider {
         buildCharmRecipes(output);
         buildCompatRecipes(output);
         buildManaRecipes(output);
-
-
+        buildVanillaRecipes(output);
+        buildMechanicalRecipes(output);
+        buildSummoningRecipes(output);
+    }
+    private void buildVanillaRecipes(RecipeOutput output) {
         List<ItemLike> MITHRIL_SMELTABLES = List.of(CRUSHED_MITHRIL.get(), MITHRIL_ORE_BLOCK_ITEM.get(), MITHRIL_ORE_DEEPSLATE_BLOCK_ITEM.get());
-
         oreSmelting(output, MITHRIL_SMELTABLES, RecipeCategory.MISC, MITHRIL_SCRAP.get(), 0.25f, 200, "mithril_scrap");
         oreBlasting(output, MITHRIL_SMELTABLES, RecipeCategory.MISC, MITHRIL_SCRAP.get(), 0.25f, 100, "mithril_scrap");
-
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MITHRIL_SCRAP.get(), 1)
                 .pattern("MMM")
                 .pattern("MMM")
@@ -121,19 +108,31 @@ public class CWRecipeProvider extends RecipeProvider {
                 .define('M', MITHRIL_NUGGET.get())
                 .unlockedBy("has_mithril_nugget", has(MITHRIL_NUGGET.get()))
                 .save(output);
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, CHANNELER.get(), 1)
-                .pattern(" L ")
-                .pattern("IHI")
-                .pattern("CCC")
-                .define('C', COPPER_SHEET)
-                .define('L', LIGHTNING_ROD)
-                .define('H', HOPPER)
-                .define('I', IRON_SHEET)
-                .unlockedBy("has_copper_sheet", has(COPPER_SHEET))
-                .save(output);
-
     }
-
+    private void buildMechanicalRecipes(RecipeOutput output) {
+        mechanicalCrafting(CHANNELER.get(), 1)
+                .patternLine(" E ")
+                .patternLine("IHI")
+                .patternLine("CBC")
+                .key('C', COPPER_SHEET)
+                .key('B', LIGHTNING_BOTTLE.get())
+                .key('E', ENERGIZED_CORE.get())
+                .key('H', HOPPER)
+                .key('I', IRON_SHEET)
+                .build(output);
+        mechanicalCrafting(AUTOLOADER_CROSSBOW.get(), 1)
+                .key('s', STICK)
+                .key('b', BRASS_INGOT)
+                .key('c', CROSSBOW)
+                .key('g', COGWHEEL)
+                .key('p', PRECISION_MECHANISM)             // e.g., Create: andesite casing/gearbox; swap to what you prefer
+                .key('r', STRING)
+                .patternLine("bssp")
+                .patternLine("rgcs")
+                .patternLine("rsgs")
+                .patternLine("srrb")
+                .build(output);
+    }
     private void buildCompatRecipes(RecipeOutput output) {
         mixing(ResourceLocation.parse("cei_rare_ink_recipe"))
                 .whenModLoaded("create_enchantment_industry")
@@ -188,290 +187,50 @@ public class CWRecipeProvider extends RecipeProvider {
     }
 
     private void buildRuneAndOrbRecipes(RecipeOutput output) {
-        runeSequence(output, NATURE_RUNE.getId(), POISONOUS_POTATO, NATURE_RUNE.get());
-        runeSequence(output, FIRE_RUNE.getId(), BLAZE_ROD, FIRE_RUNE.get());
-        runeSequence(output, EVOCATION_RUNE.getId(), EMERALD, EVOCATION_RUNE.get());
-        runeSequence(output, ICE_RUNE.getId(), FROZEN_BONE_SHARD.get(), ICE_RUNE.get());
-        runeSequence(output, HOLY_RUNE.getId(), DIVINE_PEARL.get(), HOLY_RUNE.get());
-        runeSequence(output, ENDER_RUNE.getId(), ENDER_PEARL, ENDER_RUNE.get());
-        runeSequence(output, COOLDOWN_RUNE.getId(), PHANTOM_MEMBRANE, COOLDOWN_RUNE.get());
-        runeSequence(output, PROTECTION_RUNE.getId(), PUFFERFISH, PROTECTION_RUNE.get());
+        runeSequence(output, POISONOUS_POTATO, NATURE_RUNE.get());
+        runeSequence(output, BLAZE_ROD, FIRE_RUNE.get());
+        runeSequence(output, EMERALD, EVOCATION_RUNE.get());
+        runeSequence(output, FROZEN_BONE_SHARD.get(), ICE_RUNE.get());
+        runeSequence(output, DIVINE_PEARL.get(), HOLY_RUNE.get());
+        runeSequence(output, ENDER_PEARL, ENDER_RUNE.get());
+        runeSequence(output, PHANTOM_MEMBRANE, COOLDOWN_RUNE.get());
+        runeSequence(output, PUFFERFISH, PROTECTION_RUNE.get());
 
-        orbSequence(output, NATURE_UPGRADE_ORB.getId(), NATURE_RUNE.get(), NATURE_UPGRADE_ORB.get());
-        orbSequence(output, FIRE_UPGRADE_ORB.getId(), FIRE_RUNE.get(), FIRE_UPGRADE_ORB.get());
-        orbSequence(output, EVOCATION_UPGRADE_ORB.getId(), EVOCATION_RUNE.get(), EVOCATION_UPGRADE_ORB.get());
-        orbSequence(output, ICE_UPGRADE_ORB.getId(), ICE_RUNE.get(), ICE_UPGRADE_ORB.get());
-        orbSequence(output, HOLY_UPGRADE_ORB.getId(), HOLY_RUNE.get(), HOLY_UPGRADE_ORB.get());
-        orbSequence(output, ENDER_UPGRADE_ORB.getId(), ENDER_RUNE.get(), ENDER_UPGRADE_ORB.get());
-        orbSequence(output, MANA_UPGRADE_ORB.getId(), MANA_RUNE.get(), MANA_UPGRADE_ORB.get());
-        orbSequence(output, BLOOD_UPGRADE_ORB.getId(), BLOOD_RUNE.get(), BLOOD_UPGRADE_ORB.get());
-        orbSequence(output, LIGHTNING_UPGRADE_ORB.getId(), LIGHTNING_RUNE.get(), LIGHTNING_UPGRADE_ORB.get());
-        orbSequence(output, COOLDOWN_UPGRADE_ORB.getId(), COOLDOWN_RUNE.get(), COOLDOWN_UPGRADE_ORB.get());
-        orbSequence(output, PROTECTION_UPGRADE_ORB.getId(), PROTECTION_RUNE.get(), PROTECTION_UPGRADE_ORB.get());
+        runeFilling(output, MANA_RUNE.get(), MANA.get());
+        runeFilling(output, BLOOD_RUNE.get(), BLOOD.get());
+        runeFilling(output, LIGHTNING_RUNE.get(), LIGHTNING.get());
+        itemFilling(output, ICE_RUNE.get(), BLANK_RUNE.get(), ICE_VENOM_FLUID.get(), 250);
 
-
-        filling(MANA_RUNE.getId())
-                .require(BLANK_RUNE.get())
-                .require(MANA.get(), 1000)
-                .output(MANA_RUNE.get())
-                .build(output);
-        filling(LIGHTNING_RUNE.getId())
-                .require(BLANK_RUNE.get())
-                .require(LIGHTNING.get(), 1000)
-                .output(LIGHTNING_RUNE.get())
-                .build(output);
-        filling(BLOOD_RUNE.getId())
-                .require(BLANK_RUNE.get())
-                .require(BLOOD.get(), 1000)
-                .output(BLOOD_RUNE.get())
-                .build(output);
-        filling(ICE_RUNE.getId())
-                .require(BLANK_RUNE.get())
-                .require(ICE_VENOM_FLUID.get(), 250)
-                .output(ICE_RUNE.get())
-                .build(output);
+        orbSequence(output, NATURE_RUNE.get(), NATURE_UPGRADE_ORB.get());
+        orbSequence(output, FIRE_RUNE.get(), FIRE_UPGRADE_ORB.get());
+        orbSequence(output, EVOCATION_RUNE.get(), EVOCATION_UPGRADE_ORB.get());
+        orbSequence(output, ICE_RUNE.get(), ICE_UPGRADE_ORB.get());
+        orbSequence(output, HOLY_RUNE.get(), HOLY_UPGRADE_ORB.get());
+        orbSequence(output, ENDER_RUNE.get(), ENDER_UPGRADE_ORB.get());
+        orbSequence(output, MANA_RUNE.get(), MANA_UPGRADE_ORB.get());
+        orbSequence(output, BLOOD_RUNE.get(), BLOOD_UPGRADE_ORB.get());
+        orbSequence(output, LIGHTNING_RUNE.get(), LIGHTNING_UPGRADE_ORB.get());
+        orbSequence(output, COOLDOWN_RUNE.get(), COOLDOWN_UPGRADE_ORB.get());
+        orbSequence(output, PROTECTION_RUNE.get(), PROTECTION_UPGRADE_ORB.get());
     }
 
-
     private void buildArmorRecipes(RecipeOutput output) {
-// CRYOMANCER ARMOR
-        deploying(CRYOMANCER_BOOTS.getId())
-                .require(WIZARD_BOOTS.get())
-                .require(ICE_RUNE.get())
-                .output(CRYOMANCER_BOOTS.get(), 1)
-                .build(output);
-        deploying(CRYOMANCER_CHESTPLATE.getId())
-                .require(WIZARD_CHESTPLATE.get())
-                .require(ICE_RUNE.get())
-                .output(CRYOMANCER_CHESTPLATE.get(), 1)
-                .build(output);
-        deploying(CRYOMANCER_HELMET.getId())
-                .require(WIZARD_HELMET.get())
-                .require(ICE_RUNE.get())
-                .output(CRYOMANCER_HELMET.get(), 1)
-                .build(output);
-        deploying(CRYOMANCER_LEGGINGS.getId())
-                .require(WIZARD_LEGGINGS.get())
-                .require(ICE_RUNE.get())
-                .output(CRYOMANCER_LEGGINGS.get(), 1)
-                .build(output);
-// ELECTROMANCER ARMOR
-        deploying(ELECTROMANCER_BOOTS.getId())
-                .require(WIZARD_BOOTS.get())
-                .require(LIGHTNING_RUNE.get())
-                .output(ELECTROMANCER_BOOTS.get(), 1)
-                .build(output);
-        deploying(ELECTROMANCER_CHESTPLATE.getId())
-                .require(WIZARD_CHESTPLATE.get())
-                .require(LIGHTNING_RUNE.get())
-                .output(ELECTROMANCER_CHESTPLATE.get(), 1)
-                .build(output);
-        deploying(ELECTROMANCER_HELMET.getId())
-                .require(WIZARD_HELMET.get())
-                .require(LIGHTNING_RUNE.get())
-                .output(ELECTROMANCER_HELMET.get(), 1)
-                .build(output);
-        deploying(ELECTROMANCER_LEGGINGS.getId())
-                .require(WIZARD_LEGGINGS.get())
-                .require(LIGHTNING_RUNE.get())
-                .output(ELECTROMANCER_LEGGINGS.get(), 1)
-                .build(output);
-// ARCHEVOKER ARMOR
-        deploying(ARCHEVOKER_BOOTS.getId())
-                .require(WIZARD_BOOTS.get())
-                .require(EVOCATION_RUNE.get())
-                .output(ARCHEVOKER_BOOTS.get(), 1)
-                .build(output);
-        deploying(ARCHEVOKER_CHESTPLATE.getId())
-                .require(WIZARD_CHESTPLATE.get())
-                .require(EVOCATION_RUNE.get())
-                .output(ARCHEVOKER_CHESTPLATE.get(), 1)
-                .build(output);
-        deploying(ARCHEVOKER_HELMET.getId())
-                .require(WIZARD_HELMET.get())
-                .require(EVOCATION_RUNE.get())
-                .output(ARCHEVOKER_HELMET.get(), 1)
-                .build(output);
-        deploying(ARCHEVOKER_LEGGINGS.getId())
-                .require(WIZARD_LEGGINGS.get())
-                .require(EVOCATION_RUNE.get())
-                .output(ARCHEVOKER_LEGGINGS.get(), 1)
-                .build(output);
-// CULTIST ARMOR
-        deploying(CULTIST_BOOTS.getId())
-                .require(WIZARD_BOOTS.get())
-                .require(BLOOD_RUNE.get())
-                .output(CULTIST_BOOTS.get(), 1)
-                .build(output);
-        deploying(CULTIST_CHESTPLATE.getId())
-                .require(WIZARD_CHESTPLATE.get())
-                .require(BLOOD_RUNE.get())
-                .output(CULTIST_CHESTPLATE.get(), 1)
-                .build(output);
-        deploying(CULTIST_HELMET.getId())
-                .require(WIZARD_HELMET.get())
-                .require(BLOOD_RUNE.get())
-                .output(CULTIST_HELMET.get(), 1)
-                .build(output);
-        deploying(CULTIST_LEGGINGS.getId())
-                .require(WIZARD_LEGGINGS.get())
-                .require(BLOOD_RUNE.get())
-                .output(CULTIST_LEGGINGS.get(), 1)
-                .build(output);
-// SHADOWWALKER ARMOR
-        deploying(SHADOWWALKER_BOOTS.getId())
-                .require(WIZARD_BOOTS.get())
-                .require(ENDER_RUNE.get())
-                .output(SHADOWWALKER_BOOTS.get(), 1)
-                .build(output);
-        deploying(SHADOWWALKER_CHESTPLATE.getId())
-                .require(WIZARD_CHESTPLATE.get())
-                .require(ENDER_RUNE.get())
-                .output(SHADOWWALKER_CHESTPLATE.get(), 1)
-                .build(output);
-        deploying(SHADOWWALKER_HELMET.getId())
-                .require(WIZARD_HELMET.get())
-                .require(ENDER_RUNE.get())
-                .output(SHADOWWALKER_HELMET.get(), 1)
-                .build(output);
-        deploying(SHADOWWALKER_LEGGINGS.getId())
-                .require(WIZARD_LEGGINGS.get())
-                .require(ENDER_RUNE.get())
-                .output(SHADOWWALKER_LEGGINGS.get(), 1)
-                .build(output);
-// PRIEST ARMOR
-        deploying(PRIEST_BOOTS.getId())
-                .require(WIZARD_BOOTS.get())
-                .require(HOLY_RUNE.get())
-                .output(PRIEST_BOOTS.get(), 1)
-                .build(output);
-        deploying(PRIEST_CHESTPLATE.getId())
-                .require(WIZARD_CHESTPLATE.get())
-                .require(HOLY_RUNE.get())
-                .output(PRIEST_CHESTPLATE.get(), 1)
-                .build(output);
-        deploying(PRIEST_HELMET.getId())
-                .require(WIZARD_HELMET.get())
-                .require(HOLY_RUNE.get())
-                .output(PRIEST_HELMET.get(), 1)
-                .build(output);
-        deploying(PRIEST_LEGGINGS.getId())
-                .require(WIZARD_LEGGINGS.get())
-                .require(HOLY_RUNE.get())
-                .output(PRIEST_LEGGINGS.get(), 1)
-                .build(output);
-// PLAGUED ARMOR
-        deploying(PLAGUED_BOOTS.getId())
-                .require(WIZARD_BOOTS.get())
-                .require(NATURE_RUNE.get())
-                .output(PLAGUED_BOOTS.get(), 1)
-                .build(output);
-        deploying(PLAGUED_CHESTPLATE.getId())
-                .require(WIZARD_CHESTPLATE.get())
-                .require(NATURE_RUNE.get())
-                .output(PLAGUED_CHESTPLATE.get(), 1)
-                .build(output);
-        deploying(PLAGUED_HELMET.getId())
-                .require(WIZARD_HELMET.get())
-                .require(NATURE_RUNE.get())
-                .output(PLAGUED_HELMET.get(), 1)
-                .build(output);
-        deploying(PLAGUED_LEGGINGS.getId())
-                .require(WIZARD_LEGGINGS.get())
-                .require(NATURE_RUNE.get())
-                .output(PLAGUED_LEGGINGS.get(), 1)
-                .build(output);
-// PYROMANCER ARMOR
-        deploying(PYROMANCER_BOOTS.getId())
-                .require(WIZARD_BOOTS.get())
-                .require(FIRE_RUNE.get())
-                .output(PYROMANCER_BOOTS.get(), 1)
-                .build(output);
-        deploying(PYROMANCER_CHESTPLATE.getId())
-                .require(WIZARD_CHESTPLATE.get())
-                .require(FIRE_RUNE.get())
-                .output(PYROMANCER_CHESTPLATE.get(), 1)
-                .build(output);
-        deploying(PYROMANCER_HELMET.getId())
-                .require(WIZARD_HELMET.get())
-                .require(FIRE_RUNE.get())
-                .output(PYROMANCER_HELMET.get(), 1)
-                .build(output);
-        deploying(PYROMANCER_LEGGINGS.getId())
-                .require(WIZARD_LEGGINGS.get())
-                .require(FIRE_RUNE.get())
-                .output(PYROMANCER_LEGGINGS.get(), 1)
-                .build(output);
-        deploying(CHAINED_BOOK.getId())
-                .require(BOOK)
-                .require(CHAIN)
-                .output(CHAINED_BOOK.get())
-                .build(output);
-// WANDERING MAGICIAN ARMOR
-        filling(WANDERING_MAGICIAN_BOOTS.getId())
-                .require(LEATHER_BOOTS)
-                .require(MANA.get(), 250)
-                .output(WANDERING_MAGICIAN_BOOTS.get())
-                .build(output);
-        filling(WANDERING_MAGICIAN_CHESTPLATE.getId())
-                .require(LEATHER_CHESTPLATE)
-                .require(MANA.get(), 250)
-                .output(WANDERING_MAGICIAN_CHESTPLATE.get())
-                .build(output);
-        filling(WANDERING_MAGICIAN_HELMET.getId())
-                .require(LEATHER_HELMET)
-                .require(MANA.get(), 250)
-                .output(WANDERING_MAGICIAN_HELMET.get())
-                .build(output);
-        filling(WANDERING_MAGICIAN_LEGGINGS.getId())
-                .require(LEATHER_LEGGINGS)
-                .require(MANA.get(), 250)
-                .output(WANDERING_MAGICIAN_LEGGINGS.get())
-                .build(output);
-// SCARECROW ARMOR
-        filling(PUMPKIN_BOOTS.getId())
-                .require(MAGIC_CLOTH.get())
-                .require(MANA.get(), 250)
-                .output(PUMPKIN_BOOTS.get())
-                .build(output);
-        filling(PUMPKIN_CHESTPLATE.getId())
-                .require(LEATHER)
-                .require(MANA.get(), 250)
-                .output(PUMPKIN_CHESTPLATE.get())
-                .build(output);
-        filling(PUMPKIN_HELMET.getId())
-                .require(PUMPKINS_CARVED)
-                .require(MANA.get(), 250)
-                .output(PUMPKIN_HELMET.get())
-                .build(output);
-        filling(PUMPKIN_LEGGINGS.getId())
-                .require(HAY_BLOCK)
-                .require(MANA.get(), 250)
-                .output(PUMPKIN_LEGGINGS.get())
-                .build(output);
-// NETHERITE MAGE ARMOR
+        armorDeploying(output, FIRE_RUNE.get(), "pyromancer");
+        armorDeploying(output, ICE_RUNE.get(), "cryomancer");
+        armorDeploying(output, HOLY_RUNE.get(), "priest");
+        armorDeploying(output, LIGHTNING_RUNE.get(), "electromancer");
+        armorDeploying(output, BLOOD_RUNE.get(), "cultist");
+        armorDeploying(output, EVOCATION_RUNE.get(), "archevoker");
+        armorDeploying(output, ENDER_RUNE.get(), "shadowwalker");
+        armorDeploying(output, NATURE_RUNE.get(), "plagued");
+        armorDeploying(output, NETHERITE_INGOT, "netherite_mage");
+        armorFilling(output, "wandering_magician");
 
-        deploying(NETHERITE_MAGE_BOOTS.getId())
-                .require(WIZARD_BOOTS.get())
-                .require(NETHERITE_INGOT)
-                .output(NETHERITE_MAGE_BOOTS.get())
-                .build(output);
-        deploying(NETHERITE_MAGE_CHESTPLATE.getId())
-                .require(WIZARD_CHESTPLATE.get())
-                .require(NETHERITE_INGOT)
-                .output(NETHERITE_MAGE_CHESTPLATE.get())
-                .build(output);
-        deploying(NETHERITE_MAGE_HELMET.getId())
-                .require(WIZARD_HELMET.get())
-                .require(NETHERITE_INGOT)
-                .output(NETHERITE_MAGE_HELMET.get())
-                .build(output);
-        deploying(NETHERITE_MAGE_LEGGINGS.getId())
-                .require(WIZARD_LEGGINGS.get())
-                .require(NETHERITE_INGOT)
-                .output(NETHERITE_MAGE_LEGGINGS.get())
-                .build(output);
-// UNIQUE ARMOR
+        manaFilling(output, PUMPKIN_BOOTS.get(), MAGIC_CLOTH.get(), 500);
+        manaFilling(output, PUMPKIN_CHESTPLATE.get(), LEATHER, 500);
+        manaFilling(output, PUMPKIN_HELMET.get(), CARVED_PUMPKIN, 500);
+        manaFilling(output, PUMPKIN_LEGGINGS.get(), HAY_BLOCK, 500);
+        // UNIQUE ARMOR
         sequencedAssembly(TARNISHED_CROWN.getId())
                 .require(IRON_HELMET)
                 .transitionTo(IRON_HELMET)
@@ -513,7 +272,19 @@ public class CWRecipeProvider extends RecipeProvider {
     }
 
     private void buildMiscItemRecipes(RecipeOutput output) {
-// MISC ITEMS
+        manaFilling(output, ARCANE_ESSENCE.get(), DUSTS, 250);
+        manaFilling(output, ARCANE_INGOT.get(), INGOTS, 1000);
+        manaFilling(output, MAGIC_CLOTH.get(), WOOL, 1000);
+        itemFilling(output, ENERGIZED_CORE.get(), COPPER_BLOCK, LIGHTNING.get(), 1000);
+        itemFilling(output, ICY_FANG.get(), FROZEN_BONE_SHARD.get(), ICE_VENOM_FLUID.get(), 500);
+        itemFilling(output, FROZEN_BONE_SHARD.get(), BONES, ICE_VENOM_FLUID.get(), 500);
+        itemFilling(output, CRYING_OBSIDIAN, OBSIDIAN, EVASION_ELIXIR_FLUID.get(), 500);
+        itemFilling(output, BLOODY_VELLUM.get(), HOGSKIN.get(), BLOOD.get(), 500);
+        haunting(HOGSKIN.getId())
+                .require(LEATHER)
+                .output(HOGSKIN.get())
+                .build(output);
+        // SEQUENCED
         sequencedAssembly(BLANK_RUNE.getId())
                 .require(TUFF)
                 .transitionTo(TUFF_SLAB)
@@ -630,8 +401,6 @@ public class CWRecipeProvider extends RecipeProvider {
                 .addStep(DeployerApplicationRecipe::new, builder -> builder.require(ARCANE_INGOT.get()))
                 .addStep(PressingRecipe::new, builder -> (builder))
                 .build(output);
-
-        //CHECK IF THIS WORKS
         sequencedAssembly(ANCIENT_FURLED_MAP.getId())
                 .require(PAPER)
                 .transitionTo(PAPER)
@@ -641,65 +410,7 @@ public class CWRecipeProvider extends RecipeProvider {
                 .addStep(DeployerApplicationRecipe::new, builder -> builder.require(CINDER_ESSENCE.get()))
                 .addStep(PressingRecipe::new, builder -> (builder))
                 .build(output);
-
-        filling(ARCANE_ESSENCE.getId())
-                .require(Tags.Items.DUSTS)
-                .require(MANA.get(), 250)
-                .output(ARCANE_ESSENCE.get())
-                .build(output);
-        filling(ARCANE_INGOT.getId())
-                .require(INGOTS)
-                .require(MANA.get(), 1000)
-                .output(ARCANE_INGOT.get())
-                .build(output);
-        filling(MAGIC_CLOTH.getId())
-                .require(WOOL)
-                .require(MANA.get(), 1000)
-                .output(MAGIC_CLOTH.get())
-                .build(output);
-        filling(ENERGIZED_CORE.getId())
-                .require(COPPER_BLOCK)
-                .require(LIGHTNING.get(), 1000)
-                .output(ENERGIZED_CORE.get())
-                .build(output);
-        filling(ICY_FANG.getId())
-                .require(FROZEN_BONE_SHARD.get())
-                .require(ICE_VENOM_FLUID.get(), 500)
-                .output(ICY_FANG.get())
-                .build(output);
-        filling(BLOODY_VELLUM.getId())
-                .require(HOGSKIN.get())
-                .require(BLOOD.get(), 500)
-                .output(BLOODY_VELLUM.get())
-                .build(output);
-        filling(FROZEN_BONE_SHARD.getId())
-                .require(BONE)
-                .require(ICE_VENOM_FLUID.get(), 250)
-                .output(FROZEN_BONE_SHARD.get())
-                .build(output);
-        haunting(HOGSKIN.getId())
-                .require(LEATHER)
-                .output(HOGSKIN.get())
-                .build(output);
-
         // BOSS/MOB SUMMON ITEMS
-        sequencedAssembly(WAYWARD_COMPASS.getId())
-                .require(COMPASS)
-                .transitionTo(COMPASS)
-                .addOutput(WAYWARD_COMPASS.get(), 1)
-                .loops(1)
-                .addStep(FillingRecipe::new, builder -> builder.require(MANA.get(), 1000))
-                .addStep(DeployerApplicationRecipe::new, builder -> builder.require(SOUL_LANTERN))
-                .build(output);
-        sequencedAssembly(CINDEROUS_SOULCALLER.getId())
-                .require(BELL)
-                .transitionTo(BELL)
-                .addOutput(CINDEROUS_SOULCALLER.get(), 1)
-                .loops(1)
-                .addStep(DeployerApplicationRecipe::new, builder -> builder.require(NETHERITE_SCRAP))
-                .addStep(DeployerApplicationRecipe::new, builder -> builder.require(CINDER_ESSENCE.get()))
-                .addStep(FillingRecipe::new, builder -> builder.require(LAVA, 1000))
-                .build(output);
     }
     private void buildSpellbookRecipes(RecipeOutput output) {
         sequencedAssembly(COPPER_SPELL_BOOK.getId())
@@ -824,45 +535,71 @@ public class CWRecipeProvider extends RecipeProvider {
                 .transitionTo(RUINED_BOOK.get())
                 .addOutput(ICE_SPELL_BOOK.get(), 1)
                 .loops(1)
-                .addStep(DeployerApplicationRecipe::new, builder -> builder.require(MAGIC_CLOTH.get()))
                 .addStep(DeployerApplicationRecipe::new, builder -> builder.require(MITHRIL_SCRAP.get()))
+                .addStep(DeployerApplicationRecipe::new, builder -> builder.require(MAGIC_CLOTH.get()))
                 .addStep(FillingRecipe::new, builder -> builder.require(ICE_VENOM_FLUID.get(), 250))
                 .addStep(PressingRecipe::new, builder -> (builder))
+                .build(output);
+
+        //TODO: make a method to simplify
+    }
+
+    private void buildSummoningRecipes(RecipeOutput output) {
+        sequencedAssembly(WAYWARD_COMPASS.getId())
+                .require(COMPASS)
+                .transitionTo(COMPASS)
+                .addOutput(WAYWARD_COMPASS.get(), 1)
+                .loops(1)
+                .addStep(FillingRecipe::new, builder -> builder.require(MANA.get(), 1000))
+                .addStep(DeployerApplicationRecipe::new, builder -> builder.require(SOUL_LANTERN))
+                .build(output);
+        sequencedAssembly(CINDEROUS_SOULCALLER.getId())
+                .require(BELL)
+                .transitionTo(BELL)
+                .addOutput(CINDEROUS_SOULCALLER.get(), 1)
+                .loops(1)
+                .addStep(DeployerApplicationRecipe::new, builder -> builder.require(NETHERITE_SCRAP))
+                .addStep(DeployerApplicationRecipe::new, builder -> builder.require(CINDER_ESSENCE.get()))
+                .addStep(FillingRecipe::new, builder -> builder.require(LAVA, 1000))
+                .build(output);
+        // BOSS/MOB SUMMON BLOCKS
+        sequencedAssembly(ARMOR_PILE_BLOCK_ITEM.getId())
+                .require(NETHERITE_SCRAP)
+                .transitionTo(NETHERITE_SCRAP)
+                .addOutput(ARMOR_PILE_BLOCK_ITEM.get(), 1)
+                .loops(1)
+                .addStep(DeployerApplicationRecipe::new, builder -> builder.require(CINDER_ESSENCE.get()))
+                .addStep(DeployerApplicationRecipe::new, builder -> builder.require(NETHERITE_SCRAP))
+                .build(output);
+        sequencedAssembly(ICE_SPIDER_EGG_BLOCK_ITEM.getId())
+                .require(TURTLE_EGG)
+                .transitionTo(TURTLE_EGG)
+                .addOutput(ICE_SPIDER_EGG_BLOCK_ITEM.get(), 15)
+                .addOutput(EGG, 90)
+                .addOutput(TURTLE_EGG, 30)
+                .addOutput(SPIDER_EYE, 15)
+                .loops(1)
+                .addStep(FillingRecipe::new, builder -> builder.require(ICE_VENOM_FLUID.get(), 1000))
+                .addStep(DeployerApplicationRecipe::new, builder -> builder.require(SPIDER_EYE))
+                .build(output);
+        mechanicalCrafting(CINDEROUS_KEYSTONE_BLOCK_ITEM.get(), 1)
+                .key('n', NETHERITE_INGOT)
+                .key('r', FIRE_RUNE.get())
+                .key('s', NETHER_STAR)
+                .patternLine("nrn")
+                .patternLine("rsr")
+                .patternLine("nrn")
                 .build(output);
     }
 
     private void buildBlockRecipes(RecipeOutput output) {
-        deploying(BOOK_STACK_BLOCK_ITEM.getId())
-                .require(BOOK)              // base item on the belt
-                .require(BOOK)              // item in the deployer
-                .output(BOOK_STACK_BLOCK_ITEM.get())
-                .build(output);
-        deploying(FIREFLY_JAR_ITEM.getId())
-                .require(GLASS_BOTTLE)              // base item on the belt
-                .require(LANTERN)              // item in the deployer
-                .output(FIREFLY_JAR_ITEM.get())
-                .build(output);
-        deploying(BRAZIER_ITEM.getId())
-                .require(LOGS)
-                .require(IRON_NUGGET)
-                .output(BRAZIER_ITEM.get())
-                .build(output);
-        deploying(SOUL_BRAZIER_ITEM.getId())
-                .require(SOUL_FIRE_BASE_BLOCKS)
-                .require(IRON_NUGGET)
-                .output(SOUL_BRAZIER_ITEM.get())
-                .build(output);
-        filling(WISEWOOD_BOOKSHELF_BLOCK_ITEM.getId())
-                .require(BOOKSHELF)
-                .require(MANA.get(), 10)
-                .output(WISEWOOD_BOOKSHELF_BLOCK_ITEM.get())
-                .build(output);
-        filling(WISEWOOD_CHISELED_BOOKSHELF_BLOCK_ITEM.getId())
-                .require(CHISELED_BOOKSHELF)
-                .require(MANA.get(), 10)
-                .output(WISEWOOD_CHISELED_BOOKSHELF_BLOCK_ITEM.get())
-                .build(output);
-// USEFUL BLOCKS
+        baseDeployingRecipe(output, BOOK_STACK_BLOCK_ITEM.get(), BOOK, BOOK);
+        baseDeployingRecipe(output, FIREFLY_JAR_ITEM.get(), GLASS_BOTTLE, LANTERN);
+        baseDeployingRecipe(output, BRAZIER_ITEM.get(), LOGS, IRON_NUGGET);
+        baseDeployingRecipe(output, SOUL_BRAZIER_ITEM.get(), SOUL_FIRE_BASE_BLOCKS, IRON_NUGGET);
+        manaFilling(output, WISEWOOD_BOOKSHELF_BLOCK_ITEM.get(), BOOKSHELVES, 10);
+        manaFilling(output, WISEWOOD_CHISELED_BOOKSHELF_BLOCK_ITEM.get(), CHISELED_BOOKSHELF, 10);
+        // USEFUL BLOCKS
         sequencedAssembly(ACANE_ANVIL_BLOCK_ITEM.getId())
                 .require(POLISHED_DEEPSLATE)
                 .transitionTo(ANVIL)
@@ -907,34 +644,6 @@ public class CWRecipeProvider extends RecipeProvider {
                 .addStep(DeployerApplicationRecipe::new, builder -> builder.require(POLISHED_DEEPSLATE))
                 .addStep(PressingRecipe::new, builder -> (builder))
                 .build(output);
-// BOSS/MOB SUMMON BLOCKS
-        sequencedAssembly(ARMOR_PILE_BLOCK_ITEM.getId())
-                .require(NETHERITE_SCRAP)
-                .transitionTo(NETHERITE_SCRAP)
-                .addOutput(ARMOR_PILE_BLOCK_ITEM.get(), 1)
-                .loops(1)
-                .addStep(DeployerApplicationRecipe::new, builder -> builder.require(CINDER_ESSENCE.get()))
-                .addStep(DeployerApplicationRecipe::new, builder -> builder.require(NETHERITE_SCRAP))
-                .build(output);
-        sequencedAssembly(ICE_SPIDER_EGG_BLOCK_ITEM.getId())
-                .require(TURTLE_EGG)
-                .transitionTo(TURTLE_EGG)
-                .addOutput(ICE_SPIDER_EGG_BLOCK_ITEM.get(), 15)
-                .addOutput(EGG, 90)
-                .addOutput(TURTLE_EGG, 30)
-                .addOutput(SPIDER_EYE, 15)
-                .loops(1)
-                .addStep(FillingRecipe::new, builder -> builder.require(ICE_VENOM_FLUID.get(), 1000))
-                .addStep(DeployerApplicationRecipe::new, builder -> builder.require(SPIDER_EYE))
-                .build(output);
-        mechanicalCrafting(CINDEROUS_KEYSTONE_BLOCK_ITEM.get(), 1)
-                .key('n', NETHERITE_INGOT)
-                .key('r', FIRE_RUNE.get())
-                .key('s', NETHER_STAR)
-                .patternLine("nrn")
-                .patternLine("rsr")
-                .patternLine("nrn")
-                .build(output);
     }
 
     private void buildStaffRecipes(RecipeOutput output) {
@@ -943,18 +652,9 @@ public class CWRecipeProvider extends RecipeProvider {
                 .require(ENERGIZED_CORE.get())
                 .output(LIGHTNING_ROD_STAFF.get(), 1)
                 .build(output);
-        deploying(ICE_STAFF.getId())
-                .require(FROSTED_HELVE.get())
-                .require(ICE_CRYSTAL.get())
-                .output(ICE_STAFF.get(), 1)
-                .build(output);
-        deploying(LIGHTNING_ROD_STAFF.getId())
-                .require(LIGHTNING_ROD)
-                .require(ENERGIZED_CORE.get())
-                .output(LIGHTNING_ROD_STAFF.get(), 1)
-                .build(output);
-
-        // STAFFS
+        baseDeployingRecipe(output, LIGHTNING_ROD_STAFF.get(), LIGHTNING_ROD, ENERGIZED_CORE.get());
+        baseDeployingRecipe(output, ICE_STAFF.get(), FROSTED_HELVE.get(), ICE_CRYSTAL.get());
+        // OTHER STAFFS
         sequencedAssembly(GRAYBEARD_STAFF.getId())
                 .require(STICK)
                 .transitionTo(STICK)
@@ -1028,7 +728,6 @@ public class CWRecipeProvider extends RecipeProvider {
                 .require(ARCANE_ESSENCE.get())
                 .output(COMMON_INK.get(), 500)
                 .build(output);
-
         mixing(UNCOMMON_INK.getId())
                 .require(IRON_INGOT)
                 .require(IRON_INGOT)
@@ -1037,7 +736,6 @@ public class CWRecipeProvider extends RecipeProvider {
                 .require(COMMON_INK.get(), 1000)
                 .output(UNCOMMON_INK.get(), 500)
                 .build(output);
-
         mixing(RARE_INK.getId())
                 .require(GOLD_INGOT)
                 .require(GOLD_INGOT)
@@ -1048,7 +746,6 @@ public class CWRecipeProvider extends RecipeProvider {
                 .require(UNCOMMON_INK.get(), 1000)
                 .output(RARE_INK.get(), 500)
                 .build(output);
-
         mixing(EPIC_INK.getId())
                 .require(DIAMOND)
                 .require(DIAMOND)
@@ -1062,7 +759,6 @@ public class CWRecipeProvider extends RecipeProvider {
                 .output(EPIC_INK.get(), 500)
                 .requiresHeat(HEATED)
                 .build(output);
-
         mixing(LEGENDARY_INK.getId())
                 .require(AMETHYST_SHARD)
                 .require(AMETHYST_SHARD)
@@ -1078,7 +774,6 @@ public class CWRecipeProvider extends RecipeProvider {
                 .output(LEGENDARY_INK.get(), 500)
                 .requiresHeat(SUPERHEATED)
                 .build(output);
-
         // MATERIALS
         mixing(ARCANE_ESSENCE.getId())
                 .require(LAPIS_LAZULI)
@@ -1089,7 +784,6 @@ public class CWRecipeProvider extends RecipeProvider {
                 .output(ARCANE_ESSENCE.get(), 4)
                 .requiresHeat(SUPERHEATED)
                 .build(output);
-
         mixing(CINDER_ESSENCE.getId())
                 .require(ARCANE_ESSENCE.get())
                 .require(ARCANE_ESSENCE.get())
@@ -1102,6 +796,7 @@ public class CWRecipeProvider extends RecipeProvider {
                 .requiresHeat(SUPERHEATED)
                 .build(output);
         // POTIONS/ELIXIRS (FINALLY)
+        // TODO: Simplify into potionRecipe() method
         mixing(OAKSKIN_ELIXIR_FLUID.getId())
                 .require(PotionFluidHandler.potionIngredient(Potions.STRONG_HEALING, 1000))
                 .require(OAK_LOGS)
@@ -1146,6 +841,9 @@ public class CWRecipeProvider extends RecipeProvider {
                 .requiresHeat(HEATED)
                 .build(output);
         // OTHER FLUIDS
+        // TODO: 0.5.0/1.0.0: Mana recipes will only produce 100 mana (2.5 arcane essence per)
+        // basically, every recipe will be divided by 10
+        // this is for the **Blaze Caster**, which will accept up to 500 mana (equivalent to maxed-out player)
         mixing(MANA.getId())
                 .require(FluidTags.WATER, 1000)
                 .require(ARCANE_ESSENCE.get())
@@ -1167,221 +865,56 @@ public class CWRecipeProvider extends RecipeProvider {
                 .output(TIMELESS_SLURRY_FLUID.get(), 1000)
                 .requiresHeat(SUPERHEATED)
                 .build(output);
-
+        mixing(FIRE_ALE_FLUID.getId())
+                .require(WATER, 1000)
+                .require(WHEAT)
+                .require(APPLE)
+                .require(MAGMA_CREAM)
+                .require(MUSHROOMS)
+                .output(FIRE_ALE_FLUID.get(), 500)
+                .requiresHeat(HEATED)
+                .build(output);
+        mixing(NETHERWARD_TINCTURE_FLUID.getId())
+                .require(PotionFluidHandler.potionIngredient(Potions.MUNDANE,  1000))
+                .require(NETHER_WART)
+                .require(NETHER_WART)
+                .require(BLAZE_POWDER)
+                .require(GOLD_NUGGET)
+                .output(NETHERWARD_TINCTURE_FLUID.get(), 250)
+                .requiresHeat(SUPERHEATED)
+                .build(output);
     }
 
     private void buildFillingRecipes(RecipeOutput output) {
         // INK
-        filling(INK_COMMON.getId())
-                .require(Items.GLASS_BOTTLE)
-                .require(COMMON_INK.get(), 250)
-                .output(ItemRegistry.INK_COMMON.get())
-                .build(output);
-        filling(INK_UNCOMMON.getId())
-                .require(Items.GLASS_BOTTLE)
-                .require(UNCOMMON_INK.get(), 250)
-                .output(ItemRegistry.INK_UNCOMMON.get())
-                .build(output);
-        filling(INK_RARE.getId())
-                .require(Items.GLASS_BOTTLE)
-                .require(RARE_INK.get(), 250)
-                .output(ItemRegistry.INK_RARE.get())
-                .build(output);
-        filling(INK_EPIC.getId())
-                .require(Items.GLASS_BOTTLE)
-                .require(EPIC_INK.get(), 250)
-                .output(ItemRegistry.INK_EPIC.get())
-                .build(output);
-        filling(INK_LEGENDARY.getId())
-                .require(Items.GLASS_BOTTLE)
-                .require(LEGENDARY_INK.get(), 250)
-                .output(ItemRegistry.INK_LEGENDARY.get())
-                .build(output);
+        bottleEmptyingAndFilling(output, COMMON_INK.get(), INK_COMMON.get());
+        bottleEmptyingAndFilling(output, UNCOMMON_INK.get(), INK_UNCOMMON.get());
+        bottleEmptyingAndFilling(output, RARE_INK.get(), INK_RARE.get());
+        bottleEmptyingAndFilling(output, EPIC_INK.get(), INK_EPIC.get());
+        bottleEmptyingAndFilling(output, LEGENDARY_INK.get(), INK_LEGENDARY.get());
         // POTIONS
-        filling(OAKSKIN_ELIXIR.getId())
-                .require(Items.GLASS_BOTTLE)
-                .require(OAKSKIN_ELIXIR_FLUID.get(), 250)
-                .output(ItemRegistry.OAKSKIN_ELIXIR.get())
-                .build(output);
-        filling(GREATER_OAKSKIN_ELIXIR.getId())
-                .require(Items.GLASS_BOTTLE)
-                .require(GREATER_OAKSKIN_ELIXIR_FLUID.get(), 250)
-                .output(ItemRegistry.GREATER_OAKSKIN_ELIXIR.get())
-                .build(output);
-        filling(INVISIBILITY_ELIXIR.getId())
-                .require(Items.GLASS_BOTTLE)
-                .require(INVISIBILITY_ELIXIR_FLUID.get(), 250)
-                .output(ItemRegistry.INVISIBILITY_ELIXIR.get())
-                .build(output);
-        filling(GREATER_INVISIBILITY_ELIXIR.getId())
-                .require(Items.GLASS_BOTTLE)
-                .require(GREATER_INVISIBILITY_ELIXIR_FLUID.get(), 250)
-                .output(ItemRegistry.GREATER_INVISIBILITY_ELIXIR.get())
-                .build(output);
-        filling(EVASION_ELIXIR.getId())
-                .require(Items.GLASS_BOTTLE)
-                .require(EVASION_ELIXIR_FLUID.get(), 250)
-                .output(ItemRegistry.EVASION_ELIXIR.get())
-                .build(output);
-        filling(GREATER_EVASION_ELIXIR.getId())
-                .require(Items.GLASS_BOTTLE)
-                .require(GREATER_EVASION_ELIXIR_FLUID.get(), 250)
-                .output(ItemRegistry.GREATER_EVASION_ELIXIR.get())
-                .build(output);
-        filling(GREATER_HEALING_POTION.getId())
-                .require(Items.GLASS_BOTTLE)
-                .require(GREATER_HEALING_ELIXIR_FLUID.get(), 250)
-                .output(ItemRegistry.GREATER_HEALING_POTION.get())
-                .build(output);
+        bottleEmptyingAndFilling(output, OAKSKIN_ELIXIR_FLUID.get(), OAKSKIN_ELIXIR.get());
+        bottleEmptyingAndFilling(output, GREATER_OAKSKIN_ELIXIR_FLUID.get(), GREATER_OAKSKIN_ELIXIR.get());
+        bottleEmptyingAndFilling(output, INVISIBILITY_ELIXIR_FLUID.get(), INVISIBILITY_ELIXIR.get());
+        bottleEmptyingAndFilling(output, GREATER_INVISIBILITY_ELIXIR_FLUID.get(), GREATER_INVISIBILITY_ELIXIR.get());
+        bottleEmptyingAndFilling(output, EVASION_ELIXIR_FLUID.get(), EVASION_ELIXIR.get());
+        bottleEmptyingAndFilling(output, GREATER_EVASION_ELIXIR_FLUID.get(), GREATER_EVASION_ELIXIR.get());
+        bottleEmptyingAndFilling(output, GREATER_HEALING_ELIXIR_FLUID.get(), GREATER_HEALING_POTION.get());
         // OTHER FLUIDS
-        filling(ItemRegistry.BLOOD_VIAL.getId())
-                .require(Items.GLASS_BOTTLE)
-                .require(BLOOD.get(), 250)
-                .output(ItemRegistry.BLOOD_VIAL.get())
-                .build(output);
-
-        filling(ItemRegistry.LIGHTNING_BOTTLE.getId())
-                .require(Items.GLASS_BOTTLE)
-                .require(LIGHTNING.get(), 250)
-                .output(ItemRegistry.LIGHTNING_BOTTLE.get())
-                .build(output);
-        filling(CWItems.BLOOD_BUCKET.getId())
-                .require(BUCKET)
-                .require(BLOOD.get(), 1000)
-                .output(CWItems.BLOOD_BUCKET.get())
-                .build(output);
-
-        filling(ItemRegistry.TIMELESS_SLURRY.getId())
-                .require(Items.GLASS_BOTTLE)
-                .require(TIMELESS_SLURRY_FLUID.get(), 250)
-                .output(ItemRegistry.TIMELESS_SLURRY.get())
-                .build(output);
-        filling(ICE_VENOM_VIAL.getId())
-                .require(Items.GLASS_BOTTLE)
-                .require(ICE_VENOM_FLUID.get(), 250)
-                .output(ICE_VENOM_VIAL.get())
-                .build(output);
+        bottleEmptyingAndFilling(output, BLOOD.get(), BLOOD_VIAL.get());
+        bottleEmptyingAndFilling(output, LIGHTNING.get(), LIGHTNING_BOTTLE.get());
+        bottleEmptyingAndFilling(output, ICE_VENOM_FLUID.get(), ICE_VENOM_VIAL.get());
+        bottleEmptyingAndFilling(output, TIMELESS_SLURRY_FLUID.get(), TIMELESS_SLURRY.get());
+        bucketEmptyingAndFilling(output, BLOOD.get(), BLOOD_BUCKET.get());
+        bottleEmptyingAndFilling(output, FIRE_ALE_FLUID.get(), FIRE_ALE.get());
+        bottleEmptyingAndFilling(output, NETHERWARD_TINCTURE_FLUID.get(), NETHERWARD_TINCTURE.get());
     }
-    private void buildEmptyingRecipes(RecipeOutput output) {
-        // INK
-        emptying(ItemRegistry.INK_COMMON.getId())
-                .require(ItemRegistry.INK_COMMON.get())
-                .output(COMMON_INK.get(), 250)
-                .output(Items.GLASS_BOTTLE)
-                .build(output);
-        emptying(ItemRegistry.INK_UNCOMMON.getId())
-                .require(ItemRegistry.INK_UNCOMMON.get())
-                .output(UNCOMMON_INK.get(), 250)
-                .output(Items.GLASS_BOTTLE)
-                .build(output);
-        emptying(ItemRegistry.INK_RARE.getId())
-                .require(ItemRegistry.INK_RARE.get())
-                .output(RARE_INK.get(), 250)
-                .output(Items.GLASS_BOTTLE)
-                .build(output);
-        emptying(ItemRegistry.INK_EPIC.getId())
-                .require(ItemRegistry.INK_EPIC.get())
-                .output(EPIC_INK.get(), 250)
-                .output(Items.GLASS_BOTTLE)
-                .build(output);
-        emptying(ItemRegistry.INK_LEGENDARY.getId())
-                .require(ItemRegistry.INK_LEGENDARY.get())
-                .output(LEGENDARY_INK.get(), 250)
-                .output(GLASS_BOTTLE)
-                .build(output);
-        // POTIONS
-        emptying(ItemRegistry.OAKSKIN_ELIXIR.getId())
-                .require(ItemRegistry.OAKSKIN_ELIXIR.get())
-                .output(OAKSKIN_ELIXIR_FLUID.get(), 250)
-                .output(Items.GLASS_BOTTLE)
-                .build(output);
-        emptying(ItemRegistry.GREATER_OAKSKIN_ELIXIR.getId())
-                .require(ItemRegistry.GREATER_OAKSKIN_ELIXIR.get())
-                .output(GREATER_OAKSKIN_ELIXIR_FLUID.get(), 250)
-                .output(Items.GLASS_BOTTLE)
-                .build(output);
-        emptying(ItemRegistry.INVISIBILITY_ELIXIR.getId())
-                .require(ItemRegistry.INVISIBILITY_ELIXIR.get())
-                .output(INVISIBILITY_ELIXIR_FLUID.get(), 250)
-                .output(Items.GLASS_BOTTLE)
-                .build(output);
-        emptying(ItemRegistry.GREATER_INVISIBILITY_ELIXIR.getId())
-                .require(ItemRegistry.GREATER_INVISIBILITY_ELIXIR.get())
-                .output(GREATER_INVISIBILITY_ELIXIR_FLUID.get(), 250)
-                .output(Items.GLASS_BOTTLE)
-                .build(output);
-        emptying(ItemRegistry.EVASION_ELIXIR.getId())
-                .require(ItemRegistry.EVASION_ELIXIR.get())
-                .output(EVASION_ELIXIR_FLUID.get(), 250)
-                .output(Items.GLASS_BOTTLE)
-                .build(output);
-        emptying(ItemRegistry.GREATER_EVASION_ELIXIR.getId())
-                .require(ItemRegistry.GREATER_EVASION_ELIXIR.get())
-                .output(GREATER_EVASION_ELIXIR_FLUID.get(), 250)
-                .output(Items.GLASS_BOTTLE)
-                .build(output);
-        emptying(ItemRegistry.GREATER_HEALING_POTION.getId())
-                .require(ItemRegistry.GREATER_HEALING_POTION.get())
-                .output(GREATER_HEALING_ELIXIR_FLUID.get(), 250)
-                .output(Items.GLASS_BOTTLE)
-                .build(output);
-        // OTHER FLUIDS
-        emptying(BLOOD_VIAL.getId())
-                .require(BLOOD_VIAL.get())
-                .output(BLOOD.get(), 250)
-                .output(GLASS_BOTTLE)
-                .build(output);
-        emptying(LIGHTNING_BOTTLE.getId())
-                .require(LIGHTNING_BOTTLE.get())
-                .output(LIGHTNING.get(), 250)
-                .output(GLASS_BOTTLE)
-                .build(output);
-        emptying(TIMELESS_SLURRY.getId())
-                .require(TIMELESS_SLURRY.get())
-                .output(TIMELESS_SLURRY_FLUID.get(), 250)
-                .output(GLASS_BOTTLE)
-                .build(output);
-        emptying(ICE_VENOM_FLUID.getId())
-                .require(ICE_VENOM_VIAL.get())
-                .output(ICE_VENOM_FLUID.get(), 250)
-                .output(GLASS_BOTTLE)
-                .build(output);
-    }
-
     private void buildCompactingRecipes(RecipeOutput output) {
         compacting(BLOOD.getId())
                 .require(Tags.Items.FOODS_RAW_MEAT)
                 .require(Tags.Items.FOODS_RAW_MEAT)
                 .require(Tags.Items.FOODS_RAW_MEAT)
                 .output(BLOOD.get(), 250)
-                .build(output);
-    }
-
-    // Helper to build a "Blank Rune + 3x ingredient + Press -> Specific Rune" sequence
-    private void runeSequence(RecipeOutput output,
-                              ResourceLocation outId,
-                              ItemLike ingredient,
-                              ItemLike targetRune) {
-        mixing(outId)
-                .require(BLANK_RUNE.get())
-                .require(ingredient)
-                .require(ingredient)
-                .require(ingredient)
-                .require(ingredient)
-                .output(targetRune, 1)
-                .build(output);
-    }
-    private void orbSequence(RecipeOutput output,
-                              ResourceLocation outId,
-                              ItemLike ingredient,
-                              ItemLike targetOrb) {
-        mixing(outId)
-                .require(UPGRADE_ORB.get())
-                .require(ingredient)
-                .require(ingredient)
-                .require(ingredient)
-                .require(ingredient)
-                .output(targetOrb, 1)
                 .build(output);
     }
     private void buildWeaponRecipes(RecipeOutput output) {
@@ -1393,7 +926,7 @@ public class CWRecipeProvider extends RecipeProvider {
                 .loops(1)
                 .addStep(FillingRecipe::new, builder -> builder.require(ICE_VENOM_FLUID.get(), 250))
                 .addStep(DeployerApplicationRecipe::new, builder -> builder.require(ICE))
-//                .addStep(DeployerApplicationRecipe::new, builder -> builder.require(MITHRIL_INGOT.get()))
+                .addStep(DeployerApplicationRecipe::new, builder -> builder.require(MITHRIL_INGOT.get())) //TODO
                 .addStep(PressingRecipe::new, builder -> (builder))
                 .build(output);
         sequencedAssembly(SPELLBREAKER.getId())
@@ -1412,7 +945,7 @@ public class CWRecipeProvider extends RecipeProvider {
                 .loops(1)
                 .addStep(FillingRecipe::new, builder -> builder.require(LIGHTNING.get(), 250))
                 .addStep(DeployerApplicationRecipe::new, builder -> builder.require(QUARTZ))
-//                .addStep(DeployerApplicationRecipe::new, builder -> builder.require(MITHRIL_INGOT.get()))
+                .addStep(DeployerApplicationRecipe::new, builder -> builder.require(MITHRIL_INGOT.get())) //TODO
                 .addStep(PressingRecipe::new, builder -> (builder))
                 .build(output);
         sequencedAssembly(AMETHYST_RAPIER.getId())
@@ -1460,20 +993,7 @@ public class CWRecipeProvider extends RecipeProvider {
                 .addStep(FillingRecipe::new, builder -> builder.require(MANA.get(), 1000))
                 .addStep(PressingRecipe::new, builder -> (builder))
                 .build(output);
-        mechanicalCrafting(AUTOLOADER_CROSSBOW.get(), 1)
-                .key('s', STICK)
-                .key('b', BRASS_INGOT)
-                .key('c', CROSSBOW)
-                .key('g', COGWHEEL)
-                .key('p', PRECISION_MECHANISM)             // e.g., Create: andesite casing/gearbox; swap to what you prefer
-                .key('r', STRING)
-                .patternLine("bssp")
-                .patternLine("rgcs")
-                .patternLine("rsgs")
-                .patternLine("srrb")
-                .build(output);
     }
-
     private void buildCharmRecipes(RecipeOutput output) {
         sequencedAssembly(ResourceLocation.parse(String.valueOf(MANA_RING.get())))
                 .require(ARCANE_INGOT.get())
@@ -1644,24 +1164,11 @@ public class CWRecipeProvider extends RecipeProvider {
                 .addStep(PressingRecipe::new, b -> b)
                 .build(output);
     }
-
     private void buildManaRecipes(RecipeOutput output) {
         // ARCANE ESSENCE FILLING
-        filling(ResourceLocation.parse(ARCANE_ESSENCE.getRegisteredName() + "_flour_filling"))
-                .require(FLOURS.tag)
-                .require(MANA.get(), 250)
-                .output(ARCANE_ESSENCE.get())
-                .build(output);
-        filling(ResourceLocation.parse(ARCANE_ESSENCE.getRegisteredName() + "_sugar_filling"))
-                .require(SUGAR)
-                .require(MANA.get(), 250)
-                .output(ARCANE_ESSENCE.get())
-                .build(output);
-        filling(ResourceLocation.parse(ARCANE_ESSENCE.getRegisteredName() + "_cinder_flour_filling"))
-                .require(CINDER_FLOUR)
-                .require(MANA.get(), 250)
-                .output(ARCANE_ESSENCE.get())
-                .build(output);
+        manaFillingWithItem(output, ARCANE_ESSENCE.get(), FLOURS.tag, "flour");
+        manaFillingWithItem(output, ARCANE_ESSENCE.get(), SUGAR, "sugar");
+        manaFillingWithItem(output, ARCANE_ESSENCE.get(), CINDER_FLOUR, "cinder_flour");
         // MIXING
         mixing(ResourceLocation.parse(CINDER_ESSENCE.getRegisteredName() + "_mana_recipe"))
                 .require(MANA.get(), 1000)
@@ -1717,84 +1224,129 @@ public class CWRecipeProvider extends RecipeProvider {
                 .build(output);
     }
 
-
-
-
-
-
-    public static StandardProcessingRecipe.Builder<ConversionRecipe> conversion(ResourceLocation id) {
-        return new StandardProcessingRecipe.Builder<>(ConversionRecipe::new, id);
+    // HELPERS
+    private void runeSequence(RecipeOutput output,
+                              ItemLike focus, ItemLike targetRune) {
+        mixing(ResourceLocation.parse(String.valueOf(targetRune)))
+                .require(BLANK_RUNE.get())
+                .require(focus)
+                .require(focus)
+                .require(focus)
+                .require(focus)
+                .output(targetRune, 1)
+                .build(output);
+    }
+    private void runeFilling(RecipeOutput output, ItemLike rune, FlowingFluid fluid) {
+        filling(itemId(rune))
+                .require(BLANK_RUNE.get())
+                .require(SizedFluidIngredient.of(fluid, 1000))
+                .output(rune)
+                .build(output);
+    }
+    private void orbSequence(RecipeOutput output,
+                             ItemLike rune, ItemLike targetOrb) {
+        mixing(ResourceLocation.parse(String.valueOf(targetOrb)))
+                .require(UPGRADE_ORB.get())
+                .require(rune)
+                .require(rune)
+                .require(rune)
+                .require(rune)
+                .output(targetOrb, 1)
+                .build(output);
+    }
+    private void bottleEmptyingAndFilling(RecipeOutput output, FlowingFluid fluid, ItemLike vesselItem) {
+        filling(ResourceLocation.parse(String.valueOf(vesselItem)))
+                .require(GLASS_BOTTLE)
+                .require(SizedFluidIngredient.of(fluid, 250))
+                .output(vesselItem, 1)
+                .build(output);
+        emptying(ResourceLocation.parse(String.valueOf(vesselItem)))
+                .require(vesselItem)
+                .output(GLASS_BOTTLE, 1)
+                .output(fluid, 250)
+                .build(output);
+    }
+    private void bucketEmptyingAndFilling(RecipeOutput output, FlowingFluid fluid, ItemLike vesselItem) {
+        filling(ResourceLocation.parse(String.valueOf(vesselItem)))
+                .require(BUCKETS)
+                .require(SizedFluidIngredient.of(fluid, 1000))
+                .output(vesselItem, 1)
+                .build(output);
+        emptying(ResourceLocation.parse(String.valueOf(vesselItem)))
+                .require(vesselItem)
+                .output(BUCKET, 1)
+                .output(fluid, 1000)
+                .build(output);
+    }
+    private void itemFilling(RecipeOutput output, ItemLike result, ItemLike input, FlowingFluid fluid, int mb) {
+        filling(itemId(result))
+                .require(input)
+                .require(SizedFluidIngredient.of(fluid, mb))
+                .output(result)
+                .build(output);
     }
 
-    public static StandardProcessingRecipe.Builder<CrushingRecipe> crushing(ResourceLocation id) {
-        return new StandardProcessingRecipe.Builder<>(CrushingRecipe::new, id);
+    private void baseDeployingRecipe(RecipeOutput output, ItemLike result, ItemLike input, ItemLike deployedItem) {
+        deploying(itemId(result))
+                .require(input)
+                .require(deployedItem)
+                .output(result)
+                .build(output);
     }
-
-    public static StandardProcessingRecipe.Builder<CuttingRecipe> cutting(ResourceLocation id) {
-        return new StandardProcessingRecipe.Builder<>(CuttingRecipe::new, id);
+    private void baseDeployingRecipe(RecipeOutput output, ItemLike result, TagKey<Item> input, ItemLike deployedItem) {
+        deploying(itemId(result))
+                .require(input)
+                .require(deployedItem)
+                .output(result)
+                .build(output);
     }
-
-    public static StandardProcessingRecipe.Builder<MillingRecipe> milling(ResourceLocation id) {
-        return new StandardProcessingRecipe.Builder<>(MillingRecipe::new, id);
+    private void armorDeploying(RecipeOutput output, ItemLike deployedItem, String prefix) {
+        var armors = new Item[]{WIZARD_BOOTS.get(),
+                WIZARD_LEGGINGS.get(),
+                WIZARD_CHESTPLATE.get(), WIZARD_HELMET.get()};
+        for (Item baseArmor : armors) {
+            ArmorItem.Type armorType = ((ArmorItem) baseArmor).getType();
+            ResourceLocation itemId = ResourceLocation.fromNamespaceAndPath(IronsSpellbooks.MODID,
+                    String.format(prefix + "_" + armorType.getName()));
+            ItemStack result = BuiltInRegistries.ITEM.get(itemId).getDefaultInstance();
+            baseDeployingRecipe(output, result.getItem(), baseArmor, deployedItem);
+        }
     }
-
-    public static StandardProcessingRecipe.Builder<MixingRecipe> mixing(ResourceLocation id) {
-        return new StandardProcessingRecipe.Builder<>(MixingRecipe::new, id);
+    private void manaFilling(RecipeOutput output, ItemLike result, ItemLike input, int mb) {
+        itemFilling(output, result, input, MANA.get(), mb);
     }
-
-    public static StandardProcessingRecipe.Builder<CompactingRecipe> compacting(ResourceLocation id) {
-        return new StandardProcessingRecipe.Builder<>(CompactingRecipe::new, id);
+    private void manaFilling(RecipeOutput output, ItemLike result, TagKey<Item> input, int mb) {
+        itemFilling(output, result, input, MANA.get(), mb);
     }
-
-    public static StandardProcessingRecipe.Builder<PressingRecipe> pressing(ResourceLocation id) {
-        return new StandardProcessingRecipe.Builder<>(PressingRecipe::new, id);
+    private void manaFillingWithItem(RecipeOutput output, ItemLike result, ItemLike input, String prefix) {
+        ResourceLocation itemId1 = ResourceLocation.parse(result + "_" + prefix + "_" + "filling");
+        filling(itemId1)
+                .require(input)
+                .require(MANA.get(), 250)
+                .output(result)
+                .build(output);
     }
-
-    public static StandardProcessingRecipe.Builder<SandPaperPolishingRecipe> polishing(ResourceLocation id) {
-        return new StandardProcessingRecipe.Builder<>(SandPaperPolishingRecipe::new, id);
+    private void manaFillingWithItem(RecipeOutput output, ItemLike result, TagKey<Item> input, String prefix) {
+        ResourceLocation itemId1 = ResourceLocation.parse(result + "_" + prefix + "_" + "filling");
+        filling(itemId1)
+                .require(input)
+                .require(MANA.get(), 250)
+                .output(result)
+                .build(output);
     }
-
-    public static StandardProcessingRecipe.Builder<SplashingRecipe> splashing(ResourceLocation id) {
-        return new StandardProcessingRecipe.Builder<>(SplashingRecipe::new, id);
+    private void itemFilling(RecipeOutput output, ItemLike result, TagKey<Item> input, FlowingFluid fluid, int mb) {
+        filling(itemId(result))
+                .require(input)
+                .require(SizedFluidIngredient.of(fluid, mb))
+                .output(result)
+                .build(output);
     }
-
-    public static StandardProcessingRecipe.Builder<HauntingRecipe> haunting(ResourceLocation id) {
-        return new StandardProcessingRecipe.Builder<>(HauntingRecipe::new, id);
-    }
-
-    public static ItemApplicationRecipe.Builder<DeployerApplicationRecipe> deploying(ResourceLocation id) {
-        return new ItemApplicationRecipe.Builder<>(DeployerApplicationRecipe::new, id);
-    }
-
-    public static StandardProcessingRecipe.Builder<FillingRecipe> filling(ResourceLocation id) {
-        return new StandardProcessingRecipe.Builder<>(FillingRecipe::new, id);
-    }
-
-    public static StandardProcessingRecipe.Builder<EmptyingRecipe> emptying(ResourceLocation id) {
-        return new StandardProcessingRecipe.Builder<>(EmptyingRecipe::new, id);
-    }
-
-    public static ItemApplicationRecipe.Builder<ManualApplicationRecipe> manualApplication(ResourceLocation id) {
-        return new ItemApplicationRecipe.Builder<>(ManualApplicationRecipe::new, id);
-    }
-
-    public static SequencedAssemblyRecipeBuilder sequencedAssembly(ResourceLocation id) {
-        return new SequencedAssemblyRecipeBuilder(id);
-    }
-
-    public static MechanicalCraftingRecipeBuilder mechanicalCrafting(ItemLike item, int count) {
-        return new MechanicalCraftingRecipeBuilder(item, count);
-    }
-
-    protected static void oreSmelting(RecipeOutput recipeOutput, List<ItemLike> pIngredients, RecipeCategory pCategory, ItemLike pResult,
-                                      float pExperience, int pCookingTIme, String pGroup) {
-        oreCooking(recipeOutput, RecipeSerializer.SMELTING_RECIPE, SmeltingRecipe::new, pIngredients, pCategory, pResult,
-                pExperience, pCookingTIme, pGroup, "_from_smelting");
-    }
-
-    protected static void oreBlasting(RecipeOutput recipeOutput, List<ItemLike> pIngredients, RecipeCategory pCategory, ItemLike pResult,
-                                      float pExperience, int pCookingTime, String pGroup) {
-        oreCooking(recipeOutput, RecipeSerializer.BLASTING_RECIPE, BlastingRecipe::new, pIngredients, pCategory, pResult,
-                pExperience, pCookingTime, pGroup, "_from_blasting");
+    private void armorFilling(RecipeOutput output, String armorName) {
+        var leather_armors = new Item[]{LEATHER_BOOTS, LEATHER_LEGGINGS, LEATHER_CHESTPLATE, LEATHER_HELMET};
+        for (Item baseArmor : leather_armors) {
+            ResourceLocation itemId = ResourceLocation.fromNamespaceAndPath(IronsSpellbooks.MODID, String.format(armorName + "_" + ((ArmorItem) baseArmor).getType().getName()));
+            ItemStack result = BuiltInRegistries.ITEM.get(itemId).getDefaultInstance();
+            manaFilling(output, result.getItem(), baseArmor, 250);
+        }
     }
 }

@@ -2,11 +2,11 @@
   "type": "create:filling",
   "ingredients": [
     {
-      "tag": "c:pumpkins/carved"
+      "item": "minecraft:carved_pumpkin"
     },
     {
       "type": "neoforge:single",
-      "amount": 250,
+      "amount": 500,
       "fluid": "create_wizardry:mana"
     }
   ],

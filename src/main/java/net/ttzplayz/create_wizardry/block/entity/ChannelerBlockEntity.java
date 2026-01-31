@@ -4,44 +4,48 @@ import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
+import io.redspace.ironsspellbooks.api.util.Utils;
+import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
+import io.redspace.ironsspellbooks.particle.ZapParticleOption;
 import io.redspace.ironsspellbooks.registries.SoundRegistry;
+import io.redspace.ironsspellbooks.util.ParticleHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.sounds.SoundEvents;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.monster.Creeper;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.AABB;
-import net.neoforged.neoforge.capabilities.Capabilities;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.fluids.FluidStack;
-import net.ttzplayz.create_wizardry.fluids.CWFluidRegistry;
 
 import java.util.List;
 
 import static net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.BLOCK;
 import static net.ttzplayz.create_wizardry.block.channeler.ChannelerBlock.POWERED;
+import static net.ttzplayz.create_wizardry.fluids.CWFluidRegistry.LIGHTNING;
 
 public class ChannelerBlockEntity extends SmartBlockEntity implements IHaveGoggleInformation {
 
-    // tank behaviour (primary Create integration point)
-    private SmartFluidTankBehaviour internalTank;
+    public SmartFluidTankBehaviour internalTank;
 
     // cooldowns
     private int creeperDrainCooldown = 0;
     private int lightningDrainCooldown = 0;
+    private int poweredCooldown = 2;
 
     // amounts (mB)
-    private static final int MB_PER_LIGHTNING_STRIKE = 1000; // 1 bucket
-    private static final int MB_PER_CHARGED_CREEPER = 250;   // tweak balance
+    private static final int MB_PER_LIGHTNING_STRIKE = 1000;
+    private static final int MB_PER_CHARGED_CREEPER = 250;
 
-    // tick interval for scanning creepers (we'll scan every 10 ticks to reduce cost)
+    // tick interval for scanning creepers
     private int scanCooldown = 0;
     private static final int SCAN_INTERVAL = 10;
 
@@ -51,11 +55,11 @@ public class ChannelerBlockEntity extends SmartBlockEntity implements IHaveGoggl
 
     public static void registerCapabilities(RegisterCapabilitiesEvent event) {
         event.registerBlockEntity(
-                BLOCK, // The capability type
+                BLOCK,
                 CWBlockEntities.CHANNELER_BE.get(), // BE type
                 (be, context) -> {
                     if (be.internalTank == null) return null;
-                    return be.internalTank.getPrimaryHandler();
+                    return be.internalTank.getCapability();
                 }
         );
     }
@@ -68,15 +72,10 @@ public class ChannelerBlockEntity extends SmartBlockEntity implements IHaveGoggl
 
     @Override
     public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
-        // Create-style: create a single SmartFluidTankBehaviour for lightning fluid.
-        // Capacity: 16_000 mB (16 buckets) — adjust as needed
-        internalTank = SmartFluidTankBehaviour.single(this, 16000)
+        internalTank = SmartFluidTankBehaviour.single(this, 4000)
                 .allowInsertion()
                 .allowExtraction();
         behaviours.add(internalTank);
-//        registerAwardables(behaviours, AllAdvancements.DRAIN);
-
-        // If you want the Channeler to allow insertion from above (lightning rod style), remove forbidInsertion or add more fine-grained rules.
     }
 
     @Override
@@ -92,13 +91,21 @@ public class ChannelerBlockEntity extends SmartBlockEntity implements IHaveGoggl
     public void tickServer() {
         if (level == null) return;
 
-        // Creeper scan logic (run every SCAN_INTERVAL ticks)
         if (scanCooldown > 0) scanCooldown--;
         if (scanCooldown <= 0) {
             scanCooldown = SCAN_INTERVAL;
             absorbNearbyChargedCreepers();
             absorbNearbyLightning();
         }
+
+        if (getBlockState().getValue(POWERED)) {
+            if (poweredCooldown > 0)
+                poweredCooldown--;
+        if (poweredCooldown <= 0) {
+            poweredCooldown = 0;
+            level.setBlock(worldPosition, getBlockState().setValue(POWERED, false), 3);
+        }}
+
 
         if (creeperDrainCooldown > 0) creeperDrainCooldown--;
         if (lightningDrainCooldown > 0) lightningDrainCooldown--;
@@ -110,30 +117,31 @@ public class ChannelerBlockEntity extends SmartBlockEntity implements IHaveGoggl
         if (tank == null || mb <= 0) return 0;
 
 
-        FluidStack stack = new FluidStack(CWFluidRegistry.LIGHTNING.get(), mb);
+        FluidStack stack = new FluidStack(LIGHTNING.get(), mb);
         int accepted = internalTank.getPrimaryHandler().fill(stack, IFluidHandler.FluidAction.EXECUTE);
         if (accepted > 0) {
-//            getBlockState().setValue(POWERED, true);
             setChanged();
-            sendData();
+            internalTank.sendDataLazily();
         }
         return accepted;
     }
 
-//    private boolean isLightningFluid(FluidStack stack) {
-//        return !stack.isEmpty() && stack.getFluid() == CWFluidRegistry.LIGHTNING.get();
-//    }
-
     private void absorbNearbyChargedCreepers() {
         if (level == null) return;
 
-        // Small area around the block; tweak if you want a bigger capture zone
-        AABB box = new AABB(worldPosition).inflate(1.5, 1.5, 1.5);
+        AABB box = new AABB(worldPosition).inflate(2, 2, 2);
         List<Creeper> creepers = level.getEntitiesOfClass(Creeper.class, box, c -> c != null && c.isAlive() && c.isPowered());
 
         for (Creeper creeper : creepers) {
             if (drainFromChargedCreeper(creeper)) {
-                level.playLocalSound(worldPosition, SoundRegistry.LIGHTNING_WOOSH_01.get(), SoundSource.BLOCKS, 0.75f, 0.9f + 0.2f * (float) Math.random(), false);
+                level.setBlock(worldPosition, getBlockState().setValue(POWERED, true), 3);
+                poweredCooldown = 2;
+                level.playSound(null, worldPosition, SoundRegistry.LIGHTNING_CAST.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
+                MagicManager.spawnParticles(level, ParticleHelper.ELECTRICITY, creeper.getX(), creeper.getY() + creeper.getBbHeight() / 2, creeper.getZ(), 10,
+                        creeper.getBbWidth() / 3, creeper.getBbHeight() / 3, creeper.getBbWidth() / 3, 0.1, false);
+                Vec3 start = creeper.getBoundingBox().getCenter();
+                Vec3 dest = worldPosition.getCenter();
+                ((ServerLevel) level).sendParticles(new ZapParticleOption(dest), start.x, start.y, start.z, 1, 0, 0, 0, 0);
                 // only drain one per scan to limit farming throughput
                 break;
             }
@@ -142,40 +150,53 @@ public class ChannelerBlockEntity extends SmartBlockEntity implements IHaveGoggl
     private void absorbNearbyLightning() {
         if (level == null) return;
 
-        // Small area around the block; tweak if you want a bigger capture zone
-        AABB box = new AABB(worldPosition).inflate(1.5, 1.5, 1.5);
+        AABB box = new AABB(worldPosition).inflate(8, 8, 8);
         List<LightningBolt> bolts = level.getEntitiesOfClass(LightningBolt.class, box, l -> l != null && l.isAlive());
 
         for (LightningBolt bolt : bolts) {
             if (onLightningStrike(bolt)) {
-                level.playLocalSound(worldPosition, SoundRegistry.LIGHTNING_WOOSH_01.get(), SoundSource.BLOCKS, 0.75f, 0.9f + 0.2f * (float) Math.random(), false);
+                level.setBlock(worldPosition, getBlockState().setValue(POWERED, true), 3);
+                poweredCooldown = 2;
+                level.playSound(null, worldPosition, SoundRegistry.LIGHTNING_CAST.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
+                for (int i = 0; i < 5; i++) {
+                    Vec3 start = worldPosition.getCenter();
+                    Vec3 dest = start.add(Utils.getRandomVec3(1).multiply(1.5, 0.5, 1.5).add(2, 0, 2));
+                    ((ServerLevel) level).sendParticles(new ZapParticleOption(dest), start.x, start.y, start.z, 1, 0, 0, 0, 0);
+                }
+                MagicManager.spawnParticles(level, ParticleHelper.ELECTRICITY, worldPosition.getCenter().x, worldPosition.getCenter().y, worldPosition.getCenter().z, 10,
+                        0.1, 0.1, 0.1, 0.1, false);
+                BlockPos.betweenClosedStream(box).forEach(pos -> dowseFire(level, pos));
+                bolt.setDamage(0);
+                bolt.setVisualOnly(true);
+                bolt.kill();
                 // only drain one per scan to limit farming throughput
                 break;
             }
         }
     }
 
-    // Called when lightning hits the block
+    private void dowseFire(Level level, BlockPos pos) {
+        BlockState state = level.getBlockState(pos);
+        if (state.is(BlockTags.FIRE)) {
+            level.removeBlock(pos, false);
+        }
+    }
+
     public boolean onLightningStrike(LightningBolt bolt) {
         if (level == null || level.isClientSide) return false;
         if (lightningDrainCooldown > 0) return false;
-
+        if (bolt.getCause() != null) return false;
         int filled = tryFillLightning(MB_PER_LIGHTNING_STRIKE);
         if (filled > 0) {
-            level.playSound(null, worldPosition, SoundEvents.LIGHTNING_BOLT_IMPACT, SoundSource.BLOCKS, 1.0f, 1.0f);
-            level.addParticle(ParticleTypes.ELECTRIC_SPARK,
-                    worldPosition.getX() + 0.5, worldPosition.getY() + 1.1, worldPosition.getZ() + 0.5,
-                    0.0, 0.08, 0.0);
             lightningDrainCooldown = 100; // 5 second cooldown
-            bolt.setPos(worldPosition.getX(), worldPosition.getY(), worldPosition.getZ());
-//            setChanged();
-//            sendData();
+            setChanged();
+            internalTank.sendDataLazily();
             return true;
         }
         return false;
     }
 
-    // Drain fluid when charged creeper passes through; return true if drained
+    // Drain fluid when charged creeper passes through
     public boolean drainFromChargedCreeper(Creeper creeper) {
         if (level == null || level.isClientSide) return false;
         if (creeperDrainCooldown > 0) return false;
@@ -185,20 +206,17 @@ public class ChannelerBlockEntity extends SmartBlockEntity implements IHaveGoggl
         int filled = tryFillLightning(MB_PER_CHARGED_CREEPER);
         if (filled <= 0) return false;
 
-        // No public API to “un-charge” a creeper; remove it to prevent infinite farming.
         try {
             creeper.kill();
         } catch (Throwable ignored) {
         }
 
         creeperDrainCooldown = 20; // 1 second cooldown
-//        setChanged();
-//        sendData();
+        setChanged();
+        internalTank.sendDataLazily();
         return true;
     }
 
-
-    // Removed obsolete fluid and bucket methods.
     @Override
     public void write(CompoundTag compound, HolderLookup.Provider registries, boolean clientPacket) {
         compound.putInt("creeperCooldown", creeperDrainCooldown);

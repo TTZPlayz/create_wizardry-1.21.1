@@ -1,4 +1,4 @@
-package net.ttzplayz.create_wizardry.util;
+package net.ttzplayz.create_wizardry.spell;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;

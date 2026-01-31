@@ -21,14 +21,13 @@ public class CWBlocks {
     public static final DeferredRegister.Blocks BLOCKS =
             DeferredRegister.createBlocks(CreateWizardry.MOD_ID);
 
-// Channeler block registration
 public static final DeferredBlock<ChannelerBlock> CHANNELER =
         registerBlock("channeler", () -> new ChannelerBlock(
                 Block.Properties.of()
                         .mapColor(MapColor.COLOR_ORANGE)
                         .strength(3.5F)
                         .sound(SoundType.METAL)
-                        .lightLevel(state -> 10)
+                        .lightLevel(powered -> 10)
                         .noOcclusion()
         ));
 

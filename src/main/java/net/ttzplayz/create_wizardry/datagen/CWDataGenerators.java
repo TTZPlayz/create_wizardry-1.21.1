@@ -1,7 +1,6 @@
 package net.ttzplayz.create_wizardry.datagen;
 
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.tags.FluidTagsProvider;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -10,6 +9,9 @@ import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 import net.neoforged.neoforge.data.loading.DatagenModLoader;
 import net.ttzplayz.create_wizardry.CreateWizardry;
+import net.ttzplayz.create_wizardry.advancement.CWAdvancements;
+import net.ttzplayz.create_wizardry.datagen.recipe.CWRecipeProvider;
+import net.ttzplayz.create_wizardry.datagen.CWLangProvider;
 
 @EventBusSubscriber(modid = CreateWizardry.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
 public class CWDataGenerators {
@@ -34,6 +36,9 @@ public class CWDataGenerators {
         generator.addProvider(event.includeServer(), blockTagsProvider);
         generator.addProvider(event.includeClient(), new CWBlockstateProvider(packOutput, existingFileHelper));
         generator.addProvider(event.includeServer(), new CWItemTagProvider(packOutput, lookupProvider, blockTagsProvider.contentsGetter(), existingFileHelper));
+
+        generator.addProvider(server, new CWAdvancements(output, lookupProvider));
+        generator.addProvider(event.includeClient(), new CWLangProvider(packOutput, "en_us"));
 
     }
 }

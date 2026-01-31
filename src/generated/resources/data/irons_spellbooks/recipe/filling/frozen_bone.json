@@ -2,11 +2,11 @@
   "type": "create:filling",
   "ingredients": [
     {
-      "item": "minecraft:bone"
+      "tag": "c:bones"
     },
     {
       "type": "neoforge:single",
-      "amount": 250,
+      "amount": 500,
       "fluid": "irons_spellbooks:ice_venom"
     }
   ],

@@ -1,24 +1,28 @@
 {
-  "type": "minecraft:crafting_shaped",
+  "type": "create:mechanical_crafting",
+  "accept_mirrored": true,
   "category": "misc",
   "key": {
+    "B": {
+      "item": "irons_spellbooks:lightning_bottle"
+    },
     "C": {
       "item": "create:copper_sheet"
+    },
+    "E": {
+      "item": "irons_spellbooks:energized_core"
     },
     "H": {
       "item": "minecraft:hopper"
     },
     "I": {
       "item": "create:iron_sheet"
-    },
-    "L": {
-      "item": "minecraft:lightning_rod"
     }
   },
   "pattern": [
-    " L ",
+    " E ",
     "IHI",
-    "CCC"
+    "CBC"
   ],
   "result": {
     "count": 1,
