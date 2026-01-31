@@ -27,7 +27,7 @@ public static final DeferredBlock<ChannelerBlock> CHANNELER =
                         .mapColor(MapColor.COLOR_ORANGE)
                         .strength(3.5F)
                         .sound(SoundType.METAL)
-                        .lightLevel(powered -> 10)
+                        .lightLevel(powered -> 4)
                         .noOcclusion()
         ));
 

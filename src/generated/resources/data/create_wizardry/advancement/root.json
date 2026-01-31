@@ -1,0 +1,29 @@
+{
+  "criteria": {
+    "0": {
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "background": "create_wizardry:textures/gui/advancements.png",
+    "description": {
+      "color": "#DBA213",
+      "translate": "advancement.create_wizardry.root.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "create:brass_hand"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "advancement.create_wizardry.root"
+    }
+  },
+  "requirements": [
+    [
+      "0"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

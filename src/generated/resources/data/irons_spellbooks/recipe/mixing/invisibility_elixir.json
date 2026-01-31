@@ -1,0 +1,26 @@
+{
+  "type": "create:mixing",
+  "heat_requirement": "heated",
+  "ingredients": [
+    {
+      "item": "irons_spellbooks:shriving_stone"
+    },
+    {
+      "type": "neoforge:components",
+      "amount": 1000,
+      "components": {
+        "create:potion_fluid_bottle_type": "regular",
+        "minecraft:potion_contents": {
+          "potion": "minecraft:long_invisibility"
+        }
+      },
+      "fluids": "create:potion"
+    }
+  ],
+  "results": [
+    {
+      "amount": 1000,
+      "id": "irons_spellbooks:invisibility_elixir"
+    }
+  ]
+}

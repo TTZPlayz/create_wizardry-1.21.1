@@ -23,7 +23,7 @@ license="${mod_license}"
 modId="create_wizardry" #mandatory
 
 # The version number of the mod
-version="1.21.1-0.3.5" #mandatory
+version="1.21.1-0.4.0" #mandatory
 
 # A display name for the mod
 displayName="Create: Wizardry" #mandatory
@@ -36,6 +36,7 @@ displayName="Create: Wizardry" #mandatory
 
 # A file name (in the root of the mod JAR) containing a logo for display
 #logoFile="examplemod.png" #optional
+#TODO: add mod logo
 
 # A text field displayed in the mod UI
 #credits="" #optional
@@ -98,6 +99,7 @@ type="required"
 versionRange="[1.21.1-3.5.0,)"
 ordering="NONE"
 side="BOTH"
+#todo: add other dependencies (geckolib, curios, playeranimator)
 
 
 # Features are specific properties of the game environment, that you may want to declare you require. This example declares

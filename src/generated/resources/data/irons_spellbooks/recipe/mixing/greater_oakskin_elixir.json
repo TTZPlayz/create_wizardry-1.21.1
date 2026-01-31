@@ -1,0 +1,20 @@
+{
+  "type": "create:mixing",
+  "heat_requirement": "heated",
+  "ingredients": [
+    {
+      "item": "minecraft:amethyst_shard"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 1000,
+      "fluid": "irons_spellbooks:oakskin_elixir"
+    }
+  ],
+  "results": [
+    {
+      "amount": 1000,
+      "id": "irons_spellbooks:greater_oakskin_elixir"
+    }
+  ]
+}

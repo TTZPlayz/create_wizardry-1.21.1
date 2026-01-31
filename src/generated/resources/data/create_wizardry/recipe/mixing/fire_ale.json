@@ -1,0 +1,29 @@
+{
+  "type": "create:mixing",
+  "heat_requirement": "heated",
+  "ingredients": [
+    {
+      "item": "minecraft:wheat"
+    },
+    {
+      "item": "minecraft:apple"
+    },
+    {
+      "item": "minecraft:magma_cream"
+    },
+    {
+      "tag": "c:mushrooms"
+    },
+    {
+      "type": "neoforge:tag",
+      "amount": 1000,
+      "tag": "minecraft:water"
+    }
+  ],
+  "results": [
+    {
+      "amount": 500,
+      "id": "create_wizardry:fire_ale"
+    }
+  ]
+}

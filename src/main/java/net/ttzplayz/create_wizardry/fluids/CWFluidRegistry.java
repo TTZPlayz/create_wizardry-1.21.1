@@ -38,6 +38,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.ttzplayz.create_wizardry.CreateWizardry;
+import net.ttzplayz.create_wizardry.advancement.CWAdvancements;
 import net.ttzplayz.create_wizardry.item.CWItems;
 import org.jetbrains.annotations.Nullable;
 
@@ -111,10 +112,6 @@ public class CWFluidRegistry {
                                 AABB area = new AABB(pos).inflate(1.5, 1.5, 1.5);
                                 List<LivingEntity> entities = level.getEntitiesOfClass(LivingEntity.class, area);
                                 List<Creeper> creepers = level.getEntitiesOfClass(Creeper.class, area, c -> c != null && c.isAlive() && !c.isPowered());
-                                int creeperCount = creepers.size();
-                                if (creeperCount > 0) {
-
-                                }
                                 for (int i = 0; i < 5; i++) {
                                     Vec3 start = pos.getBottomCenter();
                                     Vec3 dest = start.add(Utils.getRandomVec3(1).multiply(1.1, 2.5, 1.1).add(0, 2, 0));
@@ -124,6 +121,9 @@ public class CWFluidRegistry {
                                 for(LivingEntity entity : entities) {
                                     entity.hurt((level.damageSources().magic()), 6.0F);
                                     MagicManager.spawnParticles(level, ParticleHelper.ELECTRICITY, entity.getX(), entity.getY() + entity.getBbHeight() / 2, entity.getZ(), 3, entity.getBbWidth() / 3, entity.getBbHeight() / 3, entity.getBbWidth() / 3, 0.1, false);
+                                    if (entity.isDeadOrDying()) {
+                                        CWAdvancements.UNLIMITED_POWER.awardTo(player);
+                                    }
                                 }
                                 for(Creeper creeper : creepers) {
                                     if (Math.random() <= 0.30) {
