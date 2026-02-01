@@ -23,13 +23,13 @@ license="${mod_license}"
 modId="create_wizardry" #mandatory
 
 # The version number of the mod
-version="1.21.1-0.4.0" #mandatory
+version="1.21.1-0.4.1" #mandatory
 
 # A display name for the mod
 displayName="Create: Wizardry" #mandatory
 
 # A URL to query for updates for this mod. See the JSON update specification https://docs.neoforged.net/docs/misc/updatechecker/
-#updateJSONURL="https://change.me.example.invalid/updates.json" #optional
+updateJSONURL="https://github.com/TTZPlayz/cw-update-checker/blob/main/cw-update-checker.json" #optional
 
 # A URL for the "homepage" for this mod, displayed in the mod UI
 #displayURL="https://change.me.to.your.mods.homepage.example.invalid/" #optional
