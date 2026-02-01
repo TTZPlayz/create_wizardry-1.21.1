@@ -1,5 +1,6 @@
 package net.ttzplayz.create_wizardry.block.channeler;
 
+import com.simibubi.create.AllShapes;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.foundation.advancement.AdvancementBehaviour;
 import com.simibubi.create.foundation.block.IBE;
@@ -26,13 +27,15 @@ import net.ttzplayz.create_wizardry.block.entity.CWBlockEntities;
 import net.ttzplayz.create_wizardry.block.entity.ChannelerBlockEntity;
 import org.jetbrains.annotations.NotNull;
 
+import static net.ttzplayz.create_wizardry.block.CWShapes.CHANNELER_SHAPE;
+
 
 public class ChannelerBlock extends Block implements IWrenchable, IBE<ChannelerBlockEntity> {
 
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final net.minecraft.world.level.block.state.properties.BooleanProperty POWERED = BlockStateProperties.POWERED;
 
-    private static final VoxelShape SHAPE = Block.box(1, 0, 1, 15, 14, 15);
+            // Block.box(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D);
 
     public ChannelerBlock(Properties properties) {
         super(properties);
@@ -53,7 +56,8 @@ public class ChannelerBlock extends Block implements IWrenchable, IBE<ChannelerB
 
     @Override
     public @NotNull VoxelShape getShape(BlockState state, net.minecraft.world.level.BlockGetter level, BlockPos pos, CollisionContext context) {
-        return SHAPE;
+        return CHANNELER_SHAPE.get(Direction.UP);
+        //state.getValue(FACING)
     }
 
     @Override

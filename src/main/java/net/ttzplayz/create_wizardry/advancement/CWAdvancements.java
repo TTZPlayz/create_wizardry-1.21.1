@@ -26,7 +26,7 @@ import java.util.function.UnaryOperator;
 public class CWAdvancements implements DataProvider {
     public static final List<CWAdvancement> ENTRIES = new ArrayList<>();
     public static final CWAdvancement START = null,
-            ROOT = create("root", b -> b.icon(itemFromRegistry(ResourceLocation.fromNamespaceAndPath("create", "brass_hand")))
+            ROOT = create("root", b -> b.icon(itemFromRegistry(CreateWizardry.id("lightning_bucket")))
                     .title("Mechanical Sorcery")
                     .description("Welcome to Create: Wizardry!")
                     .awardedForFree()
@@ -45,7 +45,7 @@ public class CWAdvancements implements DataProvider {
             UNLIMITED_POWER = create("unlimited_power", b -> b.icon(itemFromRegistry(ResourceLocation.fromNamespaceAndPath(CreateWizardry.MOD_ID, "lightning_bucket")))
                     .title("UNLIMITED POWER!!!")
                     .description("Safe? No. Fun? Yes.")
-                    .special(CWAdvancement.TaskType.SECRET)
+                    .special(CWAdvancement.TaskType.SUPER_SECRET)
                     .after(SHOCKING));
 
 

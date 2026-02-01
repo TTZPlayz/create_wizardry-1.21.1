@@ -123,7 +123,8 @@ public abstract class CWAdvancement {
         NORMAL(AdvancementType.TASK, true, false, false),
         NOISY(AdvancementType.TASK, true, true, false),
         EXPERT(AdvancementType.GOAL, true, true, false),
-        SECRET(AdvancementType.GOAL, true, true, true);
+        SECRET(AdvancementType.GOAL, true, true, true),
+        SUPER_SECRET(AdvancementType.CHALLENGE, true, true, true);
 
         private final AdvancementType advancementType;
         private final boolean toast;

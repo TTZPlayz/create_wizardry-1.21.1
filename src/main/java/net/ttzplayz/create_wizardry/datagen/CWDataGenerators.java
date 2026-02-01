@@ -1,6 +1,8 @@
 package net.ttzplayz.create_wizardry.datagen;
 
 import net.minecraft.data.PackOutput;
+import net.minecraft.data.loot.LootTableProvider;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -12,6 +14,9 @@ import net.ttzplayz.create_wizardry.CreateWizardry;
 import net.ttzplayz.create_wizardry.advancement.CWAdvancements;
 import net.ttzplayz.create_wizardry.datagen.recipe.CWRecipeProvider;
 import net.ttzplayz.create_wizardry.datagen.CWLangProvider;
+
+import java.util.Collections;
+import java.util.List;
 
 @EventBusSubscriber(modid = CreateWizardry.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
 public class CWDataGenerators {
@@ -36,6 +41,9 @@ public class CWDataGenerators {
         generator.addProvider(event.includeServer(), blockTagsProvider);
         generator.addProvider(event.includeClient(), new CWBlockstateProvider(packOutput, existingFileHelper));
         generator.addProvider(event.includeServer(), new CWItemTagProvider(packOutput, lookupProvider, blockTagsProvider.contentsGetter(), existingFileHelper));
+
+        generator.addProvider(event.includeServer(), new LootTableProvider(packOutput, Collections.emptySet(),
+                List.of(new LootTableProvider.SubProviderEntry(CWBlockDropsProvider::new, LootContextParamSets.BLOCK)), lookupProvider));
 
         generator.addProvider(server, new CWAdvancements(output, lookupProvider));
         generator.addProvider(event.includeClient(), new CWLangProvider(packOutput, "en_us"));

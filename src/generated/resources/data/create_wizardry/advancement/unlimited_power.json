@@ -10,7 +10,7 @@
       "color": "#DBA213",
       "translate": "advancement.create_wizardry.unlimited_power.desc"
     },
-    "frame": "goal",
+    "frame": "challenge",
     "hidden": true,
     "icon": {
       "count": 1,
