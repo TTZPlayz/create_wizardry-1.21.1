@@ -22,7 +22,7 @@ Current Versions:
 | Minecraft | Loader   | Support                           |
 |-----------|----------|-----------------------------------|
 | 1.21.1    | NeoForge | **Supported**                     |
-| 1.20.1    | Forge    | **Shelved** (until ISS 1.20.1 V2) |
+| 1.20.1    | Forge    | **Currently Porting** - not yet compatible/fully functional |
 | 1.19.2    | Forge    | **No Longer Supported**           |
 ## Community
 - [**Discord**](https://discord.gg/zt2G42gn3X)
