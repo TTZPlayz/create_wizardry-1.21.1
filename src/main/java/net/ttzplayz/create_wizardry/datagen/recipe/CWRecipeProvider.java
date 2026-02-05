@@ -37,7 +37,6 @@ import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraftforge.common.Tags;
-import net.minecraftforge.fluids.crafting.SizedFluidIngredient;
 import com.simibubi.create.content.fluids.potion.PotionFluidHandler;
 
 import java.util.List;

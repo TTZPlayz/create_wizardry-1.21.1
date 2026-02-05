@@ -53,7 +53,6 @@ import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModContainer;
-import net.minecraftforge.fml.common.EventBusSubscriber;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -169,7 +168,7 @@ public class CreateWizardry {
         data.putInt(CW_CREEPER_CHARGE_COUNT, charged + 1);
     }
     // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
-    @EventBusSubscriber(modid = MOD_ID, value = Dist.CLIENT)
+    @Mod.EventBusSubscriber(modid = MOD_ID, value = Dist.CLIENT)
     public static class ClientModEvents
     {
         @SubscribeEvent
@@ -182,8 +181,8 @@ public class CreateWizardry {
         public static void registerClientExtensions(RegisterClientExtensionsEvent event) {
             event.registerFluidType(new SimpleClientFluidType(CreateWizardry.id("block/mana")), CWFluidRegistry.MANA_TYPE.get());
             event.registerFluidType(new SimpleClientFluidType(CreateWizardry.id("block/lightning")), CWFluidRegistry.LIGHTNING_TYPE.get());
-            event.registerFluidType(new SimpleTintedClientFluidType(new ResourceLocation("minecraft", "block/water_still"), 0x00831312), FIRE_ALE_TYPE.get());
-            event.registerFluidType(new SimpleTintedClientFluidType(new ResourceLocation("forge", "block/milk_still"), 0x00D69D84), NETHERWARD_TINCTURE_TYPE.get());
+            event.registerFluidType(new SimpleTintedClientFluidType(ResourceLocation.withDefaultNamespace( "block/water_still"), 0x00831312), FIRE_ALE_TYPE.get());
+            event.registerFluidType(new SimpleTintedClientFluidType(ResourceLocation.withDefaultNamespace( "block/milk_still"), 0x00D69D84), NETHERWARD_TINCTURE_TYPE.get());
         }
 
         @SubscribeEvent
@@ -193,6 +192,6 @@ public class CreateWizardry {
 
     }
     public static ResourceLocation id(String path) {
-        return new ResourceLocation(MOD_ID, path);
+        return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
     }
 }

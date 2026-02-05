@@ -56,9 +56,9 @@ public class CWJeiPlugin implements IModPlugin {
 
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
-        registration.addIngredientInfo(List.of(new ItemStack(LIGHTNING_BUCKET)), VanillaTypes.ITEM_STACK, Component.translatable("jei.create_wizardry.liquid_lightning"));
-        registration.addIngredientInfo(List.of(new ItemStack(MANA_BUCKET)), VanillaTypes.ITEM_STACK, Component.translatable("jei.create_wizardry.mana"));
-        registration.addIngredientInfo(List.of(new ItemStack(BLOOD_BUCKET)), VanillaTypes.ITEM_STACK, Component.translatable("jei.create_wizardry.blood"));
+        registration.addIngredientInfo(List.of(new ItemStack(LIGHTNING_BUCKET.get())), VanillaTypes.ITEM_STACK, Component.translatable("jei.create_wizardry.liquid_lightning"));
+        registration.addIngredientInfo(List.of(new ItemStack(MANA_BUCKET.get())), VanillaTypes.ITEM_STACK, Component.translatable("jei.create_wizardry.mana"));
+        registration.addIngredientInfo(List.of(new ItemStack(BLOOD_BUCKET.get())), VanillaTypes.ITEM_STACK, Component.translatable("jei.create_wizardry.blood"));
     }
 
 }

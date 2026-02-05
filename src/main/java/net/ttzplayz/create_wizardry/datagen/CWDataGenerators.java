@@ -9,7 +9,8 @@ import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.data.loading.DatagenModLoader;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.EventBusSubscriber;
+
+import net.minecraftforge.fml.common.Mod;
 import net.ttzplayz.create_wizardry.CreateWizardry;
 import net.ttzplayz.create_wizardry.advancement.CWAdvancements;
 import net.ttzplayz.create_wizardry.datagen.recipe.CWRecipeProvider;
@@ -18,7 +19,7 @@ import net.ttzplayz.create_wizardry.datagen.CWLangProvider;
 import java.util.Collections;
 import java.util.List;
 
-@EventBusSubscriber(modid = CreateWizardry.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = CreateWizardry.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class CWDataGenerators {
     public CWDataGenerators(IEventBus modBus) {
         if (!DatagenModLoader.isRunningDataGen())

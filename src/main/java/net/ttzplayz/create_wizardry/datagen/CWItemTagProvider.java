@@ -14,7 +14,6 @@ import java.util.concurrent.CompletableFuture;
 
 import static com.simibubi.create.AllTags.AllItemTags.*;
 import static io.redspace.ironsspellbooks.registries.ItemRegistry.*;
-import static net.minecraftforge.common.Tags.Items.BUCKETS;
 import static net.minecraftforge.common.Tags.Items.NUGGETS;
 import static net.ttzplayz.create_wizardry.item.CWItems.*;
 import static net.ttzplayz.create_wizardry.spell.CWTags.Items.CW_BUCKETS;
@@ -38,8 +37,8 @@ public class CWItemTagProvider extends ItemTagsProvider {
 
         tag(AllTags.AllItemTags.UPRIGHT_ON_BELT.tag)
                 .addTag(CW_BUCKETS);
-        tag(BUCKETS)
-                .addTag(CW_BUCKETS);
+//        tag(BUCKETS)
+//                .addTag(CW_BUCKETS);
         tag(CHAIN_RIDEABLE.tag)
                 .add(STAFF_OF_THE_NINES.get())
                 .add(PYRIUM_STAFF.get())

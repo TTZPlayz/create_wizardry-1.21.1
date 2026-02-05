@@ -37,12 +37,12 @@ public class CWAdvancements implements DataProvider {
                     .special(CWAdvancement.TaskType.NORMAL)
                     .whenIconCollected()
                     .after(ROOT)),
-            SHOCKING = create("shocking", b -> b.icon(itemFromRegistry(new ResourceLocation("irons_spellbooks", "lightning_bottle")))
+            SHOCKING = create("shocking", b -> b.icon(itemFromRegistry(ResourceLocation.fromNamespaceAndPath("irons_spellbooks", "lightning_bottle")))
                     .title("A *Shocking* Discovery")
                     .description("Yeah, SHOCKING...")
                     .after(CHANNELER)
                     .special(CWAdvancement.TaskType.SECRET)),
-            UNLIMITED_POWER = create("unlimited_power", b -> b.icon(itemFromRegistry(new ResourceLocation(CreateWizardry.MOD_ID, "lightning_bucket")))
+            UNLIMITED_POWER = create("unlimited_power", b -> b.icon(itemFromRegistry(ResourceLocation.fromNamespaceAndPath(CreateWizardry.MOD_ID, "lightning_bucket")))
                     .title("UNLIMITED POWER!!!")
                     .description("Safe? No. Fun? Yes.")
                     .special(CWAdvancement.TaskType.SUPER_SECRET)

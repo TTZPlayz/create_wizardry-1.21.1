@@ -65,7 +65,7 @@ public class CWEffectHandlers {
                     if (entity instanceof AbstractSpellCastingMob) {
                         ((AbstractSpellCastingMob) entity).getMagicData().addMana(5);
                     } else {
-                        entity.addEffect(new MobEffectInstance(MobEffectRegistry.INSTANT_MANA, 1, 3, true, false));
+                        entity.addEffect(new MobEffectInstance(MobEffectRegistry.INSTANT_MANA.get(), 1, 3, true, false));
                     }
                 }
             }

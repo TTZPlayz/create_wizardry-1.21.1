@@ -5,6 +5,7 @@ import com.tterrag.registrate.builders.FluidBuilder.FluidTypeFactory;
 import java.util.function.Supplier;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.BlockAndTintGetter;
