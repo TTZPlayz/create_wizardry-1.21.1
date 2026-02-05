@@ -5,7 +5,7 @@
       "tag": "c:bookshelves"
     },
     {
-      "type": "neoforge:single",
+      "type": "forge:single",
       "amount": 10,
       "fluid": "create_wizardry:mana"
     }

@@ -21,12 +21,12 @@
       "item": "create:experience_nugget"
     },
     {
-      "type": "neoforge:single",
+      "type": "forge:single",
       "amount": 1000,
       "fluid": "create_wizardry:mana"
     },
     {
-      "type": "neoforge:single",
+      "type": "forge:single",
       "amount": 1000,
       "fluid": "irons_spellbooks:epic_ink"
     }

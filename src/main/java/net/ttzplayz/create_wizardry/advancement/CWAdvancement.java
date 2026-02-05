@@ -17,7 +17,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.ttzplayz.create_wizardry.CreateWizardry;
-import net.neoforged.neoforge.registries.DeferredHolder;
+import net.minecraftforge.registries.RegistryObject;
 
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
@@ -25,12 +25,12 @@ import java.util.function.Function;
 import java.util.function.UnaryOperator;
 
 public abstract class CWAdvancement {
-    static final ResourceLocation BACKGROUND = ResourceLocation.fromNamespaceAndPath(CreateWizardry.MOD_ID, "textures/gui/advancements.png");
+    static final ResourceLocation BACKGROUND = new ResourceLocation(CreateWizardry.MOD_ID, "textures/gui/advancements.png");
     static final String LANG = "advancement." + CreateWizardry.MOD_ID + ".";
     static final String SECRET_SUFFIX = "\n§7(Hidden Advancement)";
 
     private final Advancement.Builder mcBuilder = Advancement.Builder.advancement();
-    private DeferredHolder<CriterionTrigger<?>, CWBuiltInTrigger> builtinTrigger;
+    private RegistryObject<CWBuiltInTrigger> builtinTrigger;
     private CWAdvancement parent;
     private final CWAdvancement.Builder createBuilder = new CWAdvancement.Builder();
 
@@ -54,7 +54,7 @@ public abstract class CWAdvancement {
         CWAdvancements.ENTRIES.add(this);
     }
 
-    protected abstract DeferredHolder<CriterionTrigger<?>, CWBuiltInTrigger> add(ResourceLocation id);
+    protected abstract RegistryObject<CWBuiltInTrigger> add(ResourceLocation id);
 
     private String titleKey() {
         return LANG + id;
@@ -87,7 +87,7 @@ public abstract class CWAdvancement {
     }
 
     private ResourceLocation asResource(String id) {
-        return ResourceLocation.fromNamespaceAndPath(CreateWizardry.MOD_ID, id);
+        return new ResourceLocation(CreateWizardry.MOD_ID, id);
     }
 
     public void provideLang(BiConsumer<String, String> consumer) {

@@ -6,7 +6,7 @@
       "tag": "minecraft:oak_logs"
     },
     {
-      "type": "neoforge:components",
+      "type": "forge:components",
       "amount": 1000,
       "components": {
         "create:potion_fluid_bottle_type": "regular",

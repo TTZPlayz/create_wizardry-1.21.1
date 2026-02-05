@@ -48,7 +48,7 @@
           "item": "minecraft:bell"
         },
         {
-          "type": "neoforge:tag",
+          "type": "forge:tag",
           "amount": 1000,
           "tag": "minecraft:lava"
         }

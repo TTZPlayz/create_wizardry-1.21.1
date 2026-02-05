@@ -15,7 +15,7 @@
       "tag": "c:mushrooms"
     },
     {
-      "type": "neoforge:tag",
+      "type": "forge:tag",
       "amount": 1000,
       "tag": "minecraft:water"
     }

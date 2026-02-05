@@ -11,7 +11,7 @@
       "item": "minecraft:ink_sac"
     },
     {
-      "type": "neoforge:single",
+      "type": "forge:single",
       "amount": 250,
       "fluid": "create_wizardry:mana"
     }

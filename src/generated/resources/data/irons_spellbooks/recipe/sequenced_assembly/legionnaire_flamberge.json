@@ -16,7 +16,7 @@
           "item": "irons_spellbooks:keeper_flamberge"
         },
         {
-          "type": "neoforge:single",
+          "type": "forge:single",
           "amount": 250,
           "fluid": "irons_spellbooks:timeless_slurry"
         }

@@ -5,7 +5,7 @@
       "tag": "c:slime_balls"
     },
     {
-      "type": "neoforge:tag",
+      "type": "forge:tag",
       "amount": 3,
       "tag": "c:experience"
     }

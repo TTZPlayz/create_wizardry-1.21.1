@@ -5,7 +5,7 @@
       "item": "minecraft:carved_pumpkin"
     },
     {
-      "type": "neoforge:single",
+      "type": "forge:single",
       "amount": 500,
       "fluid": "create_wizardry:mana"
     }

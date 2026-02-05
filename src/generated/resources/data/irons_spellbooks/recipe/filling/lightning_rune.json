@@ -5,7 +5,7 @@
       "item": "irons_spellbooks:blank_rune"
     },
     {
-      "type": "neoforge:single",
+      "type": "forge:single",
       "amount": 1000,
       "fluid": "create_wizardry:lightning"
     }

@@ -61,7 +61,7 @@
           "item": "minecraft:enchanted_book"
         },
         {
-          "type": "neoforge:tag",
+          "type": "forge:tag",
           "amount": 1000,
           "tag": "minecraft:lava"
         }

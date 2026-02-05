@@ -8,12 +8,12 @@
       "item": "minecraft:iron_ingot"
     },
     {
-      "type": "neoforge:single",
+      "type": "forge:single",
       "amount": 500,
       "fluid": "create_wizardry:mana"
     },
     {
-      "type": "neoforge:single",
+      "type": "forge:single",
       "amount": 1000,
       "fluid": "irons_spellbooks:common_ink"
     }

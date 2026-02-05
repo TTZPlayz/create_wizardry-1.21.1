@@ -31,7 +31,7 @@
           "item": "irons_spellbooks:weapon_parts"
         },
         {
-          "type": "neoforge:single",
+          "type": "forge:single",
           "amount": 250,
           "fluid": "irons_spellbooks:ice_venom"
         }

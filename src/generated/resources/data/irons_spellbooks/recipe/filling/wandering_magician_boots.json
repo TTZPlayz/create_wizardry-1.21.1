@@ -5,7 +5,7 @@
       "item": "minecraft:leather_boots"
     },
     {
-      "type": "neoforge:single",
+      "type": "forge:single",
       "amount": 250,
       "fluid": "create_wizardry:mana"
     }

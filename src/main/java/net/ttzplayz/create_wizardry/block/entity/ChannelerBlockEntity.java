@@ -22,13 +22,13 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
-import net.neoforged.neoforge.fluids.capability.IFluidHandler;
-import net.neoforged.neoforge.fluids.FluidStack;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
+import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.capability.IFluidHandler;
 
 import java.util.List;
 
-import static net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.BLOCK;
 import static net.ttzplayz.create_wizardry.block.channeler.ChannelerBlock.POWERED;
 import static net.ttzplayz.create_wizardry.fluids.CWFluidRegistry.LIGHTNING;
 
@@ -55,7 +55,7 @@ public class ChannelerBlockEntity extends SmartBlockEntity implements IHaveGoggl
 
     public static void registerCapabilities(RegisterCapabilitiesEvent event) {
         event.registerBlockEntity(
-                BLOCK,
+                ForgeCapabilities.FLUID_HANDLER,
                 CWBlockEntities.CHANNELER_BE.get(), // BE type
                 (be, context) -> {
                     if (be.internalTank == null) return null;

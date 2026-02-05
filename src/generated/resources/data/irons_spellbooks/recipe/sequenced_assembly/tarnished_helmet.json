@@ -25,7 +25,7 @@
           "item": "minecraft:iron_helmet"
         },
         {
-          "type": "neoforge:single",
+          "type": "forge:single",
           "amount": 500,
           "fluid": "create_wizardry:mana"
         }

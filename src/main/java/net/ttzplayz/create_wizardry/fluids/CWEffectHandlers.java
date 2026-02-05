@@ -37,7 +37,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.fluids.FluidStack;
+import net.minecraftforge.common.util.FakePlayer;
+import net.minecraftforge.fluids.FluidStack;
 import net.ttzplayz.create_wizardry.advancement.CWAdvancements;
 
 import java.util.List;
@@ -101,7 +102,7 @@ public class CWEffectHandlers {
                         dummyLightningBolt.setDamage(0);
                         dummyLightningBolt.setVisualOnly(true);
                         creeper.thunderHit((ServerLevel) level, dummyLightningBolt);
-                    } else if (entity instanceof Player player && !player.isFakePlayer()) {
+                    } else if (entity instanceof Player player && !(player instanceof FakePlayer)) {
                         CWAdvancements.SHOCKING.awardTo(player);
                     }
                 }

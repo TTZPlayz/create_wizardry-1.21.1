@@ -6,7 +6,7 @@
       "item": "irons_spellbooks:icy_fang"
     },
     {
-      "type": "neoforge:tag",
+      "type": "forge:tag",
       "amount": 1000,
       "tag": "minecraft:water"
     }

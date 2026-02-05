@@ -3,10 +3,10 @@ package net.ttzplayz.create_wizardry.block.entity.renderer;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
 import com.simibubi.create.foundation.blockEntity.renderer.SmartBlockEntityRenderer;
-import net.createmod.catnip.platform.NeoForgeCatnipServices;
+import net.createmod.catnip.platform.ForgeCatnipServices;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import net.neoforged.neoforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidStack;
 import net.ttzplayz.create_wizardry.block.entity.ChannelerBlockEntity;
 
 public class ChannelerRenderer extends SmartBlockEntityRenderer<ChannelerBlockEntity> {
@@ -35,7 +35,7 @@ public class ChannelerRenderer extends SmartBlockEntityRenderer<ChannelerBlockEn
             float max = min + (15 / 16f);
             float minY = 1f / 16f;
             level *= (3 / 16f);
-            NeoForgeCatnipServices.FLUID_RENDERER.renderFluidBox(
+            ForgeCatnipServices.FLUID_RENDERER.renderFluidBox(
                     fluidStack,
                     min, minY, min,
                     max, minY + level, max,

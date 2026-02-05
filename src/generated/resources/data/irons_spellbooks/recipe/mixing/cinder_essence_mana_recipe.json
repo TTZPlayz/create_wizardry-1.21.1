@@ -12,7 +12,7 @@
       "item": "minecraft:netherite_scrap"
     },
     {
-      "type": "neoforge:single",
+      "type": "forge:single",
       "amount": 1000,
       "fluid": "create_wizardry:mana"
     }

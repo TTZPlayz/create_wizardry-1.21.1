@@ -1,10 +1,10 @@
 package net.ttzplayz.create_wizardry.block.entity;
 
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.registries.DeferredHolder;
-import net.neoforged.neoforge.registries.DeferredRegister;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 import net.ttzplayz.create_wizardry.CreateWizardry;
 import net.ttzplayz.create_wizardry.block.CWBlocks;
 //import net.ttzplayz.create_wizardry.block.BlazeCasterBlock;
@@ -12,9 +12,9 @@ import net.ttzplayz.create_wizardry.block.CWBlocks;
 
 public class CWBlockEntities {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES =
-        DeferredRegister.create(BuiltInRegistries.BLOCK_ENTITY_TYPE, CreateWizardry.MOD_ID);
+        DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, CreateWizardry.MOD_ID);
 
-    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ChannelerBlockEntity>> CHANNELER_BE =
+    public static final RegistryObject<BlockEntityType<ChannelerBlockEntity>> CHANNELER_BE =
             BLOCK_ENTITIES.register(
                     "channeler_be",
                     () -> BlockEntityType.Builder.of(

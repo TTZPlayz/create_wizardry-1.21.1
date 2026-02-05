@@ -4,22 +4,24 @@ import com.simibubi.create.AllTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
+import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.world.level.block.Block;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.minecraftforge.common.data.ExistingFileHelper;
+import net.ttzplayz.create_wizardry.CreateWizardry;
 import net.ttzplayz.create_wizardry.item.CWItems;
 
 import java.util.concurrent.CompletableFuture;
 
 import static com.simibubi.create.AllTags.AllItemTags.*;
 import static io.redspace.ironsspellbooks.registries.ItemRegistry.*;
-import static net.neoforged.neoforge.common.Tags.Items.BUCKETS;
-import static net.neoforged.neoforge.common.Tags.Items.NUGGETS;
+import static net.minecraftforge.common.Tags.Items.BUCKETS;
+import static net.minecraftforge.common.Tags.Items.NUGGETS;
 import static net.ttzplayz.create_wizardry.item.CWItems.*;
 import static net.ttzplayz.create_wizardry.spell.CWTags.Items.CW_BUCKETS;
 
 public class CWItemTagProvider extends ItemTagsProvider {
-    public CWItemTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, CompletableFuture<TagLookup<Block>> blockTags, ExistingFileHelper existingFileHelper) {
-        super(output, lookupProvider, blockTags);
+    public CWItemTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, CompletableFuture<TagsProvider.TagLookup<Block>> blockTags, ExistingFileHelper existingFileHelper) {
+        super(output, lookupProvider, blockTags, CreateWizardry.MOD_ID, existingFileHelper);
     }
 
     @Override

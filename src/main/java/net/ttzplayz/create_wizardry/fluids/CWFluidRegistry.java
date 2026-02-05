@@ -26,17 +26,14 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.neoforged.neoforge.common.SoundAction;
-import net.neoforged.neoforge.fluids.BaseFlowingFluid;
-import net.neoforged.neoforge.fluids.FluidStack;
-import net.neoforged.neoforge.fluids.FluidType;
-import net.neoforged.neoforge.registries.DeferredHolder;
-import net.neoforged.neoforge.registries.DeferredRegister;
-import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fluids.BaseFlowingFluid;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidType;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 import net.ttzplayz.create_wizardry.CreateWizardry;
 import net.ttzplayz.create_wizardry.advancement.CWAdvancements;
 import net.ttzplayz.create_wizardry.item.CWItems;
@@ -49,15 +46,15 @@ import java.util.Random;
 public class CWFluidRegistry {
 
     private static final DeferredRegister<Fluid> FLUIDS = DeferredRegister.create(Registries.FLUID, CreateWizardry.MOD_ID);
-    private static final DeferredRegister<FluidType> FLUID_TYPES = DeferredRegister.create(NeoForgeRegistries.FLUID_TYPES, CreateWizardry.MOD_ID);
+    private static final DeferredRegister<FluidType> FLUID_TYPES = DeferredRegister.create(ForgeRegistries.FLUID_TYPES, CreateWizardry.MOD_ID);
 
     // TEXTURES
-    public static final ResourceLocation LIGHTNING_TEXTURE = ResourceLocation.fromNamespaceAndPath(CreateWizardry.MOD_ID, "block/lightning");
-    public static final ResourceLocation LIGHTNING_TEXTURE_FLOWING = ResourceLocation.fromNamespaceAndPath(CreateWizardry.MOD_ID, "block/lightning_flow");
-    public static final ResourceLocation MANA_TEXTURE = ResourceLocation.fromNamespaceAndPath(CreateWizardry.MOD_ID, "block/mana");
-    public static final ResourceLocation MANA_TEXTURE_FLOWING = ResourceLocation.fromNamespaceAndPath(CreateWizardry.MOD_ID, "block/mana_flow");
+    public static final ResourceLocation LIGHTNING_TEXTURE = new ResourceLocation(CreateWizardry.MOD_ID, "block/lightning");
+    public static final ResourceLocation LIGHTNING_TEXTURE_FLOWING = new ResourceLocation(CreateWizardry.MOD_ID, "block/lightning_flow");
+    public static final ResourceLocation MANA_TEXTURE = new ResourceLocation(CreateWizardry.MOD_ID, "block/mana");
+    public static final ResourceLocation MANA_TEXTURE_FLOWING = new ResourceLocation(CreateWizardry.MOD_ID, "block/mana_flow");
 
-    public static final DeferredHolder<FluidType, FluidType> MANA_TYPE =
+    public static final RegistryObject<FluidType> MANA_TYPE =
             FLUID_TYPES.register("mana_type", () ->
                     new MagicFluidType(FluidType.Properties.create()
                             .viscosity(200)
@@ -79,9 +76,9 @@ public class CWFluidRegistry {
                             }
                         }
                     }); //TODO: MAKE TEXTURE
-    public static final DeferredHolder<Fluid, FlowingFluid> MANA =
+    public static final RegistryObject<FlowingFluid> MANA =
             FLUIDS.register("mana", () -> new BaseFlowingFluid.Source(CWFluidRegistry.MANA_PROPERTIES));
-    public static final DeferredHolder<Fluid, FlowingFluid> MANA_FLOWING =
+    public static final RegistryObject<FlowingFluid> MANA_FLOWING =
             FLUIDS.register("mana_flowing", () -> new BaseFlowingFluid.Flowing(CWFluidRegistry.MANA_PROPERTIES));
 
     private static final BaseFlowingFluid.Properties MANA_PROPERTIES =
@@ -94,7 +91,7 @@ public class CWFluidRegistry {
                     .levelDecreasePerBlock(1)
                     .tickRate(20);
     // LIGHTNING
-    public static final DeferredHolder<FluidType, FluidType> LIGHTNING_TYPE =
+    public static final RegistryObject<FluidType> LIGHTNING_TYPE =
             FLUID_TYPES.register("lightning_type", () ->
                     new MagicFluidType(FluidType.Properties.create()
                             .viscosity(200)
@@ -136,9 +133,9 @@ public class CWFluidRegistry {
                             }
                         }
                     });
-    public static final DeferredHolder<Fluid, FlowingFluid> LIGHTNING =
+    public static final RegistryObject<FlowingFluid> LIGHTNING =
             FLUIDS.register("lightning", () -> new BaseFlowingFluid.Source(CWFluidRegistry.LIGHTNING_PROPERTIES));
-    public static final DeferredHolder<Fluid, FlowingFluid> LIGHTNING_FLOWING =
+    public static final RegistryObject<FlowingFluid> LIGHTNING_FLOWING =
             FLUIDS.register("lightning_flowing", () -> new BaseFlowingFluid.Flowing(CWFluidRegistry.LIGHTNING_PROPERTIES));
 
     private static final BaseFlowingFluid.Properties LIGHTNING_PROPERTIES =
@@ -152,14 +149,14 @@ public class CWFluidRegistry {
                     .tickRate(20);
 
 //    //SIMPLE FLUIDS
-    public static final DeferredHolder<FluidType, FluidType> FIRE_ALE_TYPE = FLUID_TYPES.register("fire_ale_type", () ->
+    public static final RegistryObject<FluidType> FIRE_ALE_TYPE = FLUID_TYPES.register("fire_ale_type", () ->
             new FluidType(FluidType.Properties.create()));
-    public static final DeferredHolder<FluidType, FluidType> NETHERWARD_TINCTURE_TYPE = FLUID_TYPES.register("netherward_tincture_type", () ->
+    public static final RegistryObject<FluidType> NETHERWARD_TINCTURE_TYPE = FLUID_TYPES.register("netherward_tincture_type", () ->
             new FluidType(FluidType.Properties.create()));
 
-    public static final DeferredHolder<Fluid, FlowingFluid> FIRE_ALE_FLUID =
+    public static final RegistryObject<FlowingFluid> FIRE_ALE_FLUID =
             FLUIDS.register("fire_ale", () -> new BaseFlowingFluid.Source(CWFluidRegistry.FIRE_ALE_PROPERTIES));
-    public static final DeferredHolder<Fluid, FlowingFluid> FIRE_ALE_FLUID_FLOWING =
+    public static final RegistryObject<FlowingFluid> FIRE_ALE_FLUID_FLOWING =
             FLUIDS.register("fire_ale_flowing", () -> new BaseFlowingFluid.Flowing(CWFluidRegistry.FIRE_ALE_PROPERTIES));
     private static final BaseFlowingFluid.Properties FIRE_ALE_PROPERTIES =
             new BaseFlowingFluid.Properties(
@@ -167,9 +164,9 @@ public class CWFluidRegistry {
                     FIRE_ALE_FLUID,
                     FIRE_ALE_FLUID_FLOWING);
 
-    public static final DeferredHolder<Fluid, FlowingFluid> NETHERWARD_TINCTURE_FLUID =
+    public static final RegistryObject<FlowingFluid> NETHERWARD_TINCTURE_FLUID =
             FLUIDS.register("netherward_tincture", () -> new BaseFlowingFluid.Source(CWFluidRegistry.NETHERWARD_TINCTURE_PROPERTIES));
-    public static final DeferredHolder<Fluid, FlowingFluid> NETHERWARD_TINCTURE_FLUID_FLOWING =
+    public static final RegistryObject<FlowingFluid> NETHERWARD_TINCTURE_FLUID_FLOWING =
             FLUIDS.register("netherward_tincture_flowing", () -> new BaseFlowingFluid.Flowing(CWFluidRegistry.NETHERWARD_TINCTURE_PROPERTIES));
     private static final BaseFlowingFluid.Properties NETHERWARD_TINCTURE_PROPERTIES =
             new BaseFlowingFluid.Properties(

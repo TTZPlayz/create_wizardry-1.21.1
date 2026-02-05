@@ -14,7 +14,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.ttzplayz.create_wizardry.CreateWizardry;
-import net.neoforged.neoforge.registries.DeferredHolder;
+import net.minecraftforge.registries.RegistryObject;
 
 import java.nio.file.Path;
 import java.util.*;
@@ -37,12 +37,12 @@ public class CWAdvancements implements DataProvider {
                     .special(CWAdvancement.TaskType.NORMAL)
                     .whenIconCollected()
                     .after(ROOT)),
-            SHOCKING = create("shocking", b -> b.icon(itemFromRegistry(ResourceLocation.fromNamespaceAndPath("irons_spellbooks", "lightning_bottle")))
+            SHOCKING = create("shocking", b -> b.icon(itemFromRegistry(new ResourceLocation("irons_spellbooks", "lightning_bottle")))
                     .title("A *Shocking* Discovery")
                     .description("Yeah, SHOCKING...")
                     .after(CHANNELER)
                     .special(CWAdvancement.TaskType.SECRET)),
-            UNLIMITED_POWER = create("unlimited_power", b -> b.icon(itemFromRegistry(ResourceLocation.fromNamespaceAndPath(CreateWizardry.MOD_ID, "lightning_bucket")))
+            UNLIMITED_POWER = create("unlimited_power", b -> b.icon(itemFromRegistry(new ResourceLocation(CreateWizardry.MOD_ID, "lightning_bucket")))
                     .title("UNLIMITED POWER!!!")
                     .description("Safe? No. Fun? Yes.")
                     .special(CWAdvancement.TaskType.SUPER_SECRET)
@@ -53,7 +53,7 @@ public class CWAdvancements implements DataProvider {
     private static CWAdvancement create(String id, UnaryOperator<CWAdvancement.Builder> b) {
         return new CWAdvancement(id, b) {
             @Override
-            protected DeferredHolder<CriterionTrigger<?>, CWBuiltInTrigger> add(ResourceLocation id) {
+            protected RegistryObject<CWBuiltInTrigger> add(ResourceLocation id) {
                 return CWBuiltInTriggers.register(id);
             }
         };

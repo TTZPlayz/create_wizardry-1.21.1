@@ -56,7 +56,7 @@
           "item": "irons_spellbooks:ruined_book"
         },
         {
-          "type": "neoforge:single",
+          "type": "forge:single",
           "amount": 250,
           "fluid": "irons_spellbooks:ice_venom"
         }

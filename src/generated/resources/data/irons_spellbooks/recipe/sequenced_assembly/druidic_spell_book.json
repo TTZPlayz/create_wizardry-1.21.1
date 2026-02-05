@@ -72,7 +72,7 @@
           "item": "irons_spellbooks:rotten_spell_book"
         },
         {
-          "type": "neoforge:single",
+          "type": "forge:single",
           "amount": 250,
           "fluid": "create:honey"
         }

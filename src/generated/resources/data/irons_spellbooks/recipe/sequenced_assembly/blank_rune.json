@@ -38,7 +38,7 @@
           "item": "minecraft:tuff_slab"
         },
         {
-          "type": "neoforge:single",
+          "type": "forge:single",
           "amount": 1000,
           "fluid": "create_wizardry:mana"
         }

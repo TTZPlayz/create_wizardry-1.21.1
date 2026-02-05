@@ -5,7 +5,7 @@
       "item": "minecraft:copper_block"
     },
     {
-      "type": "neoforge:single",
+      "type": "forge:single",
       "amount": 1000,
       "fluid": "create_wizardry:lightning"
     }

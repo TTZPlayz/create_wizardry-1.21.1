@@ -5,7 +5,7 @@
       "item": "minecraft:glass_bottle"
     },
     {
-      "type": "neoforge:single",
+      "type": "forge:single",
       "amount": 250,
       "fluid": "create_wizardry:fire_ale"
     }

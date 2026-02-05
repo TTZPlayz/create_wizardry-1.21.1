@@ -1,7 +1,7 @@
 {
-  "neoforge:conditions": [
+  "forge:conditions": [
     {
-      "type": "neoforge:mod_loaded",
+      "type": "forge:mod_loaded",
       "modid": "create_enchantment_industry"
     }
   ],
@@ -33,12 +33,12 @@
       "item": "create:experience_nugget"
     },
     {
-      "type": "neoforge:single",
+      "type": "forge:single",
       "amount": 1000,
       "fluid": "irons_spellbooks:rare_ink"
     },
     {
-      "type": "neoforge:tag",
+      "type": "forge:tag",
       "amount": 6,
       "tag": "c:experience"
     }

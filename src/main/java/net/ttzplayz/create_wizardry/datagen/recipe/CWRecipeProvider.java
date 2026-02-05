@@ -36,8 +36,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.material.FlowingFluid;
-import net.neoforged.neoforge.common.Tags;
-import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
+import net.minecraftforge.common.Tags;
+import net.minecraftforge.fluids.crafting.SizedFluidIngredient;
 import com.simibubi.create.content.fluids.potion.PotionFluidHandler;
 
 import java.util.List;
@@ -58,9 +58,9 @@ import static net.minecraft.tags.ItemTags.*;
 import static net.minecraft.world.item.Items.*;
 import static net.minecraft.world.item.Items.ANVIL;
 import static net.minecraft.world.item.Items.DIRT;
-import static net.neoforged.neoforge.common.Tags.Fluids.EXPERIENCE;
-import static net.neoforged.neoforge.common.Tags.Items.*;
-import static net.neoforged.neoforge.common.Tags.Items.FENCES;
+import static net.minecraftforge.common.Tags.Fluids.EXPERIENCE;
+import static net.minecraftforge.common.Tags.Items.*;
+import static net.minecraftforge.common.Tags.Items.FENCES;
 import static net.ttzplayz.create_wizardry.block.CWBlocks.CHANNELER;
 import static net.ttzplayz.create_wizardry.fluids.CWFluidRegistry.*;
 import static net.ttzplayz.create_wizardry.item.CWItems.*;
@@ -1306,7 +1306,7 @@ public class CWRecipeProvider extends RecipeProvider {
                 WIZARD_CHESTPLATE.get(), WIZARD_HELMET.get()};
         for (Item baseArmor : armors) {
             ArmorItem.Type armorType = ((ArmorItem) baseArmor).getType();
-            ResourceLocation itemId = ResourceLocation.fromNamespaceAndPath(IronsSpellbooks.MODID,
+            ResourceLocation itemId = new ResourceLocation(IronsSpellbooks.MODID,
                     String.format(prefix + "_" + armorType.getName()));
             ItemStack result = BuiltInRegistries.ITEM.get(itemId).getDefaultInstance();
             baseDeployingRecipe(output, result.getItem(), baseArmor, deployedItem);
@@ -1344,7 +1344,7 @@ public class CWRecipeProvider extends RecipeProvider {
     private void armorFilling(RecipeOutput output, String armorName) {
         var leather_armors = new Item[]{LEATHER_BOOTS, LEATHER_LEGGINGS, LEATHER_CHESTPLATE, LEATHER_HELMET};
         for (Item baseArmor : leather_armors) {
-            ResourceLocation itemId = ResourceLocation.fromNamespaceAndPath(IronsSpellbooks.MODID, String.format(armorName + "_" + ((ArmorItem) baseArmor).getType().getName()));
+            ResourceLocation itemId = new ResourceLocation(IronsSpellbooks.MODID, String.format(armorName + "_" + ((ArmorItem) baseArmor).getType().getName()));
             ItemStack result = BuiltInRegistries.ITEM.get(itemId).getDefaultInstance();
             manaFilling(output, result.getItem(), baseArmor, 250);
         }
