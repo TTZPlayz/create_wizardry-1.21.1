@@ -10,7 +10,7 @@ import net.ttzplayz.create_wizardry.CreateWizardry;
 public class CWTags {
     public static class Blocks {
         private static TagKey<Block> createTag(String name) {
-            return BlockTags.create(new ResourceLocation(CreateWizardry.MOD_ID, name));
+            return BlockTags.create(ResourceLocation.fromNamespaceAndPath(CreateWizardry.MOD_ID, name));
         }
     }
 
@@ -18,7 +18,7 @@ public class CWTags {
         public static final TagKey<Item> CW_BUCKETS = createTag("create_wizardry_buckets");
 
         private static TagKey<Item> createTag(String name) {
-            return ItemTags.create(new ResourceLocation(CreateWizardry.MOD_ID, name));
+            return ItemTags.create(ResourceLocation.fromNamespaceAndPath(CreateWizardry.MOD_ID, name));
         }
     }
 }

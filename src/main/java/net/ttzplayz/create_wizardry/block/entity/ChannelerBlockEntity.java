@@ -10,7 +10,7 @@ import io.redspace.ironsspellbooks.particle.ZapParticleOption;
 import io.redspace.ironsspellbooks.registries.SoundRegistry;
 import io.redspace.ironsspellbooks.util.ParticleHelper;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.HolderLookup;
+import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
@@ -23,9 +23,11 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
+import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.minecraftforge.common.util.LazyOptional;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -53,21 +55,10 @@ public class ChannelerBlockEntity extends SmartBlockEntity implements IHaveGoggl
         super(CWBlockEntities.CHANNELER_BE.get(), pos, state);
     }
 
-    public static void registerCapabilities(RegisterCapabilitiesEvent event) {
-        event.registerBlockEntity(
-                ForgeCapabilities.FLUID_HANDLER,
-                CWBlockEntities.CHANNELER_BE.get(), // BE type
-                (be, context) -> {
-                    if (be.internalTank == null) return null;
-                    return be.internalTank.getCapability();
-                }
-        );
-    }
-
     @Override
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
         if (internalTank == null) return false;
-        return containedFluidTooltip(tooltip, isPlayerSneaking, internalTank.getPrimaryHandler());
+        return containedFluidTooltip(tooltip, isPlayerSneaking, this.getCapability(ForgeCapabilities.FLUID_HANDLER));
     }
 
     @Override
@@ -88,6 +79,14 @@ public class ChannelerBlockEntity extends SmartBlockEntity implements IHaveGoggl
         }
     }
 
+    @Override
+    public <T> LazyOptional<T> getCapability(Capability<T> cap, @Nullable Direction side) {
+        if (cap == ForgeCapabilities.FLUID_HANDLER && internalTank != null) {
+            return internalTank.getCapability().cast();
+        }
+        return super.getCapability(cap, side);
+    }
+
     public void tickServer() {
         if (level == null) return;
 
@@ -99,12 +98,14 @@ public class ChannelerBlockEntity extends SmartBlockEntity implements IHaveGoggl
         }
 
         if (getBlockState().getValue(POWERED)) {
-            if (poweredCooldown > 0)
+            if (poweredCooldown > 0) {
                 poweredCooldown--;
-        if (poweredCooldown <= 0) {
-            poweredCooldown = 0;
-            level.setBlock(worldPosition, getBlockState().setValue(POWERED, false), 3);
-        }}
+            }
+            if (poweredCooldown <= 0) {
+                poweredCooldown = 0;
+                level.setBlock(worldPosition, getBlockState().setValue(POWERED, false), 3);
+            }
+        }
 
 
         if (creeperDrainCooldown > 0) creeperDrainCooldown--;
@@ -218,16 +219,16 @@ public class ChannelerBlockEntity extends SmartBlockEntity implements IHaveGoggl
     }
 
     @Override
-    public void write(CompoundTag compound, HolderLookup.Provider registries, boolean clientPacket) {
+    protected void write(CompoundTag compound, boolean clientPacket) {
         compound.putInt("creeperCooldown", creeperDrainCooldown);
         compound.putInt("lightningCooldown", lightningDrainCooldown);
-        super.write(compound, registries, clientPacket);
+        super.write(compound, clientPacket);
     }
 
     @Override
-    protected void read(CompoundTag compound, HolderLookup.Provider registries, boolean clientPacket) {
+    protected void read(CompoundTag compound, boolean clientPacket) {
         creeperDrainCooldown = compound.getInt("creeperCooldown");
         lightningDrainCooldown = compound.getInt("lightningCooldown");
-        super.read(compound, registries, clientPacket);
+        super.read(compound, clientPacket);
     }
 }

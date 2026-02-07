@@ -1,9 +1,10 @@
 package net.ttzplayz.create_wizardry.advancement;
 
-import com.simibubi.create.Create;
 import com.simibubi.create.foundation.advancement.CriterionTriggerBase;
 import com.simibubi.create.foundation.advancement.SimpleCreateTrigger;
+import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.core.registries.BuiltInRegistries;
 
 import java.util.LinkedList;
@@ -22,8 +23,6 @@ public class CWTriggers {
     }
 
     public static void register() {
-        triggers.forEach(trigger -> {
-            Registry.register(BuiltInRegistries.TRIGGER_TYPES, trigger.getId(), trigger);
-        });
+        triggers.forEach(CriteriaTriggers::register);
     }
 }

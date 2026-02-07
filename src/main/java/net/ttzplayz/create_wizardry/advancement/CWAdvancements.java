@@ -1,9 +1,12 @@
 package net.ttzplayz.create_wizardry.advancement;
 
 import com.google.common.collect.Sets;
+import com.mojang.logging.LogUtils;
 import com.simibubi.create.AllItems;
+import com.simibubi.create.foundation.advancement.CreateAdvancement;
+import com.tterrag.registrate.util.entry.ItemProviderEntry;
+import io.redspace.ironsspellbooks.registries.ItemRegistry;
 import net.minecraft.advancements.Advancement;
-import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.CriterionTrigger;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
@@ -15,6 +18,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.ttzplayz.create_wizardry.CreateWizardry;
 import net.minecraftforge.registries.RegistryObject;
+import net.ttzplayz.create_wizardry.block.CWBlocks;
+import net.ttzplayz.create_wizardry.item.CWItems;
+import org.slf4j.Logger;
 
 import java.nio.file.Path;
 import java.util.*;
@@ -23,26 +29,29 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.UnaryOperator;
 
+import static io.redspace.ironsspellbooks.registries.ItemRegistry.*;
+
 public class CWAdvancements implements DataProvider {
+    private static final Logger LOGGER = LogUtils.getLogger();
     public static final List<CWAdvancement> ENTRIES = new ArrayList<>();
     public static final CWAdvancement START = null,
-            ROOT = create("root", b -> b.icon(itemFromRegistry(CreateWizardry.id("lightning_bucket")))
+            ROOT = create("root", b -> b.icon(CWItems.LIGHTNING_BUCKET.get())
                     .title("Mechanical Sorcery")
                     .description("Welcome to Create: Wizardry!")
                     .awardedForFree()
                     .special(CWAdvancement.TaskType.SILENT)),
-            CHANNELER = create("channeler", b -> b.icon(itemFromRegistry(CreateWizardry.id("channeler")))
+            CHANNELER = create("channeler", b -> b.icon(CWBlocks.CHANNELER.get())
                     .title("Harvest the Heavens")
                     .description("Craft and Place Down a Channeler to harvest Liquid Lightning.")
                     .special(CWAdvancement.TaskType.NORMAL)
                     .whenIconCollected()
                     .after(ROOT)),
-            SHOCKING = create("shocking", b -> b.icon(itemFromRegistry(ResourceLocation.fromNamespaceAndPath("irons_spellbooks", "lightning_bottle")))
+            SHOCKING = create("shocking", b -> b.icon(LIGHTNING_BOTTLE.get())
                     .title("A *Shocking* Discovery")
                     .description("Yeah, SHOCKING...")
                     .after(CHANNELER)
                     .special(CWAdvancement.TaskType.SECRET)),
-            UNLIMITED_POWER = create("unlimited_power", b -> b.icon(itemFromRegistry(ResourceLocation.fromNamespaceAndPath(CreateWizardry.MOD_ID, "lightning_bucket")))
+            UNLIMITED_POWER = create("unlimited_power", b -> b.icon(CWItems.LIGHTNING_BUCKET.get())
                     .title("UNLIMITED POWER!!!")
                     .description("Safe? No. Fun? Yes.")
                     .special(CWAdvancement.TaskType.SUPER_SECRET)
@@ -69,36 +78,32 @@ public class CWAdvancements implements DataProvider {
     // Datagen
 
     private final PackOutput output;
-    private final CompletableFuture<HolderLookup.Provider> registries;
 
     public CWAdvancements(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
         this.output = output;
-        this.registries = registries;
     }
 
 
 
-    @Override
     public CompletableFuture<?> run(CachedOutput cache) {
-        return this.registries.thenCompose(provider -> {
-            PackOutput.PathProvider pathProvider = output.createPathProvider(PackOutput.Target.DATA_PACK, "advancement");
-            List<CompletableFuture<?>> futures = new ArrayList<>();
-
-            Set<ResourceLocation> set = Sets.newHashSet();
-            Consumer<AdvancementHolder> consumer = (advancement) -> {
-                ResourceLocation id = advancement.id();
-                if (!set.add(id))
-                    throw new IllegalStateException("Duplicate advancement " + id);
+        PackOutput.PathProvider pathProvider = this.output.createPathProvider(PackOutput.Target.DATA_PACK, "advancements");
+        List<CompletableFuture<?>> futures = new ArrayList();
+        Set<ResourceLocation> set = Sets.newHashSet();
+        Consumer<Advancement> consumer = (advancementx) -> {
+            ResourceLocation id = advancementx.getId();
+            if (!set.add(id)) {
+                throw new IllegalStateException("Duplicate advancement " + id);
+            } else {
                 Path path = pathProvider.json(id);
-                LOGGER.info("Saving advancement {}", id);
-                futures.add(DataProvider.saveStable(cache, provider, Advancement.CODEC, advancement.value(), path));
-            };
+                futures.add(DataProvider.saveStable(cache, advancementx.deconstruct().serializeToJson(), path));
+            }
+        };
 
-            for (CWAdvancement advancement : ENTRIES)
-                advancement.save(consumer, provider);
+        for(CWAdvancement advancement : ENTRIES) {
+            advancement.save(consumer);
+        }
 
-            return CompletableFuture.allOf(futures.toArray(CompletableFuture[]::new));
-        });
+        return CompletableFuture.allOf(futures.toArray(CompletableFuture[]::new));
     }
 
     @Override

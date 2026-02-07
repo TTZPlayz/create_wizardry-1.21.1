@@ -1,40 +1,40 @@
 package net.ttzplayz.create_wizardry.advancement;
 
+import com.simibubi.create.Create;
+import com.simibubi.create.foundation.advancement.AllAdvancements;
+import com.simibubi.create.foundation.advancement.AllTriggers;
+import com.simibubi.create.foundation.advancement.CreateAdvancement;
 import com.tterrag.registrate.util.entry.ItemProviderEntry;
-import net.minecraft.advancements.Advancement;
-import net.minecraft.advancements.AdvancementHolder;
-import net.minecraft.advancements.AdvancementType;
-import net.minecraft.advancements.Criterion;
-import net.minecraft.advancements.CriterionTrigger;
-import net.minecraft.advancements.critereon.InventoryChangeTrigger;
-import net.minecraft.advancements.critereon.ItemUsedOnLocationTrigger;
-import net.minecraft.core.HolderLookup;
+import net.minecraft.advancements.*;
+import net.minecraft.advancements.critereon.*;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.ttzplayz.create_wizardry.CreateWizardry;
 import net.minecraftforge.registries.RegistryObject;
 
+import java.util.Set;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
-import java.util.function.Function;
 import java.util.function.UnaryOperator;
 
 public abstract class CWAdvancement {
-    static final ResourceLocation BACKGROUND = new ResourceLocation(CreateWizardry.MOD_ID, "textures/gui/advancements.png");
+    static final ResourceLocation BACKGROUND = ResourceLocation.fromNamespaceAndPath(CreateWizardry.MOD_ID, "textures/gui/advancements.png");
     static final String LANG = "advancement." + CreateWizardry.MOD_ID + ".";
     static final String SECRET_SUFFIX = "\n§7(Hidden Advancement)";
-
-    private final Advancement.Builder mcBuilder = Advancement.Builder.advancement();
+    private Advancement.Builder builder = net.minecraft.advancements.Advancement.Builder.advancement();
     private RegistryObject<CWBuiltInTrigger> builtinTrigger;
     private CWAdvancement parent;
     private final CWAdvancement.Builder createBuilder = new CWAdvancement.Builder();
 
-    AdvancementHolder datagenResult;
+    Advancement datagenResult;
 
     private String id;
     private String title;
@@ -42,15 +42,12 @@ public abstract class CWAdvancement {
 
     public CWAdvancement(String id, UnaryOperator<CWAdvancement.Builder> b) {
         this.id = id;
-
         b.apply(createBuilder);
-
         if (!createBuilder.externalTrigger)
             builtinTrigger = add(asResource(id));
-
         if (createBuilder.type == CWAdvancement.TaskType.SECRET)
             description += SECRET_SUFFIX;
-
+        this.builder.display(createBuilder.icon, Component.translatable(this.titleKey()), Component.translatable(this.descriptionKey()).withStyle((s) -> s.withColor(14393875)), id.equals("root") ? BACKGROUND : null, createBuilder.type.frame, createBuilder.type.toast, createBuilder.type.announce, createBuilder.type.hide);
         CWAdvancements.ENTRIES.add(this);
     }
 
@@ -74,20 +71,16 @@ public abstract class CWAdvancement {
     }
 
     public boolean isAlreadyAwardedTo(Player player) {
-        if (!(player instanceof ServerPlayer sp))
+        if (player instanceof ServerPlayer sp) {
+            Advancement advancement = sp.getServer().getAdvancements().getAdvancement(Create.asResource(this.id));
+            return advancement == null ? true : sp.getAdvancements().getOrStartProgress(advancement).isDone();
+        } else {
             return true;
-        AdvancementHolder advancement = sp.getServer()
-                .getAdvancements()
-                .get(asResource(id));
-        if (advancement == null)
-            return true;
-        return sp.getAdvancements()
-                .getOrStartProgress(advancement)
-                .isDone();
+        }
     }
 
     private ResourceLocation asResource(String id) {
-        return new ResourceLocation(CreateWizardry.MOD_ID, id);
+        return ResourceLocation.fromNamespaceAndPath(CreateWizardry.MOD_ID, id);
     }
 
     public void provideLang(BiConsumer<String, String> consumer) {
@@ -95,44 +88,29 @@ public abstract class CWAdvancement {
         consumer.accept(descriptionKey(), description);
     }
 
-    void save(Consumer<AdvancementHolder> t, HolderLookup.Provider registries) {
-        if (parent != null)
-            mcBuilder.parent(parent.datagenResult);
-
-        if (!createBuilder.externalTrigger) {
-            var trigger = builtinTrigger.get();
-            mcBuilder.addCriterion("builtin", trigger.createCriterion(trigger));
+    void save(Consumer<Advancement> t) {
+        if (this.parent != null) {
+            this.builder.parent(this.parent.datagenResult);
         }
 
-        if (createBuilder.func != null)
-            createBuilder.icon(createBuilder.func.apply(registries));
-
-        if (createBuilder.pendingIconCollected && createBuilder.icon != null)
-            createBuilder.externalTrigger(InventoryChangeTrigger.TriggerInstance.hasItems(createBuilder.icon.getItem()));
-
-        mcBuilder.display(createBuilder.icon, Component.translatable(titleKey()),
-                Component.translatable(descriptionKey()).withStyle(s -> s.withColor(0xDBA213)),
-                id.equals("root") ? BACKGROUND : null, createBuilder.type.advancementType, createBuilder.type.toast,
-                createBuilder.type.announce, createBuilder.type.hide);
-
-        datagenResult = mcBuilder.save(t, asResource(id).toString());
+        this.datagenResult = this.builder.save(t, Create.asResource(this.id).toString());
     }
 
     public enum TaskType {
-        SILENT(AdvancementType.TASK, false, false, false),
-        NORMAL(AdvancementType.TASK, true, false, false),
-        NOISY(AdvancementType.TASK, true, true, false),
-        EXPERT(AdvancementType.GOAL, true, true, false),
-        SECRET(AdvancementType.GOAL, true, true, true),
-        SUPER_SECRET(AdvancementType.CHALLENGE, true, true, true);
+        SILENT(FrameType.TASK, false, false, false),
+        NORMAL(FrameType.TASK, true, false, false),
+        NOISY(FrameType.TASK, true, true, false),
+        EXPERT(FrameType.GOAL, true, true, false),
+        SECRET(FrameType.GOAL, true, true, true),
+        SUPER_SECRET(FrameType.CHALLENGE, true, true, true);
 
-        private final AdvancementType advancementType;
+        private final FrameType frame;
         private final boolean toast;
         private final boolean announce;
         private final boolean hide;
 
-        TaskType(AdvancementType advancementType, boolean toast, boolean announce, boolean hide) {
-            this.advancementType = advancementType;
+        TaskType(FrameType advancementType, boolean toast, boolean announce, boolean hide) {
+            this.frame = advancementType;
             this.toast = toast;
             this.announce = announce;
             this.hide = hide;
@@ -144,8 +122,6 @@ public abstract class CWAdvancement {
         private boolean externalTrigger;
         private int keyIndex;
         private ItemStack icon;
-        private Function<HolderLookup.Provider, ItemStack> func;
-        private boolean pendingIconCollected;
 
         public CWAdvancement.Builder special(CWAdvancement.TaskType type) {
             this.type = type;
@@ -157,63 +133,57 @@ public abstract class CWAdvancement {
             return this;
         }
 
-        public CWAdvancement.Builder icon(ItemProviderEntry<?, ?> item) {
-            return icon(item.asStack());
+        CWAdvancement.Builder icon(ItemProviderEntry<?> item) {
+            return this.icon(item.asStack());
         }
 
-        public CWAdvancement.Builder icon(ItemLike item) {
-            return icon(new ItemStack(item));
+        CWAdvancement.Builder icon(ItemLike item) {
+            return this.icon(new ItemStack(item));
         }
 
-        public CWAdvancement.Builder icon(ItemStack stack) {
-            icon = stack;
+        CWAdvancement.Builder icon(ItemStack stack) {
+            this.icon = stack;
             return this;
         }
 
-        public CWAdvancement.Builder icon(Function<HolderLookup.Provider, ItemStack> func) {
-            this.func = func;
-            return this;
-        }
-
-        public CWAdvancement.Builder title(String title) {
+        CWAdvancement.Builder title(String title) {
             CWAdvancement.this.title = title;
             return this;
         }
 
-        public CWAdvancement.Builder description(String description) {
+        CWAdvancement.Builder description(String description) {
             CWAdvancement.this.description = description;
             return this;
         }
 
-        public CWAdvancement.Builder whenBlockPlaced(Block block) {
-            return externalTrigger(ItemUsedOnLocationTrigger.TriggerInstance.placedBlock(block));
+        CWAdvancement.Builder whenBlockPlaced(Block block) {
+            return this.externalTrigger(ItemUsedOnLocationTrigger.TriggerInstance.placedBlock(block));
         }
 
-        public CWAdvancement.Builder whenIconCollected() {
-            if (icon != null)
-                return externalTrigger(InventoryChangeTrigger.TriggerInstance.hasItems(icon.getItem()));
-            pendingIconCollected = true;
-            externalTrigger = true;
-            return this;
+        CWAdvancement.Builder whenIconCollected() {
+            return this.externalTrigger(net.minecraft.advancements.critereon.InventoryChangeTrigger.TriggerInstance.hasItems(new ItemLike[]{this.icon.getItem()}));
         }
 
-        public CWAdvancement.Builder whenItemCollected(ItemProviderEntry<?, ?> item) {
-            return whenItemCollected(item.asStack()
-                    .getItem());
+        CWAdvancement.Builder whenItemCollected(ItemProviderEntry<?> item) {
+            return this.whenItemCollected(item.asStack().getItem());
         }
 
-        public CWAdvancement.Builder whenItemCollected(ItemLike itemProvider) {
-            return externalTrigger(InventoryChangeTrigger.TriggerInstance.hasItems(itemProvider));
+        CWAdvancement.Builder whenItemCollected(ItemLike itemProvider) {
+            return this.externalTrigger(net.minecraft.advancements.critereon.InventoryChangeTrigger.TriggerInstance.hasItems(new ItemLike[]{itemProvider}));
         }
 
-        public CWAdvancement.Builder awardedForFree() {
-            return externalTrigger(InventoryChangeTrigger.TriggerInstance.hasItems(new ItemLike[] {}));
+        CWAdvancement.Builder whenItemCollected(TagKey<Item> tag) {
+            return this.externalTrigger(net.minecraft.advancements.critereon.InventoryChangeTrigger.TriggerInstance.hasItems(new ItemPredicate[]{new ItemPredicate(tag, (Set)null, MinMaxBounds.Ints.ANY, MinMaxBounds.Ints.ANY, EnchantmentPredicate.NONE, EnchantmentPredicate.NONE, (Potion)null, NbtPredicate.ANY)}));
         }
 
-        public CWAdvancement.Builder externalTrigger(Criterion<?> trigger) {
-            mcBuilder.addCriterion(String.valueOf(keyIndex), trigger);
-            externalTrigger = true;
-            keyIndex++;
+        CWAdvancement.Builder awardedForFree() {
+            return this.externalTrigger(net.minecraft.advancements.critereon.InventoryChangeTrigger.TriggerInstance.hasItems(new ItemLike[0]));
+        }
+
+        CWAdvancement.Builder externalTrigger(CriterionTriggerInstance trigger) {
+            CWAdvancement.this.builder.addCriterion(String.valueOf(this.keyIndex), trigger);
+            this.externalTrigger = true;
+            ++this.keyIndex;
             return this;
         }
     }

@@ -36,7 +36,7 @@ public class CWDataGenerators {
         var server = event.includeServer();
         PackOutput packOutput = generator.getPackOutput();
 
-        generator.addProvider(server, new CWRecipeProvider(output, lookupProvider));
+        generator.addProvider(server, new CWRecipeProvider(output));
         generator.addProvider(event.includeClient(), new CWItemModelProvider(packOutput, existingFileHelper));
         BlockTagsProvider blockTagsProvider = new CWBlockTagProvider(packOutput, lookupProvider, existingFileHelper);
         generator.addProvider(event.includeServer(), blockTagsProvider);
@@ -44,7 +44,7 @@ public class CWDataGenerators {
         generator.addProvider(event.includeServer(), new CWItemTagProvider(packOutput, lookupProvider, blockTagsProvider.contentsGetter(), existingFileHelper));
 
         generator.addProvider(event.includeServer(), new LootTableProvider(packOutput, Collections.emptySet(),
-                List.of(new LootTableProvider.SubProviderEntry(CWBlockDropsProvider::new, LootContextParamSets.BLOCK)), lookupProvider));
+                List.of(new LootTableProvider.SubProviderEntry(CWBlockDropsProvider::new, LootContextParamSets.BLOCK))));
 
         generator.addProvider(server, new CWAdvancements(output, lookupProvider));
         generator.addProvider(event.includeClient(), new CWLangProvider(packOutput, "en_us"));

@@ -48,7 +48,7 @@ public class CWFluidRegistry {
     public static final ResourceLocation LIGHTNING_TEXTURE_FLOWING = ResourceLocation.fromNamespaceAndPath(CreateWizardry.MOD_ID, "block/lightning_flow");
     public static final ResourceLocation MANA_TEXTURE = ResourceLocation.fromNamespaceAndPath(CreateWizardry.MOD_ID, "block/mana");
     public static final ResourceLocation MANA_TEXTURE_FLOWING = ResourceLocation.fromNamespaceAndPath(CreateWizardry.MOD_ID, "block/mana_flow");
-
+    //TODO: MAKE TEXTURES FOR FLOWING
     public static final RegistryObject<FluidType> MANA_TYPE =
             FLUID_TYPES.register("mana_type", () ->
                     new MagicFluidType(FluidType.Properties.create()
@@ -71,7 +71,7 @@ public class CWFluidRegistry {
                                 }
                             }
                         }
-                    }); //TODO: MAKE TEXTURE
+                    });
     public static final RegistryObject<FlowingFluid> MANA =
             FLUIDS.register("mana", () -> new ForgeFlowingFluid.Source(CWFluidRegistry.MANA_PROPERTIES));
     public static final RegistryObject<FlowingFluid> MANA_FLOWING =

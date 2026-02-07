@@ -1,21 +1,31 @@
 package net.ttzplayz.create_wizardry.advancement;
 
 import com.google.common.collect.Sets;
-import com.mojang.serialization.Codec;
-import com.simibubi.create.foundation.advancement.AllTriggers;
+import com.google.gson.JsonObject;
 import net.minecraft.advancements.CriterionTrigger;
-import net.minecraft.advancements.CriterionTriggerInstance;
-import net.minecraft.advancements.critereon.CriterionValidator;
+import net.minecraft.advancements.critereon.AbstractCriterionTriggerInstance;
+import net.minecraft.advancements.critereon.ContextAwarePredicate;
+import net.minecraft.advancements.critereon.DeserializationContext;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.PlayerAdvancements;
 import net.minecraft.server.level.ServerPlayer;
+import net.ttzplayz.create_wizardry.CreateWizardry;
 
 import java.util.IdentityHashMap;
 import java.util.Map;
 import java.util.Set;
 
-public class CWBuiltInTrigger implements CriterionTrigger<CWBuiltInTrigger>, CriterionTriggerInstance {
-    private final Map<PlayerAdvancements, Set<Listener<CWBuiltInTrigger>>> listeners = new IdentityHashMap<>();
-    private final Codec<CWBuiltInTrigger> codec = Codec.unit(this);
+public class CWBuiltInTrigger implements CriterionTrigger<CWBuiltInTrigger.Instance> {
+    private final ResourceLocation id;
+    private final Map<PlayerAdvancements, Set<Listener<Instance>>> listeners = new IdentityHashMap<>();
+
+    public CWBuiltInTrigger(String id) {
+        this(CreateWizardry.id(id));
+    }
+
+    public CWBuiltInTrigger(ResourceLocation id) {
+        this.id = id;
+    }
 
     public void trigger(ServerPlayer player) {
         var advancements = player.getAdvancements();
@@ -25,13 +35,13 @@ public class CWBuiltInTrigger implements CriterionTrigger<CWBuiltInTrigger>, Cri
     }
 
     @Override
-    public final void addPlayerListener(PlayerAdvancements playerAdvancements, CriterionTrigger.Listener<CWBuiltInTrigger> listener) {
+    public final void addPlayerListener(PlayerAdvancements playerAdvancements, CriterionTrigger.Listener<Instance> listener) {
         this.listeners.computeIfAbsent(playerAdvancements, it -> Sets.newHashSet()).add(listener);
     }
 
     @Override
-    public final void removePlayerListener(PlayerAdvancements playerAdvancements, CriterionTrigger.Listener<CWBuiltInTrigger> listener) {
-        Set<CriterionTrigger.Listener<CWBuiltInTrigger>> set = this.listeners.get(playerAdvancements);
+    public final void removePlayerListener(PlayerAdvancements playerAdvancements, CriterionTrigger.Listener<Instance> listener) {
+        Set<CriterionTrigger.Listener<Instance>> set = this.listeners.get(playerAdvancements);
         if (set != null) {
             set.remove(listener);
             if (set.isEmpty()) {
@@ -46,11 +56,18 @@ public class CWBuiltInTrigger implements CriterionTrigger<CWBuiltInTrigger>, Cri
     }
 
     @Override
-    public Codec<CWBuiltInTrigger> codec() {
-        return this.codec;
+    public ResourceLocation getId() {
+        return id;
     }
 
     @Override
-    public void validate(CriterionValidator validator) {}
+    public Instance createInstance(JsonObject json, DeserializationContext context) {
+        return new Instance(id);
+    }
 
+    public static class Instance extends AbstractCriterionTriggerInstance {
+        public Instance(ResourceLocation id) {
+            super(id, ContextAwarePredicate.ANY);
+        }
+    }
 }

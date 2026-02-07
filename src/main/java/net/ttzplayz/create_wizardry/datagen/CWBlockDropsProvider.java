@@ -10,8 +10,8 @@ import net.ttzplayz.create_wizardry.block.CWBlocks;
 import java.util.Set;
 
 public class CWBlockDropsProvider extends BlockLootSubProvider {
-    protected CWBlockDropsProvider(HolderLookup.Provider registries) {
-        super(Set.of(), FeatureFlags.REGISTRY.allFlags(), registries);
+    protected CWBlockDropsProvider() {
+        super(Set.of(), FeatureFlags.REGISTRY.allFlags());
     }
 
     @Override
