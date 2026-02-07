@@ -1,0 +1,29 @@
+{
+  "parent": "create_wizardry:channeler",
+  "criteria": {
+    "builtin": {
+      "trigger": "create_wizardry:shocking"
+    }
+  },
+  "display": {
+    "description": {
+      "color": "#DBA213",
+      "translate": "advancement.create_wizardry.shocking.desc"
+    },
+    "frame": "goal",
+    "hidden": true,
+    "icon": {
+      "count": 1,
+      "id": "irons_spellbooks:lightning_bottle"
+    },
+    "title": {
+      "translate": "advancement.create_wizardry.shocking"
+    }
+  },
+  "requirements": [
+    [
+      "builtin"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
