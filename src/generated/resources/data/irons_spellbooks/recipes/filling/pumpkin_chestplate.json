@@ -1,0 +1,21 @@
+{
+  "type": "create:filling",
+  "ingredients": [
+    {
+      "tag": "forge:leather"
+    },
+    {
+      "amount": 500,
+      "fluid": "create_wizardry:mana",
+      "nbt": {}
+    }
+  ],
+  "results": [
+    {
+      "item": "irons_spellbooks:pumpkin_chestplate",
+      "nbt": {
+        "Damage": 0
+      }
+    }
+  ]
+}

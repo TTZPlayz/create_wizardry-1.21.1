@@ -1,0 +1,18 @@
+{
+  "type": "create:filling",
+  "ingredients": [
+    {
+      "tag": "forge:bones"
+    },
+    {
+      "amount": 500,
+      "fluid": "irons_spellbooks:ice_venom",
+      "nbt": {}
+    }
+  ],
+  "results": [
+    {
+      "item": "irons_spellbooks:frozen_bone"
+    }
+  ]
+}

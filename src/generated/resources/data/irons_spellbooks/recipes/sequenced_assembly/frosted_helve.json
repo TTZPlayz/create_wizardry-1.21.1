@@ -1,0 +1,62 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "irons_spellbooks:frozen_bone"
+  },
+  "loops": 2,
+  "results": [
+    {
+      "item": "irons_spellbooks:frosted_helve"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "irons_spellbooks:frozen_bone"
+        },
+        {
+          "item": "irons_spellbooks:arcane_ingot"
+        }
+      ],
+      "results": [
+        {
+          "item": "irons_spellbooks:frozen_bone"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "irons_spellbooks:frozen_bone"
+        },
+        {
+          "item": "irons_spellbooks:frozen_bone"
+        }
+      ],
+      "results": [
+        {
+          "item": "irons_spellbooks:frozen_bone"
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "irons_spellbooks:frozen_bone"
+        }
+      ],
+      "results": [
+        {
+          "item": "irons_spellbooks:frozen_bone"
+        }
+      ]
+    }
+  ],
+  "transitionalItem": {
+    "item": "irons_spellbooks:frozen_bone"
+  }
+}

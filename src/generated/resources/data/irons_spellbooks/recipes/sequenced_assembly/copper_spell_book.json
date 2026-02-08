@@ -1,0 +1,73 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "minecraft:copper_ingot"
+  },
+  "loops": 1,
+  "results": [
+    {
+      "item": "irons_spellbooks:copper_spell_book",
+      "nbt": {
+        "irons_spellbooks:spell_container": {
+          "data": [],
+          "maxSpells": 5,
+          "mustEquip": "1b",
+          "spellWheel": "1b"
+        }
+      }
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "minecraft:copper_ingot"
+        },
+        {
+          "item": "minecraft:paper"
+        }
+      ],
+      "results": [
+        {
+          "item": "minecraft:copper_ingot"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "minecraft:copper_ingot"
+        },
+        {
+          "item": "minecraft:paper"
+        }
+      ],
+      "results": [
+        {
+          "item": "minecraft:copper_ingot"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "minecraft:copper_ingot"
+        },
+        {
+          "item": "minecraft:copper_ingot"
+        }
+      ],
+      "results": [
+        {
+          "item": "minecraft:copper_ingot"
+        }
+      ]
+    }
+  ],
+  "transitionalItem": {
+    "item": "minecraft:copper_ingot"
+  }
+}

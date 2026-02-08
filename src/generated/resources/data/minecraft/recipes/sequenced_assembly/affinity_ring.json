@@ -1,0 +1,62 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "irons_spellbooks:arcane_ingot"
+  },
+  "loops": 1,
+  "results": [
+    {
+      "item": "irons_spellbooks:affinity_ring"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "irons_spellbooks:arcane_ingot"
+        },
+        {
+          "item": "create_wizardry:mithril_nugget"
+        }
+      ],
+      "results": [
+        {
+          "item": "irons_spellbooks:arcane_ingot"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "irons_spellbooks:arcane_ingot"
+        },
+        {
+          "item": "minecraft:bucket"
+        }
+      ],
+      "results": [
+        {
+          "item": "irons_spellbooks:arcane_ingot"
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "irons_spellbooks:arcane_ingot"
+        }
+      ],
+      "results": [
+        {
+          "item": "irons_spellbooks:arcane_ingot"
+        }
+      ]
+    }
+  ],
+  "transitionalItem": {
+    "item": "irons_spellbooks:arcane_ingot"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "type": "create:filling",
+  "ingredients": [
+    {
+      "item": "minecraft:leather_boots"
+    },
+    {
+      "amount": 250,
+      "fluid": "create_wizardry:mana",
+      "nbt": {}
+    }
+  ],
+  "results": [
+    {
+      "item": "irons_spellbooks:wandering_magician_boots",
+      "nbt": {
+        "Damage": 0
+      }
+    }
+  ]
+}

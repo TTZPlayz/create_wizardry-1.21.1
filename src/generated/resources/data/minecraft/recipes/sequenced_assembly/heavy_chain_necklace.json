@@ -1,0 +1,62 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "minecraft:chain"
+  },
+  "loops": 1,
+  "results": [
+    {
+      "item": "irons_spellbooks:heavy_chain_necklace"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "minecraft:chain"
+        },
+        {
+          "item": "create_wizardry:mithril_nugget"
+        }
+      ],
+      "results": [
+        {
+          "item": "minecraft:chain"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "minecraft:chain"
+        },
+        {
+          "item": "minecraft:chain"
+        }
+      ],
+      "results": [
+        {
+          "item": "minecraft:chain"
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "minecraft:chain"
+        }
+      ],
+      "results": [
+        {
+          "item": "minecraft:chain"
+        }
+      ]
+    }
+  ],
+  "transitionalItem": {
+    "item": "minecraft:chain"
+  }
+}

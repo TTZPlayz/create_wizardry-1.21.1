@@ -1,0 +1,117 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "tag": "forge:rods/wooden"
+  },
+  "loops": 1,
+  "results": [
+    {
+      "item": "irons_spellbooks:hither_thither_wand",
+      "nbt": {
+        "irons_spellbooks:spell_container": {
+          "data": [
+            {
+              "id": "irons_spellbooks:portal",
+              "index": 0,
+              "level": 1,
+              "locked": "1b"
+            }
+          ],
+          "maxSpells": 1,
+          "mustEquip": "0b",
+          "spellWheel": "1b"
+        }
+      }
+    },
+    {
+      "item": "minecraft:amethyst_shard"
+    },
+    {
+      "item": "minecraft:ender_pearl"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "minecraft:stick"
+        },
+        {
+          "item": "minecraft:amethyst_shard"
+        }
+      ],
+      "results": [
+        {
+          "item": "minecraft:stick"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "minecraft:stick"
+        },
+        {
+          "item": "minecraft:ender_pearl"
+        }
+      ],
+      "results": [
+        {
+          "item": "minecraft:stick"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "minecraft:stick"
+        },
+        {
+          "item": "minecraft:gold_nugget"
+        }
+      ],
+      "results": [
+        {
+          "item": "minecraft:stick"
+        }
+      ]
+    },
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "minecraft:stick"
+        },
+        {
+          "amount": 1000,
+          "fluid": "create_wizardry:mana",
+          "nbt": {}
+        }
+      ],
+      "results": [
+        {
+          "item": "minecraft:stick"
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "minecraft:stick"
+        }
+      ],
+      "results": [
+        {
+          "item": "minecraft:stick"
+        }
+      ]
+    }
+  ],
+  "transitionalItem": {
+    "item": "minecraft:stick"
+  }
+}

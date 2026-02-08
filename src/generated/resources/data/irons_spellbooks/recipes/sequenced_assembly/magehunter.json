@@ -1,0 +1,79 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "minecraft:iron_sword"
+  },
+  "loops": 1,
+  "results": [
+    {
+      "item": "irons_spellbooks:magehunter",
+      "nbt": {
+        "Damage": 0
+      }
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "minecraft:netherite_sword"
+        },
+        {
+          "item": "minecraft:diamond"
+        }
+      ],
+      "results": [
+        {
+          "item": "minecraft:netherite_sword",
+          "nbt": {
+            "Damage": 0
+          }
+        }
+      ]
+    },
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "minecraft:netherite_sword"
+        },
+        {
+          "amount": 1000,
+          "fluid": "create_wizardry:mana",
+          "nbt": {}
+        }
+      ],
+      "results": [
+        {
+          "item": "minecraft:netherite_sword",
+          "nbt": {
+            "Damage": 0
+          }
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "minecraft:netherite_sword"
+        }
+      ],
+      "results": [
+        {
+          "item": "minecraft:netherite_sword",
+          "nbt": {
+            "Damage": 0
+          }
+        }
+      ]
+    }
+  ],
+  "transitionalItem": {
+    "item": "minecraft:netherite_sword",
+    "nbt": {
+      "Damage": 0
+    }
+  }
+}

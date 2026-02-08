@@ -1,0 +1,102 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "irons_spellbooks:ruined_book"
+  },
+  "loops": 1,
+  "results": [
+    {
+      "item": "irons_spellbooks:dragonskin_spell_book",
+      "nbt": {
+        "irons_spellbooks:spell_container": {
+          "data": [],
+          "maxSpells": 12,
+          "mustEquip": "1b",
+          "spellWheel": "1b"
+        }
+      }
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "irons_spellbooks:ruined_book"
+        },
+        {
+          "item": "irons_spellbooks:dragonskin"
+        }
+      ],
+      "results": [
+        {
+          "item": "irons_spellbooks:ruined_book"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "irons_spellbooks:ruined_book"
+        },
+        {
+          "tag": "forge:obsidian"
+        }
+      ],
+      "results": [
+        {
+          "item": "irons_spellbooks:ruined_book"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "irons_spellbooks:ruined_book"
+        },
+        {
+          "item": "irons_spellbooks:dragonskin"
+        }
+      ],
+      "results": [
+        {
+          "item": "irons_spellbooks:ruined_book"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "irons_spellbooks:ruined_book"
+        },
+        {
+          "tag": "forge:obsidian"
+        }
+      ],
+      "results": [
+        {
+          "item": "irons_spellbooks:ruined_book"
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "irons_spellbooks:ruined_book"
+        }
+      ],
+      "results": [
+        {
+          "item": "irons_spellbooks:ruined_book"
+        }
+      ]
+    }
+  ],
+  "transitionalItem": {
+    "item": "irons_spellbooks:ruined_book"
+  }
+}

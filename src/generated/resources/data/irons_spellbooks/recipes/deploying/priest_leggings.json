@@ -1,0 +1,19 @@
+{
+  "type": "create:deploying",
+  "ingredients": [
+    {
+      "item": "irons_spellbooks:wizard_leggings"
+    },
+    {
+      "item": "irons_spellbooks:holy_rune"
+    }
+  ],
+  "results": [
+    {
+      "item": "irons_spellbooks:priest_leggings",
+      "nbt": {
+        "Damage": 0
+      }
+    }
+  ]
+}

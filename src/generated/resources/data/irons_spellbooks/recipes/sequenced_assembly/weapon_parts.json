@@ -1,0 +1,62 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "irons_spellbooks:arcane_ingot"
+  },
+  "loops": 2,
+  "results": [
+    {
+      "item": "irons_spellbooks:weapon_parts"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "irons_spellbooks:mithril_ingot"
+        },
+        {
+          "item": "irons_spellbooks:mithril_ingot"
+        }
+      ],
+      "results": [
+        {
+          "item": "irons_spellbooks:mithril_ingot"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "irons_spellbooks:mithril_ingot"
+        },
+        {
+          "item": "irons_spellbooks:arcane_ingot"
+        }
+      ],
+      "results": [
+        {
+          "item": "irons_spellbooks:mithril_ingot"
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "irons_spellbooks:mithril_ingot"
+        }
+      ],
+      "results": [
+        {
+          "item": "irons_spellbooks:mithril_ingot"
+        }
+      ]
+    }
+  ],
+  "transitionalItem": {
+    "item": "irons_spellbooks:mithril_ingot"
+  }
+}

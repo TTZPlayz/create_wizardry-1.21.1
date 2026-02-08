@@ -1,0 +1,26 @@
+{
+  "type": "create:mixing",
+  "heatRequirement": "superheated",
+  "ingredients": [
+    {
+      "item": "minecraft:blaze_powder"
+    },
+    {
+      "item": "minecraft:blaze_powder"
+    },
+    {
+      "item": "minecraft:netherite_scrap"
+    },
+    {
+      "amount": 1000,
+      "fluid": "create_wizardry:mana",
+      "nbt": {}
+    }
+  ],
+  "results": [
+    {
+      "count": 8,
+      "item": "irons_spellbooks:cinder_essence"
+    }
+  ]
+}

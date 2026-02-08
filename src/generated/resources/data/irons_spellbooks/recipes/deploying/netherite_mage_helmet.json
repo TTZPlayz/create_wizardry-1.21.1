@@ -1,0 +1,19 @@
+{
+  "type": "create:deploying",
+  "ingredients": [
+    {
+      "item": "irons_spellbooks:wizard_helmet"
+    },
+    {
+      "item": "minecraft:netherite_ingot"
+    }
+  ],
+  "results": [
+    {
+      "item": "irons_spellbooks:netherite_mage_helmet",
+      "nbt": {
+        "Damage": 0
+      }
+    }
+  ]
+}

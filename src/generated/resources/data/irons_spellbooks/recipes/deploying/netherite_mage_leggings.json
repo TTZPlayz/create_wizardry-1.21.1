@@ -1,0 +1,19 @@
+{
+  "type": "create:deploying",
+  "ingredients": [
+    {
+      "item": "irons_spellbooks:wizard_leggings"
+    },
+    {
+      "item": "minecraft:netherite_ingot"
+    }
+  ],
+  "results": [
+    {
+      "item": "irons_spellbooks:netherite_mage_leggings",
+      "nbt": {
+        "Damage": 0
+      }
+    }
+  ]
+}

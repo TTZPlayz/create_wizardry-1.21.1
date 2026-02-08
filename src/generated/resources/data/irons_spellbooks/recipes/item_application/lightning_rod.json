@@ -1,0 +1,16 @@
+{
+  "type": "create:item_application",
+  "ingredients": [
+    {
+      "item": "minecraft:lightning_rod"
+    },
+    {
+      "item": "irons_spellbooks:energized_core"
+    }
+  ],
+  "results": [
+    {
+      "item": "irons_spellbooks:lightning_rod"
+    }
+  ]
+}

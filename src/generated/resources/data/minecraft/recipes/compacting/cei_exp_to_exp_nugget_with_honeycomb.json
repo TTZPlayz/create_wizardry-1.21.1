@@ -1,0 +1,13 @@
+{
+  "type": "create:compacting",
+  "ingredients": [
+    {
+      "item": "minecraft:honeycomb"
+    }
+  ],
+  "results": [
+    {
+      "item": "create:experience_nugget"
+    }
+  ]
+}

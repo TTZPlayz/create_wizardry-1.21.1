@@ -1,0 +1,33 @@
+{
+  "type": "create:mechanical_crafting",
+  "acceptMirrored": true,
+  "key": {
+    "b": {
+      "item": "create:brass_ingot"
+    },
+    "c": {
+      "item": "minecraft:crossbow"
+    },
+    "g": {
+      "item": "create:cogwheel"
+    },
+    "p": {
+      "item": "create:precision_mechanism"
+    },
+    "r": {
+      "tag": "forge:string"
+    },
+    "s": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "bssp",
+    "rgcs",
+    "rsgs",
+    "srrb"
+  ],
+  "result": {
+    "item": "irons_spellbooks:autoloader_crossbow"
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "irons_spellbooks:decrepit_scythe"
+  },
+  "loops": 1,
+  "results": [
+    {
+      "item": "irons_spellbooks:hellrazor",
+      "nbt": {
+        "Damage": 0,
+        "irons_spellbooks:spell_container": {
+          "data": [
+            {
+              "id": "irons_spellbooks:raise_hell",
+              "index": 0,
+              "level": 3,
+              "locked": "1b"
+            }
+          ],
+          "maxSpells": 1,
+          "mustEquip": "0b",
+          "spellWheel": "1b"
+        }
+      }
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "irons_spellbooks:decrepit_scythe"
+        },
+        {
+          "amount": 250,
+          "fluid": "irons_spellbooks:timeless_slurry",
+          "nbt": {}
+        }
+      ],
+      "results": [
+        {
+          "item": "irons_spellbooks:decrepit_scythe",
+          "nbt": {
+            "Damage": 0
+          }
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "irons_spellbooks:decrepit_scythe"
+        },
+        {
+          "item": "irons_spellbooks:pyrium_ingot"
+        }
+      ],
+      "results": [
+        {
+          "item": "irons_spellbooks:decrepit_scythe",
+          "nbt": {
+            "Damage": 0
+          }
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "irons_spellbooks:decrepit_scythe"
+        }
+      ],
+      "results": [
+        {
+          "item": "irons_spellbooks:decrepit_scythe",
+          "nbt": {
+            "Damage": 0
+          }
+        }
+      ]
+    }
+  ],
+  "transitionalItem": {
+    "item": "irons_spellbooks:decrepit_scythe",
+    "nbt": {
+      "Damage": 0
+    }
+  }
+}

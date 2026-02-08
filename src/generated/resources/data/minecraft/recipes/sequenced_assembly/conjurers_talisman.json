@@ -1,0 +1,62 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "minecraft:skeleton_skull"
+  },
+  "loops": 1,
+  "results": [
+    {
+      "item": "irons_spellbooks:conjurers_talisman"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "minecraft:skeleton_skull"
+        },
+        {
+          "item": "create_wizardry:mithril_nugget"
+        }
+      ],
+      "results": [
+        {
+          "item": "minecraft:skeleton_skull"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "minecraft:skeleton_skull"
+        },
+        {
+          "tag": "forge:string"
+        }
+      ],
+      "results": [
+        {
+          "item": "minecraft:skeleton_skull"
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "minecraft:skeleton_skull"
+        }
+      ],
+      "results": [
+        {
+          "item": "minecraft:skeleton_skull"
+        }
+      ]
+    }
+  ],
+  "transitionalItem": {
+    "item": "minecraft:skeleton_skull"
+  }
+}

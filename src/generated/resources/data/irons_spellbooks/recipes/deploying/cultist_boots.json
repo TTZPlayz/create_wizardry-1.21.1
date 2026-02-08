@@ -1,0 +1,19 @@
+{
+  "type": "create:deploying",
+  "ingredients": [
+    {
+      "item": "irons_spellbooks:wizard_boots"
+    },
+    {
+      "item": "irons_spellbooks:blood_rune"
+    }
+  ],
+  "results": [
+    {
+      "item": "irons_spellbooks:cultist_boots",
+      "nbt": {
+        "Damage": 0
+      }
+    }
+  ]
+}

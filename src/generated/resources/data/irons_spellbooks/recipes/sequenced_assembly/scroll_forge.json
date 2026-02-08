@@ -1,0 +1,46 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "minecraft:crying_obsidian"
+  },
+  "loops": 1,
+  "results": [
+    {
+      "item": "irons_spellbooks:scroll_forge"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "minecraft:crying_obsidian"
+        },
+        {
+          "item": "minecraft:polished_deepslate"
+        }
+      ],
+      "results": [
+        {
+          "item": "minecraft:crying_obsidian"
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "minecraft:crying_obsidian"
+        }
+      ],
+      "results": [
+        {
+          "item": "minecraft:crying_obsidian"
+        }
+      ]
+    }
+  ],
+  "transitionalItem": {
+    "item": "minecraft:crying_obsidian"
+  }
+}

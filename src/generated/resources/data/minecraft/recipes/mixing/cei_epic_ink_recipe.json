@@ -1,0 +1,47 @@
+{
+  "type": "create:mixing",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "create_enchantment_industry"
+    }
+  ],
+  "heatRequirement": "heated",
+  "ingredients": [
+    {
+      "item": "minecraft:diamond"
+    },
+    {
+      "item": "minecraft:diamond"
+    },
+    {
+      "item": "irons_spellbooks:arcane_essence"
+    },
+    {
+      "item": "irons_spellbooks:arcane_essence"
+    },
+    {
+      "item": "irons_spellbooks:arcane_essence"
+    },
+    {
+      "item": "irons_spellbooks:arcane_essence"
+    },
+    {
+      "item": "create:experience_nugget"
+    },
+    {
+      "item": "create:experience_nugget"
+    },
+    {
+      "amount": 1000,
+      "fluid": "irons_spellbooks:rare_ink",
+      "nbt": {}
+    }
+  ],
+  "results": [
+    {
+      "amount": 500,
+      "fluid": "irons_spellbooks:epic_ink"
+    }
+  ]
+}

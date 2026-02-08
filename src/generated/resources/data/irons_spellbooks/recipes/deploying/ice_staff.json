@@ -1,0 +1,16 @@
+{
+  "type": "create:deploying",
+  "ingredients": [
+    {
+      "item": "irons_spellbooks:frosted_helve"
+    },
+    {
+      "item": "irons_spellbooks:permafrost_shard"
+    }
+  ],
+  "results": [
+    {
+      "item": "irons_spellbooks:ice_staff"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "minecraft:iron_ingot"
+    },
+    {
+      "item": "minecraft:iron_ingot"
+    },
+    {
+      "amount": 500,
+      "fluid": "create_wizardry:mana",
+      "nbt": {}
+    },
+    {
+      "amount": 1000,
+      "fluid": "irons_spellbooks:common_ink",
+      "nbt": {}
+    }
+  ],
+  "results": [
+    {
+      "amount": 500,
+      "fluid": "irons_spellbooks:uncommon_ink"
+    }
+  ]
+}

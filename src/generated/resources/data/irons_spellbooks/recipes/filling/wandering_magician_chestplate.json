@@ -1,0 +1,21 @@
+{
+  "type": "create:filling",
+  "ingredients": [
+    {
+      "item": "minecraft:leather_chestplate"
+    },
+    {
+      "amount": 250,
+      "fluid": "create_wizardry:mana",
+      "nbt": {}
+    }
+  ],
+  "results": [
+    {
+      "item": "irons_spellbooks:wandering_magician_chestplate",
+      "nbt": {
+        "Damage": 0
+      }
+    }
+  ]
+}

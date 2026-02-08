@@ -1,0 +1,44 @@
+{
+  "type": "create:mixing",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "create_enchantment_industry"
+    }
+  ],
+  "heatRequirement": "superheated",
+  "ingredients": [
+    {
+      "item": "minecraft:amethyst_shard"
+    },
+    {
+      "item": "minecraft:amethyst_shard"
+    },
+    {
+      "item": "irons_spellbooks:arcane_essence"
+    },
+    {
+      "item": "irons_spellbooks:arcane_essence"
+    },
+    {
+      "item": "irons_spellbooks:arcane_essence"
+    },
+    {
+      "item": "irons_spellbooks:arcane_essence"
+    },
+    {
+      "item": "irons_spellbooks:arcane_essence"
+    },
+    {
+      "amount": 1000,
+      "fluid": "irons_spellbooks:epic_ink",
+      "nbt": {}
+    }
+  ],
+  "results": [
+    {
+      "amount": 500,
+      "fluid": "irons_spellbooks:legendary_ink"
+    }
+  ]
+}

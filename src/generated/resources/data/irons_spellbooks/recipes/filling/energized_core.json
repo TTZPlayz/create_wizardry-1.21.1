@@ -1,0 +1,18 @@
+{
+  "type": "create:filling",
+  "ingredients": [
+    {
+      "item": "minecraft:copper_block"
+    },
+    {
+      "amount": 1000,
+      "fluid": "create_wizardry:lightning",
+      "nbt": {}
+    }
+  ],
+  "results": [
+    {
+      "item": "irons_spellbooks:energized_core"
+    }
+  ]
+}

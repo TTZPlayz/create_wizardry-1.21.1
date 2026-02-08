@@ -1,0 +1,23 @@
+{
+  "type": "create:mixing",
+  "heatRequirement": "heated",
+  "ingredients": [
+    {
+      "item": "minecraft:amethyst_shard"
+    },
+    {
+      "amount": 1000,
+      "fluid": "create:potion",
+      "nbt": {
+        "Bottle": "REGULAR",
+        "Potion": "minecraft:strong_healing"
+      }
+    }
+  ],
+  "results": [
+    {
+      "amount": 1000,
+      "fluid": "irons_spellbooks:greater_healing_elixir"
+    }
+  ]
+}

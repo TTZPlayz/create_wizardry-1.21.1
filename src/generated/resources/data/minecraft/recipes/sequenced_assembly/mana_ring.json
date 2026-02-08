@@ -1,0 +1,46 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "irons_spellbooks:arcane_ingot"
+  },
+  "loops": 1,
+  "results": [
+    {
+      "item": "irons_spellbooks:mana_ring"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "irons_spellbooks:arcane_ingot"
+        },
+        {
+          "tag": "forge:gems/diamond"
+        }
+      ],
+      "results": [
+        {
+          "item": "irons_spellbooks:arcane_ingot"
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "irons_spellbooks:arcane_ingot"
+        }
+      ],
+      "results": [
+        {
+          "item": "irons_spellbooks:arcane_ingot"
+        }
+      ]
+    }
+  ],
+  "transitionalItem": {
+    "item": "irons_spellbooks:arcane_ingot"
+  }
+}

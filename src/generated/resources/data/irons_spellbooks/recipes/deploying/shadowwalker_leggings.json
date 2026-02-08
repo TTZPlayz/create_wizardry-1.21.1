@@ -1,0 +1,19 @@
+{
+  "type": "create:deploying",
+  "ingredients": [
+    {
+      "item": "irons_spellbooks:wizard_leggings"
+    },
+    {
+      "item": "irons_spellbooks:ender_rune"
+    }
+  ],
+  "results": [
+    {
+      "item": "irons_spellbooks:shadowwalker_leggings",
+      "nbt": {
+        "Damage": 0
+      }
+    }
+  ]
+}

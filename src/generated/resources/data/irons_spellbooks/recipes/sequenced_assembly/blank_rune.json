@@ -1,0 +1,69 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "minecraft:tuff"
+  },
+  "loops": 3,
+  "results": [
+    {
+      "chance": 30.0,
+      "item": "irons_spellbooks:blank_rune"
+    },
+    {
+      "chance": 55.0,
+      "item": "minecraft:tuff"
+    },
+    {
+      "chance": 45.0,
+      "item": "minecraft:cobblestone"
+    },
+    {
+      "chance": 10.0,
+      "item": "minecraft:cobblestone_slab"
+    },
+    {
+      "chance": 5.0,
+      "item": "minecraft:cobbled_deepslate_slab"
+    },
+    {
+      "chance": 5.0,
+      "item": "irons_spellbooks:arcane_essence"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "minecraft:tuff"
+        },
+        {
+          "amount": 1000,
+          "fluid": "create_wizardry:mana",
+          "nbt": {}
+        }
+      ],
+      "results": [
+        {
+          "item": "minecraft:tuff"
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "minecraft:tuff"
+        }
+      ],
+      "results": [
+        {
+          "item": "minecraft:tuff"
+        }
+      ]
+    }
+  ],
+  "transitionalItem": {
+    "item": "minecraft:tuff"
+  }
+}

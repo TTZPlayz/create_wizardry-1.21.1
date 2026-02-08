@@ -1,0 +1,19 @@
+{
+  "type": "create:deploying",
+  "ingredients": [
+    {
+      "item": "irons_spellbooks:wizard_boots"
+    },
+    {
+      "item": "irons_spellbooks:evocation_rune"
+    }
+  ],
+  "results": [
+    {
+      "item": "irons_spellbooks:archevoker_boots",
+      "nbt": {
+        "Damage": 0
+      }
+    }
+  ]
+}

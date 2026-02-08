@@ -1,0 +1,75 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "irons_spellbooks:mithril_ingot"
+  },
+  "loops": 2,
+  "results": [
+    {
+      "item": "irons_spellbooks:mithril_weave"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "irons_spellbooks:mithril_ingot"
+        },
+        {
+          "item": "minecraft:chain"
+        }
+      ],
+      "results": [
+        {
+          "item": "irons_spellbooks:mithril_ingot"
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "irons_spellbooks:mithril_ingot"
+        }
+      ],
+      "results": [
+        {
+          "item": "irons_spellbooks:mithril_ingot"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "irons_spellbooks:mithril_ingot"
+        },
+        {
+          "item": "irons_spellbooks:mithril_ingot"
+        }
+      ],
+      "results": [
+        {
+          "item": "irons_spellbooks:mithril_ingot"
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "irons_spellbooks:mithril_ingot"
+        }
+      ],
+      "results": [
+        {
+          "item": "irons_spellbooks:mithril_ingot"
+        }
+      ]
+    }
+  ],
+  "transitionalItem": {
+    "item": "irons_spellbooks:mithril_ingot"
+  }
+}

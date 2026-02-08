@@ -1,0 +1,79 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "irons_spellbooks:keeper_flamberge"
+  },
+  "loops": 1,
+  "results": [
+    {
+      "item": "irons_spellbooks:legionnaire_flamberge",
+      "nbt": {
+        "Damage": 0
+      }
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "irons_spellbooks:keeper_flamberge"
+        },
+        {
+          "amount": 250,
+          "fluid": "irons_spellbooks:timeless_slurry",
+          "nbt": {}
+        }
+      ],
+      "results": [
+        {
+          "item": "irons_spellbooks:keeper_flamberge",
+          "nbt": {
+            "Damage": 0
+          }
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "irons_spellbooks:keeper_flamberge"
+        },
+        {
+          "item": "irons_spellbooks:pyrium_ingot"
+        }
+      ],
+      "results": [
+        {
+          "item": "irons_spellbooks:keeper_flamberge",
+          "nbt": {
+            "Damage": 0
+          }
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "irons_spellbooks:keeper_flamberge"
+        }
+      ],
+      "results": [
+        {
+          "item": "irons_spellbooks:keeper_flamberge",
+          "nbt": {
+            "Damage": 0
+          }
+        }
+      ]
+    }
+  ],
+  "transitionalItem": {
+    "item": "irons_spellbooks:keeper_flamberge",
+    "nbt": {
+      "Damage": 0
+    }
+  }
+}

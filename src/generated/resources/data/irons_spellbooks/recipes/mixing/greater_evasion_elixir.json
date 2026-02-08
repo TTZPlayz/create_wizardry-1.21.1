@@ -1,0 +1,20 @@
+{
+  "type": "create:mixing",
+  "heatRequirement": "heated",
+  "ingredients": [
+    {
+      "item": "minecraft:dragon_breath"
+    },
+    {
+      "amount": 1000,
+      "fluid": "irons_spellbooks:evasion_elixir",
+      "nbt": {}
+    }
+  ],
+  "results": [
+    {
+      "amount": 1000,
+      "fluid": "irons_spellbooks:greater_evasion_elixir"
+    }
+  ]
+}

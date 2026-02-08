@@ -1,0 +1,128 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "irons_spellbooks:rotten_spell_book"
+  },
+  "loops": 1,
+  "results": [
+    {
+      "item": "irons_spellbooks:druidic_spell_book",
+      "nbt": {
+        "irons_spellbooks:spell_container": {
+          "data": [],
+          "maxSpells": 10,
+          "mustEquip": "1b",
+          "spellWheel": "1b"
+        }
+      }
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "irons_spellbooks:rotten_spell_book"
+        },
+        {
+          "item": "minecraft:amethyst_shard"
+        }
+      ],
+      "results": [
+        {
+          "item": "irons_spellbooks:rotten_spell_book",
+          "nbt": {
+            "irons_spellbooks:spell_container": {
+              "data": [],
+              "maxSpells": 8,
+              "mustEquip": "1b",
+              "spellWheel": "1b"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "irons_spellbooks:rotten_spell_book"
+        },
+        {
+          "item": "minecraft:spore_blossom"
+        }
+      ],
+      "results": [
+        {
+          "item": "irons_spellbooks:rotten_spell_book",
+          "nbt": {
+            "irons_spellbooks:spell_container": {
+              "data": [],
+              "maxSpells": 8,
+              "mustEquip": "1b",
+              "spellWheel": "1b"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "irons_spellbooks:rotten_spell_book"
+        },
+        {
+          "amount": 250,
+          "fluid": "create:honey",
+          "nbt": {}
+        }
+      ],
+      "results": [
+        {
+          "item": "irons_spellbooks:rotten_spell_book",
+          "nbt": {
+            "irons_spellbooks:spell_container": {
+              "data": [],
+              "maxSpells": 8,
+              "mustEquip": "1b",
+              "spellWheel": "1b"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "irons_spellbooks:rotten_spell_book"
+        }
+      ],
+      "results": [
+        {
+          "item": "irons_spellbooks:rotten_spell_book",
+          "nbt": {
+            "irons_spellbooks:spell_container": {
+              "data": [],
+              "maxSpells": 8,
+              "mustEquip": "1b",
+              "spellWheel": "1b"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "transitionalItem": {
+    "item": "irons_spellbooks:rotten_spell_book",
+    "nbt": {
+      "irons_spellbooks:spell_container": {
+        "data": [],
+        "maxSpells": 8,
+        "mustEquip": "1b",
+        "spellWheel": "1b"
+      }
+    }
+  }
+}

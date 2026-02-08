@@ -1,0 +1,28 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "irons_spellbooks:upgrade_orb"
+    },
+    {
+      "item": "irons_spellbooks:arcane_rune"
+    },
+    {
+      "item": "irons_spellbooks:arcane_rune"
+    },
+    {
+      "item": "irons_spellbooks:arcane_rune"
+    },
+    {
+      "item": "irons_spellbooks:arcane_rune"
+    }
+  ],
+  "results": [
+    {
+      "item": "irons_spellbooks:mana_upgrade_orb",
+      "nbt": {
+        "irons_spellbooks:upgrade_orb_type": "irons_spellbooks:mana"
+      }
+    }
+  ]
+}

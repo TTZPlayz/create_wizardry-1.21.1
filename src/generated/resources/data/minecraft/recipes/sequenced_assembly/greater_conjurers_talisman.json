@@ -1,0 +1,62 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "irons_spellbooks:conjurers_talisman"
+  },
+  "loops": 1,
+  "results": [
+    {
+      "item": "irons_spellbooks:greater_conjurers_talisman"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "irons_spellbooks:conjurers_talisman"
+        },
+        {
+          "item": "irons_spellbooks:arcane_rune"
+        }
+      ],
+      "results": [
+        {
+          "item": "irons_spellbooks:conjurers_talisman"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "irons_spellbooks:conjurers_talisman"
+        },
+        {
+          "item": "irons_spellbooks:bloody_vellum"
+        }
+      ],
+      "results": [
+        {
+          "item": "irons_spellbooks:conjurers_talisman"
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "irons_spellbooks:conjurers_talisman"
+        }
+      ],
+      "results": [
+        {
+          "item": "irons_spellbooks:conjurers_talisman"
+        }
+      ]
+    }
+  ],
+  "transitionalItem": {
+    "item": "irons_spellbooks:conjurers_talisman"
+  }
+}

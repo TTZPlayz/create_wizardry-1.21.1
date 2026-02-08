@@ -1,0 +1,116 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "minecraft:enchanted_book"
+  },
+  "loops": 1,
+  "results": [
+    {
+      "chance": 3.0,
+      "item": "irons_spellbooks:rotten_spell_book",
+      "nbt": {
+        "irons_spellbooks:spell_container": {
+          "data": [],
+          "maxSpells": 8,
+          "mustEquip": "1b",
+          "spellWheel": "1b"
+        }
+      }
+    },
+    {
+      "item": "minecraft:dirt"
+    },
+    {
+      "chance": 2.0,
+      "item": "minecraft:bone_meal"
+    },
+    {
+      "chance": 4.0,
+      "item": "minecraft:rotten_flesh"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "minecraft:enchanted_book"
+        },
+        {
+          "item": "minecraft:rotten_flesh"
+        }
+      ],
+      "results": [
+        {
+          "item": "minecraft:enchanted_book"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "minecraft:enchanted_book"
+        },
+        {
+          "item": "minecraft:bone_meal"
+        }
+      ],
+      "results": [
+        {
+          "item": "minecraft:enchanted_book"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "minecraft:enchanted_book"
+        },
+        {
+          "item": "minecraft:dirt"
+        }
+      ],
+      "results": [
+        {
+          "item": "minecraft:enchanted_book"
+        }
+      ]
+    },
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "minecraft:enchanted_book"
+        },
+        {
+          "amount": 500,
+          "fluid": "create_wizardry:mana",
+          "nbt": {}
+        }
+      ],
+      "results": [
+        {
+          "item": "minecraft:enchanted_book"
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "minecraft:enchanted_book"
+        }
+      ],
+      "results": [
+        {
+          "item": "minecraft:enchanted_book"
+        }
+      ]
+    }
+  ],
+  "transitionalItem": {
+    "item": "minecraft:enchanted_book"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "type": "create:mixing",
+  "heatRequirement": "heated",
+  "ingredients": [
+    {
+      "item": "irons_spellbooks:icy_fang"
+    },
+    {
+      "amount": 1000,
+      "fluidTag": "minecraft:water"
+    }
+  ],
+  "results": [
+    {
+      "amount": 750,
+      "fluid": "irons_spellbooks:ice_venom"
+    }
+  ]
+}

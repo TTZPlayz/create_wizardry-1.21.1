@@ -1,0 +1,23 @@
+{
+  "type": "create:mixing",
+  "heatRequirement": "heated",
+  "ingredients": [
+    {
+      "item": "minecraft:ender_pearl"
+    },
+    {
+      "amount": 1000,
+      "fluid": "create:potion",
+      "nbt": {
+        "Bottle": "REGULAR",
+        "Potion": "irons_spellbooks:instant_mana_three"
+      }
+    }
+  ],
+  "results": [
+    {
+      "amount": 1000,
+      "fluid": "irons_spellbooks:evasion_elixir"
+    }
+  ]
+}

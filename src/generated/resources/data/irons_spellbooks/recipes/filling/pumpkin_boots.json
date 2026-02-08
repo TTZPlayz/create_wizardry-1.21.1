@@ -1,0 +1,21 @@
+{
+  "type": "create:filling",
+  "ingredients": [
+    {
+      "item": "irons_spellbooks:magic_cloth"
+    },
+    {
+      "amount": 500,
+      "fluid": "create_wizardry:mana",
+      "nbt": {}
+    }
+  ],
+  "results": [
+    {
+      "item": "irons_spellbooks:pumpkin_boots",
+      "nbt": {
+        "Damage": 0
+      }
+    }
+  ]
+}

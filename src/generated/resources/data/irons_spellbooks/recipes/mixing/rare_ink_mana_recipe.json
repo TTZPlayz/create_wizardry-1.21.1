@@ -1,0 +1,30 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "minecraft:gold_ingot"
+    },
+    {
+      "item": "minecraft:gold_ingot"
+    },
+    {
+      "item": "create:experience_nugget"
+    },
+    {
+      "amount": 750,
+      "fluid": "create_wizardry:mana",
+      "nbt": {}
+    },
+    {
+      "amount": 1000,
+      "fluid": "irons_spellbooks:uncommon_ink",
+      "nbt": {}
+    }
+  ],
+  "results": [
+    {
+      "amount": 500,
+      "fluid": "irons_spellbooks:rare_ink"
+    }
+  ]
+}

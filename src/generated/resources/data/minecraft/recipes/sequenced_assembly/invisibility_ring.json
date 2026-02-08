@@ -1,0 +1,48 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "irons_spellbooks:visibility_ring"
+  },
+  "loops": 1,
+  "results": [
+    {
+      "item": "irons_spellbooks:invisibility_ring"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "irons_spellbooks:visibility_ring"
+        },
+        {
+          "amount": 1000,
+          "fluid": "irons_spellbooks:timeless_slurry",
+          "nbt": {}
+        }
+      ],
+      "results": [
+        {
+          "item": "irons_spellbooks:visibility_ring"
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "irons_spellbooks:visibility_ring"
+        }
+      ],
+      "results": [
+        {
+          "item": "irons_spellbooks:visibility_ring"
+        }
+      ]
+    }
+  ],
+  "transitionalItem": {
+    "item": "irons_spellbooks:visibility_ring"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "type": "create:filling",
+  "ingredients": [
+    {
+      "item": "minecraft:hay_block"
+    },
+    {
+      "amount": 500,
+      "fluid": "create_wizardry:mana",
+      "nbt": {}
+    }
+  ],
+  "results": [
+    {
+      "item": "irons_spellbooks:pumpkin_leggings",
+      "nbt": {
+        "Damage": 0
+      }
+    }
+  ]
+}

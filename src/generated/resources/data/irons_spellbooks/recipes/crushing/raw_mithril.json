@@ -1,0 +1,17 @@
+{
+  "type": "create:crushing",
+  "ingredients": [
+    {
+      "item": "irons_spellbooks:raw_mithril"
+    }
+  ],
+  "results": [
+    {
+      "item": "create_wizardry:crushed_mithril"
+    },
+    {
+      "chance": 0.75,
+      "item": "create:experience_nugget"
+    }
+  ]
+}

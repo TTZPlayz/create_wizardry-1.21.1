@@ -1,0 +1,62 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "minecraft:netherite_scrap"
+  },
+  "loops": 1,
+  "results": [
+    {
+      "item": "irons_spellbooks:pyrium_staff"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "minecraft:netherite_scrap"
+        },
+        {
+          "item": "irons_spellbooks:magic_cloth"
+        }
+      ],
+      "results": [
+        {
+          "item": "minecraft:netherite_scrap"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "minecraft:netherite_scrap"
+        },
+        {
+          "item": "irons_spellbooks:pyrium_ingot"
+        }
+      ],
+      "results": [
+        {
+          "item": "minecraft:netherite_scrap"
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "minecraft:netherite_scrap"
+        }
+      ],
+      "results": [
+        {
+          "item": "minecraft:netherite_scrap"
+        }
+      ]
+    }
+  ],
+  "transitionalItem": {
+    "item": "minecraft:netherite_scrap"
+  }
+}

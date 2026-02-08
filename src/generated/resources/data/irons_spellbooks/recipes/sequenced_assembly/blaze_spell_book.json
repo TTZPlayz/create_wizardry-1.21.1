@@ -1,0 +1,79 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "minecraft:enchanted_book"
+  },
+  "loops": 1,
+  "results": [
+    {
+      "chance": 4.0,
+      "item": "irons_spellbooks:blaze_spell_book",
+      "nbt": {
+        "irons_spellbooks:spell_container": {
+          "data": [],
+          "maxSpells": 10,
+          "mustEquip": "1b",
+          "spellWheel": "1b"
+        }
+      }
+    },
+    {
+      "chance": 16.0,
+      "item": "minecraft:netherite_scrap"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "minecraft:enchanted_book"
+        },
+        {
+          "item": "minecraft:netherite_scrap"
+        }
+      ],
+      "results": [
+        {
+          "item": "minecraft:enchanted_book"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "minecraft:enchanted_book"
+        },
+        {
+          "item": "minecraft:blaze_powder"
+        }
+      ],
+      "results": [
+        {
+          "item": "minecraft:enchanted_book"
+        }
+      ]
+    },
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "minecraft:enchanted_book"
+        },
+        {
+          "amount": 1000,
+          "fluidTag": "minecraft:lava"
+        }
+      ],
+      "results": [
+        {
+          "item": "minecraft:enchanted_book"
+        }
+      ]
+    }
+  ],
+  "transitionalItem": {
+    "item": "minecraft:enchanted_book"
+  }
+}

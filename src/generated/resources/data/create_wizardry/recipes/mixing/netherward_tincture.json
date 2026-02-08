@@ -1,0 +1,32 @@
+{
+  "type": "create:mixing",
+  "heatRequirement": "superheated",
+  "ingredients": [
+    {
+      "item": "minecraft:nether_wart"
+    },
+    {
+      "item": "minecraft:nether_wart"
+    },
+    {
+      "item": "minecraft:blaze_powder"
+    },
+    {
+      "item": "minecraft:gold_nugget"
+    },
+    {
+      "amount": 1000,
+      "fluid": "create:potion",
+      "nbt": {
+        "Bottle": "REGULAR",
+        "Potion": "minecraft:mundane"
+      }
+    }
+  ],
+  "results": [
+    {
+      "amount": 250,
+      "fluid": "create_wizardry:netherward_tincture"
+    }
+  ]
+}

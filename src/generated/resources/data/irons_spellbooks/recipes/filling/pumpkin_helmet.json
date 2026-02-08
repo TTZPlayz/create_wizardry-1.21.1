@@ -1,0 +1,21 @@
+{
+  "type": "create:filling",
+  "ingredients": [
+    {
+      "item": "minecraft:carved_pumpkin"
+    },
+    {
+      "amount": 500,
+      "fluid": "create_wizardry:mana",
+      "nbt": {}
+    }
+  ],
+  "results": [
+    {
+      "item": "irons_spellbooks:pumpkin_helmet",
+      "nbt": {
+        "Damage": 0
+      }
+    }
+  ]
+}

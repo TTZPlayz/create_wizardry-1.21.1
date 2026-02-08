@@ -1,0 +1,19 @@
+{
+  "type": "create:deploying",
+  "ingredients": [
+    {
+      "item": "irons_spellbooks:wizard_helmet"
+    },
+    {
+      "item": "irons_spellbooks:fire_rune"
+    }
+  ],
+  "results": [
+    {
+      "item": "irons_spellbooks:pyromancer_helmet",
+      "nbt": {
+        "Damage": 0
+      }
+    }
+  ]
+}

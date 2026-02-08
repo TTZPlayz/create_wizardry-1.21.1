@@ -1,0 +1,78 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "minecraft:polished_deepslate"
+  },
+  "loops": 1,
+  "results": [
+    {
+      "item": "irons_spellbooks:arcane_anvil"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "minecraft:anvil"
+        },
+        {
+          "item": "minecraft:anvil"
+        }
+      ],
+      "results": [
+        {
+          "item": "minecraft:anvil"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "minecraft:anvil"
+        },
+        {
+          "item": "minecraft:amethyst_block"
+        }
+      ],
+      "results": [
+        {
+          "item": "minecraft:anvil"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "minecraft:anvil"
+        },
+        {
+          "item": "minecraft:diamond"
+        }
+      ],
+      "results": [
+        {
+          "item": "minecraft:anvil"
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "minecraft:anvil"
+        }
+      ],
+      "results": [
+        {
+          "item": "minecraft:anvil"
+        }
+      ]
+    }
+  ],
+  "transitionalItem": {
+    "item": "minecraft:anvil"
+  }
+}

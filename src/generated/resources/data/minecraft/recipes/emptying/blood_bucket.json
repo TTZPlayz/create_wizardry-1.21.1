@@ -1,0 +1,17 @@
+{
+  "type": "create:emptying",
+  "ingredients": [
+    {
+      "item": "create_wizardry:blood_bucket"
+    }
+  ],
+  "results": [
+    {
+      "item": "minecraft:bucket"
+    },
+    {
+      "amount": 1000,
+      "fluid": "irons_spellbooks:blood"
+    }
+  ]
+}

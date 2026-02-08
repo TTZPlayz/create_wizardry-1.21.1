@@ -1,0 +1,28 @@
+{
+  "type": "create:mixing",
+  "heatRequirement": "heated",
+  "ingredients": [
+    {
+      "item": "irons_spellbooks:arcane_essence"
+    },
+    {
+      "item": "irons_spellbooks:arcane_essence"
+    },
+    {
+      "item": "irons_spellbooks:arcane_essence"
+    },
+    {
+      "item": "irons_spellbooks:arcane_essence"
+    },
+    {
+      "amount": 1000,
+      "fluidTag": "minecraft:water"
+    }
+  ],
+  "results": [
+    {
+      "amount": 1000,
+      "fluid": "create_wizardry:mana"
+    }
+  ]
+}
