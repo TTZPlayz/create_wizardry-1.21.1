@@ -160,7 +160,7 @@ public class CreateWizardry {
 //            event.registerFluidType(new SimpleClientFluidType(CreateWizardry.id("block/lightning")), CWFluidRegistry.LIGHTNING_TYPE.get());
 //            event.registerFluidType(new SimpleTintedClientFluidType(ResourceLocation.withDefaultNamespace( "block/water_still"), 0x00831312), FIRE_ALE_TYPE.get());
 //            event.registerFluidType(new SimpleTintedClientFluidType(ResourceLocation.withDefaultNamespace( "block/milk_still"), 0x00D69D84), NETHERWARD_TINCTURE_TYPE.get());
-//        } //todo
+//        } //moved to fluid classes in 1.20.1
 
         @SubscribeEvent
         public static void registerBER(EntityRenderersEvent.RegisterRenderers event) {
@@ -169,7 +169,7 @@ public class CreateWizardry {
 
     }
     public static ResourceLocation id(String path) {
-        return new ResourceLocation(MOD_ID, path);
+        return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
     }
 
 }

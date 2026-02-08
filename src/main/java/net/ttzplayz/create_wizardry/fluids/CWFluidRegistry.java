@@ -1,8 +1,11 @@
 package net.ttzplayz.create_wizardry.fluids;
 
+import io.redspace.ironsspellbooks.IronsSpellbooks;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
 import io.redspace.ironsspellbooks.entity.mobs.abstract_spell_casting_mob.AbstractSpellCastingMob;
+import io.redspace.ironsspellbooks.fluids.SimpleClientFluidType;
+import io.redspace.ironsspellbooks.fluids.SimpleTintedClientFluidType;
 import io.redspace.ironsspellbooks.particle.ZapParticleOption;
 import io.redspace.ironsspellbooks.registries.MobEffectRegistry;
 import io.redspace.ironsspellbooks.registries.SoundRegistry;
@@ -24,6 +27,7 @@ import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
 import net.minecraftforge.fluids.FluidStack;
@@ -37,6 +41,7 @@ import net.ttzplayz.create_wizardry.item.CWItems;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 public class CWFluidRegistry {
 
@@ -45,10 +50,10 @@ public class CWFluidRegistry {
             DeferredRegister.create(ForgeRegistries.Keys.FLUID_TYPES, CreateWizardry.MOD_ID);
 
     // TEXTURES
-    public static final ResourceLocation LIGHTNING_TEXTURE = new ResourceLocation(CreateWizardry.MOD_ID, "block/lightning");
-    public static final ResourceLocation LIGHTNING_TEXTURE_FLOWING = new ResourceLocation(CreateWizardry.MOD_ID, "block/lightning_flow");
-    public static final ResourceLocation MANA_TEXTURE = new ResourceLocation(CreateWizardry.MOD_ID, "block/mana");
-    public static final ResourceLocation MANA_TEXTURE_FLOWING = new ResourceLocation(CreateWizardry.MOD_ID, "block/mana_flow");
+    public static final ResourceLocation LIGHTNING_TEXTURE = ResourceLocation.fromNamespaceAndPath(CreateWizardry.MOD_ID, "block/lightning");
+    public static final ResourceLocation LIGHTNING_TEXTURE_FLOWING = ResourceLocation.fromNamespaceAndPath(CreateWizardry.MOD_ID, "block/lightning");
+    public static final ResourceLocation MANA_TEXTURE = ResourceLocation.fromNamespaceAndPath(CreateWizardry.MOD_ID, "block/mana");
+    public static final ResourceLocation MANA_TEXTURE_FLOWING = ResourceLocation.fromNamespaceAndPath(CreateWizardry.MOD_ID, "block/mana");
     //TODO: MAKE TEXTURES FOR FLOWING
     public static final RegistryObject<FluidType> MANA_TYPE =
             FLUID_TYPES.register("mana_type", () ->
@@ -71,6 +76,10 @@ public class CWFluidRegistry {
                                     }
                                 }
                             }
+                        }
+                        @Override
+                        public void initializeClient(Consumer<IClientFluidTypeExtensions> consumer) {
+                            consumer.accept(new SimpleClientFluidType(CreateWizardry.id("block/mana")));
                         }
                     });
     public static final RegistryObject<FlowingFluid> MANA =
@@ -98,10 +107,11 @@ public class CWFluidRegistry {
                             .density(-1000)
 //                            .sound()
                             .lightLevel(15), LIGHTNING_TEXTURE, LIGHTNING_TEXTURE)
+
                     {
                         @Override
                         public void onVaporize(@Nullable Player player, Level level, BlockPos pos, FluidStack stack) {
-                            level.playSound(player, pos, SoundRegistry.EVOCATION_CAST.get(), SoundSource.BLOCKS, 0.5F, 1.0F);
+                            level.playSound(player, pos, SoundRegistry.LIGHTNING_CAST.get(), SoundSource.BLOCKS, 0.5F, 1.0F);
                             if (level instanceof ServerLevel) {
                                 AABB area = new AABB(pos).inflate(1.5, 1.5, 1.5);
                                 List<LivingEntity> entities = level.getEntitiesOfClass(LivingEntity.class, area);
@@ -129,6 +139,10 @@ public class CWFluidRegistry {
                                 }
                             }
                         }
+                        @Override
+                        public void initializeClient(Consumer<IClientFluidTypeExtensions> consumer) {
+                            consumer.accept(new SimpleClientFluidType(CreateWizardry.id("block/lightning")));
+                        }
                     });
     public static final RegistryObject<FlowingFluid> LIGHTNING =
             FLUIDS.register("lightning", () -> new ForgeFlowingFluid.Source(CWFluidRegistry.LIGHTNING_PROPERTIES));
@@ -147,9 +161,19 @@ public class CWFluidRegistry {
 
 //    //SIMPLE FLUIDS
     public static final RegistryObject<FluidType> FIRE_ALE_TYPE = FLUID_TYPES.register("fire_ale_type", () ->
-            new FluidType(FluidType.Properties.create()));
+            new FluidType(FluidType.Properties.create()){
+                @Override
+                public void initializeClient(Consumer<IClientFluidTypeExtensions> consumer) {
+                    consumer.accept(new SimpleTintedClientFluidType(ResourceLocation.withDefaultNamespace( "block/water_still"), 0x00831312));
+                }
+            });
     public static final RegistryObject<FluidType> NETHERWARD_TINCTURE_TYPE = FLUID_TYPES.register("netherward_tincture_type", () ->
-            new FluidType(FluidType.Properties.create()));
+            new FluidType(FluidType.Properties.create()){
+                @Override
+                public void initializeClient(Consumer<IClientFluidTypeExtensions> consumer) {
+                    consumer.accept(new SimpleTintedClientFluidType(ResourceLocation.fromNamespaceAndPath("forge", "block/milk_still"), 0x00D69D84));
+                }
+            });
 
     public static final RegistryObject<FlowingFluid> FIRE_ALE_FLUID =
             FLUIDS.register("fire_ale", () -> new ForgeFlowingFluid.Source(CWFluidRegistry.FIRE_ALE_PROPERTIES));
