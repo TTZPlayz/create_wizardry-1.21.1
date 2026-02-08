@@ -2,12 +2,7 @@ package net.ttzplayz.create_wizardry.advancement;
 
 import com.google.common.collect.Sets;
 import com.mojang.logging.LogUtils;
-import com.simibubi.create.AllItems;
-import com.simibubi.create.foundation.advancement.CreateAdvancement;
-import com.tterrag.registrate.util.entry.ItemProviderEntry;
-import io.redspace.ironsspellbooks.registries.ItemRegistry;
 import net.minecraft.advancements.Advancement;
-import net.minecraft.advancements.CriterionTrigger;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.CachedOutput;
@@ -17,9 +12,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.ttzplayz.create_wizardry.CreateWizardry;
-import net.minecraftforge.registries.RegistryObject;
 import net.ttzplayz.create_wizardry.block.CWBlocks;
-import net.ttzplayz.create_wizardry.item.CWItems;
 import org.slf4j.Logger;
 
 import java.nio.file.Path;
@@ -30,28 +23,29 @@ import java.util.function.Consumer;
 import java.util.function.UnaryOperator;
 
 import static io.redspace.ironsspellbooks.registries.ItemRegistry.*;
+import static net.ttzplayz.create_wizardry.item.CWItems.*;
 
 public class CWAdvancements implements DataProvider {
     private static final Logger LOGGER = LogUtils.getLogger();
     public static final List<CWAdvancement> ENTRIES = new ArrayList<>();
     public static final CWAdvancement START = null,
-            ROOT = create("root", b -> b.icon(CWItems.LIGHTNING_BUCKET.get())
+            ROOT = create("root", b -> b.icon(LIGHTNING_BUCKET.getId()) //HAS to be getId to work
                     .title("Mechanical Sorcery")
                     .description("Welcome to Create: Wizardry!")
                     .awardedForFree()
                     .special(CWAdvancement.TaskType.SILENT)),
-            CHANNELER = create("channeler", b -> b.icon(CWBlocks.CHANNELER.get())
+            CHANNELER = create("channeler", b -> b.icon(CWBlocks.CHANNELER.getId())
                     .title("Harvest the Heavens")
                     .description("Craft and Place Down a Channeler to harvest Liquid Lightning.")
                     .special(CWAdvancement.TaskType.NORMAL)
                     .whenIconCollected()
                     .after(ROOT)),
-            SHOCKING = create("shocking", b -> b.icon(LIGHTNING_BOTTLE.get())
+            SHOCKING = create("shocking", b -> b.icon(LIGHTNING_BOTTLE.getId())
                     .title("A *Shocking* Discovery")
                     .description("Yeah, SHOCKING...")
-                    .after(CHANNELER)
-                    .special(CWAdvancement.TaskType.SECRET)),
-            UNLIMITED_POWER = create("unlimited_power", b -> b.icon(CWItems.LIGHTNING_BUCKET.get())
+                    .special(CWAdvancement.TaskType.NORMAL)
+                    .after(CHANNELER)),
+            UNLIMITED_POWER = create("unlimited_power", b -> b.icon(LIGHTNING_BUCKET.getId())
                     .title("UNLIMITED POWER!!!")
                     .description("Safe? No. Fun? Yes.")
                     .special(CWAdvancement.TaskType.SUPER_SECRET)
@@ -62,7 +56,7 @@ public class CWAdvancements implements DataProvider {
     private static CWAdvancement create(String id, UnaryOperator<CWAdvancement.Builder> b) {
         return new CWAdvancement(id, b) {
             @Override
-            protected RegistryObject<CWBuiltInTrigger> add(ResourceLocation id) {
+            protected CWBuiltInTrigger add(ResourceLocation id) {
                 return CWBuiltInTriggers.register(id);
             }
         };
@@ -82,6 +76,8 @@ public class CWAdvancements implements DataProvider {
     public CWAdvancements(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
         this.output = output;
     }
+
+
 
 
 

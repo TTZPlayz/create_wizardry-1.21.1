@@ -1,16 +1,6 @@
 package net.ttzplayz.create_wizardry.jei;//package net.ttzplayz.create_wizardry.jei;
 
-import com.simibubi.create.AllBlocks;
-import com.simibubi.create.AllItems;
-import com.simibubi.create.AllRecipeTypes;
-import com.simibubi.create.compat.jei.category.CreateRecipeCategory;
-import com.simibubi.create.compat.jei.category.MillingCategory;
-import com.simibubi.create.content.kinetics.crusher.AbstractCrushingRecipe;
 import mezz.jei.api.IModPlugin;
-import mezz.jei.api.registration.IRecipeCatalystRegistration;
-import mezz.jei.api.registration.IRecipeCategoryRegistration;
-import mezz.jei.api.runtime.IIngredientManager;
-import mezz.jei.api.runtime.IJeiRuntime;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -18,16 +8,17 @@ import net.minecraft.world.item.ItemStack;
 import mezz.jei.api.registration.IRecipeRegistration;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.JeiPlugin;
-import net.ttzplayz.create_wizardry.block.CWBlocks;
-import org.jetbrains.annotations.NotNull;
+import net.ttzplayz.create_wizardry.CreateWizardry;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static net.ttzplayz.create_wizardry.item.CWItems.*;
 
 @JeiPlugin
 public class CWJeiPlugin implements IModPlugin {
+    private static final ResourceLocation ID = CreateWizardry.id("information");
+
 
 //    look at create jei implementation /TODO
 
@@ -49,9 +40,10 @@ public class CWJeiPlugin implements IModPlugin {
 //                .build("milling", MillingCategory::new);
 //    }
 
-    @Override
-    public @NotNull ResourceLocation getPluginUid() {
-        return ResourceLocation.parse("create_wizardry:information");
+//    @Override
+    public ResourceLocation getPluginUid() {
+//        return ResourceLocation.tryParse("create_wizardry:information");
+        return ID;
     }
 
     @Override

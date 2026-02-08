@@ -1,29 +1,22 @@
 {
   "parent": "create_wizardry:channeler",
-  "criteria": {
-    "builtin": {
-      "trigger": "create_wizardry:shocking"
-    }
-  },
+  "criteria": {},
   "display": {
+    "announce_to_chat": false,
     "description": {
       "color": "#DBA213",
       "translate": "advancement.create_wizardry.shocking.desc"
     },
-    "frame": "goal",
-    "hidden": true,
+    "frame": "task",
+    "hidden": false,
     "icon": {
-      "count": 1,
-      "id": "irons_spellbooks:lightning_bottle"
+      "item": "irons_spellbooks:lightning_bottle"
     },
+    "show_toast": true,
     "title": {
       "translate": "advancement.create_wizardry.shocking"
     }
   },
-  "requirements": [
-    [
-      "builtin"
-    ]
-  ],
+  "requirements": [],
   "sends_telemetry_event": true
 }

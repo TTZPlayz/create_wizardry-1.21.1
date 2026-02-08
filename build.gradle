@@ -80,6 +80,8 @@ minecraft {
 
             // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
             args '--mod', mod_id, '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+            property("mixin.env.remapRefMap", "true")
+            property("mixin.env.refMapRemappingFile", "${projectDir}/build/createSrgToMcp/output.srg")
         }
     }
 }
@@ -125,7 +127,7 @@ repositories {
     }
     maven {
         name = "Curios"
-        url = uri("https://maven.theillusivec4.top/")
+        url = "https://maven.theillusivec4.top/"
     }
 }
 
@@ -152,11 +154,13 @@ dependencies {
 
     implementation fg.deobf("io.redspace:irons_spellbooks:${irons_spells_version}")
 
-    implementation "software.bernie.geckolib:geckolib-forge-${minecraft_version}:${geckolib_version}"
-    implementation "dev.kosmx.player-anim:player-animation-lib-forge:${project.player_anim}"
+    implementation fg.deobf("software.bernie.geckolib:geckolib-forge-${minecraft_version}:${geckolib_version}")
+    implementation fg.deobf("dev.kosmx.player-anim:player-animation-lib-forge:${project.player_anim}")
 
-    runtimeOnly "top.theillusivec4.curios:curios-forge:${curios_version}"
-    compileOnly "top.theillusivec4.curios:curios-forge:${curios_version}:api"
+    implementation fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}")
+    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}:api")
+
+
 
     // Example mod dependency using a mod jar from ./libs with a flat dir repository
     // This maps to ./libs/coolmod-${mc_version}-${coolmod_version}.jar

@@ -138,7 +138,7 @@ public class CWRecipeProvider extends RecipeProvider {
                 .build(output);
     }
     private void buildCompatRecipes(Consumer<FinishedRecipe> output) {
-        mixing(ResourceLocation.parse("cei_rare_ink_recipe"))
+        mixing(new ResourceLocation("cei_rare_ink_recipe"))
                 .whenModLoaded("create_enchantment_industry")
                 .require(GOLD_INGOT)
                 .require(GOLD_INGOT)
@@ -149,7 +149,7 @@ public class CWRecipeProvider extends RecipeProvider {
 //                .require(EXPERIENCE, 3)
                 .output(RARE_INK.get(), 500)
                 .build(output);
-        mixing(ResourceLocation.parse("cei_epic_ink_recipe"))
+        mixing(new ResourceLocation("cei_epic_ink_recipe"))
                 .whenModLoaded("create_enchantment_industry")
                 .require(DIAMOND)
                 .require(DIAMOND)
@@ -164,7 +164,7 @@ public class CWRecipeProvider extends RecipeProvider {
                 .output(EPIC_INK.get(), 500)
                 .requiresHeat(HEATED)
                 .build(output);
-        mixing(ResourceLocation.parse("cei_legendary_ink_recipe"))
+        mixing(new ResourceLocation("cei_legendary_ink_recipe"))
                 .whenModLoaded("create_enchantment_industry")
                 .require(AMETHYST_SHARD)
                 .require(AMETHYST_SHARD)
@@ -178,12 +178,12 @@ public class CWRecipeProvider extends RecipeProvider {
                 .output(LEGENDARY_INK.get(), 500)
                 .requiresHeat(SUPERHEATED)
                 .build(output);
-        compacting(ResourceLocation.parse("cei_exp_to_exp_nugget"))
+        compacting(new ResourceLocation("cei_exp_to_exp_nugget"))
 //                .require(EXPERIENCE, 3)
                 .require(SLIMEBALLS)
                 .output(EXP_NUGGET)
                 .build(output);
-        compacting(ResourceLocation.parse("cei_exp_to_exp_nugget_with_honeycomb"))
+        compacting(new ResourceLocation("cei_exp_to_exp_nugget_with_honeycomb"))
 //                .require(EXPERIENCE, 3)
                 .require(HONEYCOMB)
                 .output(EXP_NUGGET)
@@ -999,7 +999,7 @@ public class CWRecipeProvider extends RecipeProvider {
                 .build(output);
     }
     private void buildCharmRecipes(Consumer<FinishedRecipe> output) {
-        sequencedAssembly(ResourceLocation.parse(String.valueOf(MANA_RING.get())))
+        sequencedAssembly(new ResourceLocation(String.valueOf(MANA_RING.get())))
                 .require(ARCANE_INGOT.get())
                 .transitionTo(ARCANE_INGOT.get())
                 .addOutput(MANA_RING.get(), 1)
@@ -1007,7 +1007,7 @@ public class CWRecipeProvider extends RecipeProvider {
                 .addStep(DeployerApplicationRecipe::new, b -> b.require(GEMS_DIAMOND))
                 .addStep(PressingRecipe::new, b -> b)
                 .build(output);
-        sequencedAssembly(ResourceLocation.parse(String.valueOf(SILVER_RING.get())))
+        sequencedAssembly(new ResourceLocation(String.valueOf(SILVER_RING.get())))
                 .require(SILVER.ingots)
                 .transitionTo(IRON_INGOT)
                 .addOutput(SILVER_RING.get(), 1)
@@ -1015,7 +1015,7 @@ public class CWRecipeProvider extends RecipeProvider {
                 .addStep(DeployerApplicationRecipe::new, b -> b.require(MITHRIL_NUGGET.get()))
                 .addStep(PressingRecipe::new, b -> b)
                 .build(output);
-        sequencedAssembly(ResourceLocation.parse(String.valueOf(COOLDOWN_RING.get())))
+        sequencedAssembly(new ResourceLocation(String.valueOf(COOLDOWN_RING.get())))
                 .require(INGOTS_COPPER)
                 .transitionTo(COPPER_INGOT)
                 .addOutput(COOLDOWN_RING.get(), 1)
@@ -1023,7 +1023,7 @@ public class CWRecipeProvider extends RecipeProvider {
                 .addStep(DeployerApplicationRecipe::new, b -> b.require(MITHRIL_NUGGET.get()))
                 .addStep(PressingRecipe::new, b -> b)
                 .build(output);
-        sequencedAssembly(ResourceLocation.parse(String.valueOf(CAST_TIME_RING.get())))
+        sequencedAssembly(new ResourceLocation(String.valueOf(CAST_TIME_RING.get())))
                 .require(INGOTS_COPPER)
                 .transitionTo(COPPER_INGOT)
                 .addOutput(CAST_TIME_RING.get(), 1)
@@ -1032,7 +1032,7 @@ public class CWRecipeProvider extends RecipeProvider {
                 .addStep(DeployerApplicationRecipe::new, b -> b.require(AMETHYST_CLUSTER))
                 .addStep(PressingRecipe::new, b -> b)
                 .build(output);
-        sequencedAssembly(ResourceLocation.parse(String.valueOf(EMERALD_STONEPLATE_RING.get())))
+        sequencedAssembly(new ResourceLocation(String.valueOf(EMERALD_STONEPLATE_RING.get())))
                 .require(GOLD_INGOT)
                 .transitionTo(GOLD_INGOT)
                 .addOutput(EMERALD_STONEPLATE_RING.get(), 1)
@@ -1041,7 +1041,7 @@ public class CWRecipeProvider extends RecipeProvider {
                 .addStep(DeployerApplicationRecipe::new, b -> b.require(EXP_NUGGET))
                 .addStep(PressingRecipe::new, b -> b)
                 .build(output);
-        sequencedAssembly(ResourceLocation.parse(String.valueOf(FIREWARD_RING.get())))
+        sequencedAssembly(new ResourceLocation(String.valueOf(FIREWARD_RING.get())))
                 .require(ARCANE_INGOT.get())
                 .transitionTo(ARCANE_INGOT.get())
                 .addOutput(FIREWARD_RING.get(), 1)
@@ -1050,7 +1050,7 @@ public class CWRecipeProvider extends RecipeProvider {
                 .addStep(DeployerApplicationRecipe::new, b -> b.require(CINDER_ESSENCE.get()))
                 .addStep(PressingRecipe::new, b -> b)
                 .build(output);
-        sequencedAssembly(ResourceLocation.parse(String.valueOf(FROSTWARD_RING.get())))
+        sequencedAssembly(new ResourceLocation(String.valueOf(FROSTWARD_RING.get())))
                 .require(ARCANE_INGOT.get())
                 .transitionTo(ARCANE_INGOT.get())
                 .addOutput(FROSTWARD_RING.get(), 1)
@@ -1059,7 +1059,7 @@ public class CWRecipeProvider extends RecipeProvider {
                 .addStep(DeployerApplicationRecipe::new, b -> b.require(ICE_CRYSTAL.get()))
                 .addStep(PressingRecipe::new, b -> b)
                 .build(output);
-        sequencedAssembly(ResourceLocation.parse(String.valueOf(POISONWARD_RING.get())))
+        sequencedAssembly(new ResourceLocation(String.valueOf(POISONWARD_RING.get())))
                 .require(ARCANE_INGOT.get())
                 .transitionTo(ARCANE_INGOT.get())
                 .addOutput(POISONWARD_RING.get(), 1)
@@ -1068,7 +1068,7 @@ public class CWRecipeProvider extends RecipeProvider {
                 .addStep(DeployerApplicationRecipe::new, b -> b.require(NATURE_RUNE.get()))
                 .addStep(PressingRecipe::new, b -> b)
                 .build(output);
-        sequencedAssembly(ResourceLocation.parse(String.valueOf(AFFINITY_RING.get())))
+        sequencedAssembly(new ResourceLocation(String.valueOf(AFFINITY_RING.get())))
                 .require(ARCANE_INGOT.get())
                 .transitionTo(ARCANE_INGOT.get())
                 .addOutput(AFFINITY_RING.get(), 1)
@@ -1077,7 +1077,7 @@ public class CWRecipeProvider extends RecipeProvider {
                 .addStep(DeployerApplicationRecipe::new, b -> b.require(BUCKET))
                 .addStep(PressingRecipe::new, b -> b)
                 .build(output);
-//        sequencedAssembly(ResourceLocation.parse(String.valueOf(EXPULSION_RING.get())))
+//        sequencedAssembly(new ResourceLocation(String.valueOf(EXPULSION_RING.get())))
 //                .require(ARCANE_INGOT.get())
 //                .transitionTo(ARCANE_INGOT.get())
 //                .addOutput(EXPULSION_RING.get(), 1)
@@ -1086,7 +1086,7 @@ public class CWRecipeProvider extends RecipeProvider {
 //                .addStep(DeployerApplicationRecipe::new, b -> b.require(WIND_CHARGE))
 //                .addStep(PressingRecipe::new, b -> b)
 //                .build(output);
-        sequencedAssembly(ResourceLocation.parse(String.valueOf(VISIBILITY_RING.get())))
+        sequencedAssembly(new ResourceLocation(String.valueOf(VISIBILITY_RING.get())))
                 .require(GOLD_INGOT)
                 .transitionTo(GOLD_INGOT)
                 .addOutput(VISIBILITY_RING.get(), 1)
@@ -1095,7 +1095,7 @@ public class CWRecipeProvider extends RecipeProvider {
                 .addStep(DeployerApplicationRecipe::new, b -> b.require(SPYGLASS))
                 .addStep(PressingRecipe::new, b -> b)
                 .build(output);
-        sequencedAssembly(ResourceLocation.parse(String.valueOf(SIGNET_OF_THE_BETRAYER.get())))
+        sequencedAssembly(new ResourceLocation(String.valueOf(SIGNET_OF_THE_BETRAYER.get())))
                 .require(NETHERITE_INGOT)
                 .transitionTo(GOLD_INGOT)
                 .addOutput(SIGNET_OF_THE_BETRAYER.get(), 1)
@@ -1104,7 +1104,7 @@ public class CWRecipeProvider extends RecipeProvider {
                 .addStep(DeployerApplicationRecipe::new, b -> b.require(DIVINE_SOULSHARD.get()))
                 .addStep(PressingRecipe::new, b -> b)
                 .build(output);
-        sequencedAssembly(ResourceLocation.parse(String.valueOf(INVISIBILITY_RING.get())))
+        sequencedAssembly(new ResourceLocation(String.valueOf(INVISIBILITY_RING.get())))
                 .require(VISIBILITY_RING.get())
                 .transitionTo(VISIBILITY_RING.get())
                 .addOutput(INVISIBILITY_RING.get(), 1)
@@ -1113,7 +1113,7 @@ public class CWRecipeProvider extends RecipeProvider {
                 .addStep(PressingRecipe::new, b -> b)
                 .build(output);
 
-        sequencedAssembly(ResourceLocation.parse(String.valueOf(AMETHYST_RESONANCE_NECKLACE.get())))
+        sequencedAssembly(new ResourceLocation(String.valueOf(AMETHYST_RESONANCE_NECKLACE.get())))
                 .require(Tags.Items.LEATHER)
                 .transitionTo(Items.LEATHER)
                 .addOutput(AMETHYST_RESONANCE_NECKLACE.get(), 1)
@@ -1122,7 +1122,7 @@ public class CWRecipeProvider extends RecipeProvider {
                 .addStep(DeployerApplicationRecipe::new, builder -> builder.require(Tags.Items.LEATHER))
                 .addStep(PressingRecipe::new, builder -> (builder))
                 .build(output);
-        sequencedAssembly(ResourceLocation.parse(String.valueOf(HEAVY_CHAIN.get())))
+        sequencedAssembly(new ResourceLocation(String.valueOf(HEAVY_CHAIN.get())))
                 .require(CHAIN)
                 .transitionTo(CHAIN)
                 .addOutput(HEAVY_CHAIN.get(), 1)
@@ -1131,7 +1131,7 @@ public class CWRecipeProvider extends RecipeProvider {
                 .addStep(DeployerApplicationRecipe::new, b -> b.require(CHAIN))
                 .addStep(PressingRecipe::new, b -> b)
                 .build(output);
-        sequencedAssembly(ResourceLocation.parse(String.valueOf(CONJURERS_TALISMAN.get())))
+        sequencedAssembly(new ResourceLocation(String.valueOf(CONJURERS_TALISMAN.get())))
                 .require(SKELETON_SKULL)
                 .transitionTo(SKELETON_SKULL)
                 .addOutput(CONJURERS_TALISMAN.get(), 1)
@@ -1140,7 +1140,7 @@ public class CWRecipeProvider extends RecipeProvider {
                 .addStep(DeployerApplicationRecipe::new, b -> b.require(Tags.Items.STRING))
                 .addStep(PressingRecipe::new, b -> b)
                 .build(output);
-        sequencedAssembly(ResourceLocation.parse(String.valueOf(GREATER_CONJURERS_TALISMAN.get())))
+        sequencedAssembly(new ResourceLocation(String.valueOf(GREATER_CONJURERS_TALISMAN.get())))
                 .require(CONJURERS_TALISMAN.get())
                 .transitionTo(CONJURERS_TALISMAN.get())
                 .addOutput(GREATER_CONJURERS_TALISMAN.get(), 1)
@@ -1149,7 +1149,7 @@ public class CWRecipeProvider extends RecipeProvider {
                 .addStep(DeployerApplicationRecipe::new, b -> b.require(BLOODY_VELLUM.get()))
                 .addStep(PressingRecipe::new, b -> b)
                 .build(output);
-        sequencedAssembly(ResourceLocation.parse(String.valueOf(CONCENTRATION_AMULET.get())))
+        sequencedAssembly(new ResourceLocation(String.valueOf(CONCENTRATION_AMULET.get())))
                 .require(CHAIN)
                 .transitionTo(CHAIN)
                 .addOutput(CONCENTRATION_AMULET.get(), 1)
@@ -1158,7 +1158,7 @@ public class CWRecipeProvider extends RecipeProvider {
                 .addStep(DeployerApplicationRecipe::new, b -> b.require(CHAIN))
                 .addStep(PressingRecipe::new, b -> b)
                 .build(output);
-        sequencedAssembly(ResourceLocation.parse(String.valueOf(TELEPORTATION_AMULET.get())))
+        sequencedAssembly(new ResourceLocation(String.valueOf(TELEPORTATION_AMULET.get())))
                 .require(CHAIN)
                 .transitionTo(CHAIN)
                 .addOutput(TELEPORTATION_AMULET.get(), 1)
@@ -1174,7 +1174,7 @@ public class CWRecipeProvider extends RecipeProvider {
         manaFillingWithItem(output, ARCANE_ESSENCE.get(), SUGAR, "sugar");
         manaFillingWithItem(output, ARCANE_ESSENCE.get(), CINDER_FLOUR, "cinder_flour");
         // MIXING
-        mixing(ResourceLocation.parse(CINDER_ESSENCE.getId() + "_mana_recipe"))
+        mixing(new ResourceLocation(CINDER_ESSENCE.getId() + "_mana_recipe"))
                 .require(MANA.get(), 1000)
                 .require(BLAZE_POWDER)
                 .require(BLAZE_POWDER)
@@ -1182,21 +1182,21 @@ public class CWRecipeProvider extends RecipeProvider {
                 .output(CINDER_ESSENCE.get(), 8)
                 .requiresHeat(SUPERHEATED)
                 .build(output);
-        mixing(ResourceLocation.parse(COMMON_INK.getId() + "_mana_recipe"))
+        mixing(new ResourceLocation(COMMON_INK.getId() + "_mana_recipe"))
                 .require(COPPER_INGOT)
                 .require(COPPER_INGOT)
                 .require(INK_SAC)
                 .require(MANA.get(), 250)
                 .output(COMMON_INK.get(), 500)
                 .build(output);
-        mixing(ResourceLocation.parse(UNCOMMON_INK.getId() + "_mana_recipe"))
+        mixing(new ResourceLocation(UNCOMMON_INK.getId() + "_mana_recipe"))
                 .require(IRON_INGOT)
                 .require(IRON_INGOT)
                 .require(MANA.get(), 500)
                 .require(COMMON_INK.get(), 1000)
                 .output(UNCOMMON_INK.get(), 500)
                 .build(output);
-        mixing(ResourceLocation.parse(RARE_INK.getId() + "_mana_recipe"))
+        mixing(new ResourceLocation(RARE_INK.getId() + "_mana_recipe"))
                 .require(GOLD_INGOT)
                 .require(GOLD_INGOT)
                 .require(MANA.get(), 750)
@@ -1204,7 +1204,7 @@ public class CWRecipeProvider extends RecipeProvider {
                 .require(UNCOMMON_INK.get(), 1000)
                 .output(RARE_INK.get(), 500)
                 .build(output);
-        mixing(ResourceLocation.parse(EPIC_INK.getId() + "_mana_recipe"))
+        mixing(new ResourceLocation(EPIC_INK.getId() + "_mana_recipe"))
                 .require(DIAMOND)
                 .require(DIAMOND)
                 .require(MANA.get(), 1000)
@@ -1214,7 +1214,7 @@ public class CWRecipeProvider extends RecipeProvider {
                 .output(EPIC_INK.get(), 500)
                 .requiresHeat(HEATED)
                 .build(output);
-        mixing(ResourceLocation.parse(LEGENDARY_INK.getId() + "_mana_recipe"))
+        mixing(new ResourceLocation(LEGENDARY_INK.getId() + "_mana_recipe"))
                 .require(AMETHYST_SHARD)
                 .require(AMETHYST_SHARD)
                 .require(MANA.get(), 1000)
@@ -1231,7 +1231,7 @@ public class CWRecipeProvider extends RecipeProvider {
     // HELPERS
     private void runeSequence(Consumer<FinishedRecipe> output,
                               ItemLike focus, ItemLike targetRune) {
-        mixing(ResourceLocation.parse(String.valueOf(targetRune)))
+        mixing(new ResourceLocation(String.valueOf(targetRune)))
                 .require(BLANK_RUNE.get())
                 .require(focus)
                 .require(focus)
@@ -1249,7 +1249,7 @@ public class CWRecipeProvider extends RecipeProvider {
     }
     private void orbSequence(Consumer<FinishedRecipe> output,
                              ItemLike rune, ItemLike targetOrb) {
-        mixing(ResourceLocation.parse(String.valueOf(targetOrb)))
+        mixing(new ResourceLocation(String.valueOf(targetOrb)))
                 .require(UPGRADE_ORB.get())
                 .require(rune)
                 .require(rune)
@@ -1259,24 +1259,24 @@ public class CWRecipeProvider extends RecipeProvider {
                 .build(output);
     }
     private void bottleEmptyingAndFilling(Consumer<FinishedRecipe> output, FlowingFluid fluid, ItemLike vesselItem) {
-        filling(ResourceLocation.parse(String.valueOf(vesselItem)))
+        filling(new ResourceLocation(String.valueOf(vesselItem)))
                 .require(GLASS_BOTTLE)
                 .require(FluidIngredient.fromFluid(fluid, 250))
                 .output(vesselItem, 1)
                 .build(output);
-        emptying(ResourceLocation.parse(String.valueOf(vesselItem)))
+        emptying(new ResourceLocation(String.valueOf(vesselItem)))
                 .require(vesselItem)
                 .output(GLASS_BOTTLE, 1)
                 .output(fluid, 250)
                 .build(output);
     }
     private void bucketEmptyingAndFilling(Consumer<FinishedRecipe> output, FlowingFluid fluid, ItemLike vesselItem) {
-        filling(ResourceLocation.parse(String.valueOf(vesselItem)))
+        filling(new ResourceLocation(String.valueOf(vesselItem)))
                 .require(BUCKET)
                 .require(FluidIngredient.fromFluid(fluid, 1000))
                 .output(vesselItem, 1)
                 .build(output);
-        emptying(ResourceLocation.parse(String.valueOf(vesselItem)))
+        emptying(new ResourceLocation(String.valueOf(vesselItem)))
                 .require(vesselItem)
                 .output(BUCKET, 1)
                 .output(fluid, 1000)
@@ -1310,7 +1310,7 @@ public class CWRecipeProvider extends RecipeProvider {
                 WIZARD_CHESTPLATE.get(), WIZARD_HELMET.get()};
         for (Item baseArmor : armors) {
             ArmorItem.Type armorType = ((ArmorItem) baseArmor).getType();
-            ResourceLocation itemId = ResourceLocation.fromNamespaceAndPath(IronsSpellbooks.MODID,
+            ResourceLocation itemId = new ResourceLocation(IronsSpellbooks.MODID,
                     String.format(prefix + "_" + armorType.getName()));
             ItemStack result = BuiltInRegistries.ITEM.get(itemId).getDefaultInstance();
             baseDeployingRecipe(output, result.getItem(), baseArmor, deployedItem);
@@ -1323,7 +1323,7 @@ public class CWRecipeProvider extends RecipeProvider {
         itemFilling(output, result, input, MANA.get(), mb);
     }
     private void manaFillingWithItem(Consumer<FinishedRecipe> output, ItemLike result, ItemLike input, String prefix) {
-        ResourceLocation itemId1 = ResourceLocation.parse(result + "_" + prefix + "_" + "filling");
+        ResourceLocation itemId1 = new ResourceLocation(result + "_" + prefix + "_" + "filling");
         filling(itemId1)
                 .require(input)
                 .require(MANA.get(), 250)
@@ -1331,7 +1331,7 @@ public class CWRecipeProvider extends RecipeProvider {
                 .build(output);
     }
     private void manaFillingWithItem(Consumer<FinishedRecipe> output, ItemLike result, TagKey<Item> input, String prefix) {
-        ResourceLocation itemId1 = ResourceLocation.parse(result + "_" + prefix + "_" + "filling");
+        ResourceLocation itemId1 = new ResourceLocation(result + "_" + prefix + "_" + "filling");
         filling(itemId1)
                 .require(input)
                 .require(MANA.get(), 250)
@@ -1348,7 +1348,7 @@ public class CWRecipeProvider extends RecipeProvider {
     private void armorFilling(Consumer<FinishedRecipe> output, String armorName) {
         var leather_armors = new Item[]{LEATHER_BOOTS, LEATHER_LEGGINGS, LEATHER_CHESTPLATE, LEATHER_HELMET};
         for (Item baseArmor : leather_armors) {
-            ResourceLocation itemId = ResourceLocation.fromNamespaceAndPath(IronsSpellbooks.MODID, String.format(armorName + "_" + ((ArmorItem) baseArmor).getType().getName()));
+            ResourceLocation itemId = new ResourceLocation(IronsSpellbooks.MODID, String.format(armorName + "_" + ((ArmorItem) baseArmor).getType().getName()));
             Holder.@NotNull Reference<Item> result = ForgeRegistries.ITEMS.getDelegateOrThrow(itemId);
             manaFilling(output, result.get(), baseArmor, 250);
         }

@@ -1,11 +1,8 @@
 {
   "parent": "create_wizardry:shocking",
-  "criteria": {
-    "builtin": {
-      "trigger": "create_wizardry:unlimited_power"
-    }
-  },
+  "criteria": {},
   "display": {
+    "announce_to_chat": true,
     "description": {
       "color": "#DBA213",
       "translate": "advancement.create_wizardry.unlimited_power.desc"
@@ -13,17 +10,13 @@
     "frame": "challenge",
     "hidden": true,
     "icon": {
-      "count": 1,
-      "id": "create_wizardry:lightning_bucket"
+      "item": "create_wizardry:lightning_bucket"
     },
+    "show_toast": true,
     "title": {
       "translate": "advancement.create_wizardry.unlimited_power"
     }
   },
-  "requirements": [
-    [
-      "builtin"
-    ]
-  ],
+  "requirements": [],
   "sends_telemetry_event": true
 }

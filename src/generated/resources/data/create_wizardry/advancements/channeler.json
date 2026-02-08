@@ -5,7 +5,9 @@
       "conditions": {
         "items": [
           {
-            "items": "create_wizardry:channeler"
+            "items": [
+              "create_wizardry:channeler"
+            ]
           }
         ]
       },
@@ -18,10 +20,12 @@
       "color": "#DBA213",
       "translate": "advancement.create_wizardry.channeler.desc"
     },
+    "frame": "task",
+    "hidden": false,
     "icon": {
-      "count": 1,
-      "id": "create_wizardry:channeler"
+      "item": "create_wizardry:channeler"
     },
+    "show_toast": true,
     "title": {
       "translate": "advancement.create_wizardry.channeler"
     }

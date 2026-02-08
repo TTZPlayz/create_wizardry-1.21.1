@@ -1,6 +1,7 @@
 {
   "criteria": {
     "0": {
+      "conditions": {},
       "trigger": "minecraft:inventory_changed"
     }
   },
@@ -11,9 +12,10 @@
       "color": "#DBA213",
       "translate": "advancement.create_wizardry.root.desc"
     },
+    "frame": "task",
+    "hidden": false,
     "icon": {
-      "count": 1,
-      "id": "create_wizardry:lightning_bucket"
+      "item": "create_wizardry:lightning_bucket"
     },
     "show_toast": false,
     "title": {

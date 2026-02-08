@@ -1,9 +1,6 @@
 package net.ttzplayz.create_wizardry.advancement;
 
 import com.simibubi.create.Create;
-import com.simibubi.create.foundation.advancement.AllAdvancements;
-import com.simibubi.create.foundation.advancement.AllTriggers;
-import com.simibubi.create.foundation.advancement.CreateAdvancement;
 import com.tterrag.registrate.util.entry.ItemProviderEntry;
 import net.minecraft.advancements.*;
 import net.minecraft.advancements.critereon.*;
@@ -18,11 +15,15 @@ import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.ttzplayz.create_wizardry.CreateWizardry;
-import net.minecraftforge.registries.RegistryObject;
+import net.minecraftforge.registries.ForgeRegistries;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
 
 public abstract class CWAdvancement {
@@ -30,7 +31,7 @@ public abstract class CWAdvancement {
     static final String LANG = "advancement." + CreateWizardry.MOD_ID + ".";
     static final String SECRET_SUFFIX = "\n§7(Hidden Advancement)";
     private Advancement.Builder builder = net.minecraft.advancements.Advancement.Builder.advancement();
-    private RegistryObject<CWBuiltInTrigger> builtinTrigger;
+    private CWBuiltInTrigger builtinTrigger;
     private CWAdvancement parent;
     private final CWAdvancement.Builder createBuilder = new CWAdvancement.Builder();
 
@@ -43,15 +44,16 @@ public abstract class CWAdvancement {
     public CWAdvancement(String id, UnaryOperator<CWAdvancement.Builder> b) {
         this.id = id;
         b.apply(createBuilder);
-        if (!createBuilder.externalTrigger)
+        if (!createBuilder.externalTrigger) {
             builtinTrigger = add(asResource(id));
-        if (createBuilder.type == CWAdvancement.TaskType.SECRET)
+        }
+        if (createBuilder.type == CWAdvancement.TaskType.SECRET) {
             description += SECRET_SUFFIX;
-        this.builder.display(createBuilder.icon, Component.translatable(this.titleKey()), Component.translatable(this.descriptionKey()).withStyle((s) -> s.withColor(14393875)), id.equals("root") ? BACKGROUND : null, createBuilder.type.frame, createBuilder.type.toast, createBuilder.type.announce, createBuilder.type.hide);
+        }
         CWAdvancements.ENTRIES.add(this);
     }
 
-    protected abstract RegistryObject<CWBuiltInTrigger> add(ResourceLocation id);
+    protected abstract CWBuiltInTrigger add(ResourceLocation id);
 
     private String titleKey() {
         return LANG + id;
@@ -62,18 +64,20 @@ public abstract class CWAdvancement {
     }
 
     public void awardTo(Player player) {
-        if (!(player instanceof ServerPlayer sp))
+        if (!(player instanceof ServerPlayer sp)) {
             return;
-        if (builtinTrigger == null)
+        }
+        if (builtinTrigger == null) {
             throw new UnsupportedOperationException(
                     "Advancement " + id + " uses external Triggers, it cannot be awarded directly");
-        builtinTrigger.get().trigger(sp);
+        }
+        builtinTrigger.trigger(sp);
     }
 
     public boolean isAlreadyAwardedTo(Player player) {
         if (player instanceof ServerPlayer sp) {
-            Advancement advancement = sp.getServer().getAdvancements().getAdvancement(Create.asResource(this.id));
-            return advancement == null ? true : sp.getAdvancements().getOrStartProgress(advancement).isDone();
+            Advancement advancement = sp.getServer().getAdvancements().getAdvancement(this.asResource(id));
+            return advancement == null || sp.getAdvancements().getOrStartProgress(advancement).isDone();
         } else {
             return true;
         }
@@ -93,7 +97,16 @@ public abstract class CWAdvancement {
             this.builder.parent(this.parent.datagenResult);
         }
 
-        this.datagenResult = this.builder.save(t, Create.asResource(this.id).toString());
+        ItemStack icon = Objects.requireNonNull(createBuilder.iconSupplier, "Missing icon for advancement " + id).get();
+        this.builder.display(icon, Component.translatable(this.titleKey()), Component.translatable(this.descriptionKey())
+                .withStyle((s) -> s.withColor(14393875)),
+                id.equals("root") ? BACKGROUND : null, createBuilder.type.frame, createBuilder.type.toast,
+                createBuilder.type.announce, createBuilder.type.hide);
+        createBuilder.applyCriteria(this.builder);
+        this.datagenResult = this.builder.save(t,
+                this.asResource(this.id).toString()
+//                Create.asResource(this.id).toString() To add to create advancements
+        );
     }
 
     public enum TaskType {
@@ -120,8 +133,8 @@ public abstract class CWAdvancement {
     public class Builder {
         private CWAdvancement.TaskType type = CWAdvancement.TaskType.NORMAL;
         private boolean externalTrigger;
-        private int keyIndex;
-        private ItemStack icon;
+        private Supplier<ItemStack> iconSupplier;
+        private final List<Supplier<CriterionTriggerInstance>> criteriaSuppliers = new ArrayList<>();
 
         public CWAdvancement.Builder special(CWAdvancement.TaskType type) {
             this.type = type;
@@ -138,11 +151,25 @@ public abstract class CWAdvancement {
         }
 
         CWAdvancement.Builder icon(ItemLike item) {
-            return this.icon(new ItemStack(item));
+            return this.icon(() -> new ItemStack(item));
         }
 
         CWAdvancement.Builder icon(ItemStack stack) {
-            this.icon = stack;
+            return this.icon(() -> stack);
+        }
+
+        CWAdvancement.Builder icon(ResourceLocation itemId) {
+            return this.icon(() -> {
+                Item item = ForgeRegistries.ITEMS.getValue(itemId);
+                if (item == null) {
+                    throw new IllegalStateException("Missing item for advancement icon: " + itemId);
+                }
+                return new ItemStack(item);
+            });
+        }
+
+        CWAdvancement.Builder icon(Supplier<ItemStack> supplier) {
+            this.iconSupplier = supplier;
             return this;
         }
 
@@ -157,11 +184,13 @@ public abstract class CWAdvancement {
         }
 
         CWAdvancement.Builder whenBlockPlaced(Block block) {
-            return this.externalTrigger(ItemUsedOnLocationTrigger.TriggerInstance.placedBlock(block));
+            return this.externalTrigger(() -> ItemUsedOnLocationTrigger.TriggerInstance.placedBlock(block));
         }
 
         CWAdvancement.Builder whenIconCollected() {
-            return this.externalTrigger(net.minecraft.advancements.critereon.InventoryChangeTrigger.TriggerInstance.hasItems(new ItemLike[]{this.icon.getItem()}));
+            return this.externalTrigger(() -> InventoryChangeTrigger.TriggerInstance.hasItems(new ItemLike[]{
+                    this.iconSupplier.get().getItem()
+            }));
         }
 
         CWAdvancement.Builder whenItemCollected(ItemProviderEntry<?> item) {
@@ -169,23 +198,36 @@ public abstract class CWAdvancement {
         }
 
         CWAdvancement.Builder whenItemCollected(ItemLike itemProvider) {
-            return this.externalTrigger(net.minecraft.advancements.critereon.InventoryChangeTrigger.TriggerInstance.hasItems(new ItemLike[]{itemProvider}));
+            return this.externalTrigger(() -> InventoryChangeTrigger.TriggerInstance.hasItems(new ItemLike[]{
+                    itemProvider
+            }));
         }
 
         CWAdvancement.Builder whenItemCollected(TagKey<Item> tag) {
-            return this.externalTrigger(net.minecraft.advancements.critereon.InventoryChangeTrigger.TriggerInstance.hasItems(new ItemPredicate[]{new ItemPredicate(tag, (Set)null, MinMaxBounds.Ints.ANY, MinMaxBounds.Ints.ANY, EnchantmentPredicate.NONE, EnchantmentPredicate.NONE, (Potion)null, NbtPredicate.ANY)}));
+            return this.externalTrigger(() -> InventoryChangeTrigger.TriggerInstance.hasItems(new ItemPredicate[]{
+                    new ItemPredicate(tag, (Set) null, MinMaxBounds.Ints.ANY, MinMaxBounds.Ints.ANY,
+                            EnchantmentPredicate.NONE, EnchantmentPredicate.NONE, (Potion) null, NbtPredicate.ANY)
+            }));
         }
 
         CWAdvancement.Builder awardedForFree() {
-            return this.externalTrigger(net.minecraft.advancements.critereon.InventoryChangeTrigger.TriggerInstance.hasItems(new ItemLike[0]));
+            return this.externalTrigger(() -> InventoryChangeTrigger.TriggerInstance.hasItems(new ItemLike[0]));
         }
 
         CWAdvancement.Builder externalTrigger(CriterionTriggerInstance trigger) {
-            CWAdvancement.this.builder.addCriterion(String.valueOf(this.keyIndex), trigger);
+            return this.externalTrigger(() -> trigger);
+        }
+
+        CWAdvancement.Builder externalTrigger(Supplier<CriterionTriggerInstance> triggerSupplier) {
+            this.criteriaSuppliers.add(triggerSupplier);
             this.externalTrigger = true;
-            ++this.keyIndex;
             return this;
         }
-    }
 
+        void applyCriteria(Advancement.Builder builder) {
+            for (int i = 0; i < criteriaSuppliers.size(); i++) {
+                builder.addCriterion(String.valueOf(i), criteriaSuppliers.get(i).get());
+            }
+        }
+    }
 }

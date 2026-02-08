@@ -41,13 +41,14 @@ import java.util.List;
 public class CWFluidRegistry {
 
     private static final DeferredRegister<Fluid> FLUIDS = DeferredRegister.create(Registries.FLUID, CreateWizardry.MOD_ID);
-    private static final DeferredRegister<FluidType> FLUID_TYPES = DeferredRegister.create((ResourceLocation) ForgeRegistries.FLUID_TYPES, CreateWizardry.MOD_ID);
+    private static final DeferredRegister<FluidType> FLUID_TYPES =
+            DeferredRegister.create(ForgeRegistries.Keys.FLUID_TYPES, CreateWizardry.MOD_ID);
 
     // TEXTURES
-    public static final ResourceLocation LIGHTNING_TEXTURE = ResourceLocation.fromNamespaceAndPath(CreateWizardry.MOD_ID, "block/lightning");
-    public static final ResourceLocation LIGHTNING_TEXTURE_FLOWING = ResourceLocation.fromNamespaceAndPath(CreateWizardry.MOD_ID, "block/lightning_flow");
-    public static final ResourceLocation MANA_TEXTURE = ResourceLocation.fromNamespaceAndPath(CreateWizardry.MOD_ID, "block/mana");
-    public static final ResourceLocation MANA_TEXTURE_FLOWING = ResourceLocation.fromNamespaceAndPath(CreateWizardry.MOD_ID, "block/mana_flow");
+    public static final ResourceLocation LIGHTNING_TEXTURE = new ResourceLocation(CreateWizardry.MOD_ID, "block/lightning");
+    public static final ResourceLocation LIGHTNING_TEXTURE_FLOWING = new ResourceLocation(CreateWizardry.MOD_ID, "block/lightning_flow");
+    public static final ResourceLocation MANA_TEXTURE = new ResourceLocation(CreateWizardry.MOD_ID, "block/mana");
+    public static final ResourceLocation MANA_TEXTURE_FLOWING = new ResourceLocation(CreateWizardry.MOD_ID, "block/mana_flow");
     //TODO: MAKE TEXTURES FOR FLOWING
     public static final RegistryObject<FluidType> MANA_TYPE =
             FLUID_TYPES.register("mana_type", () ->

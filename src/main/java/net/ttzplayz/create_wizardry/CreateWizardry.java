@@ -14,9 +14,8 @@ import net.minecraftforge.client.event.EntityRenderersEvent;
 //import net.minecraftforge.client.event.RegisterClientExtensionsEvent; //todo
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.GameData;
-import net.minecraftforge.registries.RegisterEvent;
 import net.ttzplayz.create_wizardry.advancement.CWAdvancements;
-import net.ttzplayz.create_wizardry.advancement.CWTriggers;
+//import net.ttzplayz.create_wizardry.advancement.CWTriggers;
 import net.ttzplayz.create_wizardry.block.CWBlocks;
 import net.ttzplayz.create_wizardry.block.entity.CWBlockEntities;
 import net.ttzplayz.create_wizardry.block.entity.renderer.ChannelerRenderer;
@@ -38,10 +37,10 @@ import net.minecraftforge.event.entity.EntityStruckByLightningEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.ModContainer;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 import static com.simibubi.create.AllBlocks.STEAM_WHISTLE;
 import static io.redspace.ironsspellbooks.registries.CreativeTabRegistry.MATERIALS_TAB;
@@ -67,7 +66,8 @@ public class CreateWizardry {
 
     // The constructor for the mod class is the first code that is run when your mod is loaded.
     // FML will recognize some parameter types like IEventBus or ModContainer and pass them in automatically.
-    public CreateWizardry(IEventBus modEventBus, ModContainer modContainer) {
+    public CreateWizardry() {
+        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
 
@@ -77,8 +77,8 @@ public class CreateWizardry {
         CWBlocks.register(modEventBus);
         CWBlockEntities.register(modEventBus);
         CWItems.register(modEventBus);
-        CWBuiltInTriggers.register(modEventBus);
         CWAdvancements.registerTriggers();
+        CWBuiltInTriggers.register();
 
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
@@ -169,17 +169,7 @@ public class CreateWizardry {
 
     }
     public static ResourceLocation id(String path) {
-        return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
+        return new ResourceLocation(MOD_ID, path);
     }
 
-    @Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
-    public static class ModEvents {
-        @SubscribeEvent
-        public static void onRegister(final RegisterEvent event) {
-            if (event.getRegistryKey().equals(CWBuiltInTriggers.TRIGGER_TYPE_KEY)) {
-                CWAdvancements.registerTriggers();
-                CWTriggers.register();
-            }
-        }
-    }
 }
