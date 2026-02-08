@@ -45,6 +45,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 import static com.simibubi.create.AllBlocks.STEAM_WHISTLE;
 import static io.redspace.ironsspellbooks.registries.CreativeTabRegistry.MATERIALS_TAB;
+import static io.redspace.ironsspellbooks.registries.FluidRegistry.BLOOD;
 import static io.redspace.ironsspellbooks.registries.FluidRegistry.ICE_VENOM_FLUID;
 import static io.redspace.ironsspellbooks.registries.ItemRegistry.MITHRIL_SCRAP;
 import static io.redspace.ironsspellbooks.registries.ItemRegistry.RAW_MITHRIL;
@@ -97,6 +98,7 @@ public class CreateWizardry {
         event.enqueueWork(() -> OpenPipeEffectHandler.REGISTRY.register(FIRE_ALE_FLUID.get(), new CWEffectHandlers.FireAleEffectHandler()));
         event.enqueueWork(() -> OpenPipeEffectHandler.REGISTRY.register(NETHERWARD_TINCTURE_FLUID.get(), new CWEffectHandlers.NetherwardEffectHandler()));
         event.enqueueWork(() -> OpenPipeEffectHandler.REGISTRY.register(ICE_VENOM_FLUID.get(), new CWEffectHandlers.IceVenomEffectHandler()));
+        event.enqueueWork(() -> OpenPipeEffectHandler.REGISTRY.register(BLOOD.get(), new CWEffectHandlers.BloodEffectHandler()));
 
         event.enqueueWork(() -> {
             Holder<PoiType> lightningRod =

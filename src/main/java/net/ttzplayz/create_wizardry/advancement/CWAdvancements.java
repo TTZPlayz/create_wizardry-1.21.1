@@ -25,8 +25,8 @@ public class CWAdvancements implements DataProvider {
     public static final List<CWAdvancement> ENTRIES = new ArrayList<>();
     public static final CWAdvancement START = null,
             ROOT = create("root", b -> b.icon(LIGHTNING_BUCKET.getId()) //HAS to be getId to work
-                    .title("Mechanical Sorcery") //todo: switch the title and advancement
-                    .description("Welcome to Create: Wizardry!")
+                    .title("Welcome to Create: Wizardry")
+                    .description("Mechanical Sorcery")
                     .awardedForFree()
                     .special(CWAdvancement.TaskType.SILENT)),
             CHANNELER = create("channeler", b -> b.icon(CWBlocks.CHANNELER.getId())
@@ -41,10 +41,16 @@ public class CWAdvancements implements DataProvider {
                     .special(CWAdvancement.TaskType.SECRET)
                     .after(CHANNELER)),
             UNLIMITED_POWER = create("unlimited_power", b -> b.icon(LIGHTNING_BUCKET.getId())
-                    .title("UNLIMITED POWER!!!")
+            .title("UNLIMITED POWER!!!")
                     .description("Safe? No. Fun? Yes.")
                     .special(CWAdvancement.TaskType.SUPER_SECRET)
-                    .after(SHOCKING));
+                    .after(SHOCKING)),
+            VAMPIRE_SHOWER = create("vampire_shower", b -> b.icon(BLOOD_BUCKET.getId())
+            .title("Vampire Shower")
+                    .description("Bathe in the blood of your enemies.")
+                    .special(CWAdvancement.TaskType.SECRET)
+                    .after(ROOT));
+            //todo: industrial ink
 
 
 
@@ -58,10 +64,9 @@ public class CWAdvancements implements DataProvider {
     }
 
     public static void registerTriggers() {
-        CWBuiltInTriggers.register("root");
-        CWBuiltInTriggers.register("channeler");
-        CWBuiltInTriggers.register("shocking");
-        CWBuiltInTriggers.register("unlimited_power");
+        for (CWAdvancement advancement : ENTRIES) {
+            CWBuiltInTriggers.register(advancement.getId());
+        }
     }
 
     // Datagen

@@ -1,25 +1,25 @@
 {
-  "parent": "create_wizardry:channeler",
+  "parent": "create_wizardry:root",
   "criteria": {
     "0": {
       "conditions": {},
-      "trigger": "create_wizardry:shocking_builtin"
+      "trigger": "create_wizardry:vampire_shower_builtin"
     }
   },
   "display": {
     "announce_to_chat": true,
     "description": {
       "color": "#DBA213",
-      "translate": "advancement.create_wizardry.shocking.desc"
+      "translate": "advancement.create_wizardry.vampire_shower.desc"
     },
     "frame": "goal",
     "hidden": true,
     "icon": {
-      "item": "irons_spellbooks:lightning_bottle"
+      "item": "create_wizardry:blood_bucket"
     },
     "show_toast": true,
     "title": {
-      "translate": "advancement.create_wizardry.shocking"
+      "translate": "advancement.create_wizardry.vampire_shower"
     }
   },
   "requirements": [

@@ -96,6 +96,10 @@ public abstract class CWAdvancement {
         consumer.accept(descriptionKey(), description);
     }
 
+    String getId() {
+        return id;
+    }
+
     void save(Consumer<Advancement> t) {
         if (this.parent != null) {
             this.builder.parent(this.parent.datagenResult);

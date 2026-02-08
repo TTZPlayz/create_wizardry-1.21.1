@@ -23,9 +23,9 @@ public class CWItems {
     public static final RegistryObject<Item> MITHRIL_NUGGET = ITEMS.register("mithril_nugget",
             () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
     public static final RegistryObject<Item> MANA_BUCKET = ITEMS.register("mana_bucket",
-            () -> new BucketItem(CWFluidRegistry.MANA, new Item.Properties()));
+            () -> new BucketItem(CWFluidRegistry.MANA, new Item.Properties().rarity(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> LIGHTNING_BUCKET = ITEMS.register("lightning_bucket",
-            () -> new BucketItem(CWFluidRegistry.LIGHTNING, new Item.Properties()));
+            () -> new BucketItem(CWFluidRegistry.LIGHTNING, new Item.Properties().rarity(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> BLOOD_BUCKET = ITEMS.register("blood_bucket",
             () -> new BucketItem(BLOOD, new Item.Properties()));
 

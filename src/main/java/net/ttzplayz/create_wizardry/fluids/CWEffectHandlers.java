@@ -156,4 +156,17 @@ public class CWEffectHandlers {
             }
         }
     }
+    public static class BloodEffectHandler implements OpenPipeEffectHandler {
+        @Override
+        public void apply(Level level, AABB area, FluidStack fluidStack) {
+            if (level.getGameTime() % 5L == 0L) {
+                List<LivingEntity> entities = level.getEntitiesOfClass(LivingEntity.class, area, LivingEntity::isAffectedByPotions);
+                for(LivingEntity entity : entities) {
+                    if (entity instanceof Player player && !(player instanceof FakePlayer)) {
+                        CWAdvancements.VAMPIRE_SHOWER.awardTo(player);
+                    }
+                }
+            }
+        }
+    }
 }
