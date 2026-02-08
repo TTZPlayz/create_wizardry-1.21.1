@@ -107,7 +107,7 @@ public class CWFluidRegistry {
                     {
                         @Override
                         public void onVaporize(@Nullable Player player, Level level, BlockPos pos, FluidStack stack) {
-                            level.playSound(player, pos, SoundRegistry.EVOCATION_CAST.get(), SoundSource.BLOCKS, 0.5F, 1.0F);
+                            level.playSound(player, pos, SoundRegistry.LIGHTNING_CAST.get(), SoundSource.BLOCKS, 0.5F, 1.0F);
                             if (level instanceof ServerLevel) {
                                 AABB area = new AABB(pos).inflate(1.5, 1.5, 1.5);
                                 List<LivingEntity> entities = level.getEntitiesOfClass(LivingEntity.class, area);

@@ -10,7 +10,7 @@
 		"4": "create:block/fluid_tank_top",
 		"5": "create_wizardry:block/channeler_top",
 		"6": "create_wizardry:block/channeler_side",
-		"particle": "create_wizardry:block/channeler_base"
+		"particle": "create_wizardry:block/channeler_side"
 	},
 	"elements": [
 		{

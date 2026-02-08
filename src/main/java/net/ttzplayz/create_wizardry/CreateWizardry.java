@@ -63,6 +63,7 @@ import net.neoforged.neoforge.event.server.ServerStartingEvent;
 
 import static com.simibubi.create.AllBlocks.STEAM_WHISTLE;
 import static io.redspace.ironsspellbooks.registries.CreativeTabRegistry.MATERIALS_TAB;
+import static io.redspace.ironsspellbooks.registries.FluidRegistry.BLOOD;
 import static io.redspace.ironsspellbooks.registries.FluidRegistry.ICE_VENOM_FLUID;
 import static io.redspace.ironsspellbooks.registries.ItemRegistry.MITHRIL_SCRAP;
 import static io.redspace.ironsspellbooks.registries.ItemRegistry.RAW_MITHRIL;
@@ -80,11 +81,7 @@ public class CreateWizardry {
     private static final Logger LOGGER = LogUtils.getLogger();
     private static final String CW_CREEPER_CHARGE_COUNT = "cw_charged_creepers";
     private static final int MAX_CHARGED_CREEPERS_PER_BOLT = 4;
-    // Create a Deferred Register to hold Blocks which will all be registered under the "examplemod" namespace
 
-
-    // The constructor for the mod class is the first code that is run when your mod is loaded.
-    // FML will recognize some parameter types like IEventBus or ModContainer and pass them in automatically.
     public CreateWizardry(IEventBus modEventBus, ModContainer modContainer) {
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
@@ -114,6 +111,7 @@ public class CreateWizardry {
         event.enqueueWork(() -> OpenPipeEffectHandler.REGISTRY.register(FIRE_ALE_FLUID.get(), new CWEffectHandlers.FireAleEffectHandler()));
         event.enqueueWork(() -> OpenPipeEffectHandler.REGISTRY.register(NETHERWARD_TINCTURE_FLUID.get(), new CWEffectHandlers.NetherwardEffectHandler()));
         event.enqueueWork(() -> OpenPipeEffectHandler.REGISTRY.register(ICE_VENOM_FLUID.get(), new CWEffectHandlers.IceVenomEffectHandler()));
+        event.enqueueWork(() -> OpenPipeEffectHandler.REGISTRY.register(BLOOD.get(), new CWEffectHandlers.BloodEffectHandler()));
 
         event.enqueueWork(() -> {
             Holder<PoiType> lightningRod =

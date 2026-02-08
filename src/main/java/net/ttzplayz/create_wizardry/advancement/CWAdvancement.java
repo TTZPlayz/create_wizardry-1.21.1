@@ -48,7 +48,7 @@ public abstract class CWAdvancement {
         if (!createBuilder.externalTrigger)
             builtinTrigger = add(asResource(id));
 
-        if (createBuilder.type == CWAdvancement.TaskType.SECRET)
+        if (createBuilder.type == CWAdvancement.TaskType.SECRET || createBuilder.type == TaskType.SUPER_SECRET)
             description += SECRET_SUFFIX;
 
         CWAdvancements.ENTRIES.add(this);
@@ -88,6 +88,14 @@ public abstract class CWAdvancement {
 
     private ResourceLocation asResource(String id) {
         return ResourceLocation.fromNamespaceAndPath(CreateWizardry.MOD_ID, id);
+    }
+
+    ResourceLocation getId() {
+        return asResource(id);
+    }
+
+    boolean hasBuiltinTrigger() {
+        return builtinTrigger != null;
     }
 
     public void provideLang(BiConsumer<String, String> consumer) {

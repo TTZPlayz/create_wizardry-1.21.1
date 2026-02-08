@@ -1,0 +1,29 @@
+{
+  "parent": "create_wizardry:root",
+  "criteria": {
+    "builtin": {
+      "trigger": "create_wizardry:vampire_shower"
+    }
+  },
+  "display": {
+    "description": {
+      "color": "#DBA213",
+      "translate": "advancement.create_wizardry.vampire_shower.desc"
+    },
+    "frame": "goal",
+    "hidden": true,
+    "icon": {
+      "count": 1,
+      "id": "create_wizardry:blood_bucket"
+    },
+    "title": {
+      "translate": "advancement.create_wizardry.vampire_shower"
+    }
+  },
+  "requirements": [
+    [
+      "builtin"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

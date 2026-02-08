@@ -53,7 +53,7 @@ public class CWEffectHandlers {
                         area.getCenter().x, area.getCenter().y, area.getCenter().z,
                         SoundRegistry.EVOCATION_CAST.get(),
                         SoundSource.BLOCKS,
-                        10000.0F,
+                        0.5F,
                         0.8F,
                         false
                 );
@@ -83,7 +83,7 @@ public class CWEffectHandlers {
                             area.getCenter().x, area.getCenter().y, area.getCenter().z,
                             SoundRegistry.LIGHTNING_CAST.get(),
                             SoundSource.BLOCKS,
-                            10000.0F,
+                            0.5F, //fix for 1.20.1 also
                             0.8F,
                             false
                     );
@@ -96,12 +96,14 @@ public class CWEffectHandlers {
                     MagicManager.spawnParticles(level, ParticleHelper.ELECTRICITY, entity.getX(), entity.getY() + entity.getBbHeight() / 2, entity.getZ(), 10, entity.getBbWidth() / 3, entity.getBbHeight() / 3, entity.getBbWidth() / 3, 0.1, false);
                     level.playSound(entity, entity.getOnPos(), SoundRegistry.LIGHTNING_CAST.get(), SoundSource.BLOCKS, 0.5F, 1.0F);
 
-                    if (entity instanceof Creeper creeper) {
-                        var dummyLightningBolt = new LightningBolt(EntityType.LIGHTNING_BOLT, level);
-                        dummyLightningBolt.setDamage(0);
-                        dummyLightningBolt.setVisualOnly(true);
-                        creeper.thunderHit((ServerLevel) level, dummyLightningBolt);
-                    } else if (entity instanceof Player player && !player.isFakePlayer()) {
+//                    if (entity instanceof Creeper creeper) {
+//                        var dummyLightningBolt = new LightningBolt(EntityType.LIGHTNING_BOLT, level);
+//                        dummyLightningBolt.setDamage(0);
+//                        dummyLightningBolt.setVisualOnly(true);
+//                        creeper.thunderHit((ServerLevel) level, dummyLightningBolt);
+//                    } else
+                    //to prevent op farming
+                        if (entity instanceof Player player && !player.isFakePlayer()) {
                         CWAdvancements.SHOCKING.awardTo(player);
                     }
                 }
@@ -151,6 +153,20 @@ public class CWEffectHandlers {
                 for(LivingEntity entity : entities) {
                     entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 0, false, false));
                     entity.setTicksFrozen(100);
+                }
+            }
+        }
+    }
+    public static class BloodEffectHandler implements OpenPipeEffectHandler {
+        @Override
+        public void apply(Level level, AABB area, FluidStack fluid) {
+            if (level.getGameTime() % 5L == 0L) {
+                List<LivingEntity> entities = level.getEntitiesOfClass(LivingEntity.class, area, LivingEntity::isAffectedByPotions);
+                for(LivingEntity entity : entities) {
+                    if (entity instanceof Player player && !player.isFakePlayer()) {
+                        CWAdvancements.VAMPIRE_SHOWER.awardTo(player);
+                    }
+                    entity.playSound(SoundRegistry.BLOOD_EXPLOSION.get());
                 }
             }
         }
