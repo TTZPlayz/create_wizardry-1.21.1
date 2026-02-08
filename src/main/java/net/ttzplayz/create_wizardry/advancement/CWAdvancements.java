@@ -3,14 +3,10 @@ package net.ttzplayz.create_wizardry.advancement;
 import com.google.common.collect.Sets;
 import com.mojang.logging.LogUtils;
 import net.minecraft.advancements.Advancement;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
 import net.ttzplayz.create_wizardry.block.CWBlocks;
 import org.slf4j.Logger;
 
@@ -42,7 +38,7 @@ public class CWAdvancements implements DataProvider {
             SHOCKING = create("shocking", b -> b.icon(LIGHTNING_BOTTLE.getId())
                     .title("A *Shocking* Discovery")
                     .description("Yeah, SHOCKING...")
-                    .special(CWAdvancement.TaskType.NORMAL)
+                    .special(CWAdvancement.TaskType.SECRET)
                     .after(CHANNELER)),
             UNLIMITED_POWER = create("unlimited_power", b -> b.icon(LIGHTNING_BUCKET.getId())
                     .title("UNLIMITED POWER!!!")
@@ -111,10 +107,10 @@ public class CWAdvancements implements DataProvider {
             advancement.provideLang(consumer);
     }
 
-    private static java.util.function.Function<HolderLookup.Provider, ItemStack> itemFromRegistry(ResourceLocation id) {
-        return provider -> new ItemStack(
-                provider.lookupOrThrow(Registries.ITEM)
-                        .getOrThrow(ResourceKey.create(Registries.ITEM, id))
-                        .value());
-    }
+//    private static java.util.function.Function<HolderLookup.Provider, ItemStack> itemFromRegistry(ResourceLocation id) {
+//        return provider -> new ItemStack(
+//                provider.lookupOrThrow(Registries.ITEM)
+//                        .getOrThrow(ResourceKey.create(Registries.ITEM, id))
+//                        .value());
+//    }
 }
