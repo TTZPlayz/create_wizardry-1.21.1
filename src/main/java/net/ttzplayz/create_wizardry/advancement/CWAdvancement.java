@@ -1,6 +1,7 @@
 package net.ttzplayz.create_wizardry.advancement;
 
 import com.simibubi.create.Create;
+import com.simibubi.create.foundation.advancement.AllTriggers;
 import com.tterrag.registrate.util.entry.ItemProviderEntry;
 import net.minecraft.advancements.*;
 import net.minecraft.advancements.critereon.*;
@@ -46,7 +47,10 @@ public abstract class CWAdvancement {
         b.apply(createBuilder);
         if (!createBuilder.externalTrigger) {
             builtinTrigger = add(asResource(id));
+            builtinTrigger = CWTriggers.addSimple(id + "_builtin");
+            this.builder.addCriterion("0", this.builtinTrigger.instance());
         }
+
         if (createBuilder.type == CWAdvancement.TaskType.SECRET) {
             description += SECRET_SUFFIX;
         }

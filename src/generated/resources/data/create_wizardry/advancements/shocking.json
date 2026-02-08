@@ -1,6 +1,11 @@
 {
   "parent": "create_wizardry:channeler",
-  "criteria": {},
+  "criteria": {
+    "0": {
+      "conditions": {},
+      "trigger": "create_wizardry:shocking_builtin"
+    }
+  },
   "display": {
     "announce_to_chat": false,
     "description": {
@@ -17,6 +22,10 @@
       "translate": "advancement.create_wizardry.shocking"
     }
   },
-  "requirements": [],
+  "requirements": [
+    [
+      "0"
+    ]
+  ],
   "sends_telemetry_event": true
 }

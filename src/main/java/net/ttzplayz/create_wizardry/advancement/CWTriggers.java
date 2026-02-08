@@ -1,23 +1,19 @@
 package net.ttzplayz.create_wizardry.advancement;
 
 import com.simibubi.create.foundation.advancement.CriterionTriggerBase;
-import com.simibubi.create.foundation.advancement.SimpleCreateTrigger;
 import net.minecraft.advancements.CriteriaTriggers;
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.core.registries.BuiltInRegistries;
 
 import java.util.LinkedList;
 import java.util.List;
 
 public class CWTriggers {
-    private static final List<CriterionTriggerBase<?>> triggers = new LinkedList<>();
+    private static final List<CWBuiltInTrigger> triggers = new LinkedList<>();
 
-    public static SimpleCreateTrigger addSimple(String id) {
-        return add(new SimpleCreateTrigger(id));
+    public static CWBuiltInTrigger addSimple(String id) {
+        return add(new CWBuiltInTrigger(id));
     }
 
-    private static <T extends CriterionTriggerBase<?>> T add(T instance) {
+    private static <T extends CriterionTriggerBase<?>> CWBuiltInTrigger add(CWBuiltInTrigger instance) {
         triggers.add(instance);
         return instance;
     }

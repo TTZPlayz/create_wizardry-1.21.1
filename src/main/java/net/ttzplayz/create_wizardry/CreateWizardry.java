@@ -16,6 +16,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.GameData;
 import net.ttzplayz.create_wizardry.advancement.CWAdvancements;
 //import net.ttzplayz.create_wizardry.advancement.CWTriggers;
+import net.ttzplayz.create_wizardry.advancement.CWTriggers;
 import net.ttzplayz.create_wizardry.block.CWBlocks;
 import net.ttzplayz.create_wizardry.block.entity.CWBlockEntities;
 import net.ttzplayz.create_wizardry.block.entity.renderer.ChannelerRenderer;
@@ -79,6 +80,7 @@ public class CreateWizardry {
         CWItems.register(modEventBus);
         CWAdvancements.registerTriggers();
         CWBuiltInTriggers.register();
+        CWTriggers.register();
 
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);

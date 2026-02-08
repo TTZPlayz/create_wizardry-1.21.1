@@ -14,7 +14,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.ttzplayz.create_wizardry.CreateWizardry;
 import net.ttzplayz.create_wizardry.advancement.CWAdvancements;
 import net.ttzplayz.create_wizardry.datagen.recipe.CWRecipeProvider;
-import net.ttzplayz.create_wizardry.datagen.CWLangProvider;
 
 import java.util.Collections;
 import java.util.List;
@@ -46,7 +45,7 @@ public class CWDataGenerators {
         generator.addProvider(event.includeServer(), new LootTableProvider(packOutput, Collections.emptySet(),
                 List.of(new LootTableProvider.SubProviderEntry(CWBlockDropsProvider::new, LootContextParamSets.BLOCK))));
 
-        generator.addProvider(server, new CWAdvancements(output, lookupProvider));
+        generator.addProvider(server, new CWAdvancements(output));
         generator.addProvider(event.includeClient(), new CWLangProvider(packOutput, "en_us"));
 
     }

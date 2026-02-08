@@ -2,6 +2,8 @@ package net.ttzplayz.create_wizardry.advancement;
 
 import com.google.common.collect.Sets;
 import com.google.gson.JsonObject;
+import com.simibubi.create.foundation.advancement.CriterionTriggerBase;
+
 import net.minecraft.advancements.CriterionTrigger;
 import net.minecraft.advancements.critereon.AbstractCriterionTriggerInstance;
 import net.minecraft.advancements.critereon.ContextAwarePredicate;
@@ -11,13 +13,33 @@ import net.minecraft.server.PlayerAdvancements;
 import net.minecraft.server.level.ServerPlayer;
 import net.ttzplayz.create_wizardry.CreateWizardry;
 
+import javax.annotation.Nullable;
 import java.util.IdentityHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Supplier;
 
 public class CWBuiltInTrigger implements CriterionTrigger<CWBuiltInTrigger.Instance> {
     private final ResourceLocation id;
     private final Map<PlayerAdvancements, Set<Listener<Instance>>> listeners = new IdentityHashMap<>();
+
+    public CWBuiltInTrigger.Instance createInstance(JsonObject json, DeserializationContext context) {
+        return new CWBuiltInTrigger.Instance(this.getId());
+    }
+    public CWBuiltInTrigger.Instance instance() {
+        return new CWBuiltInTrigger.Instance(this.getId());
+    }
+
+    public static class Instance extends CriterionTriggerBase.Instance {
+        public Instance(ResourceLocation idIn) {
+            super(idIn, ContextAwarePredicate.ANY);
+        }
+
+        protected boolean test(@Nullable List<Supplier<Object>> suppliers) {
+            return true;
+        }
+    }
 
     public CWBuiltInTrigger(String id) {
         this(CreateWizardry.id(id));
@@ -60,14 +82,14 @@ public class CWBuiltInTrigger implements CriterionTrigger<CWBuiltInTrigger.Insta
         return id;
     }
 
-    @Override
-    public Instance createInstance(JsonObject json, DeserializationContext context) {
-        return new Instance(id);
-    }
+//    @Override
+//    public Instance createInstance(JsonObject json, DeserializationContext context) {
+//        return new Instance(id);
+//    }
 
-    public static class Instance extends AbstractCriterionTriggerInstance {
-        public Instance(ResourceLocation id) {
-            super(id, ContextAwarePredicate.ANY);
-        }
-    }
+//    public static class Instance extends AbstractCriterionTriggerInstance {
+//        public Instance(ResourceLocation id) {
+//            super(id, ContextAwarePredicate.ANY);
+//        }
+//    }
 }

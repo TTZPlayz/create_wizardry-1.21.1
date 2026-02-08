@@ -11,7 +11,6 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import net.ttzplayz.create_wizardry.CreateWizardry;
 import net.ttzplayz.create_wizardry.block.CWBlocks;
 import org.slf4j.Logger;
 
@@ -30,7 +29,7 @@ public class CWAdvancements implements DataProvider {
     public static final List<CWAdvancement> ENTRIES = new ArrayList<>();
     public static final CWAdvancement START = null,
             ROOT = create("root", b -> b.icon(LIGHTNING_BUCKET.getId()) //HAS to be getId to work
-                    .title("Mechanical Sorcery")
+                    .title("Mechanical Sorcery") //todo: switch the title and advancement
                     .description("Welcome to Create: Wizardry!")
                     .awardedForFree()
                     .special(CWAdvancement.TaskType.SILENT)),
@@ -73,7 +72,7 @@ public class CWAdvancements implements DataProvider {
 
     private final PackOutput output;
 
-    public CWAdvancements(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
+    public CWAdvancements(PackOutput output) {
         this.output = output;
     }
 
