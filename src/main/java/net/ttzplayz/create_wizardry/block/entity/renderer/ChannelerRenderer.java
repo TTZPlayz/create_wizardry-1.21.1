@@ -1,11 +1,16 @@
 package net.ttzplayz.create_wizardry.block.entity.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.simibubi.create.content.fluids.drain.ItemDrainBlockEntity;
+import com.simibubi.create.content.fluids.transfer.GenericItemEmptying;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
 import com.simibubi.create.foundation.blockEntity.renderer.SmartBlockEntityRenderer;
 import net.createmod.catnip.platform.ForgeCatnipServices;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.util.Mth;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.phys.AABB;
 import net.minecraftforge.fluids.FluidStack;
 import net.ttzplayz.create_wizardry.block.entity.ChannelerBlockEntity;
 
@@ -21,26 +26,22 @@ public class ChannelerRenderer extends SmartBlockEntityRenderer<ChannelerBlockEn
         super.renderSafe(channeler, partialTicks, poseStack, buffer, light, overlay);
     }
 
-    private void renderFluid(ChannelerBlockEntity channeler, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int light) {
-        SmartFluidTankBehaviour tank = channeler.internalTank;
-        if (tank == null)
-            return;
-
-        SmartFluidTankBehaviour.TankSegment primaryTank = tank.getPrimaryTank();
-        FluidStack fluidStack = primaryTank.getRenderedFluid();
-        float level = primaryTank.getFluidLevel().getValue(partialTicks);
-
-        if (!fluidStack.isEmpty() && level != 0) {
-            float min = 1f / 16f;
-            float max = min + (15 / 16f);
-            float minY = 1f / 16f;
-            level *= (3 / 16f);
-            ForgeCatnipServices.FLUID_RENDERER.renderFluidBox(
-                    fluidStack,
-                    min, minY, min,
-                    max, minY + level, max,
-                    buffer, poseStack, light,
-                    false, false);
+    protected void renderFluid(ChannelerBlockEntity be, float partialTicks, PoseStack ms, MultiBufferSource buffer, int light) {
+        SmartFluidTankBehaviour tank = be.internalTank;
+        if (tank != null) {
+            SmartFluidTankBehaviour.TankSegment primaryTank = tank.getPrimaryTank();
+            FluidStack fluidStack = primaryTank.getRenderedFluid();
+            float level = primaryTank.getFluidLevel().getValue(partialTicks);
+            if (!fluidStack.isEmpty() && level != 0.0F) {
+                float yMin = 0.3125F;
+                float min = 0.125F;
+                float max = min + 0.75F;
+                float yOffset = 0.4375F * level;
+                ms.pushPose();
+                ms.translate(0.0F, yOffset, 0.0F);
+                ForgeCatnipServices.FLUID_RENDERER.renderFluidBox(fluidStack, min, yMin - yOffset, min, max, yMin, max, buffer, ms, light, false, false);
+                ms.popPose();
+            }
         }
     }
 }

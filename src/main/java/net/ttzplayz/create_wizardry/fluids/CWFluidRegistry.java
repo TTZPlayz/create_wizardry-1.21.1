@@ -11,9 +11,12 @@ import io.redspace.ironsspellbooks.registries.MobEffectRegistry;
 import io.redspace.ironsspellbooks.registries.SoundRegistry;
 import io.redspace.ironsspellbooks.util.ParticleHelper;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.ParticleUtils;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LightningBolt;
@@ -72,9 +75,9 @@ public class CWFluidRegistry {
                                         ((AbstractSpellCastingMob) entity).getMagicData().addMana(50);
                                     } else {
                                         entity.addEffect(new MobEffectInstance(MobEffectRegistry.INSTANT_MANA.get(), 1, 50, true, false));
-
                                     }
                                 }
+                                MagicManager.spawnParticles(level, ParticleTypes.GLOW_SQUID_INK, area.getCenter().x(), area.getCenter().y(), area.getCenter().z(), 10, 0.5, 0.5, 0.5, 0.1, false);
                             }
                         }
                         @Override

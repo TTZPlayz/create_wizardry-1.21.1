@@ -54,7 +54,7 @@ public class CWEffectHandlers {
                         area.getCenter().x, area.getCenter().y, area.getCenter().z,
                         SoundRegistry.EVOCATION_CAST.get(),
                         SoundSource.BLOCKS,
-                        10000.0F,
+                        0.5F,
                         0.8F,
                         false
                 );
@@ -84,7 +84,7 @@ public class CWEffectHandlers {
                             area.getCenter().x, area.getCenter().y, area.getCenter().z,
                             SoundRegistry.LIGHTNING_CAST.get(),
                             SoundSource.BLOCKS,
-                            10000.0F,
+                            0.5F,
                             0.8F,
                             false
                     );
@@ -97,12 +97,14 @@ public class CWEffectHandlers {
                     MagicManager.spawnParticles(level, ParticleHelper.ELECTRICITY, entity.getX(), entity.getY() + entity.getBbHeight() / 2, entity.getZ(), 10, entity.getBbWidth() / 3, entity.getBbHeight() / 3, entity.getBbWidth() / 3, 0.1, false);
                     level.playSound(entity, entity.getOnPos(), SoundRegistry.LIGHTNING_CAST.get(), SoundSource.BLOCKS, 0.5F, 1.0F);
 
-                    if (entity instanceof Creeper creeper) {
-                        var dummyLightningBolt = new LightningBolt(EntityType.LIGHTNING_BOLT, level);
-                        dummyLightningBolt.setDamage(0);
-                        dummyLightningBolt.setVisualOnly(true);
-                        creeper.thunderHit((ServerLevel) level, dummyLightningBolt);
-                    } else if (entity instanceof Player player && !(player instanceof FakePlayer)) {
+//                    if (entity instanceof Creeper creeper) {
+//                        var dummyLightningBolt = new LightningBolt(EntityType.LIGHTNING_BOLT, level);
+//                        dummyLightningBolt.setDamage(0);
+//                        dummyLightningBolt.setVisualOnly(true);
+//                        creeper.thunderHit((ServerLevel) level, dummyLightningBolt);
+//                    } else
+                    // rebalanced
+                        if (entity instanceof Player player && !(player instanceof FakePlayer)) {
                         CWAdvancements.SHOCKING.awardTo(player);
                     }
                 }
@@ -165,6 +167,7 @@ public class CWEffectHandlers {
                     if (entity instanceof Player player && !(player instanceof FakePlayer)) {
                         CWAdvancements.VAMPIRE_SHOWER.awardTo(player);
                     }
+                    entity.playSound(SoundRegistry.BLOOD_EXPLOSION.get());
                 }
             }
         }

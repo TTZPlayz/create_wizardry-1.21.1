@@ -26,7 +26,7 @@ public class CWLangProvider extends LanguageProvider {
         add("item.create_wizardry.channeler", "Channeler");
         add("block.create_wizardry.channeler", "Channeler");
         add("jei.create_wizardry.liquid_lightning",
-                "An extremely volatile fluid that is charged with electric energy. Can be obtained by channeling lightning bolts onto the top of fluid tanks using a lightning rod or extracting from charged creepers in a bottle.");
+                "An extremely volatile fluid that is charged with electric energy. Can be obtained by channeling lightning bolts using the Channeler block or by extracting from charged creepers in a bottle.");
         add("jei.create_wizardry.mana",
                 "The liquid essence of magic. Can be used to form arcane essence when combined with dust.");
         add("jei.create_wizardry.blood",
