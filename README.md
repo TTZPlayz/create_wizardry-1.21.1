@@ -19,11 +19,11 @@ _This mod adds enhanced compatibility between **Create** and **Iron's Spells & S
 ## Compatibility
 Current Versions:
 
-| Minecraft | Loader   | Support                 |
-|-----------|----------|-------------------------|
-| 1.21.1    | NeoForge | **Supported!**          |
-| 1.20.1    | Forge    | **Supported!**          |
-| 1.19.2    | Forge    | **No Longer Supported** |
+| Minecraft | Loader   | Support                 | Version      |
+|-----------|----------|-------------------------|--------------|
+| 1.21.1    | NeoForge | **Supported!**          | 1.21.1-0.4.1 |
+| 1.20.1    | Forge    | **Supported!**          | 1.20.1-0.4.1 |
+| 1.19.2    | Forge    | **No Longer Supported** | 1.19.2-0.2.0 |
 ## Community
 - [**Discord**](https://discord.gg/zt2G42gn3X)
 - [**Issues**](https://github.com/TTZPlayz/create_wizardry-1.21.1/issues)
